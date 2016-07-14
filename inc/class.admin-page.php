@@ -20,6 +20,8 @@ class IssetVideoPublisherAdminPage
     {
         add_action('admin_menu', [$this, 'admin_menu']);
         add_action('admin_init', [$this, 'admin_init']);
+
+        add_action("load-post-new.php", [$this, 'importPublishVideos']);
     }
 
     /**
@@ -33,6 +35,16 @@ class IssetVideoPublisherAdminPage
 
         return self::$instance;
     }
+
+    public function importPublishVideos()
+    {
+        $issetVideoPublisher = IssetVideoPublisher::instance();
+        if (isset($_GET['post_type']) && $_GET['post_type'] === $issetVideoPublisher->getPostType()) {
+            $issetVideoPublisher->getPublishedVideos();
+            wp_redirect('edit.php?post_type=' . $issetVideoPublisher->getPostType());
+        }
+    }
+
 
     /**
      * Add options page.
@@ -139,7 +151,7 @@ class IssetVideoPublisherAdminPage
     {
         $issetVideoPublisher = IssetVideoPublisher::instance();
         printf(
-            '<input type="text" id="consumer_key" name="isset-video-publisher-options[consumer_key]" value="%s" />',
+            '<input type="text" id="consumer_key" name="isset-video-publisher-options[consumer_key]" value="%s" class="large-text" />',
             $issetVideoPublisher->getConsumerKey()
         );
     }
@@ -151,7 +163,7 @@ class IssetVideoPublisherAdminPage
     {
         $issetVideoPublisher = IssetVideoPublisher::instance();
         printf(
-            '<input type="text" id="private_key" name="isset-video-publisher-options[private_key]" value="%s" />',
+            '<input type="text" id="private_key" name="isset-video-publisher-options[private_key]" value="%s" class="large-text" />',
             $issetVideoPublisher->getPrivateKey()
         );
     }
