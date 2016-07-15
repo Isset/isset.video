@@ -1,0 +1,106 @@
+#: inc/class.admin-page.php:56 inc/class.admin-page.php:57
+#: inc/class.admin-page.php:96
+msgid "Video Publisher Settings"
+msgstr "Video publisher instellingen"
+
+#: inc/class.admin-page.php:144
+msgid "Enter your settings below:"
+msgstr "Voer hieronder je instellingen van de publisher in"
+
+#: inc/class.isset-video-publisher-meta-box.php:25
+msgid "Publisher preview"
+msgstr "Preview"
+
+#: inc/class.isset-video-publisher-meta-box.php:32
+msgid "Use this shortcode in a post to include the video."
+msgstr "Je kan deze shortcode in een bericht gebruiken om de video te tonen."
+
+#: inc/class.isset-video-publisher.php:297
+msgid "Your browser does not support the video tag."
+msgstr "Jouw browser ondersteund geen videos"
+
+#: inc/class.isset-video-publisher.php:299
+msgid "Video canot be loaded"
+msgstr "Deze video kan niet geladen worden"
+
+#: inc/class.isset-video-publisher.php:316
+msgid "Add New Video"
+msgstr "Nieuwe video"
+
+#: inc/class.isset-video-publisher.php:317
+msgid "Import from publisher"
+msgstr "Importeer"
+
+#: inc/class.isset-video-publisher.php:318
+msgid "Edit Video"
+msgstr "Bewerk"
+
+#: inc/class.isset-video-publisher.php:319
+msgid "View Video"
+msgstr "Bekijk"
+
+#: inc/class.isset-video-publisher.php:320
+msgid "All Videos"
+msgstr "Alle videos"
+
+#: inc/class.isset-video-publisher.php:321
+msgid "Search Videos"
+msgstr "Zoeken"
+
+#: inc/class.isset-video-publisher.php:322
+msgid "Parent Videos:"
+msgstr "Hoort hij:"
+
+#: inc/class.isset-video-publisher.php:323
+msgid "No videos found."
+msgstr "Geen videos gevonden"
+
+#: inc/class.isset-video-publisher.php:324
+msgid "No videos found in Trash."
+msgstr "Geen videos gevonden tussen deze rommel"
+
+#: inc/class.isset-video-publisher.php:329
+msgid "Description."
+msgstr "Omschrijving"
+
+#. Plugin Name of the plugin/theme
+msgid "Isset Video Publisher plugin"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://isset.nl"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Video intergration from the video publisher from Isset Internet Professionals"
+msgstr "Video intergratie, gemaakt voor de video publisher gemaakt door Isset Internet Professionals"
+
+#. Author of the plugin/theme
+msgid "Casper Houde"
+msgstr ""
+
+#: inc/class.isset-video-publisher.php:311
+msgctxt "post type general name"
+msgid "Videos"
+msgstr ""
+
+#: inc/class.isset-video-publisher.php:312
+msgctxt "post type singular name"
+msgid "Video"
+msgstr ""
+
+#: inc/class.isset-video-publisher.php:313
+msgctxt "admin menu"
+msgid "Videos"
+msgstr ""
+
+#: inc/class.isset-video-publisher.php:314
+msgctxt "add new on admin bar"
+msgid "Video"
+msgstr ""
+
+#: inc/class.isset-video-publisher.php:315
+msgctxt "video"
+msgid "Import from publisher"
+msgstr ""

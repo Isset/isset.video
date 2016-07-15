@@ -1,0 +1,26 @@
+{
+  "name": "isset-video-publisher",
+  "version": "0.1.0",
+  "description": "Video intergration from the video publisher from Isset Internet Professionals",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.isset.nl:issetbv/wp-video-publisher.git"
+  },
+  "keywords": [
+    "video",
+    "publisher",
+    "wordpress"
+  ],
+  "author": "Casper Houde",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-po2mo": "^0.1.2",
+    "grunt-wp-i18n": "^0.5.4",
+    "gulp": "^3.9.1"
+  }
+}

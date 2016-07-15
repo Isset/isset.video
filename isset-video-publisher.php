@@ -7,7 +7,7 @@ Description: Video intergration from the video publisher from Isset Internet Pro
 Version: 0.1.0
 Author: Casper Houde
 */
-
+define('ISSET_VIDEO_PUBLISHER_PATH', plugin_dir_path(__FILE__));
 define('ISSET_VIDEO_PUBLISHER_URL', plugin_dir_url(__FILE__));
 define('ISSET_VIDEO_PUBLISHER_VERSION', '0.1.0');
 

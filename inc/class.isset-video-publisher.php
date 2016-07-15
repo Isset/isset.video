@@ -32,6 +32,7 @@ class IssetVideoPublisher
         add_shortcode('publish', [&$this, 'publish_shortcode']);
         add_action('init', [$this, 'initPostType']);
         add_action( 'wp_enqueue_scripts', [$this, 'enqueue_scripts'] );
+        load_plugin_textdomain('isset-video-publisher', false, 'isset-video-publisher/languages');
     }
 
     public function enqueue_scripts()
@@ -319,8 +320,8 @@ class IssetVideoPublisher
             'all_items' => __('All Videos', 'isset-video-publisher'),
             'search_items' => __('Search Videos', 'isset-video-publisher'),
             'parent_item_colon' => __('Parent Videos:', 'isset-video-publisher'),
-            'not_found' => __('No books found.', 'isset-video-publisher'),
-            'not_found_in_trash' => __('No books found in Trash.', 'isset-video-publisher'),
+            'not_found' => __('No videos found.', 'isset-video-publisher'),
+            'not_found_in_trash' => __('No videos found in Trash.', 'isset-video-publisher'),
         ];
 
         $args = [
