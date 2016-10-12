@@ -25,19 +25,36 @@ class IssetVideoPublisher
     private $issetVideoPublisherOptions;
 
     /**
+     * @return IssetVideoPublisher
+     */
+    public static function instance()
+    {
+        if (!self::$instance) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    /**
      * IssetVideoPublisher constructor.
      */
     public function __construct()
     {
+        $this->initPostType();
         add_shortcode('publish', [&$this, 'publish_shortcode']);
-        add_action('init', [$this, 'initPostType']);
-        add_action( 'wp_enqueue_scripts', [$this, 'enqueue_scripts'] );
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
         load_plugin_textdomain('isset-video-publisher', false, 'isset-video-publisher/languages');
+
+        add_action('rest_api_init', [$this, 'restApiInit']);
     }
 
+    /**
+     *
+     */
     public function enqueue_scripts()
     {
-        wp_enqueue_style( 'isset-video-publisher', ISSET_VIDEO_PUBLISHER_URL . 'css/isset-video-publisher.css', [], ISSET_VIDEO_PUBLISHER_VERSION );
+        wp_enqueue_style('isset-video-publisher', ISSET_VIDEO_PUBLISHER_URL . 'css/isset-video-publisher.css', [], ISSET_VIDEO_PUBLISHER_VERSION);
     }
 
     /**
@@ -86,18 +103,6 @@ class IssetVideoPublisher
         }
 
         return '';
-    }
-
-    /**
-     * @return IssetVideoPublisher
-     */
-    public static function instance()
-    {
-        if (!self::$instance) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
     }
 
     /**
@@ -158,7 +163,6 @@ class IssetVideoPublisher
                     ];
 
                     if ($WP_Query->post_count === 0) {
-
                         $postData['post_title'] = $publish['streamName'];
 
                         $postId = wp_insert_post($postData, true);
@@ -262,6 +266,10 @@ class IssetVideoPublisher
                     'uuid' => false,
                     'post_id' => false,
                     'poster' => false,
+                    'controls' => 'controls',
+                    'autoplay' => '',
+                    'loop' => 'loop',
+                    'muted' => '',
                 ],
                 $params
             )
@@ -273,31 +281,38 @@ class IssetVideoPublisher
             return false;
         }
 
-        if ($uuid === false) {
-            if (get_post_type($post_id) !== $this->getPostType()) {
-                return false;
-            }
+        $args = [];
+        if ($uuid) {
+            $args['post_name__in'] = [$uuid];
+        }
+        $args['p'] = $post_id;
+        $args['post_type'] = $this->getPostType();
+        $query = new WP_Query($args);
+        if ((int)$query->found_posts !== 1) {
+            return $content;
+        }
 
-            $post = get_post($post_id);
-            $uuid = $post->post_name;
+        global $post;
+        $query->the_post();
 
-            $image = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'large');
-            if (is_array($image)) {
-                list($poster, $w, $h) = $image;
-            }
+        $uuid = $post->post_name;
+        $image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'large');
+        if (is_array($image)) {
+            list($poster, $w, $h) = $image;
         }
 
         $video_url = $this->getVideoUrl($uuid);
-
         if ($video_url) {
             $result = sprintf('<div class="video-publisher-video video-publisher-video-16by9">' .
-                '<video controls poster="%s" src="%s">' .
+                '<video %s %s %s %s poster="%s" src="%s" playsinline>' .
                 '%s' .
                 '</video>' .
-                '</div>', $poster, $video_url, __('Your browser does not support the video tag.', 'isset-video-publisher'));
+                '</div>', esc_attr($controls), esc_attr($autoplay), esc_attr($loop), esc_attr($muted), esc_url($poster), esc_url($video_url), __('Your browser does not support the video tag.', 'isset-video-publisher'));
         } else {
             $result = __('Video canot be loaded', 'isset-video-publisher');
         }
+
+        wp_reset_query();
 
         return $result;
     }
@@ -342,5 +357,43 @@ class IssetVideoPublisher
         ];
 
         register_post_type($this->getPostType(), $args);
+    }
+
+    /**
+     * @return mixed|void
+     */
+    public function getFrontPageId()
+    {
+        return (int)get_option('isset-video-publisher-frontpage-id');
+    }
+
+    /**
+     * @param $pageId
+     *
+     * @return bool
+     */
+    public function setFrontPageId($pageId)
+    {
+        return update_option('isset-video-publisher-frontpage-id', $pageId);
+    }
+
+    public function restApiInit()
+    {
+        register_rest_route('video-publisher/v1', '/update-publisher', [
+            'methods' => 'GET',
+            'callback' => [$this, 'updatePublisher'],
+            'permission_callback' => function () {
+                return current_user_can('edit_others_posts');
+            },
+        ]);
+    }
+
+    public function updatePublisher()
+    {
+        $this->getPublishedVideos();
+
+        return [
+            'message' => 'videos updated'
+        ];
     }
 }
