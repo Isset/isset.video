@@ -29,7 +29,7 @@ class IssetVideoPublisher
      */
     public static function instance()
     {
-        if (!self::$instance) {
+        if ( ! self::$instance) {
             self::$instance = new self();
         }
 
@@ -54,7 +54,8 @@ class IssetVideoPublisher
      */
     public function enqueue_scripts()
     {
-        wp_enqueue_style('isset-video-publisher', ISSET_VIDEO_PUBLISHER_URL . 'css/isset-video-publisher.css', [], ISSET_VIDEO_PUBLISHER_VERSION);
+        wp_enqueue_style('isset-video-publisher', ISSET_VIDEO_PUBLISHER_URL . 'isset-video-publisher.css', [], ISSET_VIDEO_PUBLISHER_VERSION);
+        wp_enqueue_script('isset-video-publisher', ISSET_VIDEO_PUBLISHER_URL . '/isset-video-publisher.min.js', [], ISSET_VIDEO_PUBLISHER_VERSION, true);
     }
 
     /**
@@ -110,6 +111,8 @@ class IssetVideoPublisher
      */
     public function getPublishedVideos()
     {
+        $this->getToken();
+
         $xauth_token = get_option(self::PUBLISHER_TOKEN_KEY);
         $response = wp_remote_get(
             sprintf(self::PUBLISHER_URL . '/api/published'),
@@ -304,7 +307,7 @@ class IssetVideoPublisher
         $video_url = $this->getVideoUrl($uuid);
         if ($video_url) {
             $result = sprintf('<div class="video-publisher-video video-publisher-video-16by9">' .
-                '<video %s %s %s %s poster="%s" src="%s" playsinline>' .
+                '<video %s %s %s %s poster="%s" src="%s" playsinline class="video-js vjs-default-skin vjs-big-play-centered" data-setup=\'{"fluid": true}\'> ' .
                 '%s' .
                 '</video>' .
                 '</div>', esc_attr($controls), esc_attr($autoplay), esc_attr($loop), esc_attr($muted), esc_url($poster), esc_url($video_url), __('Your browser does not support the video tag.', 'isset-video-publisher'));
@@ -342,8 +345,8 @@ class IssetVideoPublisher
         $args = [
             'labels' => $labels,
             'description' => __('Description.', 'isset-video-publisher'),
-            'public' => true,
-            'publicly_queryable' => true,
+            'public' => false,
+            'publicly_queryable' => false,
             'show_ui' => true,
             'show_in_menu' => true,
             'query_var' => true,
