@@ -33,3 +33,12 @@
 .video-publisher-video-4by3 {
   padding-bottom: 75%;
 }
+
+.video-js {
+  .vjs-progress-control {
+    .vjs-play-progress,
+    .vjs-mouse-display {
+      white-space: nowrap;
+    }
+  }
+}

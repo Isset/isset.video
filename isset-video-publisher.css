@@ -1310,4 +1310,8 @@ video::-webkit-media-text-track-display {
 .video-publisher-video-4by3 {
   padding-bottom: 75%; }
 
+.video-js .vjs-progress-control .vjs-play-progress,
+.video-js .vjs-progress-control .vjs-mouse-display {
+  white-space: nowrap; }
+
 /*# sourceMappingURL=isset-video-publisher.css.map */

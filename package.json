@@ -4,7 +4,9 @@
   "description": "Video intergration from the video publisher from Isset Internet Professionals",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm install",
+    "clean": "npm cache clean",
+    "watch": "grunt watch-files"
   },
   "repository": {
     "type": "git",
