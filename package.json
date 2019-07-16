@@ -19,18 +19,18 @@
   ],
   "author": "Casper Houde",
   "license": "ISC",
-  "devDependencies": {
-    "coffeeify": "^2.1.0",
-    "grunt": "^1.0.1",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-uglify": "^2.0.0",
-    "grunt-po2mo": "^0.1.2",
-    "grunt-wp-i18n": "^0.5.4",
-    "less-plugin-autoprefix": "^1.5.1",
-    "less-plugin-clean-css": "^1.5.1",
-    "video.js": "^5.12.6"
-  },
   "dependencies": {
-    "grunt-browserify": "^5.0.0"
+    "@eater/grunt-po2mo": "^1.0.0",
+    "coffeeify": "^3.0.1",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-wp-i18n": "^1.0.3",
+    "less-plugin-autoprefix": "^2.0.0",
+    "less-plugin-clean-css": "^1.5.1",
+    "video.js": "^7.6.0"
   }
 }

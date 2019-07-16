@@ -8,7 +8,7 @@ module.exports = function (grunt) {
             },
             default: {
                 files: {
-                    'isset-video-publisher.css': 'scss/isset-video-publisher.scss'
+                    'plugin/isset-video-publisher.css': 'scss/isset-video-publisher.scss'
                 }
             }
         },
@@ -25,14 +25,14 @@ module.exports = function (grunt) {
                     watch: true
                 },
                 files: {
-                    'isset-video-publisher.js': ['js/isset-video-publisher.js']
+                    'plugin/isset-video-publisher.js': ['js/isset-video-publisher.js']
                 }
             }
         },
         uglify: {
             default: {
                 files: {
-                    'isset-video-publisher.min.js': ['isset-video-publisher.js']
+                    'plugin/isset-video-publisher.min.js': ['isset-video-publisher.js']
                 }
             }
         },
@@ -42,7 +42,7 @@ module.exports = function (grunt) {
                 tasks: ['sass']
             },
             uglify: {
-                files: ['isset-video-publisher.js'],
+                files: ['plugin/isset-video-publisher.js'],
                 tasks: ['uglify']
             }
         },
@@ -50,7 +50,9 @@ module.exports = function (grunt) {
             target: {
                 options: {
                     type: 'wp-plugin',
-                    domainPath: '/languages',
+                    cwd: 'plugin',
+                    domainPath: '../languages/',
+                    potFilename: 'isset-video-publisher.pot',
                     language: ['nl', 'en'],
                     updatePoFiles: true
                 }
@@ -59,21 +61,30 @@ module.exports = function (grunt) {
         po2mo: {
             files: {
                 src: 'languages/*.po',
+                dest: 'plugin/',
                 expand: true
+            }
+        },
+        copy: {
+            main: {
+                expand: true,
+                src: ["languages/*.po", "languages/*.pot"],
+                dest: "plugin/"
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-wp-i18n');
-    grunt.loadNpmTasks('grunt-po2mo');
+    grunt.loadNpmTasks('@eater/grunt-po2mo');
 
     grunt.registerTask('watch-files', ['sass', 'browserify', 'uglify', 'watch']);
     grunt.registerTask('dist', ['trans']);
-    grunt.registerTask('trans', ['makepot', 'po2mo']);
+    grunt.registerTask('trans', ['makepot', 'po2mo', 'copy']);
 
     grunt.registerTask('default', ['trans']);
 };
