@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -e
+
+cd "$(realpath "$(dirname "$0")")/..";
+
+# If no node_modules exist, it's a safe assumption
+# Yarn wasn't run, so install and setup webpack
+if [ -d node_modules ]; then
+    bin/setup-webpack;
+fi
+
+# Start watch job from packages.json
+yarn watch

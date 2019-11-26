@@ -1,3 +1,6 @@
 /vendor/
 /node_modules/
 .sass-cache
+/.docker-context/
+/plugin/js
+/plugin/css

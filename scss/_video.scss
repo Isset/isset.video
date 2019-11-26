@@ -26,7 +26,7 @@
 
 // Modifier class for 16:9 aspect ratio
 .video-publisher-video-16by9 {
-  padding-bottom: 56.25%;
+  padding-bottom: calc((9 / 16) * 100%);
 }
 
 // Modifier class for 4:3 aspect ratio

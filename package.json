@@ -1,12 +1,12 @@
 {
   "name": "isset-video-publisher",
-  "version": "0.1.0",
-  "description": "Video intergration from the video publisher from Isset Internet Professionals",
+  "version": "1.0.0",
+  "description": "My webpack project",
   "main": "index.js",
   "scripts": {
-    "build": "npm install",
+    "build": "webpack",
     "clean": "npm cache clean",
-    "watch": "grunt watch-files"
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -19,18 +19,22 @@
   ],
   "author": "Casper Houde",
   "license": "ISC",
-  "devDependencies": {
-    "coffeeify": "^2.1.0",
-    "grunt": "^1.0.1",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-uglify": "^2.0.0",
-    "grunt-po2mo": "^0.1.2",
-    "grunt-wp-i18n": "^0.5.4",
-    "less-plugin-autoprefix": "^1.5.1",
-    "less-plugin-clean-css": "^1.5.1",
-    "video.js": "^5.12.6"
-  },
   "dependencies": {
-    "grunt-browserify": "^5.0.0"
+    "video.js": "^7.6.0"
+  },
+  "devDependencies": {
+    "@webpack-cli/init": "^0.2.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "css-loader": "^3.1.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
   }
 }

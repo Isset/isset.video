@@ -1,0 +1,5 @@
+{{ function('wp_nonce_field', 'class.isset-video-publisher-meta-box.php', 'isset_publisher_class_nonce') }}
+<label for="isset-video-publisher-home">
+    <input type="checkbox" name="isset_video_publisher_home" id="isset-video-publisher-home" {{ checked }}>
+    {{ _e('Use as video on homepage.', 'isset-video-publisher') }}
+</label>

@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  wordpress:
+    image: wordpress:php7.3-apache
+    ports:
+      - '2080:80'
+    environment:
+      - 'APACHE_RUN_USER=#1000'
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=kaakje
+      - WORDPRESS_DB_NAME=wordpress
+    volumes:
+      - ./.docker-context/wordpress:/var/www/html
+      - ./plugin:/var/www/html/wp-content/plugins/isset-video-publisher
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: kaakje
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - mysql:/var/lib/mysql
+
+volumes:
+  mysql:

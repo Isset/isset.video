@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -e;
+shopt -s extglob;
+
+# change to project dir ($0 is relative path to script from current working directory)
+cd "$(dirname "$(realpath "$0")")/.."
+# Download latest wordpress
+wget -O /tmp/wp.zip 'https://wordpress.org/latest.zip';
+# Download Timber 
+wget -O /tmp/wp_timber.zip 'https://downloads.wordpress.org/plugin/timber-library.1.13.0.zip';
+# Create and move into .docker-context
+mkdir .docker-context;
+cd .docker-context;
+# Unpack wordpress
+unzip /tmp/wp.zip;
+# Move into plugins directory
+cd wordpress/wp-content/plugins;
+# Unpack timber
+unzip /tmp/wp_timber.zip;
+# Delete temp zip
+rm /tmp/wp.zip /tmp/wp_timber.zip;

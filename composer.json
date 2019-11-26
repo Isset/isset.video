@@ -7,5 +7,10 @@
             "email": "casper@isset.nl"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "IssetBV\\VideoPublisher\\Wordpress\\": "plugin/src"
+        }
+    }
 }

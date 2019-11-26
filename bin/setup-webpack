@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+# change dir into project directory
+cd "$(realpath "$(dirname "$0")")/.."
+
+# Install npm packages
+yarn;
+
+# Run webpack
+yarn run webpack;
