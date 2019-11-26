@@ -7,6 +7,13 @@
 - yarn
 - docker / docker-compose
 - Unix-like environment
+- `realpath` needs to be installed
+
+### Realpath setup
+
+On MacOS, if setup fails with an error regarding `realpath` it might not be installed on your host:
+
+- OS X: `brew install coreutils`
 
 ## Setup
 
