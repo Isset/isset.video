@@ -1,0 +1,7 @@
+<div class="wrap">
+    <form method="post" action="options.php">
+        {{ function('settings_fields', 'video_publisher_settings') }}
+        {{ function('do_settings_sections', 'publisher-admin') }}
+        {{ function('submit_button') }}
+    </form>
+</div>

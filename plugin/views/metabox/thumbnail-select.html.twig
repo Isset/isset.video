@@ -1,0 +1,11 @@
+<div class="thumbnail-select-grid">
+    {% for asset in assets if asset.type == 'image' and asset.status == 'online' %}
+        <div class="thumbnail-item">
+            <div class="thumbnail">
+                <img src="{{ asset.url }}" alt="">
+            </div>
+            <button type="button" data-url="{{ asset.url }}"
+                    class="button button-primary button-large">{{ _e('Set as featured image', 'isset-video-publisher') }}</button>
+        </div>
+    {% endfor %}
+</div>
