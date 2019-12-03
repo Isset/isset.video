@@ -5,7 +5,7 @@ Plugin Name: Isset Video Publisher plugin
 Plugin URI: http://isset.nl
 Description: Video integration from the video publisher from Isset Internet Professionals
 Version: 0.1.0
-Author: Casper Houder
+Author: Isset
 */
 
 use IssetBV\VideoPublisher\Wordpress\Autoloader;

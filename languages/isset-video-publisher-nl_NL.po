@@ -1,3 +1,16 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl_NL\n"
+"X-Generator: Poedit 2.2.4\n"
+
 #: inc/class.admin-page.php:56 inc/class.admin-page.php:57
 #: inc/class.admin-page.php:96
 msgid "Video Publisher Settings"
@@ -5,7 +18,7 @@ msgstr "Video publisher instellingen"
 
 #: inc/class.admin-page.php:144
 msgid "Enter your settings below:"
-msgstr "Voer hieronder je instellingen van de publisher in"
+msgstr "Voer je instellingen hieronder in:"
 
 #: inc/class.isset-video-publisher-meta-box.php:26
 msgid "Publisher preview"
@@ -25,7 +38,7 @@ msgstr ""
 
 #: inc/class.isset-video-publisher.php:313
 msgid "Your browser does not support the video tag."
-msgstr "Jouw browser ondersteund geen videos"
+msgstr "Je browser heeft geen video ondersteuning."
 
 #: inc/class.isset-video-publisher.php:315
 msgid "Video canot be loaded"
@@ -61,15 +74,15 @@ msgstr "Hoort hij:"
 
 #: inc/class.isset-video-publisher.php:341
 msgid "No videos found."
-msgstr "Geen videos gevonden"
+msgstr "Geen Video's gevonden."
 
 #: inc/class.isset-video-publisher.php:342
 msgid "No videos found in Trash."
-msgstr "Geen videos gevonden tussen deze rommel"
+msgstr "Geen Video's gevonden in de Prullenbak."
 
 #: inc/class.isset-video-publisher.php:347
 msgid "Description."
-msgstr "Omschrijving"
+msgstr "Omschrijving."
 
 #. Plugin Name of the plugin/theme
 #, fuzzy
@@ -82,13 +95,13 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Video intergration from the video publisher from Isset Internet Professionals"
+"Video integration from the video publisher from Isset Internet Professionals"
 msgstr ""
-"Video intergratie, gemaakt voor de video publisher gemaakt door Isset "
+"Video integratie, gemaakt voor de video publisher gemaakt door Isset "
 "Internet Professionals"
 
 #. Author of the plugin/theme
-msgid "Casper Houde"
+msgid "Isset Internet Professionals"
 msgstr ""
 
 #: inc/class.isset-video-publisher.php:329

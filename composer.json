@@ -3,8 +3,8 @@
     "description": "Wordpress plugin for the video publisher from https://video-publisher.io",
     "authors": [
         {
-            "name": "Casper Houdé",
-            "email": "casper@isset.nl"
+            "name": "Isset Internet Professionals",
+            "email": "info@isset.nl"
         }
     ],
     "require": {},

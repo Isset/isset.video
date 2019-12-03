@@ -17,7 +17,7 @@
     "publisher",
     "wordpress"
   ],
-  "author": "Casper Houde",
+  "author": "Isset Internet Professionals",
   "license": "ISC",
   "dependencies": {
     "video.js": "^7.6.0"

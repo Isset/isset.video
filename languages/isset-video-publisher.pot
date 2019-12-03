@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Casper Houde
+# Copyright (C) 2019 Isset Internet Professionals
 # This file is distributed under the same license as the Isset Video Publisher plugin package.
 msgid ""
 msgstr ""
@@ -96,12 +96,12 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Video intergration from the video publisher from Isset Internet "
+"Video integration from the video publisher from Isset Internet "
 "Professionals"
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Casper Houde"
+msgid "Isset Internet Professionals"
 msgstr ""
 
 #: inc/class.isset-video-publisher.php:329

@@ -81,11 +81,11 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Video intergration from the video publisher from Isset Internet Professionals"
+"Video integration from the video publisher from Isset Internet Professionals"
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Casper Houde"
+msgid "Isset Internet Professionals"
 msgstr ""
 
 #: inc/class.isset-video-publisher.php:329
