@@ -115,7 +115,8 @@ class VideoPublisherService {
 			return false;
 		}
 
-		if ( wp_remote_retrieve_response_code( $response ) == 403 ) {
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( $response_code >= 400 && $response_code < 500 ) {
 			update_option( Plugin::PUBLISHER_TOKEN_KEY, false );
 			$this->getToken();
 
