@@ -7,7 +7,7 @@ cd "$(dirname "$(realpath "$0")")/.."
 # Download latest wordpress
 wget -O /tmp/wp.zip 'https://wordpress.org/latest.zip';
 # Download Timber 
-wget -O /tmp/wp_timber.zip 'https://downloads.wordpress.org/plugin/timber-library.1.13.0.zip';
+wget -O /tmp/wp_timber.zip 'https://downloads.wordpress.org/plugin/timber-library.1.15.1.zip';
 # Create and move into .docker-context
 mkdir .docker-context;
 cd .docker-context;
