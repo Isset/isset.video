@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e;
+cd "$(realpath "$(dirname "$0")")/..";
+
+WEBPACK_ENV=production yarn webpack
+
+test -d out || mkdir out;
+
+cd plugin;
+zip -r ../out/wp-video-publisher.zip ./*;
