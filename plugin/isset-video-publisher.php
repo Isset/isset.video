@@ -25,4 +25,27 @@ spl_autoload_register( new Autoloader() );
 
 add_action( 'init', function () {
 	Plugin::instance()->init();
+
+    wp_register_script(
+        'publisher-video',
+        plugins_url( 'js/publisher-video-block.js', __FILE__ ),
+        ['wp-blocks', 'wp-element', 'wp-editor']
+    );
+
+    register_block_type( 'publisher/video', [
+        'editor_script' => 'publisher-video',
+    ]);
+} );
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'isset-publisher/v1', '/publishes', array(
+        'methods' => 'GET',
+        'callback' => function() {
+            global $wpdb;
+
+            $service = new \IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService(Plugin::instance());
+
+            return $service->getPublishes();
+        },
+    ) );
 } );

@@ -12,5 +12,8 @@
         "psr-4": {
             "IssetBV\\VideoPublisher\\Wordpress\\": "plugin/src"
         }
+    },
+    "require-dev": {
+        "timber/timber": "^1.15"
     }
 }
