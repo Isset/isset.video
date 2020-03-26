@@ -16,6 +16,7 @@ use IssetBV\VideoPublisher\Wordpress\MetaBox\FrontPage;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\Preview;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\ThumbnailSelect;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use IssetBV\VideoPublisher\Wordpress\Rest\PublishesEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\ShortcodeBase;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\Publish;
@@ -73,6 +74,7 @@ class Plugin {
 		$this->initScripts();
 		$this->loadTranslations();
 		$this->initActions();
+		$this->initRest();
 
 		if ( is_admin() ) {
 			$this->initMetaBoxes();
@@ -120,6 +122,16 @@ class Plugin {
 		add_action( 'wp_enqueue_scripts', function () {
 			$this->enqueueScripts( 'site' );
 		} );
+
+        wp_register_script(
+            'publisher-video',
+            plugins_url( '../js/publisher-video-block.js', __FILE__ ),
+            ['wp-blocks', 'wp-element', 'wp-editor']
+        );
+
+        register_block_type( 'publisher/video', [
+            'editor_script' => 'publisher-video',
+        ]);
 	}
 
 	private function initPostTypes() {
@@ -185,4 +197,9 @@ class Plugin {
 
 		add_action( $actionObj->getAction(), $actionObj, $actionObj->getPriority(), $actionObj->getArgs() );
 	}
+
+	public function initRest()
+    {
+        PublishesEndpoint::publishes();
+    }
 }
