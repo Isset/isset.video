@@ -82,7 +82,7 @@ import React from "react";
                             {suggestions.map(suggestion => {
                                 return (
                                     <div style={{display: "flex", flexDirection: "column", marginBottom: "15px"}}>
-                                        <iframe src={suggestion.view.embed_url}/>
+                                        <span style={[style.text, {textAlign: "center"}]}>{suggestion.streamName}</span>
                                         <span style={style.textClick} onClick={() => setValue(suggestion.uuid)}>Use video</span>
                                     </div>
                                 )
