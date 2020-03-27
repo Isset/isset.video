@@ -106,14 +106,15 @@ const { RichText } = wp.editor;
                         <input style={style.input} placeholder="Video uuid" onChange={e => setValue([e.target.value])} value={content}/>
                     </form>
                     <hr/>
-                    <span onClick={toggleSuggestions} style={style.textClick}>Toggle suggestions</span>
+                    <a href="#" onClick={toggleSuggestions} style={style.textClick}>Toggle suggestions</a>
                     <div style={{display: typeof showSuggestions === "boolean" && showSuggestions === true ? "flex" : "none"}}>
                         <div style={{display: "flex", flexDirection: "column"}}>
+                            <hr />
                             {suggestions.map(suggestion => {
                                 return (
                                     <div style={{display: "flex", flexDirection: "column", marginBottom: "15px"}}>
                                         <span style={style.text}>{suggestion.streamName}</span>
-                                        <span style={style.textClick} onClick={() => setValue(suggestion.uuid)}>Use video</span>
+                                        <a href="#" style={style.textClick} onClick={() => setValue(suggestion.uuid)}>Use video</a>
                                     </div>
                                 )
                             })}
