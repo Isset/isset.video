@@ -75,6 +75,7 @@ class Plugin {
 		$this->loadTranslations();
 		$this->initActions();
 		$this->initRest();
+		$this->initBlocks();
 
 		if ( is_admin() ) {
 			$this->initMetaBoxes();
@@ -122,16 +123,6 @@ class Plugin {
 		add_action( 'wp_enqueue_scripts', function () {
 			$this->enqueueScripts( 'site' );
 		} );
-
-        wp_register_script(
-            'publisher-video',
-            plugins_url( '../js/publisher-video-block.js', __FILE__ ),
-            ['wp-blocks', 'wp-element', 'wp-editor']
-        );
-
-        register_block_type( 'publisher/video', [
-            'editor_script' => 'publisher-video',
-        ]);
 	}
 
 	private function initPostTypes() {
@@ -201,5 +192,29 @@ class Plugin {
 	public function initRest()
     {
         PublishesEndpoint::publishes();
+    }
+
+    private function initBlocks()
+    {
+        $this->registerBlock('video-block');
+    }
+
+    private function registerBlock($name) {
+        wp_register_script(
+            "isset-video-publisher-{$name}",
+            plugins_url( "../js/publisher-{$name}.js", __FILE__ ),
+            ['wp-blocks', 'wp-element', 'wp-editor']
+        );
+
+        wp_register_style(
+            "isset-video-publisher-{$name}-style",
+            plugins_url( '../css/main.css', __FILE__ ),
+            ['wp-edit-blocks']
+        );
+
+        register_block_type( "isset-video-publisher/{$name}", [
+            'editor_script' => "isset-video-publisher-{$name}",
+            'editor_style' => "isset-video-publisher-{$name}-style"
+        ]);
     }
 }
