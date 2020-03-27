@@ -63,6 +63,9 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                         {suggestions.map(suggestion => {
                             return (
                                 <div className="video-block-suggestions-wrapper">
+                                    { suggestion.post_thumbnail !== null &&
+                                        <img alt="thumbnail" className="video-block-suggestions-image" src={suggestion.post_thumbnail} />
+                                    }
                                     <span className="video-block-text">{suggestion.post_title}</span>
                                     <a href="#" className="video-block-text-clickable" onClick={() => setValue(suggestion.post_name)}>Use video</a>
                                 </div>

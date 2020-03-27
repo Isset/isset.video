@@ -19,7 +19,17 @@ class PublishesEndpoint
                     ];
                     $WP_Query = new WP_Query($args);
 
-                    return $WP_Query->posts;
+                    if ($WP_Query->post_count > 0) {
+                        return array_map(function ($post) {
+                            return [
+                                'post_name' => $post->post_name,
+                                'post_title' => $post->post_title,
+                                'post_thumbnail' => the_post_thumbnail($post)
+                            ];
+                        }, $WP_Query->posts);
+                    }
+
+                    return [];
                 },
             ]);
         });

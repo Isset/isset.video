@@ -213,39 +213,4 @@ class VideoPublisherService {
 
 		return false;
 	}
-
-	public function getPublishes()
-    {
-        $this->getToken();
-
-        $xauth_token = get_option( Plugin::PUBLISHER_TOKEN_KEY );
-        $response    = wp_remote_get(
-            sprintf( Plugin::PUBLISHER_URL . '/api/published?size=20' ),
-            [
-                'headers' => [
-                    'xauth-token' => $xauth_token,
-                ],
-            ]
-        );
-
-        if ( is_wp_error( $response ) ) {
-            return false;
-        }
-
-        if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
-            return json_decode( $response['body'], true );
-        }
-
-        if ( wp_remote_retrieve_response_code( $response ) == 403 ) {
-            update_option( Plugin::PUBLISHER_TOKEN_KEY, false );
-            $this->getToken();
-
-            $xauth_token = get_option( Plugin::PUBLISHER_TOKEN_KEY );
-            if ( $xauth_token ) {
-                return $this->getPublishes();
-            }
-        }
-
-        return false;
-    }
 }
