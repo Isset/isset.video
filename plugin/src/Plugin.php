@@ -76,6 +76,7 @@ class Plugin {
 		$this->initActions();
 		$this->initRest();
 		$this->initBlocks();
+		$this->initRecurring();
 
 		if ( is_admin() ) {
 			$this->initMetaBoxes();
@@ -216,5 +217,17 @@ class Plugin {
             'editor_script' => "isset-video-publisher-{$name}",
             'editor_style' => "isset-video-publisher-{$name}-style"
         ]);
+    }
+
+    private function initRecurring()
+    {
+        if ( ! wp_next_scheduled( 'fetch_publishes' ) ) {
+            wp_schedule_event(time(), 'hourly', 'fetch_publishes');
+        }
+    }
+
+    private function fetch_publishes() {
+	    $videoPublisherService = new VideoPublisherService($this);
+	    $videoPublisherService->getPublishedVideos();
     }
 }

@@ -195,7 +195,7 @@ class VideoPublisherService {
 					];
 
 					if ( $WP_Query->post_count === 0 ) {
-						$postData['post_title'] = $publish['streamName'];
+						$postData['post_title'] = \DateTime::createFromFormat(DATE_ISO8601, $publish['date_created'])->format("Y-m-d") . " " . $publish['streamName'];
 
 						$postId = wp_insert_post( $postData, true );
 						$post   = get_post( $postId );

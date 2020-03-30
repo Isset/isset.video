@@ -24,6 +24,6 @@ class Preview extends BaseMetaBox {
 	function render() {
 		$context         = Timber::context();
 		$context['post'] = new Post();
-		Timber::render( __DIR__ . '/../../views/metabox/preview.html.twig', $context );
+		Timber::render( __DIR__ . '/../../views/metabox/0preview.html.twig', $context );
 	}
 }
