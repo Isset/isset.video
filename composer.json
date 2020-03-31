@@ -7,7 +7,9 @@
             "email": "info@isset.nl"
         }
     ],
-    "require": {},
+    "require": {
+      "ext-json": "*"
+    },
     "autoload": {
         "psr-4": {
             "IssetBV\\VideoPublisher\\Wordpress\\": "plugin/src"
