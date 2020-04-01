@@ -15,7 +15,7 @@ class VideoPublisher {
 			'singular_name'      => _x( 'Video', 'post type singular name', 'isset-video-publisher' ),
 			'menu_name'          => _x( 'Videos', 'admin menu', 'isset-video-publisher' ),
 			'name_admin_bar'     => _x( 'Video', 'add new on admin bar', 'isset-video-publisher' ),
-			'add_new'            => _x( 'Import from publisher', 'video', 'isset-video-publisher' ),
+			'add_new'            => _x( 'Sync videos', 'video', 'isset-video-publisher' ),
 			'add_new_item'       => __( 'Add New Video', 'isset-video-publisher' ),
 			'new_item'           => __( 'Import from publisher', 'isset-video-publisher' ),
 			'edit_item'          => __( 'Edit Video', 'isset-video-publisher' ),

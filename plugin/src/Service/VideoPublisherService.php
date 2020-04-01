@@ -144,7 +144,7 @@ class VideoPublisherService {
 
 		$xauth_token = get_option( Plugin::PUBLISHER_TOKEN_KEY );
 		$response    = wp_remote_get(
-			sprintf( Plugin::PUBLISHER_URL . '/api/published' ),
+			sprintf( Plugin::PUBLISHER_URL . '/api/v2/publishes' ),
 			[
 				'headers' => [
 					'xauth-token' => $xauth_token,
@@ -170,12 +170,13 @@ class VideoPublisherService {
 			$publishes = json_decode( $response['body'], true );
 
 			if ( is_array( $publishes ) ) {
-				foreach ( $publishes as $publish ) {
+				foreach ( $publishes['results'] as $publish ) {
+
 					if ( empty( $publish['uuid'] ) ) {
 						continue;
 					}
 
-					if ( $publish['status'] === 'online' && (int) $publish['enabled'] === 1 ) {
+					if ( $publish['status'] === 'online' && (int) $publish['enabled'] === true ) {
 						$postStatus = 'publish';
 					} else {
 						$postStatus = 'draft';
@@ -195,7 +196,7 @@ class VideoPublisherService {
 					];
 
 					if ( $WP_Query->post_count === 0 ) {
-						$postData['post_title'] = \DateTime::createFromFormat(DATE_ISO8601, $publish['date_created'])->format("Y-m-d") . " " . $publish['streamName'];
+						$postData['post_title'] = \DateTime::createFromFormat(DATE_ISO8601, $publish['date_created'])->format("Y-m-d") . " - " . $publish['description'];
 
 						$postId = wp_insert_post( $postData, true );
 						$post   = get_post( $postId );
