@@ -2,49 +2,56 @@ import React from "react";
 
 const blocks = window.wp.blocks;
 
-let suggestions = [];
-
-fetch("/?rest_route=/isset-publisher/v1/publishes").then(res => {
-    res.json().then(json => {
-        if (json.length > 9) {
-            suggestions = json.slice(0, 5)
-        } else {
-            suggestions = json;
-        }
-    }).catch(err => console.log(err))
-}).catch(err => console.log(err));
-
 blocks.registerBlockType('isset-video-publisher/video-block', {
     title: 'Isset Video Publisher video',
     icon: 'video-alt2',
     category: 'embed',
     attributes: {
-        content: {
+        uuidParsed: {
             type: 'array',
             source: 'children',
-            selector: 'h4',
+            selector: 'video-embed',
         },
-        contentParsed: {
+        uuid: {
             type: 'array',
             source: 'children',
-            selector: 'span',
+            selector: 'video-uuid',
         },
-        showSuggestions: {
-            type: 'boolean',
-            source: 'children',
-            selector: 'p',
+        searchTerm: {
+            type: 'array',
+            source: 'children'
+        },
+        suggestions: {
+            type: 'array',
+            source: 'children'
         }
     },
-    example: {
-        attributes: {
-            content: 'Hello World',
-            showSuggestions: true
-        },
-    },
     edit: (props) => {
-        const {attributes: {content, showSuggestions}, setAttributes} = props;
-        const setValue = newValue => setAttributes({content: newValue, contentParsed: `[publish uuid=${newValue}]`});
-        const toggleSuggestions = () => setAttributes({showSuggestions: typeof showSuggestions === "boolean" ? !showSuggestions : true});
+        const {attributes: {uuid, suggestions}, setAttributes} = props;
+        const setValue = newValue => setAttributes({uuid: newValue, uuidParsed: `[publish uuid=${newValue}]`});
+        const changeSearchTerm = newTerm => {
+            setAttributes({searchTerm: newTerm});
+            getSuggestions(newTerm)
+        };
+        const getSuggestions = searchTerm => {
+            fetch(`/?rest_route=/isset-publisher/v1/publishes`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({post_title: searchTerm})
+            }).then(res => {
+                res.json().then(json => {
+                    if (json.length > 5) {
+                        setAttributes({suggestions: json.slice(0, 5)})
+                    } else {
+                        setAttributes({suggestions: json})
+                    }
+                }).catch(err => console.log(err))
+            }).catch(err => console.log(err));
+        };
+
+        console.log(suggestions);
 
         return (
             <div className="video-block-container">
@@ -52,37 +59,47 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                     Publisher video
                 </div>
                 <span className="video-block-text">Enter a video uuid</span>
-                <form className="video-block-form">
-                    <input className="video-block-input" placeholder="Video uuid" onChange={e => setValue(e.target.value)} value={content}/>
+                <form className="video-block-form" onSubmit={e => e.preventDefault()}>
+                    <input className="video-block-input" placeholder="Video uuid"
+                           onChange={e => setValue(e.target.value)} value={uuid}/>
+                </form>
+                <span className="video-block-text">Or</span>
+                <span className="video-block-text">Search for a video</span>
+                <form className="video-block-form" onSubmit={e => e.preventDefault()}>
+                    <input className="video-block-input" placeholder="Search videos"
+                           onBlur={e => changeSearchTerm(e.target.value)} />
                 </form>
                 <hr/>
-                <a href="#" onClick={toggleSuggestions} className="video-block-text-clickable">Toggle suggestions</a>
-                <div style={{display: typeof showSuggestions === "boolean" && showSuggestions === true ? "flex" : "none"}}>
-                    <div className="video-block-suggestions-container">
-                        <hr />
-                        {suggestions.map(suggestion => {
-                            return (
-                                <div className="video-block-suggestions-wrapper">
-                                    { suggestion.post_thumbnail !== null &&
-                                        <img alt="thumbnail" className="video-block-suggestions-image" src={suggestion.post_thumbnail} />
-                                    }
-                                    <span className="video-block-text">{suggestion.post_title}</span>
-                                    <a href="#" className="video-block-text-clickable" onClick={() => setValue(suggestion.post_name)}>Use video</a>
-                                </div>
-                            )
-                        })}
-                    </div>
+                <div className="video-block-suggestions-container">
+                    <hr/>
+                    {suggestions.length === 0 &&
+                    <span className="video-block-text">No publishes found</span>
+                    }
+                    {suggestions.map(suggestion => {
+                        if (suggestion.type === 'div') return <div/>;
+
+                        return (
+                            <div className="video-block-suggestions-wrapper">
+                                {suggestion.post_thumbnail !== null &&
+                                    <div dangerouslySetInnerHTML={{__html: suggestion.post_thumbnail}}/>
+                                }
+                                <span className="video-block-text">{suggestion.post_title}</span>
+                                <a href="#" className="video-block-text-clickable"
+                                   onClick={() => setValue(suggestion.post_name)}>Use video</a>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         );
     },
     save: (props) => {
-        const { attributes } = props;
+        const {attributes} = props;
 
         return (
             <div>
-                <span>{attributes.contentParsed}</span>
-                <h4 style={{display: "none"}}>{attributes.content}</h4>
+                <video-uuid>{attributes.uuid}</video-uuid>
+                <video-embed style={{display: "none"}}>{attributes.uuidParsed}</video-embed>
             </div>
         )
     },

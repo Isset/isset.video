@@ -7,26 +7,42 @@ use WP_Query;
 
 class PublishesEndpoint
 {
+    private static function initLikeFilter()
+    {
+        add_filter( 'posts_where', function ( $where, &$wp_query ) {
+            global $wpdb;
+            if ( $searchTerm = $wp_query->get( 'post_title_like' ) ) {
+                $where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql( $wpdb->esc_like( $searchTerm ) ) . '%\'';
+            }
+            return $where;
+        }, 10, 2 );
+    }
+
     public static function publishes()
     {
         add_action('rest_api_init', function () {
             register_rest_route('isset-publisher/v1', '/publishes', [
-                'methods' => 'GET',
-                'callback' => function () {
+                'methods' => 'POST',
+                'callback' => function ($request) {
+                    $reqBody = json_decode($request->get_body(), true);
+                    self::initLikeFilter();
+
                     $args = [
                         'post_type' => VideoPublisher::getTypeName(),
-                        'post_status' => ['publish'],
+                        'post_status' => 'any',
+                        'post_title_like' => $reqBody['post_title'],
                     ];
-                    $WP_Query = new WP_Query($args);
 
-                    if ($WP_Query->post_count > 0) {
+                    $query = new WP_Query($args);
+
+                    if ($query->post_count > 0) {
                         return array_map(function ($post) {
                             return [
                                 'post_name' => $post->post_name,
                                 'post_title' => $post->post_title,
-                                'post_thumbnail' => the_post_thumbnail($post)
+                                'post_thumbnail' => get_the_post_thumbnail($post)
                             ];
-                        }, $WP_Query->posts);
+                        }, $query->posts);
                     }
 
                     return [];
