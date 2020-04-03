@@ -17,6 +17,16 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             source: 'children',
             selector: 'video-uuid',
         },
+        videoName: {
+            type: 'array',
+            source: 'children',
+            selector: 'video-name'
+        },
+        videoThumbnail: {
+            type: 'array',
+            source: 'children',
+            selector: 'video-thumbnail'
+        },
         searchTerm: {
             type: 'array',
             source: 'children'
@@ -27,8 +37,12 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
         }
     },
     edit: (props) => {
-        const {attributes: {uuid, suggestions}, setAttributes} = props;
-        const setValue = newValue => setAttributes({uuid: newValue, uuidParsed: `[publish uuid=${newValue}]`});
+        const {attributes: {uuid, suggestions, videoName, videoThumbnail}, setAttributes} = props;
+        const setValue = newValue => {
+            const suggestion = suggestions.find(suggestion => suggestion.post_name === newValue);
+
+            setAttributes({uuid: newValue, uuidParsed: `[publish uuid=${newValue}]`, videoName: suggestion.post_title, videoThumbnail: suggestion.post_thumbnail})
+        };
         const changeSearchTerm = newTerm => {
             setAttributes({searchTerm: newTerm});
             getSuggestions(newTerm)
@@ -56,25 +70,24 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                 <div className="video-block-title-wrapper">
                     Publisher video
                 </div>
-                <span className="video-block-text">Enter a video uuid</span>
-                <form className="video-block-form" onSubmit={e => e.preventDefault()}>
-                    <input className="video-block-input" placeholder="Video uuid"
-                           onChange={e => setValue(e.target.value)} value={uuid}/>
-                </form>
-                <span className="video-block-text">Or</span>
                 <span className="video-block-text">Search for a video</span>
                 <form className="video-block-form" onSubmit={e => e.preventDefault()}>
                     <input className="video-block-input" placeholder="Search videos"
                            onBlur={e => changeSearchTerm(e.target.value)} />
                 </form>
                 <hr/>
+                <div className="video-block-selected-container" style={{display: (typeof Array.isArray(uuid) && uuid.length === 1) || (typeof uuid === 'string' && uuid !== '') ? 'flex' : 'none'}}>
+                    <span className="video-block-title-wrapper">Selected video</span>
+                    <span className="video-block-text">{videoName}</span>
+                    <div dangerouslySetInnerHTML={{__html: videoThumbnail}}/>
+                </div>
                 <div className="video-block-suggestions-container">
                     <hr/>
                     {suggestions.length === 0 ?
                         <span className="video-block-text">No publishes found</span>
                         :
                         suggestions.map(suggestion => {
-                            return suggestion.type === 'div' ? <div/> : <div className="video-block-suggestions-wrapper">
+                            return suggestion.type === 'div' ? <span className="video-block-text">No publishes found</span> : <div className="video-block-suggestions-wrapper">
                                 {suggestion.post_thumbnail !== null &&
                                 <div dangerouslySetInnerHTML={{__html: suggestion.post_thumbnail}}/>
                                 }
@@ -93,8 +106,10 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
 
         return (
             <div>
-                <video-uuid>{attributes.uuid}</video-uuid>
-                <video-embed style={{display: "none"}}>{attributes.uuidParsed}</video-embed>
+                <video-uuid style={{display: 'none'}}>{attributes.uuid}</video-uuid>
+                <video-embed>{attributes.uuidParsed}</video-embed>
+                <video-name style={{display: 'none'}}>{attributes.videoName}</video-name>
+                <video-thumbnail style={{display: 'none'}}>{attributes.videoThumbnail}</video-thumbnail>
             </div>
         )
     },
