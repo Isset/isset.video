@@ -10,15 +10,18 @@ use IssetBV\VideoPublisher\Wordpress\Action\ImportPublishedVideos;
 use IssetBV\VideoPublisher\Wordpress\Action\RestRouter;
 use IssetBV\VideoPublisher\Wordpress\Action\SavePost;
 use IssetBV\VideoPublisher\Wordpress\Action\Settings;
+use IssetBV\VideoPublisher\Wordpress\Action\ThumbnailColumn;
 use IssetBV\VideoPublisher\Wordpress\Entrypoint\BaseEntrypoint;
+use IssetBV\VideoPublisher\Wordpress\Filter\BaseFilter;
+use IssetBV\VideoPublisher\Wordpress\Filter\ThumbnailColumnFilter;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\BaseMetaBox;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\FrontPage;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\Preview;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\ThumbnailSelect;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
-use IssetBV\VideoPublisher\Wordpress\Shortcode\ShortcodeBase;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\Publish;
+use IssetBV\VideoPublisher\Wordpress\Shortcode\ShortcodeBase;
 
 class Plugin {
 	static $instance;
@@ -44,7 +47,12 @@ class Plugin {
 		SavePost::class,
 		ImportPublishedVideos::class,
 		Settings\Init::class,
-		Settings\Menu::class
+		Settings\Menu::class,
+		ThumbnailColumn::class,
+	];
+
+	private $filters = [
+		ThumbnailColumnFilter::class,
 	];
 
 	private $scripts = [
@@ -73,6 +81,7 @@ class Plugin {
 		$this->initScripts();
 		$this->loadTranslations();
 		$this->initActions();
+		$this->initFilters();
 
 		if ( is_admin() ) {
 			$this->initMetaBoxes();
@@ -136,6 +145,12 @@ class Plugin {
 		}
 	}
 
+	private function initFilters() {
+		foreach ( $this->filters as $filter ) {
+			$this->filter( $filter );
+		}
+	}
+
 	/**
 	 * @return VideoPublisherService
 	 */
@@ -171,9 +186,7 @@ class Plugin {
 	 * @return BaseEntrypoint
 	 */
 	public function entrypoint( $class ) {
-		$entrypoint = new $class( $this );
-
-		return $entrypoint;
+		return new $class( $this );
 	}
 
 	public function action( $action ) {
@@ -184,5 +197,11 @@ class Plugin {
 		}
 
 		add_action( $actionObj->getAction(), $actionObj, $actionObj->getPriority(), $actionObj->getArgs() );
+	}
+
+	public function filter( $filter ) {
+		/** @var BaseFilter $filterObj */
+		$filterObj = new $filter( $this );
+		$filterObj->register();
 	}
 }
