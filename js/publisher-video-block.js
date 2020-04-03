@@ -17,11 +17,6 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             source: 'children',
             selector: 'video-uuid',
         },
-        videoName: {
-            type: 'array',
-            source: 'children',
-            selector: 'video-name'
-        },
         videoThumbnail: {
             type: 'array',
             source: 'children',
@@ -86,7 +81,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
         }
 
         render() {
-            const {attributes: {uuid, suggestions, videoName, videoThumbnail}} = this.props;
+            const {attributes: {uuid, suggestions, videoThumbnail}} = this.props;
 
             if ((typeof Array.isArray(uuid) && uuid.length === 1) || (typeof uuid === 'string' && uuid !== '')) {
                 return (
@@ -135,12 +130,11 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
     },
     save: (props) => {
         const {attributes} = props;
-        
+
         return (
             <div>
                 <video-uuid style={{display: 'none'}}>{attributes.uuid}</video-uuid>
                 <video-embed>{attributes.uuidParsed}</video-embed>
-                <video-name style={{display: 'none'}}>{attributes.videoName}</video-name>
                 <video-thumbnail style={{display: 'none'}}>{attributes.videoThumbnail}</video-thumbnail>
             </div>
         )
