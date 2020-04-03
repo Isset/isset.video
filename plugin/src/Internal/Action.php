@@ -28,7 +28,7 @@ class Action {
 			throw new \RuntimeException( "Function $name doesn't exist on " . get_class( $this->controller ) );
 		}
 
-		$res = [
+		return [
 			'methods'             => $this->method,
 			'callback'            => [ $this->controller, $name ],
 			'permission_callback' => function () {
@@ -41,7 +41,5 @@ class Action {
 				return true;
 			}
 		];
-
-		return $res;
 	}
 }
