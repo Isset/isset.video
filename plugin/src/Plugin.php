@@ -205,7 +205,7 @@ class Plugin {
         wp_register_script(
             "isset-video-publisher-{$name}",
             plugins_url( "../js/publisher-{$name}.js", __FILE__ ),
-            ['wp-blocks', 'wp-element', 'wp-editor']
+            ['wp-blocks', 'wp-element', 'wp-editor', 'wp-components']
         );
 
         wp_register_style(
