@@ -51,8 +51,6 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             }).catch(err => console.log(err));
         };
 
-        console.log(suggestions);
-
         return (
             <div className="video-block-container">
                 <div className="video-block-title-wrapper">
@@ -72,23 +70,20 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                 <hr/>
                 <div className="video-block-suggestions-container">
                     <hr/>
-                    {suggestions.length === 0 &&
-                    <span className="video-block-text">No publishes found</span>
-                    }
-                    {suggestions.map(suggestion => {
-                        if (suggestion.type === 'div') return <div/>;
-
-                        return (
-                            <div className="video-block-suggestions-wrapper">
+                    {suggestions.length === 0 ?
+                        <span className="video-block-text">No publishes found</span>
+                        :
+                        suggestions.map(suggestion => {
+                            return suggestion.type === 'div' ? <div/> : <div className="video-block-suggestions-wrapper">
                                 {suggestion.post_thumbnail !== null &&
-                                    <div dangerouslySetInnerHTML={{__html: suggestion.post_thumbnail}}/>
+                                <div dangerouslySetInnerHTML={{__html: suggestion.post_thumbnail}}/>
                                 }
                                 <span className="video-block-text">{suggestion.post_title}</span>
                                 <a href="#" className="video-block-text-clickable"
                                    onClick={() => setValue(suggestion.post_name)}>Use video</a>
                             </div>
-                        )
-                    })}
+                        })
+                    }
                 </div>
             </div>
         );
