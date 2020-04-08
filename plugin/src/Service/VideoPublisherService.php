@@ -203,16 +203,16 @@ class VideoPublisherService {
 
 						$postId = wp_insert_post( $postData, true );
 						$post   = get_post( $postId );
+
+                        $imgSetter->execute([], 'sync', [
+                            'url' => $publish['assets'][0]['url'],
+                            'post_id' => $post->ID
+                        ]);
 					} else {
 						$post = $WP_Query->next_post();
 
 						$postData['ID'] = $post->ID;
 						wp_update_post( $postData );
-
-						$imgSetter->execute([], 'sync', [
-						    'url' => $publish['assets'][0]['url'],
-                            'post_id' => $post->ID
-                        ]);
 					}
 
 					update_post_meta( $post->ID, 'video-publish', $publish );
