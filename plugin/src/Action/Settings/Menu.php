@@ -19,7 +19,20 @@ class Menu extends BaseAction {
 			'manage_options',
 			'isset-video-publisher-admin',
 			function () {
-				Timber::render( __DIR__ . '/../../../views/admin/page.html.twig', Timber::context() );
+				$context = Timber::context();
+				$vps     = $this->plugin->getVideoPublisherService();
+
+				$context['logged_in'] = $vps->isLoggedIn();
+
+				if ( $context['logged_in'] ) {
+					$context['user']       = $vps->getUserInfo();
+					$context['logout_url'] = $vps->getLogoutURL();
+				}
+
+				$context['login_url']              = $vps->getLoginURL();
+				$context['show_advanced_settings'] = $vps->shouldShowAdvancedOptions();
+
+				Timber::render( __DIR__ . '/../../../views/admin/page.html.twig', $context );
 			}
 		);
 	}
