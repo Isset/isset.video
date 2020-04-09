@@ -4,8 +4,10 @@
 namespace IssetBV\VideoPublisher\Wordpress\Service;
 
 
+use IssetBV\VideoPublisher\Wordpress\Action\SetFeaturedImage;
 use IssetBV\VideoPublisher\Wordpress\Plugin;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use WP_Http;
 use WP_Query;
 
 class VideoPublisherService {
@@ -168,6 +170,7 @@ class VideoPublisherService {
 
 		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
 			$publishes = json_decode( $response['body'], true );
+            $imgSetter = new SetFeaturedImage(Plugin::$instance);
 
 			if ( is_array( $publishes ) ) {
 				foreach ( $publishes as $publish ) {
@@ -204,6 +207,11 @@ class VideoPublisherService {
 
 						$postData['ID'] = $post->ID;
 						wp_update_post( $postData );
+
+						$imgSetter->execute([], 'sync', [
+						    'url' => $publish['assets'][0]['url'],
+                            'post_id' => $post->ID
+                        ]);
 					}
 
 					update_post_meta( $post->ID, 'video-publish', $publish );

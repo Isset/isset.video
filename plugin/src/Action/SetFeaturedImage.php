@@ -3,15 +3,19 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Action;
 
-
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 
 class SetFeaturedImage extends BaseAction {
-	function execute( $arguments ) {
-		check_ajax_referer( 'set-image' );
-
-		$post_id = $_POST['post_id'];
-		$url     = $_POST['url'];
+	function execute( $arguments, $type = 'ajax', $args = [] ) {
+		if ($type === 'ajax') {
+            check_ajax_referer( 'set-image' );
+            $post_id = $_POST['post_id'];
+            $url     = $_POST['url'];
+        }
+		else {
+            $post_id = $args['post_id'];
+            $url     = $args['url'];
+        }
 
 		$query = new \WP_Query( [
 			'p'         => $post_id,
