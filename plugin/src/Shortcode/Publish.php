@@ -4,7 +4,6 @@
 namespace IssetBV\VideoPublisher\Wordpress\Shortcode;
 
 
-use IssetBV\VideoPublisher\Wordpress\Plugin;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use Timber\Timber;
 use WP_Query;
@@ -63,10 +62,18 @@ class Publish extends ShortcodeBase {
 			->getVideoPublisherService()
 			->getVideoUrlForWordpress( $uuid );
 
-		$context              = $attr;
-		$context['poster']    = $poster;
-		$context['uuid']      = $uuid;
-		$context['video_url'] = $video_url;
+		$context                = $attr;
+		$context['poster']      = $poster;
+		$context['uuid']        = $uuid;
+		$context['video_url']   = $video_url;
+		$context['video_setup'] = [
+			'fluid' => true,
+			'html5' => [
+				'hls' => [
+					'handleManifestRedirects' => true,
+				],
+			],
+		];
 
 		return Timber::compile( __DIR__ . '/../../views/shortcode/publish.html.twig', $context );
 	}

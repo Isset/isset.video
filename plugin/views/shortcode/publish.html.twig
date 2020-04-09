@@ -1,9 +1,10 @@
 {% if video_url %}
+
     <div class="video-publisher-video video-publisher-video-16by9">
         <video {{ controls }} {{ autoplay }} {{ loop }} {{ muted }}
                 poster="{{ poster }}" preload="auto" class="video-js vjs-big-play-centered vjs-default-skin"
-                data-setup='{"fluid":true,"handleManifestRedirects":true}'>
-            <source src="{{ video_url }}" type="video/mp4">
+                data-setup="{{ video_setup|json_encode|escape }}">
+            <source src="{{ video_url|escape }}" type="application/x-mpegURL">
             <p class="vjs-no-js">
                 {{ __( 'Your browser does not support the video tag.', 'isset-video-publisher') }}
             </p>
