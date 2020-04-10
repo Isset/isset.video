@@ -169,8 +169,8 @@ class VideoPublisherService {
 		}
 
 		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
-			$publishes = json_decode( $response['body'], true );
-            $imgSetter = new SetFeaturedImage(Plugin::$instance);
+			$publishes        = json_decode( $response['body'], true );
+			$thumbnailService = new ThumbnailService( Plugin::$instance );
 
 			if ( is_array( $publishes ) ) {
 				foreach ( $publishes as $publish ) {
@@ -203,10 +203,7 @@ class VideoPublisherService {
 						$postId = wp_insert_post( $postData, true );
 						$post   = get_post( $postId );
 
-                        $imgSetter->execute([], 'sync', [
-                            'url' => $publish['assets'][0]['url'],
-                            'post_id' => $post->ID
-                        ]);
+						$thumbnailService->setThumbnail( $postId, $publish['assets'][0]['url'] );
 					} else {
 						$post = $WP_Query->next_post();
 
