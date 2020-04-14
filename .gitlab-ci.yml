@@ -1,6 +1,6 @@
 before_script:
   - apt update
-  - apt install zip
+  - apt install -y -f zip
 
 build:
   stage: build
@@ -14,12 +14,12 @@ build:
     - ./bin/create-release
   artifacts:
     paths:
-      - out/release.zip
+      - out/wp-video-publisher.zip
     expire_in: 30 days
 publish_nightly:
   script:
     - ssh-add <(echo "${SSH_PRIV_KEY}")
     - echo 'Host *' >> ~/.ssh/config
     - echo '  StrictHostKeyChecking no' >> ~/.ssh/config
-    - scp out/release.zip wptest@isset122.isset.nl:web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip
+    - scp out/wp-video-publisher.zip wptest@isset122.isset.nl:web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip
     - ssh wptest@isset122.isset.nl sh -c "cd web/WordPress/wp-content/plugins/wp-video-publisher || exit; rm -rf *; unzip ~/web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip"
