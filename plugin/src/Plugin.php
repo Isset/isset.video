@@ -64,8 +64,8 @@ class Plugin {
 	];
 
 
-	const PUBLISHER_TOKEN_KEY = 'isset_video_publisher_token';
-	const PUBLISHER_URL = 'https://my.videopublisher.io';
+	const PUBLISHER_URL = 'https://my.videopublisher.io/';
+	const MY_ISSET_VIDEO_URL = 'https://my.isset.video/';
 
 	public static function instance() {
 		if ( self::$instance === null ) {
@@ -204,4 +204,5 @@ class Plugin {
 		$filterObj = new $filter( $this );
 		$filterObj->register();
 	}
+
 }

@@ -19,28 +19,38 @@ class Init extends BaseAction {
 
 
 	function execute( $arguments ) {
-		$this->plugin->action(Scripts::class);
-		$this->plugin->action(SetFeaturedImage::class);
+		$this->plugin->action( Scripts::class );
+		$this->plugin->action( SetFeaturedImage::class );
+		$vps = $this->plugin->getVideoPublisherService();
 
 		register_setting(
 			'video_publisher_settings', // Option group
 			'isset-video-publisher-options', // Option name
 			function ( $input ) {
 				$new_input = [];
-				if ( isset( $input['consumer_key'] ) ) {
-					$new_input['consumer_key'] = sanitize_text_field( $input['consumer_key'] );
+				if ( isset( $input['show_advanced_options'] ) ) {
+					$new_input['show_advanced_options'] = sanitize_text_field( $input['show_advanced_options'] ) === "1";
 				}
 
-				if ( isset( $input['private_key'] ) ) {
-					$new_input['private_key'] = sanitize_text_field( $input['private_key'] );
+				if ( isset( $input['my_isset_video_url'] ) ) {
+					$new_input['my_isset_video_url'] = sanitize_text_field( $input['my_isset_video_url'] );
 				}
+
+
+				if ( isset( $input['publisher_url'] ) ) {
+					$new_input['publisher_url'] = sanitize_text_field( $input['publisher_url'] );
+				}
+
 
 				return $new_input;
 			}
 		);
 
+		$default_section  = 'isset-video-publisher-default-section';
+		$advanced_section = 'isset-video-publisher-advanced-section';
+
 		add_settings_section(
-			'setting_section_id', // ID
+			$default_section, // ID
 			__( 'Video Publisher Settings', 'isset-video-publisher' ), // Title
 			function () {
 				_e( 'Enter your settings below:', 'isset-video-publisher' );
@@ -49,33 +59,60 @@ class Init extends BaseAction {
 		);
 
 		add_settings_field(
-			'consumer_key', // ID
-			'Consumer key', // Title
+			"show_advanced_options", // ID
+			__( 'Show advanced options', 'isset-video-publisher' ), // Title
 			function () {
 				$issetVideoPublisher = $this->plugin->getVideoPublisherService();
-				$this->renderInput( "consumer_key", $issetVideoPublisher->getConsumerKey() );
+				$this->renderInput( "show_advanced_options", "1", "checkbox", [
+					'checked' => $issetVideoPublisher->shouldShowAdvancedOptions()
+				] );
 			},
 			'publisher-admin', // Page
-			'setting_section_id' // Section
+			$default_section // Section
 		);
 
-		add_settings_field(
-			'private_key',
-			'Private key',
-			function () {
-				$issetVideoPublisher = $this->plugin->getVideoPublisherService();
-				$this->renderInput( "private_key", $issetVideoPublisher->getPrivateKey() );
-			},
-			'publisher-admin',
-			'setting_section_id'
-		);
+		if ( $vps->shouldShowAdvancedOptions() ) {
+			add_settings_section(
+				$advanced_section, // ID
+				__( 'Advanced settings', 'isset-video-publisher' ), // Title
+				function () {
+					_e( 'Enter your settings below:', 'isset-video-publisher' );
+				},
+				'publisher-admin' // Page
+			);
+
+
+			add_settings_field(
+				"my_isset_video_url", // ID
+				'My isset video URL', // Name
+				function () {
+					$issetVideoPublisher = $this->plugin->getVideoPublisherService();
+					$this->renderInput( "my_isset_video_url", $issetVideoPublisher->getMyIssetVideoURL() );
+				},
+				'publisher-admin', // Page
+				$advanced_section // Section
+			);
+
+			add_settings_field(
+				"publisher_url", // ID
+				'Publisher URL', // Name
+				function () {
+					$issetVideoPublisher = $this->plugin->getVideoPublisherService();
+					$this->renderInput( "publisher_url", $issetVideoPublisher->getPublisherURL() );
+				},
+				'publisher-admin', // Page
+				$advanced_section // Section
+			);
+		}
 	}
 
-	private function renderInput( $name, $value ) {
+	private function renderInput( $name, $value, $type = 'text', $extra = [] ) {
 
 		Timber::render( __DIR__ . '/../../../views/admin/input.html.twig', [
 			'name'  => $name,
-			'value' => $value
+			'value' => $value,
+			'type'  => $type,
+			'extra' => $extra,
 		] );
 	}
 }

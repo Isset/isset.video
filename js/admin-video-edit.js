@@ -1,7 +1,5 @@
 jQuery(($) => {
     $('.thumbnail-item button').click(function () {
-        console.log(this);
-
         // noinspection JSUnresolvedVariable
         $.post(IssetVideoPublisherAjax.ajaxUrl, {
             _ajax_nonce: IssetVideoPublisherAjax.nonce,

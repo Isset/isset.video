@@ -1,4 +1,12 @@
-<div class="wrap">
+<div class="wrap video-publisher-admin">
+    <div class="login-box">
+        {% if logged_in %}
+            <span class="greeting">{{ __('Hi, %s', 'isset-video-publisher')|format(user.username) }}</span>
+            <a href="{{ logout_url }}">{{ __("Logout", 'isset-video-publisher') }}</a>
+        {% else %}
+            <a href="{{ login_url }}">{{ __("Log in to my isset", 'isset-video-publisher') }}</a>
+        {% endif %}
+    </div>
     <form method="post" action="options.php">
         {{ function('settings_fields', 'video_publisher_settings') }}
         {{ function('do_settings_sections', 'publisher-admin') }}

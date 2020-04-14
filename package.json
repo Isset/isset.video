@@ -20,7 +20,7 @@
   "author": "Isset Internet Professionals",
   "license": "ISC",
   "dependencies": {
-    "video.js": "^7.6.0"
+    "video.js": "^7.7.5"
   },
   "devDependencies": {
     "@webpack-cli/init": "^0.2.2",
