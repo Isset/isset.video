@@ -1,16 +1,30 @@
 <?php
 
 
-namespace IssetBV\VideoPublisher\Wordpress\Action;
+namespace IssetBV\VideoPublisher\Wordpress\Service;
 
+
+use IssetBV\VideoPublisher\Wordpress\Action\SetFeaturedImage;
+use IssetBV\VideoPublisher\Wordpress\Plugin;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use WP_Query;
 
-class SetFeaturedImage extends BaseAction {
-	function execute( $arguments ) {
-		check_ajax_referer( 'set-image' );
-		$post_id = $_POST['post_id'];
-		$url     = $_POST['url'];
+class ThumbnailService {
+	/**
+	 * @var Plugin
+	 */
+	private $plugin;
 
+	/**
+	 * VideoPublisherService constructor.
+	 *
+	 * @param $plugin
+	 */
+	public function __construct( Plugin $plugin ) {
+		$this->plugin = $plugin;
+	}
+
+	public function setThumbnail( $post_id, $url ) {
 		$query = new \WP_Query( [
 			'p'         => $post_id,
 			'post_type' => VideoPublisher::getTypeName(),
@@ -85,9 +99,4 @@ class SetFeaturedImage extends BaseAction {
 
 		return true;
 	}
-
-	function getAction() {
-		return 'wp_ajax_isset-video-set-image';
-	}
-
 }

@@ -4,8 +4,10 @@
 namespace IssetBV\VideoPublisher\Wordpress\Service;
 
 
+use IssetBV\VideoPublisher\Wordpress\Action\SetFeaturedImage;
 use IssetBV\VideoPublisher\Wordpress\Plugin;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use WP_Http;
 use WP_Query;
 
 class VideoPublisherService {
@@ -167,7 +169,8 @@ class VideoPublisherService {
 		}
 
 		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
-			$publishes = json_decode( $response['body'], true );
+			$publishes        = json_decode( $response['body'], true );
+			$thumbnailService = new ThumbnailService( Plugin::$instance );
 
 			if ( is_array( $publishes ) ) {
 				foreach ( $publishes as $publish ) {
@@ -199,6 +202,8 @@ class VideoPublisherService {
 
 						$postId = wp_insert_post( $postData, true );
 						$post   = get_post( $postId );
+
+						$thumbnailService->setThumbnail( $postId, $publish['assets'][0]['url'] );
 					} else {
 						$post = $WP_Query->next_post();
 
