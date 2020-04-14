@@ -24,5 +24,5 @@ publish_nightly:
     - mkdir ~/.ssh
     - echo 'Host *' >> ~/.ssh/config
     - echo '  StrictHostKeyChecking no' >> ~/.ssh/config
-    - scp out/wp-video-publisher.zip wptest@isset122.isset.nl:web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip
-    - ssh wptest@isset122.isset.nl sh -c "cd web/WordPress/wp-content/plugins/wp-video-publisher || exit; rm -rf *; unzip ~/web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip"
+    - scp out/wp-video-publisher.zip wptest@isset122.isset.net:web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip
+    - ssh wptest@isset122.isset.net sh -c "cd web/WordPress/wp-content/plugins/wp-video-publisher || exit; rm -rf *; unzip ~/web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip"
