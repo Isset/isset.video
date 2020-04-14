@@ -21,6 +21,7 @@ publish_nightly:
     - apt install -y -f openssh-client
     - eval "$(ssh-agent)"
     - ssh-add <(echo "${SSH_PRIV_KEY}")
+    - mkdir ~/.ssh
     - echo 'Host *' >> ~/.ssh/config
     - echo '  StrictHostKeyChecking no' >> ~/.ssh/config
     - scp out/wp-video-publisher.zip wptest@isset122.isset.nl:web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip
