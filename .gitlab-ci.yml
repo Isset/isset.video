@@ -19,6 +19,7 @@ build:
 publish_nightly:
   script:
     - apt install -y -f openssh-client
+    - eval "$(ssh-agent)"
     - ssh-add <(echo "${SSH_PRIV_KEY}")
     - echo 'Host *' >> ~/.ssh/config
     - echo '  StrictHostKeyChecking no' >> ~/.ssh/config
