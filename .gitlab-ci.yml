@@ -1,9 +1,10 @@
 before_script:
-  - apk add unzip
+  - apt update
+  - apt install unzip
 
 build:
   stage: build
-  image: node:alpine
+  image: node
   cache:
     paths:
       - node_modules
