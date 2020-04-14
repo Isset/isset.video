@@ -18,7 +18,7 @@ build:
     expire_in: 30 days
 publish_nightly:
   script:
-    - apt install -y -f openssh
+    - apt install -y -f openssh-client
     - ssh-add <(echo "${SSH_PRIV_KEY}")
     - echo 'Host *' >> ~/.ssh/config
     - echo '  StrictHostKeyChecking no' >> ~/.ssh/config
