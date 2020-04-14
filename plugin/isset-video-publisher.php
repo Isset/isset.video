@@ -1,11 +1,16 @@
 <?php
 
 /*
-Plugin Name: Isset Video Publisher plugin
-Plugin URI: http://isset.nl
-Description: Video integration from the video publisher from Isset Internet Professionals
+Plugin Name: isset.video
+Plugin URI: https://isset.video/wp-plugin/
+Description: Wordpress isset.video implimentation
 Version: 0.1.0
-Author: Isset
+Requires at least: 5.0
+Required PHP: 7.3
+Author: Isset B.V.
+Author URI: http://isset.nl/
+License: GPL v3
+License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
 use IssetBV\VideoPublisher\Wordpress\Autoloader;
