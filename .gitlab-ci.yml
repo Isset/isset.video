@@ -1,6 +1,13 @@
+before_script:
+  - apk add unzip
+
 build:
   stage: build
-  image: node
+  image: node:alpine
+  cache:
+    paths:
+      - node_modules
+    key: node_modules
   script:
     - yarn
     - ./bin/create-release
@@ -8,3 +15,10 @@ build:
     paths:
       - out/release.zip
     expire_in: 30 days
+publish_nightly:
+  script:
+    - ssh-add <(echo "${SSH_PRIV_KEY}")
+    - echo 'Host *' >> ~/.ssh/config
+    - echo '  StrictHostKeyChecking no' >> ~/.ssh/config
+    - scp out/release.zip wptest@isset122.isset.nl:web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip
+    - ssh wptest@isset122.isset.nl sh -c "cd web/WordPress/wp-content/plugins/wp-video-publisher || exit; rm -rf *; unzip ~/web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip"
