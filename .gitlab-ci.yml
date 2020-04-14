@@ -1,6 +1,6 @@
 before_script:
   - apt update
-  - apt install unzip
+  - apt install zip
 
 build:
   stage: build
