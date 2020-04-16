@@ -89,7 +89,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                         <div className="video-block-icon-close-wrapper" onClick={() => this.setValue('')}>
                             <span className="video-block-icon-close dashicons dashicons-no"/>
                         </div>
-                        <div dangerouslySetInnerHTML={{__html: videoThumbnail}}/>
+                        <div style={{position: 'relative'}} dangerouslySetInnerHTML={{__html: videoThumbnail+"<span class='dashicon dashicons-controls-play video-block-play-button'/>"}}/>
                     </div>
                 )
             }
