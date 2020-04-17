@@ -3,9 +3,6 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Action;
 
-
-use IssetVideoPublisher;
-
 class SavePost extends BaseAction {
 	function getAction() {
 		return 'save_post';
@@ -21,12 +18,11 @@ class SavePost extends BaseAction {
 			return $post_id;
 		}
 
-		$issetVideoPublisher = IssetVideoPublisher::instance();
 		if ( isset( $_POST['isset_video_publisher_home'] ) ) {
-			$this->plugin->setFrontpageId( get_the_ID() );
+			$this->plugin->setFrontPageId( get_the_ID() );
 		} else {
-			if ( get_the_ID() === $issetVideoPublisher->getFrontPageId() ) {
-				$this->plugin->setFrontpageId( false );
+			if ( get_the_ID() === $this->plugin->getFrontPageId() ) {
+				$this->plugin->setFrontPageId( false );
 			}
 		}
 	}

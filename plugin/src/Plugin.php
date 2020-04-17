@@ -19,6 +19,7 @@ use IssetBV\VideoPublisher\Wordpress\MetaBox\FrontPage;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\Preview;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\ThumbnailSelect;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use IssetBV\VideoPublisher\Wordpress\Service\ThumbnailService;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\Publish;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\ShortcodeBase;
@@ -30,6 +31,11 @@ class Plugin {
 	 * @var VideoPublisherService
 	 */
 	private $videoPublisherService;
+
+	/**
+	 * @var ThumbnailService
+	 */
+	private $thumbnailService;
 
 	private $shortcodes = [
 		Publish::class,
@@ -43,7 +49,6 @@ class Plugin {
 
 	private $actions = [
 		HijackRouter::class,
-		RestRouter::class,
 		SavePost::class,
 		ImportPublishedVideos::class,
 		Settings\Init::class,
@@ -162,6 +167,17 @@ class Plugin {
 		return $this->videoPublisherService;
 	}
 
+	/**
+	 * @return ThumbnailService
+	 */
+	public function getThumbnailService() {
+		if ( $this->thumbnailService === null ) {
+			$this->thumbnailService = new ThumbnailService( $this );
+		}
+
+		return $this->thumbnailService;
+	}
+
 	private function initMetaBoxes() {
 		add_action( 'add_meta_boxes', function () {
 			foreach ( $this->metaBoxes as $metaBox ) {
@@ -172,12 +188,12 @@ class Plugin {
 		} );
 	}
 
-	public function getFrontpageId() {
-		return (int) get_option( 'isset-video-publisher-frontpage-id' );
+	public function getFrontPageId() {
+		return get_option( 'isset-video-publisher-frontpage-id' );
 	}
 
-	public function setFrontpageId( $get_the_ID ) {
-		return update_option( 'isset-video-publisher-frontpage-id', "$get_the_ID" );
+	public function setFrontPageId( $id ) {
+		return update_option( 'isset-video-publisher-frontpage-id', $id, true );
 	}
 
 	/**

@@ -15,7 +15,7 @@ class VideoPublisherService {
 	private $plugin;
 
 	/**
-	 * @var void
+	 * @var array
 	 */
 	private $issetVideoPublisherOptions;
 
@@ -200,7 +200,7 @@ class VideoPublisherService {
 			return false;
 		}
 
-		$thumbnail_service = new ThumbnailService( Plugin::$instance );
+		$thumbnail_service = $this->plugin->getThumbnailService();
 		$result            = json_decode( $response['body'], true );
 
 		if ( is_array( $result['results'] ) ) {

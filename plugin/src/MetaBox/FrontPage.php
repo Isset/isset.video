@@ -28,7 +28,7 @@ class FrontPage extends BaseMetaBox {
 	function render() {
 		$context            = Timber::context();
 		$context['post']    = new Post();
-		$context['checked'] = $this->plugin->getFrontpageId() === get_the_ID();
+		$context['checked'] = $this->plugin->getFrontPageId() === get_the_ID();
 		Timber::render( __DIR__ . '/../../views/metabox/front-page.html.twig', $context );
 	}
 
