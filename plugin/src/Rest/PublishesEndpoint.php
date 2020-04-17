@@ -7,17 +7,6 @@ use WP_Query;
 
 class PublishesEndpoint
 {
-    private static function initLikeFilter()
-    {
-        add_filter( 'posts_where', function ( $where, &$wp_query ) {
-            global $wpdb;
-            if ( $searchTerm = $wp_query->get( 'post_title_like' ) ) {
-                $where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql( $wpdb->esc_like( $searchTerm ) ) . '%\'';
-            }
-            return $where;
-        }, 10, 2 );
-    }
-
     public static function publishes()
     {
         add_action('rest_api_init', function () {
@@ -25,12 +14,11 @@ class PublishesEndpoint
                 'methods' => 'POST',
                 'callback' => function ($request) {
                     $reqBody = json_decode($request->get_body(), true);
-                    self::initLikeFilter();
 
                     $args = [
                         'post_type' => VideoPublisher::getTypeName(),
-                        'post_status' => 'any',
-                        'post_title_like' => $reqBody['post_title'],
+                        'post_status' => 'published',
+                        's' => $reqBody['post_title'],
                     ];
 
                     $query = new WP_Query($args);

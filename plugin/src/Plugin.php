@@ -254,10 +254,7 @@ class Plugin {
 		add_action( 'admin_init', function () {
 			if ( is_admin() && current_user_can( 'activate_plugins' ) && ! is_plugin_active( 'timber-library/timber.php' ) ) {
 				add_action( 'admin_notices', function () {
-					?>
-                    <div class="error"><p>Isset video publisher plugin requires <a
-                                    href="https://wordpress.org/plugins/timber-library/" target="_blank">timber</a> to
-                            work, please install and activate the timber plugin.</p></div><?php
+					include __DIR__ . '/../views/admin/timber-alert.php';
 				} );
 
 				deactivate_plugins( plugin_basename( __FILE__ ) );
