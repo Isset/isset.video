@@ -75,6 +75,10 @@ class Publish extends ShortcodeBase {
 			],
 		];
 
+		add_action( 'wp_head', function () {
+			include __DIR__ . '/../../views/opengraph/videoData.php';
+		}, 1, 1 );
+
 		return Timber::compile( __DIR__ . '/../../views/shortcode/publish.html.twig', $context );
 	}
 }

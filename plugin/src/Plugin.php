@@ -42,9 +42,7 @@ class Plugin {
 	];
 
 	private $metaBoxes = [
-		Preview::class,
 		FrontPage::class,
-		ThumbnailSelect::class,
 	];
 
 	private $actions = [

@@ -65,7 +65,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
         }
 
         setValue(newValue, newThumbnail = '') {
-            const {attributes: {suggestions}, setAttributes} = this.props;
+            const {setAttributes} = this.props;
 
             setAttributes({
                 uuid: newValue,
@@ -82,6 +82,8 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
 
         render() {
             const {attributes: {uuid, suggestions, videoThumbnail}} = this.props;
+
+            console.log(this.props.attributes)
 
             if ((typeof Array.isArray(uuid) && uuid.length === 1) || (typeof uuid === 'string' && uuid !== '')) {
                 return (
