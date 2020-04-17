@@ -156,11 +156,8 @@ class VideoPublisherService {
 		}
 
 		$body = json_decode( $response['body'], true );
-		if ( ! isset( $body['viewable'] ) || ! $body['viewable'] ) {
-			return false;
-		}
 
-		if ( ! isset( $body['playout'] ) || ! $body['playout'] ) {
+		if ( ! isset( $body['playout'] ) || ! $body['playout'] || ! isset( $body['playout'] ['playout_url'] ) || ! $body['playout']['playout_url'] ) {
 			return false;
 		}
 
