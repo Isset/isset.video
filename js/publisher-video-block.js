@@ -69,7 +69,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
 
             setAttributes({
                 uuid: newValue,
-                uuidParsed: `[publish uuid=${newValue}]`,
+                uuidParsed: `[publish uuid='${newValue}']`,
                 videoThumbnail: newThumbnail
             });
         }
@@ -82,8 +82,6 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
 
         render() {
             const {attributes: {uuid, suggestions, videoThumbnail}} = this.props;
-
-            console.log(this.props.attributes)
 
             if ((typeof Array.isArray(uuid) && uuid.length === 1) || (typeof uuid === 'string' && uuid !== '')) {
                 return (

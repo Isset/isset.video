@@ -1,1 +1,0 @@
-<meta property="og:video" content="<?= $context['video_url'] ?>" />

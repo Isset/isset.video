@@ -128,3 +128,8 @@ msgstr ""
 msgctxt "video"
 msgid "Import from publisher"
 msgstr ""
+
+#: inc/file.timber-alert.php:7
+msgctxt "is required to use Isset video publisher plugin"
+msgid "timber alert"
+msgstr ""
