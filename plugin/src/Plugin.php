@@ -5,22 +5,29 @@ namespace IssetBV\VideoPublisher\Wordpress;
 
 
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
+use IssetBV\VideoPublisher\Wordpress\Action\Editor;
+use IssetBV\VideoPublisher\Wordpress\Action\GenerateUploadUrl;
 use IssetBV\VideoPublisher\Wordpress\Action\HijackRouter;
 use IssetBV\VideoPublisher\Wordpress\Action\ImportPublishedVideos;
 use IssetBV\VideoPublisher\Wordpress\Action\SavePost;
 use IssetBV\VideoPublisher\Wordpress\Action\Settings;
 use IssetBV\VideoPublisher\Wordpress\Action\ThumbnailColumn;
+use IssetBV\VideoPublisher\Wordpress\Action\Upload;
 use IssetBV\VideoPublisher\Wordpress\Entrypoint\BaseEntrypoint;
 use IssetBV\VideoPublisher\Wordpress\Filter\BaseFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\ThumbnailColumnFilter;
+use IssetBV\VideoPublisher\Wordpress\Filter\Timber;
+use IssetBV\VideoPublisher\Wordpress\Filter\VideoUpload;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\BaseMetaBox;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\FrontPage;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\Preview;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\ThumbnailSelect;
+use IssetBV\VideoPublisher\Wordpress\MetaBox\TranscodingStatus;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Rest\PublishesEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Service\ThumbnailService;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
+use IssetBV\VideoPublisher\Wordpress\Service\WordpressService;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\Publish;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\ShortcodeBase;
 
@@ -37,12 +44,16 @@ class Plugin {
 	 */
 	private $thumbnailService;
 
+	/**
+	 * @var WordpressService
+	 */
+	private $wordpressService;
+
 	private $shortcodes = [
 		Publish::class,
 	];
 
 	private $metaBoxes = [
-		Preview::class,
 		FrontPage::class,
 		ThumbnailSelect::class,
 	];
@@ -54,10 +65,16 @@ class Plugin {
 		Settings\Init::class,
 		Settings\Menu::class,
 		ThumbnailColumn::class,
+		Upload\Page::class,
+		Upload\GenerateUploadUrl::class,
+		Upload\RegisterUpload::class,
+		Editor::class,
 	];
 
 	private $filters = [
 		ThumbnailColumnFilter::class,
+		VideoUpload::class,
+		Timber::class,
 	];
 
 	private $scripts = [
@@ -105,27 +122,26 @@ class Plugin {
 		}
 	}
 
+	public function enqueueScript( $script ) {
+		wp_enqueue_script(
+			'isset-video-publisher-' . $script,
+			ISSET_VIDEO_PUBLISHER_URL . '/' . $script,
+			[],
+			ISSET_VIDEO_PUBLISHER_VERSION . '-' . filemtime( ISSET_VIDEO_PUBLISHER_PATH . '/' . $script ),
+			true
+		);
+	}
+
 	private function enqueueScripts( $context ) {
 		foreach ( $this->scripts as $script => $applicableContexts ) {
 			if ( in_array( $context, $applicableContexts, true ) ) {
-				wp_enqueue_script(
-					'isset-video-publisher-' . $script,
-					ISSET_VIDEO_PUBLISHER_URL . '/' . $script,
-					[],
-					ISSET_VIDEO_PUBLISHER_VERSION . '-' . filemtime( ISSET_VIDEO_PUBLISHER_PATH . '/' . $script ),
-					true
-				);
+				$this->enqueueScript( $script );
 			}
 		}
 
 		foreach ( $this->styles as $style => $applicableContexts ) {
 			if ( in_array( $context, $applicableContexts, true ) ) {
-				wp_enqueue_style(
-					'isset-video-publisher-' . $style,
-					ISSET_VIDEO_PUBLISHER_URL . '/' . $style,
-					[],
-					ISSET_VIDEO_PUBLISHER_VERSION . '-' . filemtime( ISSET_VIDEO_PUBLISHER_PATH . '/' . $style )
-				);
+				$this->enqueueStyle( $style );
 			}
 		}
 	}
@@ -187,7 +203,9 @@ class Plugin {
 			foreach ( $this->metaBoxes as $metaBox ) {
 				/** @var BaseMetaBox $metaBoxObj */
 				$metaBoxObj = new $metaBox( $this );
-				add_meta_box( $metaBoxObj->getId(), $metaBoxObj->getTitle(), $metaBoxObj );
+				if ( $metaBoxObj->isVisible() ) {
+					add_meta_box( $metaBoxObj->getId(), $metaBoxObj->getTitle(), $metaBoxObj, $metaBoxObj->getScreen(), $metaBoxObj->getContext() );
+				}
 			}
 		} );
 	}
@@ -275,5 +293,22 @@ class Plugin {
 		/** @var BaseFilter $filterObj */
 		$filterObj = new $filter( $this );
 		$filterObj->register();
+	}
+
+	public function enqueueStyle( $style ) {
+		wp_enqueue_style(
+			'isset-video-publisher-' . $style,
+			ISSET_VIDEO_PUBLISHER_URL . '/' . $style,
+			[],
+			ISSET_VIDEO_PUBLISHER_VERSION . '-' . filemtime( ISSET_VIDEO_PUBLISHER_PATH . '/' . $style )
+		);
+	}
+
+	public function getWordpressService() {
+		if ( $this->wordpressService === null ) {
+			$this->wordpressService = new WordpressService( $this );
+		}
+
+		return $this->wordpressService;
 	}
 }

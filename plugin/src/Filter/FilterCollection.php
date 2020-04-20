@@ -10,6 +10,10 @@ class FilterCollection {
 	 */
 	private $filters = [];
 
+	public static function new() {
+		return new FilterCollection();
+	}
+
 	/**
 	 * @param string $name
 	 * @param callable $callable

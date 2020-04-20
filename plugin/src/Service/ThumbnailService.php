@@ -4,10 +4,8 @@
 namespace IssetBV\VideoPublisher\Wordpress\Service;
 
 
-use IssetBV\VideoPublisher\Wordpress\Action\SetFeaturedImage;
 use IssetBV\VideoPublisher\Wordpress\Plugin;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
-use WP_Query;
 
 class ThumbnailService {
 	/**

@@ -1,0 +1,13 @@
+.phase-upload {
+  display: none;
+
+  .bar {
+    background: red;
+    width: 0;
+    height: 30px;
+  }
+}
+
+.phase-done {
+  display: none;
+}

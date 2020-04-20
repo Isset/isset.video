@@ -4,6 +4,10 @@
 namespace IssetBV\VideoPublisher\Wordpress\Action;
 
 class SavePost extends BaseAction {
+	public function isAdminOnly() {
+		return true;
+	}
+
 	function getAction() {
 		return 'save_post';
 	}
