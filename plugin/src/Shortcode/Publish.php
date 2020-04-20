@@ -76,7 +76,7 @@ class Publish extends ShortcodeBase {
 		];
 
 		add_action( 'wp_head', function () use ($context) {
-			echo Timber::compile(__DIR__ . '/../../views/opengraph/video-data.html.twig', ['videoUrl' => $context['video_url']]);
+			echo Timber::render(__DIR__ . '/../../views/opengraph/video-data.html.twig', ['videoUrl' => $context['video_url']]);
 		}, 1, 1 );
 
 		return Timber::compile( __DIR__ . '/../../views/shortcode/publish.html.twig', $context );
