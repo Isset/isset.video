@@ -17,7 +17,7 @@ class Scripts extends BaseAction {
 	}
 
 	function execute( $arguments ) {
-		if ( $_GET['post_type'] !== VideoPublisher::getTypeName() ) {
+		if ( $_GET['post_type'] !== VideoPublisher::getTypeName() && get_post_type() !== VideoPublisher::getTypeName() ) {
 			return;
 		}
 
