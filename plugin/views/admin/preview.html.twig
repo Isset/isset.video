@@ -1,0 +1,6 @@
+{% set publish_shortcode = '[publish uuid=' ~ post.post_name ~ ']' %}
+<br>
+{{ publish_shortcode|shortcodes }}
+<hr>
+{{ _e('Use this shortcode in a post to include the video.', 'isset-video-publisher') }}
+<br><br><code>{{ publish_shortcode }}</code>

@@ -5,8 +5,6 @@ namespace IssetBV\VideoPublisher\Wordpress\Service;
 
 
 use IssetBV\VideoPublisher\Wordpress\Plugin;
-use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
-use WP_Query;
 
 class VideoPublisherService {
 	/**
@@ -132,30 +130,7 @@ class VideoPublisherService {
 	}
 
 	public function getVideoUrl( $uuid ) {
-		$auth_token = $this->getAuthToken();
-		$response   = wp_remote_get(
-			sprintf( rtrim( $this->getPublisherURL(), '/' ) . '/api/publishes/%s', urlencode( $uuid ) ),
-			[
-				'headers' => [
-					'x-token-auth' => $auth_token,
-				],
-			]
-		);
-
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-		$response_code = wp_remote_retrieve_response_code( $response );
-		if ( $response_code !== 200 ) {
-			if ( $response_code >= 400 && $response_code < 500 ) {
-				$this->removeAuthToken();
-			}
-
-			return false;
-		}
-
-		$body = json_decode( $response['body'], true );
+		$body = $this->fetchPublishInfo( $uuid );
 
 		if ( ! isset( $body['playout'] ) || ! $body['playout'] || ! isset( $body['playout'] ['playout_url'] ) || ! $body['playout']['playout_url'] ) {
 			return false;
@@ -165,40 +140,16 @@ class VideoPublisherService {
 
 	}
 
+	public function fetchPublishInfo( $uuid ) {
+		return $this->publisherGet( '/api/publishes/' . urlencode( $uuid ) );
+	}
+
 	/**
 	 * @return bool
 	 */
 	public function getPublishedVideos() {
-		$auth_token = $this->getAuthToken();
-
-		if ( $auth_token === false ) {
-			return false;
-		}
-
-		$response = wp_remote_get(
-			sprintf( rtrim( $this->getPublisherURL(), '/' ) . '/api/publishes?size=100' ),
-			[
-				'headers' => [
-					'x-token-auth' => $auth_token,
-				],
-			]
-		);
-
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-		$response_code = wp_remote_retrieve_response_code( $response );
-		if ( $response_code !== 200 ) {
-			if ( $response_code >= 400 && $response_code < 500 ) {
-				$this->removeAuthToken();
-			}
-
-			return false;
-		}
-
-		$thumbnail_service = $this->plugin->getThumbnailService();
-		$result            = json_decode( $response['body'], true );
+		$result            = $this->publisherGet( '/api/publishes?size=100' );
+		$wordpress_service = $this->plugin->getWordpressService();
 
 		if ( is_array( $result['results'] ) ) {
 			foreach ( $result['results'] as $publish ) {
@@ -206,40 +157,7 @@ class VideoPublisherService {
 					continue;
 				}
 
-				if ( $publish['status'] === 'online' && (int) $publish['enabled'] === 1 ) {
-					$post_status = 'publish';
-				} else {
-					$post_status = 'draft';
-				}
-
-				$args     = [
-					'post_type'   => VideoPublisher::getTypeName(),
-					'name'        => $publish['uuid'],
-					'post_status' => [ 'publish', 'draft' ],
-				];
-				$WP_Query = new WP_Query( $args );
-
-				$post_data = [
-					'post_name'   => $publish['uuid'],
-					'post_type'   => VideoPublisher::getTypeName(),
-					'post_status' => $post_status,
-				];
-
-				if ( $WP_Query->post_count === 0 ) {
-					$post_data['post_title'] = $publish['description'];
-
-					$post_id = wp_insert_post( $post_data, true );
-					$post    = get_post( $post_id );
-
-					$thumbnail_service->setThumbnail( $post_id, $publish['assets'][0]['url'] );
-				} else {
-					$post = $WP_Query->next_post();
-
-					$post_data['ID'] = $post->ID;
-					wp_update_post( $post_data );
-				}
-
-				update_post_meta( $post->ID, 'video-publish', $publish );
+				$wordpress_service->updatePostFromPublish( $publish );
 			}
 		}
 
@@ -306,5 +224,82 @@ class VideoPublisherService {
 		);
 
 		$this->removeAuthToken();
+	}
+
+	public function getUploadURL() {
+		$result = $this->publisherGet( '/api/uploads/request-url' );
+
+		return $result['url'];
+	}
+
+	private function publisherGet( $path ) {
+		$auth_token = $this->getAuthToken();
+
+		if ( $auth_token === false ) {
+			return false;
+		}
+
+		$response = wp_remote_get(
+			sprintf( rtrim( $this->getPublisherURL(), '/' ) . $path ),
+			[
+				'headers' => [
+					'x-token-auth' => $auth_token,
+				],
+			]
+		);
+
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( $response_code !== 200 ) {
+			if ( $response_code === 401 || $response_code === 403 ) {
+				$this->removeAuthToken();
+			}
+
+			return false;
+		}
+
+		return json_decode( $response['body'], true );
+	}
+
+	public function fetchUploadInfo( $id ) {
+		return $this->publisherGet( '/api/uploads/' . urlencode( $id ) . '/status' );
+	}
+
+	public function updateUpload( $post_id ) {
+		$status = get_post_meta( $post_id, 'video-isset-status', true );
+
+		if ( $status !== 'transcoding' ) {
+			return $status;
+		}
+
+		$transcode = get_post_meta( $post_id, 'video-isset-transcode', true );
+
+		$data = $this->fetchUploadInfo( $transcode['id'] );
+
+		if ( $data['status'] === 'publishOnline' ) {
+			wp_update_post( [
+				'post_name' => $data['publish'],
+				'ID'        => $post_id,
+			] );
+
+			$publish_info = $this->fetchPublishInfo( $data['publish'] );
+			if ( $publish_info === false ) {
+				return false;
+			}
+
+			$this->plugin->getWordpressService()->updatePostFromPublish( $publish_info, true );
+		}
+
+		return get_post_meta( $post_id, 'video-isset-status', true );
+	}
+
+	public function updateUploads() {
+		$drafts = $this->plugin->getWordpressService()->getUploadDrafts();
+		foreach ( $drafts as $draft ) {
+			$this->updateUpload( $draft );
+		}
 	}
 }

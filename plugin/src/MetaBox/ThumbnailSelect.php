@@ -13,6 +13,12 @@ class ThumbnailSelect extends BaseMetaBox {
 		return 'video-publisher-thumbnail-select';
 	}
 
+	public function isVisible() {
+		$post = get_post();
+
+		return get_post_meta( $post->ID, 'video-isset-status', true ) !== 'transcoding';
+	}
+
 	function getTitle() {
 		return __( 'Use generated thumbnail', 'isset-video-publisher' );
 	}

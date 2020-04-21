@@ -8,6 +8,11 @@ use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use Timber\Timber;
 
 class ThumbnailColumn extends BaseAction {
+	public function isAdminOnly() {
+		return true;
+	}
+
+
 	function getArgs() {
 		return 2;
 	}

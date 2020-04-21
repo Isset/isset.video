@@ -33,6 +33,10 @@ abstract class BaseMetaBox {
 		return 'advanced';
 	}
 
+	public function isVisible() {
+		return true;
+	}
+
 	function __invoke() {
 		$this->render();
 	}

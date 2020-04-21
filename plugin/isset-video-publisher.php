@@ -24,6 +24,7 @@ define( 'ISSET_VIDEO_PUBLISHER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ISSET_VIDEO_PUBLISHER_URL', plugin_dir_url( __FILE__ ) );
 define( 'ISSET_VIDEO_PUBLISHER_VERSION', '0.1.0' );
 
+
 include_once __DIR__ . '/src/Autoloader.php';
 
 spl_autoload_register( new Autoloader() );

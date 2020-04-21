@@ -4,8 +4,12 @@
 namespace IssetBV\VideoPublisher\Wordpress\Action;
 
 class SetFeaturedImage extends BaseAction {
+	public function isAdminOnly() {
+		return true;
+	}
+
 	function execute( $arguments ) {
-		check_ajax_referer( 'set-image' );
+		check_ajax_referer( 'isset-video' );
 		$post_id = $_POST['post_id'];
 		$url     = $_POST['url'];
 
@@ -15,5 +19,4 @@ class SetFeaturedImage extends BaseAction {
 	function getAction() {
 		return 'wp_ajax_isset-video-set-image';
 	}
-
 }

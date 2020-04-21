@@ -13,6 +13,12 @@ class FrontPage extends BaseMetaBox {
 		return 'video-publisher-front-page';
 	}
 
+	public function isVisible() {
+		$post = get_post();
+
+		return get_post_meta( $post->ID, 'video-isset-status', true ) !== 'transcoding';
+	}
+
 	function getScreen() {
 		return VideoPublisher::getTypeName();
 	}
