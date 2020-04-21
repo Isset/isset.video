@@ -17,6 +17,8 @@ build:
       - out/wp-video-publisher.zip
     expire_in: 30 days
 publish_nightly:
+  only:
+    - master
   script:
     - apt install -y -f openssh-client
     - eval "$(ssh-agent)"
