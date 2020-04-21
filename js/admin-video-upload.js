@@ -4,9 +4,19 @@ jQuery(($) => {
   // noinspection JSUnresolvedVariable
   const {nonce, ajaxUrl} = IssetVideoPublisherAjax;
 
-  $(".phase-select button").click(async () => {
-    let fileSelect = $('.phase-select input[type="file"]');
+  let fileSelect = $('.phase-select input[type="file"]');
 
+  fileSelect.change(function () {
+    let fileDisplay = $("#phase-select-file");
+    let file = this.files[0];
+    if (file) {
+      fileDisplay.html('Selected file: ' + file.name)
+    } else {
+      fileDisplay.html('')
+    }
+  });
+
+  $(".phase-select button").click(async () => {
     if (fileSelect.val() === "") {
       return;
     }
@@ -32,10 +42,10 @@ jQuery(($) => {
     let uploadXhr = new XMLHttpRequest();
 
     uploadXhr.upload.addEventListener("progress", (e) => {
-      const progressBar = $('.phase-upload .progress');
+      const progressContainer = $('.phase-upload');
       const percent = (e.loaded / e.total) * 100;
-      progressBar.find('.bar').width(`${percent}%`);
-      progressBar.find('.indicator').text(`${Math.ceil(percent)}%`);
+      progressContainer.find('.progress-bar').width(`${percent}%`);
+      progressContainer.find('.indicator').text(`${Math.ceil(percent)}%`);
     });
 
     uploadXhr.open("POST", uploadUrlObj.url);
