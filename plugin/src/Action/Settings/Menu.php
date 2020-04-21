@@ -5,6 +5,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Action\Settings;
 
 
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
+use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use Timber\Timber;
 
 class Menu extends BaseAction {
@@ -31,6 +32,8 @@ class Menu extends BaseAction {
 
 				$context['login_url']              = $vps->getLoginURL();
 				$context['show_advanced_settings'] = $vps->shouldShowAdvancedOptions();
+
+				$context['video_url'] = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
 
 				Timber::render( __DIR__ . '/../../../views/admin/page.html.twig', $context );
 			}

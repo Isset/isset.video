@@ -1,15 +1,23 @@
 <div class="wrap video-publisher-admin">
-    <div class="login-box">
-        {% if logged_in %}
-            <span class="greeting">{{ __('Hi, %s', 'isset-video-publisher')|format(user.username) }}</span>
-            <a href="{{ logout_url }}">{{ __("Logout", 'isset-video-publisher') }}</a>
-        {% else %}
-            <a href="{{ login_url }}">{{ __("Log in to my isset", 'isset-video-publisher') }}</a>
-        {% endif %}
-    </div>
+    {% if logged_in %}
+        <div class="card">
+            <h2>{{ __('Hi, %s', 'isset-video-publisher')|format(user.username) }}</h2>
+            <div>You are now connected to my.isset.video. Click the button below to unlink your account and logout.</div>
+            <a class="btn btn-danger mt-20" href="{{ logout_url }}">{{ __("Logout", 'isset-video-publisher') }}</a>
+            <a class="btn mt-20" href="{{ video_url }}">{{ __("Go to videos", 'isset-video-publisher') }}</a>
+        </div>
+    {% else %}
+        <div class="card">
+            <h2>Connect to my.isset.video</h2>
+            <div>Please connect your my.isset.video account by clicking the button below. We will redirect you to my.isset.video to ask for your permission.</div>
+            <a class="btn mt-20" href="{{ login_url }}">{{ __("Connect to my.isset.video", 'isset-video-publisher') }}</a>
+        </div>
+    {% endif %}
     <form method="post" action="options.php">
-        {{ function('settings_fields', 'video_publisher_settings') }}
-        {{ function('do_settings_sections', 'publisher-admin') }}
-        {{ function('submit_button') }}
+        <div class="card">
+            {{ function('settings_fields', 'video_publisher_settings') }}
+            {{ function('do_settings_sections', 'publisher-admin') }}
+            {{ function('submit_button') }}
+        </div>
     </form>
 </div>
