@@ -5,6 +5,8 @@ namespace IssetBV\VideoPublisher\Wordpress\Service;
 
 
 use IssetBV\VideoPublisher\Wordpress\Plugin;
+use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use WP_Query;
 
 class VideoPublisherService {
 	/**
@@ -301,5 +303,33 @@ class VideoPublisherService {
 		foreach ( $drafts as $draft ) {
 			$this->updateUpload( $draft );
 		}
+	}
+
+	public function getStats() {
+		$auth_token = $this->getAuthToken();
+
+		if ( $auth_token === false ) {
+			return false;
+		}
+
+		$response = wp_remote_get(
+			sprintf( rtrim( $this->getPublisherURL(), '/' ) . '/api/stats/usage' ),
+			[
+				'headers' => [
+					'x-token-auth' => $auth_token,
+				],
+			]
+		);
+
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( $response_code !== 200 ) {
+			return false;
+		}
+
+		return json_decode( $response['body'], true );
 	}
 }

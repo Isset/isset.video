@@ -26,6 +26,8 @@ use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
 use IssetBV\VideoPublisher\Wordpress\Service\WordpressService;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\Publish;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\ShortcodeBase;
+use IssetBV\VideoPublisher\Wordpress\Widgets\BaseWidget;
+use IssetBV\VideoPublisher\Wordpress\Widgets\Dashboard;
 
 class Plugin {
 	static $instance;
@@ -50,6 +52,7 @@ class Plugin {
 	];
 
 	private $metaBoxes = [
+		Preview::class,
 		FrontPage::class,
 		ThumbnailSelect::class,
 	];
@@ -72,6 +75,10 @@ class Plugin {
 		Timber::class,
 	];
 
+	private $dashboardWidgets = [
+		Dashboard::class
+	];
+
 	private $scripts = [
 		'js/main.js' => [ 'site', 'admin' ],
 	];
@@ -81,7 +88,7 @@ class Plugin {
 	];
 
 
-	const PUBLISHER_URL = 'https://my.videopublisher.io/';
+	const PUBLISHER_URL = 'https://publish.isset.video/';
 	const MY_ISSET_VIDEO_URL = 'https://my.isset.video/';
 
 	public static function instance() {
@@ -106,6 +113,7 @@ class Plugin {
 
 		if ( is_admin() ) {
 			$this->initMetaBoxes();
+			$this->initDashboardWidgets();
 		}
 	}
 
@@ -305,5 +313,20 @@ class Plugin {
 		}
 
 		return $this->wordpressService;
+	}
+
+	private function initDashboardWidgets() {
+	    add_action('wp_dashboard_setup', function() {
+		    foreach ( $this->dashboardWidgets as $widget ) {
+			    $this->dashboardWidget( $widget );
+		    }
+        });
+	}
+
+	public function dashboardWidget( $widget ) {
+		/** @var BaseWidget $widgetObj */
+		$widgetObj = new $widget( $this );
+
+		wp_add_dashboard_widget( $widgetObj->getWidgetId(), $widgetObj->getWidgetName(), $widgetObj, $widgetObj->controlCallback(), $widgetObj->getArgs() );
 	}
 }
