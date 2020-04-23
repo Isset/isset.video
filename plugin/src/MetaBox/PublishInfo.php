@@ -8,9 +8,9 @@ use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use Timber\Post;
 use Timber\Timber;
 
-class ThumbnailSelect extends BaseMetaBox {
+class PublishInfo extends BaseMetaBox {
 	function getId() {
-		return 'video-publisher-thumbnail-select';
+		return 'video-publisher-publish-info';
 	}
 
 	public function isVisible() {
@@ -20,7 +20,7 @@ class ThumbnailSelect extends BaseMetaBox {
 	}
 
 	function getTitle() {
-		return __( 'Use generated thumbnail', 'isset-video-publisher' );
+		return __( 'Publish info', 'isset-video-publisher' );
 	}
 
 	function getScreen() {
@@ -28,18 +28,17 @@ class ThumbnailSelect extends BaseMetaBox {
 	}
 
 	public function getContext() {
-		return 'normal';
+		return 'side';
 	}
 
 	function render() {
 		$context         = Timber::context();
 		$context['post'] = new Post();
 
-		$item              = get_post_meta( get_the_ID(), 'video-publish', true );
-		$context['assets'] = $item['assets'];
-		$context['nonce']  = wp_create_nonce( 'isset-video-set-image' );
+		$item = get_post_meta( get_the_ID(), 'video-publish', true );
+		$context['size'] = $item['size'];
 
-		Timber::render( __DIR__ . '/../../views/metabox/thumbnail-select.html.twig', $context );
+		Timber::render( __DIR__ . '/../../views/metabox/publish-info.html.twig', $context );
 	}
 
 }

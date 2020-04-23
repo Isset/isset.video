@@ -1,16 +1,20 @@
-{% if isLoggedIn %}
-    <span>Logged in as {{ username }}, <a href="{{ logoutUrl }}">logout</a></span>
-    {% if stats %}
-        <div class="video-publisher-mt-2">
-            <span class="video-publisher-bold">Storage used: </span>
-            <span>{{ (stats['storage'] / 1e+9) | round(3) }} GB</span>
-        </div>
-        <div>
-            <span class="video-publisher-bold">Data streamed: </span>
-            <span>{{ (stats['streaming'] / 1e+9) | round(3) }} GB</span>
-        </div>
-    {% endif %}
+<div class="video-publisher-admin">
+    {% if isLoggedIn %}
+        <h2>{{ __('Logged in as %s', 'isset-video-publisher')|format(user.username) }}</h2>
+        {% if stats %}
+            <div class="video-publisher-mt-2">
+                <span class="video-publisher-bold">Storage used: </span>
+                <span>{{ (stats['storage'] / 1e+9) | round(3) }} GB</span>
+            </div>
+            <div>
+                <span class="video-publisher-bold">Data streamed: </span>
+                <span>{{ (stats['streaming'] / 1e+9) | round(3) }} GB</span>
+            </div>
+        {% endif %}
+        <a class="btn btn-danger mt-20" href="{{ logout_url }}">{{ __("Logout", 'isset-video-publisher') }}</a>
+        <a class="btn mt-20" href="{{ video_url }}">{{ __("Go to videos", 'isset-video-publisher') }}</a>
 
-{% else %}
-    <a href="{{ loginUrl }}">Login to isset.video</a>
-{% endif %}
+    {% else %}
+        <a class="btn mt-20" href="{{ login_url }}">Login to isset.video</a>
+    {% endif %}
+</div>

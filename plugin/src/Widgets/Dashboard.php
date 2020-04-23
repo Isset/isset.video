@@ -34,12 +34,13 @@ class Dashboard extends BaseWidget {
 		if ($context['isLoggedIn']) {
 			$userInfo = $this->service->getUserInfo();
 
-			$context['username'] = $userInfo['username'];
-			$context['logoutUrl'] = $this->service->getLogoutURL();
+			$context['user']       = $userInfo;
+			$context['logout_url'] = $this->service->getLogoutURL();
+			$context['videos_url'] = $context['video_url'] = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
 			$context['stats'] = $this->service->getStats();
 		}
 		else {
-			$context['loginUrl'] = $this->service->getLoginURL();
+			$context['login_url'] = $this->service->getLoginURL();
 		}
 
 		echo Timber::compile( __DIR__ . '/../../views/admin/dashboard/dashboard.html.twig', $context);

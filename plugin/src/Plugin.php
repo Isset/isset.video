@@ -18,6 +18,7 @@ use IssetBV\VideoPublisher\Wordpress\Filter\Timber;
 use IssetBV\VideoPublisher\Wordpress\Filter\VideoUpload;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\BaseMetaBox;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\FrontPage;
+use IssetBV\VideoPublisher\Wordpress\MetaBox\PublishInfo;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\ThumbnailSelect;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Rest\PublishesEndpoint;
@@ -52,9 +53,9 @@ class Plugin {
 	];
 
 	private $metaBoxes = [
-		Preview::class,
 		FrontPage::class,
 		ThumbnailSelect::class,
+        PublishInfo::class
 	];
 
 	private $actions = [
@@ -75,10 +76,6 @@ class Plugin {
 		Timber::class,
 	];
 
-	private $dashboardWidgets = [
-		Dashboard::class
-	];
-
 	private $scripts = [
 		'js/main.js' => [ 'site', 'admin' ],
 	];
@@ -87,6 +84,9 @@ class Plugin {
 		'css/main.css' => [ 'site', 'admin' ],
 	];
 
+	private $dashboardWidgets = [
+		Dashboard::class
+	];
 
 	const PUBLISHER_URL = 'https://publish.isset.video/';
 	const MY_ISSET_VIDEO_URL = 'https://my.isset.video/';
@@ -278,9 +278,9 @@ class Plugin {
 			if ( is_admin() && current_user_can( 'activate_plugins' ) && ! is_plugin_active( 'timber-library/timber.php' ) ) {
 				add_action( 'admin_notices', function () {
 					?>
-                    <div class="error"><p>Isset video publisher plugin requires <a
-                                    href="https://wordpress.org/plugins/timber-library/" target="_blank">timber</a> to
-                            work, please install and activate the timber plugin.</p></div><?php
+					<div class="error"><p>Isset video publisher plugin requires <a
+								href="https://wordpress.org/plugins/timber-library/" target="_blank">timber</a> to
+							work, please install and activate the timber plugin.</p></div><?php
 				} );
 
 				deactivate_plugins( plugin_basename( __FILE__ ) );
@@ -316,11 +316,11 @@ class Plugin {
 	}
 
 	private function initDashboardWidgets() {
-	    add_action('wp_dashboard_setup', function() {
-		    foreach ( $this->dashboardWidgets as $widget ) {
-			    $this->dashboardWidget( $widget );
-		    }
-        });
+		add_action('wp_dashboard_setup', function() {
+			foreach ( $this->dashboardWidgets as $widget ) {
+				$this->dashboardWidget( $widget );
+			}
+		});
 	}
 
 	public function dashboardWidget( $widget ) {

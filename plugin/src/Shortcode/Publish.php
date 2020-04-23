@@ -19,7 +19,7 @@ class Publish extends ShortcodeBase {
 				'poster'   => false,
 				'controls' => 'controls',
 				'autoplay' => '',
-				'loop'     => 'loop',
+				'loop'     => '',
 				'muted'    => '',
 			],
 			$params
@@ -29,9 +29,17 @@ class Publish extends ShortcodeBase {
 		$post_id = $attr['post_id'];
 		$poster  = $attr['poster'];
 
+		$query = new WP_Query([
+			'post_type' => VideoPublisher::getTypeName(),
+			'post_status' => 'published',
+			'name' => $uuid
+		]);
+
+		if ($query->post_count === 0) {
+			return Timber::compile( __DIR__ . '/../../views/shortcode/publish-invalid.html.twig' );
+		}
 
 		/* @var int $post_id */
-
 		if ( $uuid === false && $post_id === false ) {
 			return false;
 		}

@@ -7,16 +7,7 @@ use WP_Query;
 
 class PublishesEndpoint
 {
-    private static function initLikeFilter()
-    {
-        add_filter( 'posts_where', function ( $where, &$wp_query ) {
-            global $wpdb;
-            if ( $searchTerm = $wp_query->get( 'post_title_like' ) ) {
-                $where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql( $wpdb->esc_like( $searchTerm ) ) . '%\'';
-            }
-            return $where;
-        }, 10, 2 );
-    }
+	const LAZY_STEPS = 6;
 
     public static function publishes()
     {
@@ -25,24 +16,27 @@ class PublishesEndpoint
                 'methods' => 'POST',
                 'callback' => function ($request) {
                     $reqBody = json_decode($request->get_body(), true);
-                    self::initLikeFilter();
 
                     $args = [
                         'post_type' => VideoPublisher::getTypeName(),
                         'post_status' => 'any',
-                        'post_title_like' => $reqBody['post_title'],
+                        's' => $reqBody['post_title'],
                     ];
 
                     $query = new WP_Query($args);
+                    $page = $reqBody['page'];
 
                     if ($query->post_count > 0) {
                         return array_map(function ($post) {
+	                        $meta = get_post_meta( $post->ID, 'video-publish', true );
+
                             return [
                                 'post_name' => $post->post_name,
                                 'post_title' => $post->post_title,
-                                'post_thumbnail' => get_the_post_thumbnail($post)
+                                'post_thumbnail' => get_the_post_thumbnail($post),
+	                            'post_size' => $meta['size']
                             ];
-                        }, $query->posts);
+                        }, array_slice($query->posts, self::LAZY_STEPS * $page, self::LAZY_STEPS));
                     }
 
                     return [];

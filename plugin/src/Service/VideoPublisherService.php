@@ -313,7 +313,7 @@ class VideoPublisherService {
 		}
 
 		$response = wp_remote_get(
-			sprintf( rtrim( $this->getPublisherURL(), '/' ) . '/api/stats/usage' ),
+			sprintf( rtrim( Plugin::PUBLISHER_URL, '/' ) . '/api/stats/usage' ),
 			[
 				'headers' => [
 					'x-token-auth' => $auth_token,
