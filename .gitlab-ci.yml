@@ -19,6 +19,7 @@ build:
 publish_nightly:
   only:
     - master
+    - develop
   script:
     - apt install -y -f openssh-client
     - eval "$(ssh-agent)"
