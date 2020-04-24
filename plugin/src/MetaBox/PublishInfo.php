@@ -37,6 +37,12 @@ class PublishInfo extends BaseMetaBox {
 
 		$item = get_post_meta( get_the_ID(), 'video-publish', true );
 		$context['size'] = $item['size'];
+		$context['meta'] = $item['metadata'];
+
+		if ($item['metadata']) {
+			$seconds = $item['metadata'][0]['duration'];
+			$context['duration'] = sprintf('%02d:%02d:%02d', ($seconds/ 3600),($seconds/ 60 % 60), $seconds% 60);
+		}
 
 		Timber::render( __DIR__ . '/../../views/metabox/publish-info.html.twig', $context );
 	}

@@ -332,4 +332,37 @@ class VideoPublisherService {
 
 		return json_decode( $response['body'], true );
 	}
+
+	public function fetchSubscriptionLimit() {
+		$auth_token = $this->getAuthToken();
+
+		if ( $auth_token === false ) {
+			return false;
+		}
+
+		$response = wp_remote_get(
+			sprintf( rtrim( $this->getMyIssetVideoURL(), '/' ) . '/api/token/subscription-limit' ),
+			[
+				'headers' => [
+					'x-token-auth'     => $auth_token,
+					'x-token-platform' => 'publisher'
+				],
+			]
+		);
+
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( $response_code !== 200 ) {
+			if ( $response_code >= 400 && $response_code < 500 ) {
+				$this->removeAuthToken();
+			}
+
+			return false;
+		}
+
+		return json_decode( $response['body'], true );
+	}
 }

@@ -81,6 +81,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                 body: JSON.stringify({post_title: searchTerm, page: lazyStep})
             }).then(res => {
                 res.json().then(json => {
+                    console.log(json);
                     setAttributes({suggestions: [...suggestions, ...json]});
                     this.setState({
                         lazyStep: lazyStep + 1
@@ -89,15 +90,15 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             }).catch(err => console.log(err));
         }
 
-        setValue(newValue, newThumbnail = '', newName = '', newSize = 0) {
+        setValue(suggestion) {
             const {setAttributes} = this.props;
 
             setAttributes({
-                uuid: newValue,
-                uuidParsed: `[publish uuid=${newValue}]`,
-                videoThumbnail: newThumbnail,
-                videoName: newName,
-                videoSize: newSize
+                uuid: suggestion.post_name,
+                uuidParsed: `[publish uuid=${suggestion.post_name}]`,
+                videoThumbnail: suggestion.post_thumbnail,
+                videoName: suggestion.post_title,
+                videoSize: suggestion.post_size
             });
         }
 
@@ -125,7 +126,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                                             <span><b>Video name: </b> {videoName}</span>
                                         </PanelRow>
                                         <PanelRow>
-                                            <span><b>Video size: </b> {parseInt(videoSize).toFixed(3)} GB</span>
+                                            <span><b>Video size: </b> {(parseInt(videoSize) / 1e+9).toFixed(3)} GB</span>
                                         </PanelRow>
                                     </PanelBody>
                                 </InspectorControls>
@@ -159,14 +160,14 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                             suggestions.map(suggestion => {
                                 return suggestion.type !== 'div' &&
                                     <div className="video-block-suggestions-wrapper"
-                                         onClick={() => this.setValue(suggestion.post_name, suggestion.post_thumbnail, suggestion.post_title, suggestion.post_size)}>
+                                         onClick={() => this.setValue(suggestion)}>
                                         {suggestion.post_thumbnail !== null &&
                                         <div dangerouslySetInnerHTML={{__html: suggestion.post_thumbnail}}/>
                                         }
                                         <span className="video-block-text">{suggestion.post_title}</span>
                                     </div>
                             })
-                        }
+                        }c
                     </div>
                     <div>
                         <button onClick={() => this.getSuggestions(searchTerm, lazyStep)}

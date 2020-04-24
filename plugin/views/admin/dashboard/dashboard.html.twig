@@ -4,11 +4,11 @@
         {% if stats %}
             <div class="video-publisher-mt-2">
                 <span class="video-publisher-bold">Storage used: </span>
-                <span>{{ (stats['storage'] / 1e+9) | round(3) }} GB</span>
+                <span>{{ (stats['storage'] / 1e+9) | round(3) }} GB / {{ (subscription_limit['storage_limit'] / 1e+9) | round(3) }} GB</span>
             </div>
             <div>
                 <span class="video-publisher-bold">Data streamed: </span>
-                <span>{{ (stats['streaming'] / 1e+9) | round(3) }} GB</span>
+                <span>{{ (stats['streaming'] / 1e+9) | round(3) }} GB / {{ (subscription_limit['streaming_limit'] / 1e+9) | round(3) }} GB</span>
             </div>
         {% endif %}
         <a class="btn btn-danger mt-20" href="{{ logout_url }}">{{ __("Logout", 'isset-video-publisher') }}</a>
