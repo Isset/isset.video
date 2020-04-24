@@ -167,11 +167,11 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                                         <span className="video-block-text">{suggestion.post_title}</span>
                                     </div>
                             })
-                        }c
+                        }
                     </div>
                     <div>
                         <button onClick={() => this.getSuggestions(searchTerm, lazyStep)}
-                                className="video-block-button">Search
+                                className="video-block-button">More results
                         </button>
                     </div>
                 </div>
