@@ -28,7 +28,7 @@ class DeletePublish extends BaseAction {
 	}
 
 	function getAction() {
-		return 'trashed_post';
+		return 'before_delete_post';
 	}
 
 	public function getPriority() {
