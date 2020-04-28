@@ -120,13 +120,13 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                                 <InspectorControls>
                                     <PanelBody title="Video info">
                                         <PanelRow>
-                                            <span><b>Uuid: </b> {uuid}</span> <br/>
-                                        </PanelRow>
-                                        <PanelRow>
                                             <span><b>Video name: </b> {videoName}</span>
                                         </PanelRow>
                                         <PanelRow>
                                             <span><b>Video size: </b> {(parseInt(videoSize) / 1e+9).toFixed(3)} GB</span>
+                                        </PanelRow>
+                                        <PanelRow>
+                                            <span><b>Uuid: </b> {uuid}</span> <br/>
                                         </PanelRow>
                                     </PanelBody>
                                 </InspectorControls>

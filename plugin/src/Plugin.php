@@ -55,7 +55,7 @@ class Plugin {
 	private $metaBoxes = [
 		FrontPage::class,
 		ThumbnailSelect::class,
-        PublishInfo::class
+		PublishInfo::class
 	];
 
 	private $actions = [
@@ -278,9 +278,9 @@ class Plugin {
 			if ( is_admin() && current_user_can( 'activate_plugins' ) && ! is_plugin_active( 'timber-library/timber.php' ) ) {
 				add_action( 'admin_notices', function () {
 					?>
-					<div class="error"><p>Isset video publisher plugin requires <a
-								href="https://wordpress.org/plugins/timber-library/" target="_blank">timber</a> to
-							work, please install and activate the timber plugin.</p></div><?php
+                    <div class="error"><p>Isset video publisher plugin requires <a
+                                    href="https://wordpress.org/plugins/timber-library/" target="_blank">timber</a> to
+                            work, please install and activate the timber plugin.</p></div><?php
 				} );
 
 				deactivate_plugins( plugin_basename( __FILE__ ) );
@@ -316,11 +316,11 @@ class Plugin {
 	}
 
 	private function initDashboardWidgets() {
-		add_action('wp_dashboard_setup', function() {
+		add_action( 'wp_dashboard_setup', function () {
 			foreach ( $this->dashboardWidgets as $widget ) {
 				$this->dashboardWidget( $widget );
 			}
-		});
+		} );
 	}
 
 	public function dashboardWidget( $widget ) {
