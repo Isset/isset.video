@@ -5,6 +5,7 @@ namespace IssetBV\VideoPublisher\Wordpress;
 
 
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
+use IssetBV\VideoPublisher\Wordpress\Action\DeletePublish;
 use IssetBV\VideoPublisher\Wordpress\Action\DurationColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Editor;
 use IssetBV\VideoPublisher\Wordpress\Action\HijackRouter;
@@ -71,6 +72,7 @@ class Plugin {
 		Upload\RegisterUpload::class,
 		Editor::class,
 		DurationColumn::class,
+        DeletePublish::class,
 	];
 
 	private $filters = [
