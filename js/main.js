@@ -1,8 +1,4 @@
-const videoJs = require('video.js');
-
-require('@silvermine/videojs-airplay')(videoJs);
-
-require('@silvermine/videojs-airplay/src/scss/videojs-airplay');
+let videojs = require('video.js');
 
 require('./functions');
 
@@ -16,13 +12,10 @@ if (document.querySelector('#isset-video-default')) {
         video.textTracks[0].mode = "hidden";
     }
 
-    window.VideoJS = videoJs.default('isset-video-default', {
+    videojs.default(video, {
         fill: true,
-        plugins: {
-            airPlay: {
-                addButtonToControlBar: true
-            }
+        chromecast: {
+            appId: 'E0FB432F'
         }
     });
-    window.VideoJS.airPlay();
 }

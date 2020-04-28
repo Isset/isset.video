@@ -22,6 +22,7 @@ class ThumbnailColumn extends BaseAction {
 	 */
 	function execute( $arguments ) {
 		list( $columnName, $postId ) = $arguments;
+
 		if ( $columnName !== "video-publisher-thumbnail" ) {
 			return;
 		}

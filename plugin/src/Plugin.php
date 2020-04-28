@@ -5,6 +5,7 @@ namespace IssetBV\VideoPublisher\Wordpress;
 
 
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
+use IssetBV\VideoPublisher\Wordpress\Action\DurationColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Editor;
 use IssetBV\VideoPublisher\Wordpress\Action\HijackRouter;
 use IssetBV\VideoPublisher\Wordpress\Action\ImportPublishedVideos;
@@ -13,6 +14,7 @@ use IssetBV\VideoPublisher\Wordpress\Action\Settings;
 use IssetBV\VideoPublisher\Wordpress\Action\ThumbnailColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload;
 use IssetBV\VideoPublisher\Wordpress\Filter\BaseFilter;
+use IssetBV\VideoPublisher\Wordpress\Filter\DurationColumnFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\ThumbnailColumnFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\Timber;
 use IssetBV\VideoPublisher\Wordpress\Filter\VideoUpload;
@@ -68,9 +70,11 @@ class Plugin {
 		Upload\GenerateUploadUrl::class,
 		Upload\RegisterUpload::class,
 		Editor::class,
+		DurationColumn::class,
 	];
 
 	private $filters = [
+		DurationColumnFilter::class,
 		ThumbnailColumnFilter::class,
 		VideoUpload::class,
 		Timber::class,
