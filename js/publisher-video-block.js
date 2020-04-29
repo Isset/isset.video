@@ -93,13 +93,24 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
         setValue(suggestion) {
             const {setAttributes} = this.props;
 
-            setAttributes({
-                uuid: suggestion.post_name,
-                uuidParsed: `[publish uuid=${suggestion.post_name}]`,
-                videoThumbnail: suggestion.post_thumbnail,
-                videoName: suggestion.post_title,
-                videoSize: suggestion.post_size
-            });
+            if (suggestion === '') {
+                setAttributes({
+                    uuid: '',
+                    uuidParsed: '',
+                    videoThumbnail: '',
+                    videoName: '',
+                    videoSize: ''
+                });
+            }
+            else {
+                setAttributes({
+                    uuid: suggestion.post_name,
+                    uuidParsed: `[publish uuid=${suggestion.post_name}]`,
+                    videoThumbnail: suggestion.post_thumbnail,
+                    videoName: suggestion.post_title,
+                    videoSize: suggestion.post_size
+                });
+            }
         }
 
         changeSearchTerm(newTerm) {

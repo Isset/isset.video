@@ -73,8 +73,8 @@ class WordpressService {
 
 			$post_data['ID'] = $post->ID;
 
-			if ($post->post_status === 'trashed') {
-				$post_data['post_status'] = 'trashed';
+			if ($post->post_status === 'trash') {
+				$post_data['post_status'] = 'trash';
 			}
 
 			wp_update_post( $post_data );
