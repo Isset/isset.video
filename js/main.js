@@ -1,5 +1,5 @@
 const videojs = require('video.js');
-require('videojs-contrib-quality-levels')
+require('videojs-contrib-quality-levels');
 require('videojs-http-source-selector');
 
 require('./functions');

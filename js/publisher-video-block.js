@@ -81,7 +81,6 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                 body: JSON.stringify({post_title: searchTerm, page: lazyStep})
             }).then(res => {
                 res.json().then(json => {
-                    console.log(json);
                     setAttributes({suggestions: [...suggestions, ...json]});
                     this.setState({
                         lazyStep: lazyStep + 1
