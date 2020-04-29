@@ -12954,7 +12954,7 @@ video.js@^5.0.0:
     videojs-vtt.js "0.12.6"
     xhr "2.2.2"
 
-"video.js@^6.8.0 || ^7.0.0", video.js@^7.7.5:
+"video.js@^6 || ^7", "video.js@^6.8.0 || ^7.0.0", video.js@^7.0.0, video.js@^7.7.5:
   version "7.7.5"
   resolved "https://registry.yarnpkg.com/video.js/-/video.js-7.7.5.tgz#7b066c4eb56fdf4980d3be09491ce520ffe8ed75"
   integrity sha512-+HSp2KNZmGzkmTecXyaXxEGi3F41WAm43PqNp3hWq5wYUQOHwcRu5YhhCz+5q0fDV+SlnFMSSLl/I6QLMlYv/g==
@@ -12977,6 +12977,14 @@ videojs-chromecast@^2.0.8:
     object.assign "^4.0.3"
     video.js "^5.0.0"
 
+videojs-contrib-quality-levels@^2.0.4, videojs-contrib-quality-levels@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/videojs-contrib-quality-levels/-/videojs-contrib-quality-levels-2.0.9.tgz#b5d533d5092a6fc7d29eae1b43e4597d89bd527b"
+  integrity sha512-HJeaJJQdSufi9Y5T7jlyyhkeq+mWPCog86q6ypoTi66boBMMJTo2abiOSHS9KaOGAJjH72gfvrjVY5FRdjlxYA==
+  dependencies:
+    global "^4.3.2"
+    video.js "^6 || ^7"
+
 videojs-font@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/videojs-font/-/videojs-font-2.0.0.tgz#af7461ef9d4b95e0334bffb78b2f2ff0364a9034"
@@ -12986,6 +12994,15 @@ videojs-font@3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/videojs-font/-/videojs-font-3.2.0.tgz#212c9d3f4e4ec3fa7345167d64316add35e92232"
   integrity sha512-g8vHMKK2/JGorSfqAZQUmYYNnXmfec4MLhwtEFS+mMs2IDY398GLysy6BH6K+aS1KMNu/xWZ8Sue/X/mdQPliA==
+
+videojs-http-source-selector@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/videojs-http-source-selector/-/videojs-http-source-selector-1.1.6.tgz#073aadbea0106ba6c98d6b611094dbf8554ffa1f"
+  integrity sha512-6b5MmKTT2cVnrjtdNj4z1VO91udbXkZkTYA6LlD8WN2aHlG2rqFTmtMab4NK4nlkkkbRnm3c2q2IddL3jffLmg==
+  dependencies:
+    global "^4.3.2"
+    video.js "^7.0.0"
+    videojs-contrib-quality-levels "^2.0.4"
 
 videojs-ie8@1.1.2:
   version "1.1.2"

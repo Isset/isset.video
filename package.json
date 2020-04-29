@@ -27,7 +27,9 @@
     "react-dom": "^16.13.1",
     "underscore": "^1.10.2",
     "video.js": "^7.7.5",
-    "videojs-chromecast": "^2.0.8"
+    "videojs-chromecast": "^2.0.8",
+    "videojs-contrib-quality-levels": "^2.0.9",
+    "videojs-http-source-selector": "^1.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

@@ -61,7 +61,7 @@ jQuery(($) => {
         err("Request failed");
       })
     });
-
+ba
     let response = JSON.parse(await uploadPromise);
 
     $('.phase-upload').hide();

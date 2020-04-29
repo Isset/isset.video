@@ -1,4 +1,6 @@
-let videojs = require('video.js');
+const videojs = require('video.js');
+require('videojs-contrib-quality-levels')
+require('videojs-http-source-selector');
 
 require('./functions');
 
@@ -12,10 +14,14 @@ if (document.querySelector('#isset-video-default')) {
         video.textTracks[0].mode = "hidden";
     }
 
-    videojs.default(video, {
+    let player = videojs.default(video, {
         fill: true,
-        chromecast: {
-            appId: 'E0FB432F'
+        plugins: {
+            httpSourceSelector:
+                {
+                    default: 'auto'
+                }
         }
     });
+    player.httpSourceSelector();
 }

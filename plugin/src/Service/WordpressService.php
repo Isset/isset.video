@@ -50,7 +50,7 @@ class WordpressService {
 		$args = [
 			'post_type'   => VideoPublisher::getTypeName(),
 			'name'        => $publish['uuid'],
-			'post_status' => [ 'publish', 'draft', 'trashed' ],
+			'post_status' => [ 'publish', 'draft', 'trash' ],
 		];
 
 		$WP_Query = new WP_Query( $args );
@@ -73,8 +73,8 @@ class WordpressService {
 
 			$post_data['ID'] = $post->ID;
 
-			if ($post->post_status === 'trash') {
-				$post_data['post_status'] = 'trash';
+			if ($post->post_status === 'trashed') {
+				$post_data['post_status'] = 'trashed';
 			}
 
 			wp_update_post( $post_data );
