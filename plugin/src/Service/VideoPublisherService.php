@@ -6,6 +6,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Service;
 
 use IssetBV\VideoPublisher\Wordpress\Plugin;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use WP_Http;
 use WP_Query;
 
 class VideoPublisherService {
@@ -266,6 +267,39 @@ class VideoPublisherService {
 		return json_decode( $response['body'], true );
 	}
 
+	private function issetVideoGet( $path ) {
+		$auth_token = $this->getAuthToken();
+
+		if ( $auth_token === false ) {
+			return false;
+		}
+
+		$response = wp_remote_get(
+			sprintf( rtrim( $this->getMyIssetVideoURL(), '/' ) . $path ),
+			[
+				'headers' => [
+					'x-token-auth'     => $auth_token,
+					'x-token-platform' => 'publisher'
+				],
+			]
+		);
+
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( $response_code !== 200 ) {
+			if ( $response_code >= 400 && $response_code < 500 ) {
+				$this->removeAuthToken();
+			}
+
+			return false;
+		}
+
+		return json_decode( $response['body'], true );
+	}
+
 	public function fetchUploadInfo( $id ) {
 		return $this->publisherGet( '/api/uploads/' . urlencode( $id ) . '/status' );
 	}
@@ -305,65 +339,12 @@ class VideoPublisherService {
 		}
 	}
 
-	public function getStats() {
-		$auth_token = $this->getAuthToken();
-
-		if ( $auth_token === false ) {
-			return false;
-		}
-
-		$response = wp_remote_get(
-			sprintf( rtrim( Plugin::PUBLISHER_URL, '/' ) . '/api/stats/usage' ),
-			[
-				'headers' => [
-					'x-token-auth' => $auth_token,
-				],
-			]
-		);
-
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-		$response_code = wp_remote_retrieve_response_code( $response );
-		if ( $response_code !== 200 ) {
-			return false;
-		}
-
-		return json_decode( $response['body'], true );
+	public function fetchStats() {
+		return $this->publisherGet('/api/stats/usage');
 	}
 
 	public function fetchSubscriptionLimit() {
-		$auth_token = $this->getAuthToken();
-
-		if ( $auth_token === false ) {
-			return false;
-		}
-
-		$response = wp_remote_get(
-			sprintf( rtrim( $this->getMyIssetVideoURL(), '/' ) . '/api/token/subscription-limit' ),
-			[
-				'headers' => [
-					'x-token-auth'     => $auth_token,
-					'x-token-platform' => 'publisher'
-				],
-			]
-		);
-
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-		$response_code = wp_remote_retrieve_response_code( $response );
-		if ( $response_code !== 200 ) {
-			if ( $response_code >= 400 && $response_code < 500 ) {
-				$this->removeAuthToken();
-			}
-
-			return false;
-		}
-
-		return json_decode( $response['body'], true );
+		return $this->issetVideoGet('/api/token/subscription-limit');
 	}
 
 	public function deletePublish( $publishUuid ) {
@@ -373,7 +354,7 @@ class VideoPublisherService {
 			return false;
 		}
 
-		$client = new \WP_Http();
+		$client = new WP_Http();
 		$response = $client->request( rtrim( $this->getPublisherURL(), '/' ) . '/api/publishes/' . $publishUuid, [
 			'method' => 'DELETE',
 			'headers' => [
@@ -398,5 +379,13 @@ class VideoPublisherService {
 		}
 
 		return true;
+	}
+
+	public function uploadingAllowed()
+	{
+		$limit = $this->fetchSubscriptionLimit();
+		$current = $this->fetchStats();
+
+		return $limit['storage_limit'] > $current['storage'];
 	}
 }

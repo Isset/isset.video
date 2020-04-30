@@ -5,6 +5,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Filter;
 
 
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
 use Timber\Timber;
 
 class VideoUpload extends BaseFilter {
@@ -15,6 +16,8 @@ class VideoUpload extends BaseFilter {
 	 * @return bool
 	 */
 	public function shouldReplaceEditor( $_, $post ) {
+		$service = new VideoPublisherService($this->plugin);
+
 		if ( $post->post_type !== VideoPublisher::getTypeName() ) {
 			return $_;
 		}
@@ -22,6 +25,7 @@ class VideoUpload extends BaseFilter {
 		if ( $post->post_status === 'auto-draft' ) {
 			$context           = Timber::context();
 			$context['screen'] = get_current_screen();
+			$context['uploading_allowed'] = $service->uploadingAllowed();
 
 			Timber::render( __DIR__ . '/../../views/admin/upload.html.twig', $context );
 

@@ -3,7 +3,7 @@
 /*
 Plugin Name: isset.video
 Plugin URI: https://isset.video/wp-plugin/
-Description: Wordpress isset.video implimentation
+Description: Wordpress isset.video implementation
 Version: 0.1.0
 Requires at least: 5.0
 Required PHP: 7.3
