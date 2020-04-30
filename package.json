@@ -18,7 +18,7 @@
     "publisher",
     "wordpress"
   ],
-  "author": "Isset Internet Professionals",
+  "author": "isset.video",
   "license": "ISC",
   "dependencies": {
     "@wordpress/block-editor": "^3.7.6",

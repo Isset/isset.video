@@ -7,7 +7,7 @@ Description: Wordpress isset.video implementation
 Version: 0.1.0
 Requires at least: 5.0
 Required PHP: 7.3
-Author: Isset B.V.
+Author: isset.video
 Author URI: http://isset.nl/
 License: GPL v3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
