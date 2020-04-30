@@ -1,6 +1,6 @@
 #: inc/class.admin-page.php:56 inc/class.admin-page.php:57
 #: inc/class.admin-page.php:96
-msgid "Video Publisher Settings"
+msgid "isset.video settings"
 msgstr "Video publisher instellingen"
 
 #: inc/class.admin-page.php:144
