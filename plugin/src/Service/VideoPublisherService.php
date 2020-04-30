@@ -196,6 +196,7 @@ class VideoPublisherService {
 		if ( $response_code !== 200 ) {
 			if ( $response_code >= 400 && $response_code < 500 ) {
 				$this->removeAuthToken();
+				error_log("/api/token/account");
 			}
 
 			return false;
@@ -226,6 +227,7 @@ class VideoPublisherService {
 			]
 		);
 
+		error_log("Manual logout");
 		$this->removeAuthToken();
 	}
 
@@ -258,6 +260,7 @@ class VideoPublisherService {
 		$response_code = wp_remote_retrieve_response_code( $response );
 		if ( $response_code !== 200 ) {
 			if ( $response_code === 401 || $response_code === 403 ) {
+				error_log($path);
 				$this->removeAuthToken();
 			}
 
@@ -291,6 +294,7 @@ class VideoPublisherService {
 		$response_code = wp_remote_retrieve_response_code( $response );
 		if ( $response_code !== 200 ) {
 			if ( $response_code >= 400 && $response_code < 500 ) {
+				error_log($path);
 				$this->removeAuthToken();
 			}
 
@@ -372,6 +376,7 @@ class VideoPublisherService {
 		$response_code = wp_remote_retrieve_response_code( $response );
 		if ( $response_code !== 200 ) {
 			if ( $response_code >= 400 && $response_code < 500 ) {
+				error_log("/api/publishes/" . $publishUuid);
 				$this->removeAuthToken();
 			}
 
