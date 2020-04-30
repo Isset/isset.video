@@ -1,86 +1,26 @@
-# Isset Video Publisher
+# isset.video 
+- Author: isset.video
+- Plugin URI: https://isset.video/wp-plugin/
+- Tags: external video, cdn, video processing, hls video
+- Requires at least: 5.0.0
+- Tested up to: 5.4.0
+- Requires PHP: 7.3
+- License: GPLv3 or later
+- License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-> Nothing puts more emphasis on "word" in WordPress like a 5 minute long video
+## What is isset.video?
+Isset.video is a platform that allows users to upload video content and make it available for people to see. We proces (transcode) your video in multiple bitrates so it is friendly for most devices. The videofiles are stored on a secure CDN located in multiple datacenters in the Netherlands. We don't claim any rights associated with your content.
 
-## Requirements
+## Who is this for?
+Any orginisation that has met the limits of the youtubes en vimeo's of this world. No commorcials and no suggestions for other video's at the and of the video. We don't have any restrictions on monitization and the content of your video as long as you don't brake any laws. So if you want to put your video content behind a paywall, be our guest.
 
-- yarn
-- docker / docker-compose
-- Unix-like environment
-- `realpath` needs to be installed
+## What does it cost?
+The plugin itself is free. For the storing and streaming your video we have a price plan depending on your usage. This ranges between free and 75,- euro a month. please check out our price plan at https://isset.video/wp-plugin.
 
-### Realpath setup
+## How do I sign up?
+You can create an account right here: https://my.isset.video/register
+After installing the plugin you can connect using the button in the settings.
 
-On MacOS, if setup fails with an error regarding `realpath` it might not be installed on your host:
-
-- OS X: `brew install coreutils`
-
-## Setup
-
-Setting up your dev environment can be done by running
-
-```bash
-bin/setup
-```
-
-This will install wordpress and the [Timber](https://timber.github.io/docs/) plugin into `.docker-context`
-
-## Dev server
-
-The dev server can be started with
-
-
-```bash
-# -d can be omitted if you like clogging your console
-docker-compose up -d
-```
-
-You should now be able to navigate to `http://localhost:2080` where you'll be able to walk through the Wordpress install.  
-After installing WordPress, you need to enable the Timber and Isset Video Publisher plugin
-
-
-## CSS/JS development
-
-For CSS/JS development, you can run
-
-```bash
-bin/dev-webpack
-```
-
-To only build CSS/JS once, you can run
-
-```bash
-bin/setup-webpack
-```
-
-Which will start a webpack watch job
-
-
-## Timber
-
-Timber is a tool that provides us a Twig environment and shortcuts, documentations can be found here: https://timber.github.io/docs/
-
-## File structure
-
-```
-| - scss # pre-processed SCSS files
-| - js # pre-processed JavaScript
-| - languages # pre-processed translation files
-| - plugin # PHP source
-  | - css # generated CSS
-  | - js # generated JS
-  | - languages # generated translations
-  | - views # Twig templates
-  |   # WordPress entry point, this is the file that 
-  | - isset-video-publisher.php Wordpress will load
-  |   # PHP source, following PSR-4 in namespace 
-  |   # IssetBV\VideoPublisher\Wordpress\
-  | - src 
-    |   # Since we can't use the composer autoloader,
-    |   # this is a polyfill autoloader
-    | - Autoloader.php 
-    |   # Main entry point for this plugin, registering of styles, 
-    |   # scripts and other components happens here
-    | - Plugin.php 
-```
-
+## What dependencies does the WordPress plugin have?
+We decided to use Timber to make our lives as developer a bit more convenient.
+Find out more about Timber on their homepage: https://www.upstatement.com/timber/.
