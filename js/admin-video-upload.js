@@ -36,6 +36,8 @@ jQuery(($) => {
 
     let uploadUrlObj = await uploadUrlResp.json();
 
+    $("#uploadingTitle")[0].innerHTML = fileSelect[0].files[0].name;
+
     let form = new FormData();
     form.set("file", fileSelect.prop("files")[0], fileSelect.val().split("/").pop());
 
@@ -61,7 +63,7 @@ jQuery(($) => {
         err("Request failed");
       })
     });
-ba
+
     let response = JSON.parse(await uploadPromise);
 
     $('.phase-upload').hide();
@@ -83,4 +85,8 @@ ba
     let registerObj = await registerResponse.json();
     location.href = registerObj.url;
   })
+
+  $('#btnCancelUpload').click(function () {
+    location.reload()
+  });
 });

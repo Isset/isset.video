@@ -28,6 +28,8 @@
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" style="width: 0;"></div>
                 </div>
+                <div class="uploading-text">Uploading: <span id="uploadingTitle"></span></div>
+                <button id="btnCancelUpload" class="btn">Cancel upload</button>
             </div>
             <div class="phase-done">
 
@@ -37,7 +39,8 @@
 {% else %}
     <div class="card">
         <div class="text-wrapper">
-            <p>Storage limit is already reached, please remove video's to upload again.</p>
+            <p>Storage limit is already reached, please remove video's to upload again or upgrade your subscription <a
+                        href="https://my.isset.video/subscriptions">https://my.isset.video/subscriptions</a>.</p>
         </div>
     </div>
 {% endif %}
