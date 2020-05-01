@@ -17,6 +17,10 @@ jQuery(($) => {
   });
 
   $(".phase-select button").click(async () => {
+    $(window).bind('beforeunload', function(){
+      return 'Are you sure you want to leave?';
+    });
+
     if (fileSelect.val() === "") {
       return;
     }
@@ -80,6 +84,10 @@ jQuery(($) => {
         ["_ajax_nonce", nonce],
         ["id", response.id],
       ])
+    });
+
+    $(window).bind('beforeunload', function(){
+      return true;
     });
 
     let registerObj = await registerResponse.json();

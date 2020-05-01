@@ -1,9 +1,8 @@
 {% if video_url %}
-
     <div class="video-publisher-video video-player">
         <video id="isset-video-default" {{ controls }} {{ autoplay }} {{ loop }} {{ muted }}
                 poster="{{ poster }}" preload="auto" class="video-js vjs-big-play-centered vjs-default-skin"
-                data-setup="{{ video_setup|json_encode|escape }}">
+                data-setup="{{ video_setup|json_encode|escape }}" controls x-webkit-airplay=“allow”>
             <source src="{{ video_url|escape }}" type="application/x-mpegURL">
             <p class="vjs-no-js">
                 {{ __( 'Your browser does not support the video tag.', 'isset-video-publisher') }}

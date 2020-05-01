@@ -21,13 +21,13 @@
   "author": "isset.video",
   "license": "ISC",
   "dependencies": {
+    "@leochen1216/videojs-chromecast": "^2.0.0",
     "@wordpress/block-editor": "^3.7.6",
     "@wordpress/blocks": "^6.12.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "underscore": "^1.10.2",
     "video.js": "^7.7.5",
-    "videojs-chromecast": "^2.0.8",
     "videojs-contrib-quality-levels": "^2.0.9",
     "videojs-http-source-selector": "^1.1.6"
   },
