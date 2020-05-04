@@ -10,8 +10,16 @@ class SetFeaturedImage extends BaseAction {
 
 	function execute( $arguments ) {
 		check_ajax_referer( 'isset-video' );
+		if ( ! isset( $_POST['url'] ) || ! is_string( $_POST['url'] ) ) {
+			return false;
+		}
+
+		if ( ! isset( $_POST['post_id'] ) || !is_numeric($_POST['post_id']) || get_post($_POST['post_id']) === null ) {
+			return false;
+		}
+
 		$post_id = $_POST['post_id'];
-		$url     = $_POST['url'];
+		$url = $_POST['url'];
 
 		return $this->plugin->getThumbnailService()->setThumbnail( $post_id, $url );
 	}
