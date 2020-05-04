@@ -28,7 +28,7 @@ class ThumbnailSelect extends BaseMetaBox {
 	}
 
 	public function getContext() {
-		return 'side';
+		return 'normal';
 	}
 
 	function render() {

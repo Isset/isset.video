@@ -17,6 +17,10 @@ jQuery(($) => {
   });
 
   $(".phase-select button").click(async () => {
+    $(window).bind('beforeunload', function(){
+      return 'Are you sure you want to leave?';
+    });
+
     if (fileSelect.val() === "") {
       return;
     }
@@ -35,6 +39,8 @@ jQuery(($) => {
     });
 
     let uploadUrlObj = await uploadUrlResp.json();
+
+    $("#uploadingTitle")[0].innerHTML = fileSelect[0].files[0].name;
 
     let form = new FormData();
     form.set("file", fileSelect.prop("files")[0], fileSelect.val().split("/").pop());
@@ -80,7 +86,15 @@ jQuery(($) => {
       ])
     });
 
+    $(window).unbind(function(){
+      return true;
+    });
+
     let registerObj = await registerResponse.json();
     location.href = registerObj.url;
   })
+
+  $('#btnCancelUpload').click(function () {
+    location.reload()
+  });
 });

@@ -18,6 +18,10 @@ class RegisterUpload extends BaseAction {
 		check_ajax_referer( 'isset-video' );
 		header( "Content-Type", "application/json" );
 
+		if ( ! isset( $_POST['id'] ) || ! is_numeric( $_POST['id'] ) ) {
+			return;
+		}
+
 		$post = $this->plugin->getWordpressService()->createPostForUpload( $_POST['id'] );
 
 		echo json_encode( [

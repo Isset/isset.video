@@ -2,7 +2,7 @@
   display: grid;
   grid-gap: 0.3em;
   grid-auto-flow: row;
-  grid-template-columns: repeat(auto-fill, 300px);
+  grid-template-columns: repeat(auto-fill, 260px);
 
   .thumbnail-item {
     padding: 1em;
@@ -16,7 +16,7 @@
 }
 
 #video-publisher-thumbnail {
-  width: 60px;
+  width: 120px;
 }
 
 .video-publisher-admin {
@@ -55,3 +55,18 @@
   }
 }
 
+.video-publisher-flex {
+  display: flex;
+}
+
+.video-publisher-bold {
+  font-weight: bold;
+}
+
+.video-publisher-mt-2 {
+  margin-top: 0.75rem;
+}
+
+.video-publisher-ml-2 {
+  margin-left: 0.75rem;
+}

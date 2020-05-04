@@ -48,9 +48,9 @@ class WordpressService {
 		}
 
 		$args = [
-			'post_type'   => VideoPublisher::getTypeName(),
-			'name'        => $publish['uuid'],
-			'post_status' => [ 'publish', 'draft' ],
+			'post_type'     => VideoPublisher::getTypeName(),
+			'post_name__in' => [$publish['uuid'], $publish['uuid'] . '__trashed'],
+			'post_status'   => [ 'publish', 'draft', 'trash' ],
 		];
 
 		$WP_Query = new WP_Query( $args );
@@ -72,6 +72,11 @@ class WordpressService {
 			$post = $WP_Query->next_post();
 
 			$post_data['ID'] = $post->ID;
+
+			if ( $post->post_status === 'trash' ) {
+				$post_data['post_status'] = 'trash';
+			}
+
 			wp_update_post( $post_data );
 		}
 

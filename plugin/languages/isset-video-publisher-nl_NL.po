@@ -1,6 +1,6 @@
 #: inc/class.admin-page.php:56 inc/class.admin-page.php:57
 #: inc/class.admin-page.php:96
-msgid "Video Publisher Settings"
+msgid "isset.video settings"
 msgstr "Video publisher instellingen"
 
 #: inc/class.admin-page.php:144
@@ -82,13 +82,13 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Video integration from the video publisher from Isset Internet Professionals"
+"Video integration from the video publisher from isset.video"
 msgstr ""
 "Video integratie, gemaakt voor de video publisher gemaakt door Isset "
 "Internet Professionals"
 
 #. Author of the plugin/theme
-msgid "Isset Internet Professionals"
+msgid "isset.video"
 msgstr ""
 
 #: inc/class.isset-video-publisher.php:329

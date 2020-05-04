@@ -51,7 +51,7 @@ class Init extends BaseAction {
 
 		add_settings_section(
 			$default_section, // ID
-			__( 'Video Publisher Settings', 'isset-video-publisher' ), // Title
+			__( 'isset.video settings', 'isset-video-publisher' ), // Title
 			function () {
 				_e( 'Enter your settings below:', 'isset-video-publisher' );
 			},

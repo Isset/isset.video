@@ -5,6 +5,8 @@ namespace IssetBV\VideoPublisher\Wordpress;
 
 
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
+use IssetBV\VideoPublisher\Wordpress\Action\DeletePublish;
+use IssetBV\VideoPublisher\Wordpress\Action\DurationColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Editor;
 use IssetBV\VideoPublisher\Wordpress\Action\HijackRouter;
 use IssetBV\VideoPublisher\Wordpress\Action\ImportPublishedVideos;
@@ -13,11 +15,13 @@ use IssetBV\VideoPublisher\Wordpress\Action\Settings;
 use IssetBV\VideoPublisher\Wordpress\Action\ThumbnailColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload;
 use IssetBV\VideoPublisher\Wordpress\Filter\BaseFilter;
+use IssetBV\VideoPublisher\Wordpress\Filter\DurationColumnFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\ThumbnailColumnFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\Timber;
 use IssetBV\VideoPublisher\Wordpress\Filter\VideoUpload;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\BaseMetaBox;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\FrontPage;
+use IssetBV\VideoPublisher\Wordpress\MetaBox\PublishInfo;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\ThumbnailSelect;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Rest\PublishesEndpoint;
@@ -26,6 +30,8 @@ use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
 use IssetBV\VideoPublisher\Wordpress\Service\WordpressService;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\Publish;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\ShortcodeBase;
+use IssetBV\VideoPublisher\Wordpress\Widgets\BaseWidget;
+use IssetBV\VideoPublisher\Wordpress\Widgets\Dashboard;
 
 class Plugin {
 	static $instance;
@@ -52,6 +58,7 @@ class Plugin {
 	private $metaBoxes = [
 		FrontPage::class,
 		ThumbnailSelect::class,
+		PublishInfo::class
 	];
 
 	private $actions = [
@@ -64,6 +71,7 @@ class Plugin {
 		Upload\GenerateUploadUrl::class,
 		Upload\RegisterUpload::class,
 		Editor::class,
+        DeletePublish::class,
 	];
 
 	private $filters = [
@@ -80,8 +88,11 @@ class Plugin {
 		'css/main.css' => [ 'site', 'admin' ],
 	];
 
+	private $dashboardWidgets = [
+		Dashboard::class
+	];
 
-	const PUBLISHER_URL = 'https://my.videopublisher.io/';
+	const PUBLISHER_URL = 'https://publish.isset.video/';
 	const MY_ISSET_VIDEO_URL = 'https://my.isset.video/';
 
 	public static function instance() {
@@ -106,6 +117,7 @@ class Plugin {
 
 		if ( is_admin() ) {
 			$this->initMetaBoxes();
+			$this->initDashboardWidgets();
 		}
 	}
 
@@ -305,5 +317,20 @@ class Plugin {
 		}
 
 		return $this->wordpressService;
+	}
+
+	private function initDashboardWidgets() {
+		add_action( 'wp_dashboard_setup', function () {
+			foreach ( $this->dashboardWidgets as $widget ) {
+				$this->dashboardWidget( $widget );
+			}
+		} );
+	}
+
+	public function dashboardWidget( $widget ) {
+		/** @var BaseWidget $widgetObj */
+		$widgetObj = new $widget( $this );
+
+		wp_add_dashboard_widget( $widgetObj->getWidgetId(), $widgetObj->getWidgetName(), $widgetObj, $widgetObj->controlCallback(), $widgetObj->getArgs() );
 	}
 }

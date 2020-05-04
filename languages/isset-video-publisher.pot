@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Isset Internet Professionals
+# Copyright (C) 2019 isset.video
 # This file is distributed under the same license as the Isset Video Publisher plugin package.
 msgid ""
 msgstr ""
@@ -15,7 +15,7 @@ msgstr ""
 
 #: inc/class.admin-page.php:56 inc/class.admin-page.php:57
 #: inc/class.admin-page.php:96
-msgid "Video Publisher Settings"
+msgid "isset.video settings"
 msgstr ""
 
 #: inc/class.admin-page.php:144
@@ -101,7 +101,7 @@ msgid ""
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Isset Internet Professionals"
+msgid "isset.video"
 msgstr ""
 
 #: inc/class.isset-video-publisher.php:329

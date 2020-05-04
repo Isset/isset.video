@@ -15,8 +15,8 @@ class Menu extends BaseAction {
 
 	function execute( $arguments ) {
 		add_options_page(
-			__( 'Video Publisher Settings', 'isset-video-publisher' ),
-			__( 'Video Publisher Settings', 'isset-video-publisher' ),
+			__( 'isset.video settings', 'isset-video-publisher' ),
+			__( 'isset.video settings', 'isset-video-publisher' ),
 			'manage_options',
 			'isset-video-publisher-admin',
 			function () {
