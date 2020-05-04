@@ -1,13 +1,12 @@
 === isset.video ===
-Author: isset.video
-Plugin URI: https://isset.video/wp-plugin/
+Contributors: rommertvantil, peekopeeko
 Tags: external video, cdn, video processing, hls video
+Plugin URI: https://isset.video/wp-plugin/
 Requires at least: 5.0
 Tested up to: 5.4
 Requires PHP: 7.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Contributors: isset
 Stable tag: 1.0
 
 Isset.video is a platform that allows users to upload video content and make it available for people to see using WordPress.
