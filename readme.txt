@@ -21,7 +21,7 @@ Any orginisation that has met the limits of the youtubes en vimeo's of this worl
 = What does it cost? =
 The plugin itself is free. For the storing and streaming your video we have a price plan depending on your usage. This ranges between free and 75,- euro a month. please check out our price plan at https://isset.video/wp-plugin.
 = How do I sign up? =
-You can create an account right here: https://my.isset.video/register
+You can create an account right here: <https://my.isset.video/register>
 After installing the plugin you can connect using the button in the settings.
 = What dependencies does the WordPress plugin have? =
 We decided to use Timber to make our lives as developer a bit more convenient.
