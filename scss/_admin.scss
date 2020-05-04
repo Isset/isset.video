@@ -55,10 +55,18 @@
   }
 }
 
+.video-publisher-flex {
+  display: flex;
+}
+
 .video-publisher-bold {
   font-weight: bold;
 }
 
 .video-publisher-mt-2 {
   margin-top: 0.75rem;
+}
+
+.video-publisher-ml-2 {
+  margin-left: 0.75rem;
 }

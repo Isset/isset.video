@@ -71,12 +71,10 @@ class Plugin {
 		Upload\GenerateUploadUrl::class,
 		Upload\RegisterUpload::class,
 		Editor::class,
-		DurationColumn::class,
         DeletePublish::class,
 	];
 
 	private $filters = [
-		DurationColumnFilter::class,
 		ThumbnailColumnFilter::class,
 		VideoUpload::class,
 		Timber::class,

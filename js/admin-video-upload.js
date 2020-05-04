@@ -86,7 +86,7 @@ jQuery(($) => {
       ])
     });
 
-    $(window).bind('beforeunload', function(){
+    $(window).unbind(function(){
       return true;
     });
 
