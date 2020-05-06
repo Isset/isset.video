@@ -35,4 +35,33 @@ jQuery(($) => {
       location.reload()
     })
   });
+
+  let timeout = null;
+  let originalSrc = null;
+
+  $('.video-publisher-thumbnail-stills').hover(function () {
+    let count = 0;
+    let img = $(this);
+    let stills = $(this).siblings('div.video-publisher-hidden.video-publisher-possible-stills').children();
+
+    originalSrc = img.attr('src');
+
+    if (stills) {
+      img.attr('src', stills[count].innerHTML);
+      count++;
+
+      timeout = setInterval(function () {
+        img.attr('src', stills[count].innerHTML);
+        count = stills.length - 1 === count ? 0 : count + 1;
+      }, 800)
+    }
+  }, function () {
+    if (timeout !== null) {
+      clearInterval(timeout);
+      $(this).attr('src', originalSrc);
+
+      timeout = null;
+      originalSrc = null
+    }
+  });
 });

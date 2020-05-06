@@ -44,7 +44,8 @@ class ThumbnailColumn extends BaseAction {
 
 			echo Timber::compile( __DIR__ . "/../../views/admin/thumbnail-column.html.twig", [
 				"poster"   => $poster,
-				"duration" => $duration
+				"duration" => $duration,
+				"assets" => $postMeta['assets']
 			] );
 		}
 	}

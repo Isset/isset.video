@@ -1,4 +1,9 @@
 <div class="video-publisher-flex">
-    <img class="attachment-60x60 size-60x60" src="{{ poster }}" width="60" height="60" />
+    <img class="attachment-60x60 size-60x60 video-publisher-thumbnail-stills" src="{{ poster }}" width="120" height="120" />
+    <div class="video-publisher-hidden video-publisher-possible-stills">
+        {% for still in assets %}
+            <span class="video-publisher-possible-still">{{ still['url'] }}</span>
+        {% endfor %}
+    </div>
     <span class="video-publisher-ml-2">{{ duration }}</span>
 </div>
