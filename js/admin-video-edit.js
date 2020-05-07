@@ -1,7 +1,7 @@
 jQuery(($) => {
 
 
-  if (adminpage === "edit-php") {
+  if (adminpage === "edit-php" && typenow === "video-publisher") {
     let syncButton = $('<a class="page-title-action" />').text("Sync videos");
     $('.wp-header-end').before(syncButton);
 

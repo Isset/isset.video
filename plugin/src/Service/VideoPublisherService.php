@@ -5,9 +5,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Service;
 
 
 use IssetBV\VideoPublisher\Wordpress\Plugin;
-use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use WP_Http;
-use WP_Query;
 
 class VideoPublisherService {
 	/**
@@ -36,19 +34,15 @@ class VideoPublisherService {
 	public function getLoginURL() {
 		$url = $this->getMyIssetVideoURL();
 
-		return rtrim( $url, "/" ) . "/publisher-token-request?referrer=" . urlencode( add_query_arg(
-					[
-						'ivp-action' => 'auth'
-					],
-					site_url( 'index.php' )
-				)
-			);
+		return rtrim( $url, "/" ) .
+		       "/publisher-token-request?referrer=" .
+		       urlencode( add_query_arg( [ 'ivp-action' => 'auth' ], site_url( 'index.php' ) ) );
 	}
 
 	public function getLogoutURL() {
 		return add_query_arg(
 			[
-				'ivp-action' => 'deauth'
+				'ivp-action' => 'deauth',
 			],
 			site_url( 'index.php' )
 		);
@@ -126,7 +120,7 @@ class VideoPublisherService {
 		return add_query_arg(
 			[
 				'uuid'       => $uuid,
-				'ivp-action' => 'video-redirect'
+				'ivp-action' => 'video-redirect',
 			],
 			site_url( 'index.php' )
 		);
@@ -135,12 +129,13 @@ class VideoPublisherService {
 	public function getVideoUrl( $uuid ) {
 		$body = $this->fetchPublishInfo( $uuid );
 
-		if ( ! isset( $body['playout'] ) || ! $body['playout'] || ! isset( $body['playout'] ['playout_url'] ) || ! $body['playout']['playout_url'] ) {
+		if ( ! isset( $body['playout'] ) || ! $body['playout'] || ! isset( $body['playout'] ['playout_url'] )
+		     || ! $body['playout']['playout_url']
+		) {
 			return false;
 		}
 
 		return $body['playout']['playout_url'];
-
 	}
 
 	public function fetchPublishInfo( $uuid ) {
@@ -178,27 +173,18 @@ class VideoPublisherService {
 			return false;
 		}
 
+		$url      = sprintf( rtrim( $this->getMyIssetVideoURL(), '/' ) . '/api/token/account' );
 		$response = wp_remote_get(
-			sprintf( rtrim( $this->getMyIssetVideoURL(), '/' ) . '/api/token/account' ),
+			$url,
 			[
 				'headers' => [
 					'x-token-auth'     => $auth_token,
-					'x-token-platform' => 'publisher'
+					'x-token-platform' => 'publisher',
 				],
 			]
 		);
 
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-		$response_code = wp_remote_retrieve_response_code( $response );
-		if ( $response_code !== 200 ) {
-			if ( $response_code >= 400 && $response_code < 500 ) {
-				$this->removeAuthToken();
-				error_log("/api/token/account");
-			}
-
+		if ( ! $this->isResponseValid( 'GET', $url, $response ) ) {
 			return false;
 		}
 
@@ -217,17 +203,18 @@ class VideoPublisherService {
 		}
 
 		wp_remote_request(
-			sprintf( rtrim( $this->getMyIssetVideoURL(), '/' ) . '/api/token/delete/' . urlencode( $this->getAuthToken() ) ),
+			sprintf( rtrim( $this->getMyIssetVideoURL(), '/' ) . '/api/token/delete/'
+			         . urlencode( $this->getAuthToken() ) ),
 			[
 				'method'  => 'DELETE',
 				'headers' => [
 					'x-token-auth'     => $auth_token,
-					'x-token-platform' => 'publisher'
+					'x-token-platform' => 'publisher',
 				],
 			]
 		);
 
-		error_log("Manual logout");
+		error_log( "Manual logout" );
 		$this->removeAuthToken();
 	}
 
@@ -244,8 +231,9 @@ class VideoPublisherService {
 			return false;
 		}
 
+		$url      = rtrim( $this->getPublisherURL(), '/' ) . $path;
 		$response = wp_remote_get(
-			sprintf( rtrim( $this->getPublisherURL(), '/' ) . $path ),
+			$url,
 			[
 				'headers' => [
 					'x-token-auth' => $auth_token,
@@ -253,17 +241,7 @@ class VideoPublisherService {
 			]
 		);
 
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-		$response_code = wp_remote_retrieve_response_code( $response );
-		if ( $response_code !== 200 ) {
-			if ( $response_code === 401 || $response_code === 403 ) {
-				error_log($path);
-				$this->removeAuthToken();
-			}
-
+		if ( ! $this->isResponseValid( 'GET', $url, $response ) ) {
 			return false;
 		}
 
@@ -277,27 +255,18 @@ class VideoPublisherService {
 			return false;
 		}
 
+		$url      = rtrim( $this->getMyIssetVideoURL(), '/' ) . $path;
 		$response = wp_remote_get(
-			sprintf( rtrim( $this->getMyIssetVideoURL(), '/' ) . $path ),
+			$url,
 			[
 				'headers' => [
 					'x-token-auth'     => $auth_token,
-					'x-token-platform' => 'publisher'
+					'x-token-platform' => 'publisher',
 				],
 			]
 		);
 
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-		$response_code = wp_remote_retrieve_response_code( $response );
-		if ( $response_code !== 200 ) {
-			if ( $response_code >= 400 && $response_code < 500 ) {
-				error_log($path);
-				$this->removeAuthToken();
-			}
-
+		if ( ! $this->isResponseValid( 'GET', $url, $response ) ) {
 			return false;
 		}
 
@@ -321,9 +290,9 @@ class VideoPublisherService {
 
 		if ( $data['status'] === 'publishOnline' ) {
 			wp_update_post( [
-				'post_name' => $data['publish'],
-				'ID'        => $post_id,
-			] );
+				                'post_name' => $data['publish'],
+				                'ID'        => $post_id,
+			                ] );
 
 			$publish_info = $this->fetchPublishInfo( $data['publish'] );
 			if ( $publish_info === false ) {
@@ -344,11 +313,11 @@ class VideoPublisherService {
 	}
 
 	public function fetchStats() {
-		return $this->publisherGet('/api/stats/usage');
+		return $this->publisherGet( '/api/stats/usage' );
 	}
 
 	public function fetchSubscriptionLimit() {
-		return $this->issetVideoGet('/api/token/subscription-limit');
+		return $this->issetVideoGet( '/api/token/subscription-limit' );
 	}
 
 	public function deletePublish( $publishUuid ) {
@@ -358,39 +327,49 @@ class VideoPublisherService {
 			return false;
 		}
 
-		$client = new WP_Http();
-		$response = $client->request( rtrim( $this->getPublisherURL(), '/' ) . '/api/publishes/' . $publishUuid, [
-			'method' => 'DELETE',
-			'headers' => [
-				'x-token-auth'     => $auth_token,
-				'x-token-platform' => 'publisher'
-			],
-		] );
+		$client   = new WP_Http();
+		$url      = rtrim( $this->getPublisherURL(), '/' ) . '/api/publishes/' . $publishUuid;
+		$response = $client->request(
+			$url,
+			[
+				'method'  => 'DELETE',
+				'headers' => [
+					'x-token-auth'     => $auth_token,
+					'x-token-platform' => 'publisher',
+				],
+			]
+		);
 
 
-
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-		$response_code = wp_remote_retrieve_response_code( $response );
-		if ( $response_code !== 200 ) {
-			if ( $response_code >= 400 && $response_code < 500 ) {
-				error_log("/api/publishes/" . $publishUuid);
-				$this->removeAuthToken();
-			}
-
+		if ( ! $this->isResponseValid( 'DELETE', $url, $response ) ) {
 			return false;
 		}
 
 		return true;
 	}
 
-	public function uploadingAllowed()
-	{
-		$limit = $this->fetchSubscriptionLimit();
+	public function uploadingAllowed() {
+		$limit   = $this->fetchSubscriptionLimit();
 		$current = $this->fetchStats();
 
 		return $limit['storage_limit'] > $current['storage'];
+	}
+
+	public function isResponseValid( $method, $url, $response ) {
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( $response_code === 200 ) {
+			return true;
+		}
+
+		if ( $response_code === 401 || $response_code === 403 ) {
+			error_log( "Logged out for $method $url [$response_code]" );
+			$this->removeAuthToken();
+		}
+
+		return true;
 	}
 }
