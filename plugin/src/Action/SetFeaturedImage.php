@@ -3,6 +3,8 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Action;
 
+use IssetBV\VideoPublisher\Wordpress\Service\TextService;
+
 class SetFeaturedImage extends BaseAction {
 	public function isAdminOnly() {
 		return true;
@@ -10,16 +12,13 @@ class SetFeaturedImage extends BaseAction {
 
 	function execute( $arguments ) {
 		check_ajax_referer( 'isset-video' );
-		if ( ! isset( $_POST['url'] ) || ! is_string( $_POST['url'] ) ) {
+
+		$post_id = TextService::validateAndSanitizeText($_POST['post_id']);
+		$url = TextService::validateAndSanitizeText($_POST['url']);
+
+		if ($post_id === false || $url === false) {
 			return false;
 		}
-
-		if ( ! isset( $_POST['post_id'] ) || !is_numeric($_POST['post_id']) || get_post($_POST['post_id']) === null ) {
-			return false;
-		}
-
-		$post_id = $_POST['post_id'];
-		$url = $_POST['url'];
 
 		return $this->plugin->getThumbnailService()->setThumbnail( $post_id, $url );
 	}

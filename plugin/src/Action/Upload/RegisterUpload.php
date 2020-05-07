@@ -5,6 +5,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Action\Upload;
 
 
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
+use IssetBV\VideoPublisher\Wordpress\Service\TextService;
 
 class RegisterUpload extends BaseAction {
 	public function isAdminOnly() {
@@ -18,11 +19,13 @@ class RegisterUpload extends BaseAction {
 		check_ajax_referer( 'isset-video' );
 		header( "Content-Type", "application/json" );
 
-		if ( ! isset( $_POST['id'] ) || ! is_numeric( $_POST['id'] ) ) {
+		$post_id = TextService::validateAndSanitizeText( $_POST['id'] );
+
+		if ( $post_id === false ) {
 			return;
 		}
 
-		$post = $this->plugin->getWordpressService()->createPostForUpload( $_POST['id'] );
+		$post = $this->plugin->getWordpressService()->createPostForUpload( $post_id );
 
 		echo json_encode( [
 			"url" => add_query_arg( [ "post" => $post->ID, 'action' => 'edit' ], 'post.php' ),

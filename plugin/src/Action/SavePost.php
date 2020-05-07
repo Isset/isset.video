@@ -3,6 +3,8 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Action;
 
+use IssetBV\VideoPublisher\Wordpress\Service\TextService;
+
 class SavePost extends BaseAction {
 	public function isAdminOnly() {
 		return true;
@@ -18,7 +20,9 @@ class SavePost extends BaseAction {
 
 	function execute( $args ) {
 		list( $post_id ) = $args;
-		if ( ! isset( $_POST['isset_publisher_class_nonce'] ) || ! wp_verify_nonce( $_POST['isset_publisher_class_nonce'], basename( __FILE__ ) ) ) {
+
+		$nonce = TextService::validateAndSanitizeText($_POST['isset_publisher_class_nonce']);
+		if ( $nonce !== false && wp_verify_nonce( $nonce, basename( __FILE__ ) ) ) {
 			return $post_id;
 		}
 

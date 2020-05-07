@@ -4,20 +4,21 @@
 namespace IssetBV\VideoPublisher\Wordpress\Action;
 
 
+use IssetBV\VideoPublisher\Wordpress\Service\TextService;
+
 class HijackRouter extends BaseAction {
 	function execute( $arguments ) {
-		if ( ! isset( $_GET['ivp-action'] ) || ! is_string( $_GET['ivp-action'] ) ) {
+		$action = TextService::validateAndSanitizeText( $_GET['ivp-action'] );
+		if ( $action === false ) {
 			return;
 		}
 
-		$action = $_GET['ivp-action'];
-
 		if ( $action === 'auth' ) {
-			if ( ! isset( $_GET['token'] ) || ! is_string( $_GET['token'] ) ) {
+			$token = TextService::validateAndSanitizeText( $_GET['token'] );
+			if ( $token === false ) {
 				return;
 			}
 
-			$token = $_GET['token'];
 			$this->plugin
 				->getVideoPublisherService()
 				->updateAuthToken( $token );
@@ -36,11 +37,11 @@ class HijackRouter extends BaseAction {
 		}
 
 		if ( $action === 'video-redirect' ) {
-			if ( ! isset( $_GET['uuid'] ) || ! is_string( $_GET['uuid'] ) ) {
+			$uuid = TextService::validateAndSanitizeText( $_GET['uuid'] );
+			if ( $uuid === false ) {
 				return;
 			}
 
-			$uuid = $_GET['uuid'];
 			$video = $this->plugin
 				->getVideoPublisherService()
 				->getVideoUrl( $uuid );
