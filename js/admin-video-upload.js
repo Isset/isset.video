@@ -1,4 +1,5 @@
 import "../scss/upload.scss"
+import {updateFaviconProgress} from "./progress-favicon";
 
 jQuery(($) => {
   // noinspection JSUnresolvedVariable
@@ -40,7 +41,8 @@ jQuery(($) => {
 
     let uploadUrlObj = await uploadUrlResp.json();
 
-    $("#uploadingTitle")[0].innerHTML = fileSelect[0].files[0].name;
+    let filename = fileSelect[0].files[0].name;
+    $("#uploadingTitle")[0].innerHTML = filename;
 
     let form = new FormData();
     form.set("file", fileSelect.prop("files")[0], fileSelect.val().split("/").pop());
@@ -49,9 +51,12 @@ jQuery(($) => {
 
     uploadXhr.upload.addEventListener("progress", (e) => {
       const progressContainer = $('.phase-upload');
-      const percent = (e.loaded / e.total) * 100;
+      const percent = Math.ceil((e.loaded / e.total) * 100);
       progressContainer.find('.progress-bar').width(`${percent}%`);
-      progressContainer.find('.indicator').text(`${Math.ceil(percent)}%`);
+      progressContainer.find('.indicator').text(`${percent}%`);
+
+      updateFaviconProgress(percent);
+      $(document).prop('title', `${percent}% - ${filename}`);
     });
 
     uploadXhr.open("POST", uploadUrlObj.url);
@@ -92,7 +97,7 @@ jQuery(($) => {
 
     let registerObj = await registerResponse.json();
     location.href = registerObj.url;
-  })
+  });
 
   $('#btnCancelUpload').click(function () {
     location.reload()
