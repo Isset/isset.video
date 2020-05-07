@@ -1,5 +1,4 @@
 let canvas = document.querySelector('canvas');
-let context = canvas.getContext('2d');
 let favicon = document.querySelector('link[rel*="icon"]');
 
 // Create favicon dynamically if it doesn't exist
@@ -12,7 +11,7 @@ if (!favicon) {
 }
 
 export function updateFaviconProgress(progress) {
-    let n = progress;
+    let context = canvas.getContext('2d');
     context.clearRect(0, 0, 32, 32);
 
     context.lineWidth = 8;
