@@ -19,7 +19,7 @@ class RegisterUpload extends BaseAction {
 		check_ajax_referer( 'isset-video' );
 		header( "Content-Type", "application/json" );
 
-		$post_id = TextService::validateAndSanitizeText( $_POST['id'] );
+		$post_id = TextService::validateAndSanitizeText( $_POST, 'id' );
 
 		if ( $post_id === false ) {
 			return;

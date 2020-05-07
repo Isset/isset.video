@@ -13,10 +13,10 @@ class SetFeaturedImage extends BaseAction {
 	function execute( $arguments ) {
 		check_ajax_referer( 'isset-video' );
 
-		$post_id = TextService::validateAndSanitizeText($_POST['post_id']);
-		$url = TextService::validateAndSanitizeText($_POST['url']);
+		$post_id = TextService::validateAndSanitizeText( $_POST, 'post_id' );
+		$url     = TextService::validateAndSanitizeText( $_POST, 'url' );
 
-		if ($post_id === false || $url === false) {
+		if ( $post_id === false || $url === false ) {
 			return false;
 		}
 

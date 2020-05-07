@@ -21,7 +21,7 @@ class SavePost extends BaseAction {
 	function execute( $args ) {
 		list( $post_id ) = $args;
 
-		$nonce = TextService::validateAndSanitizeText($_POST['isset_publisher_class_nonce']);
+		$nonce = TextService::validateAndSanitizeText( $_POST, 'isset_publisher_class_nonce' );
 		if ( $nonce !== false && wp_verify_nonce( $nonce, basename( __FILE__ ) ) ) {
 			return $post_id;
 		}

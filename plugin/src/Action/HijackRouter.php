@@ -8,13 +8,13 @@ use IssetBV\VideoPublisher\Wordpress\Service\TextService;
 
 class HijackRouter extends BaseAction {
 	function execute( $arguments ) {
-		$action = TextService::validateAndSanitizeText( $_GET['ivp-action'] );
+		$action = TextService::validateAndSanitizeText( $_GET, 'ivp-action' );
 		if ( $action === false ) {
 			return;
 		}
 
 		if ( $action === 'auth' ) {
-			$token = TextService::validateAndSanitizeText( $_GET['token'] );
+			$token = TextService::validateAndSanitizeText( $_GET, 'token' );
 			if ( $token === false ) {
 				return;
 			}
@@ -37,7 +37,7 @@ class HijackRouter extends BaseAction {
 		}
 
 		if ( $action === 'video-redirect' ) {
-			$uuid = TextService::validateAndSanitizeText( $_GET['uuid'] );
+			$uuid = TextService::validateAndSanitizeText( $_GET, 'uuid' );
 			if ( $uuid === false ) {
 				return;
 			}
