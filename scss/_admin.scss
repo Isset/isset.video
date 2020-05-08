@@ -16,7 +16,7 @@
 }
 
 #video-publisher-thumbnail {
-  width: 300px;
+  width: 400px;
 }
 
 .video-publisher-admin {
@@ -73,4 +73,10 @@
 
 .video-publisher-ml-2 {
   margin-left: 0.75rem;
+}
+
+.video-publisher-thumbnail-stills {
+  height: auto;
+  width: 100%;
+  max-width: 300px;
 }
