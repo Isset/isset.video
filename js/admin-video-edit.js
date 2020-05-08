@@ -35,4 +35,33 @@ jQuery(($) => {
       location.reload()
     })
   });
+
+  let stillCycleInterval = null;
+  let originalSrc = null;
+
+  $('.video-publisher-thumbnail-stills').hover(function () {
+    let count = 0;
+    let img = $(this);
+    let stills = img.data('stills');
+
+    originalSrc = img.attr('src');
+
+    if (stills) {
+      img.attr('src', stills[count].url);
+      count++;
+
+      stillCycleInterval = setInterval(function () {
+        img.attr('src', stills[count].url);
+        count = (count + 1) % stills.length;
+      }, 800)
+    }
+  }, function () {
+    if (stillCycleInterval !== null) {
+      clearInterval(stillCycleInterval);
+      $(this).attr('src', originalSrc);
+
+      stillCycleInterval = null;
+      originalSrc = null
+    }
+  });
 });

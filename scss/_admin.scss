@@ -16,7 +16,7 @@
 }
 
 #video-publisher-thumbnail {
-  width: 120px;
+  width: 300px;
 }
 
 .video-publisher-admin {
@@ -57,6 +57,10 @@
 
 .video-publisher-flex {
   display: flex;
+}
+
+.video-publisher-hidden {
+  display: none;
 }
 
 .video-publisher-bold {
