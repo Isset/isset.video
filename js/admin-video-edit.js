@@ -36,31 +36,31 @@ jQuery(($) => {
     })
   });
 
-  let timeout = null;
+  let stillCycleInterval = null;
   let originalSrc = null;
 
   $('.video-publisher-thumbnail-stills').hover(function () {
     let count = 0;
     let img = $(this);
-    let stills = $(this).siblings('div.video-publisher-hidden.video-publisher-possible-stills').children();
+    let stills = img.data('stills');
 
     originalSrc = img.attr('src');
 
     if (stills) {
-      img.attr('src', stills[count].innerHTML);
+      img.attr('src', stills[count].url);
       count++;
 
-      timeout = setInterval(function () {
-        img.attr('src', stills[count].innerHTML);
-        count = stills.length - 1 === count ? 0 : count + 1;
+      stillCycleInterval = setInterval(function () {
+        img.attr('src', stills[count].url);
+        count = (count + 1) % stills.length;
       }, 800)
     }
   }, function () {
-    if (timeout !== null) {
-      clearInterval(timeout);
+    if (stillCycleInterval !== null) {
+      clearInterval(stillCycleInterval);
       $(this).attr('src', originalSrc);
 
-      timeout = null;
+      stillCycleInterval = null;
       originalSrc = null
     }
   });
