@@ -34,25 +34,59 @@ class ThumbnailColumn extends BaseAction {
 		if ( isset( $postMeta['metadata'] ) && $postMeta['metadata'] !== null ) {
 			$seconds    = $postMeta['metadata'][0]['duration'];
 			$duration   = sprintf( '%02d:%02d:%02d', ( $seconds / 3600 ), ( $seconds / 60 % 60 ), $seconds % 60 );
-			$resolution = array_map( function ( $resolution ) {
-				return intval($resolution);
-			}, explode( 'x', $postMeta['metadata'][0]['resolution'] ) );
-			$image  = wp_get_attachment_image_src( get_post_thumbnail_id( $postId ), [ $resolution[0], $resolution[1] ] );
+			$resolution = array_map(
+				function ( $resolution ) {
+					return intval( $resolution );
+				},
+				explode( 'x', $postMeta['metadata'][0]['resolution'] )
+			);
 		} else {
 			$duration   = '';
-			$resolution = null;
-			$image  = wp_get_attachment_image_src( get_post_thumbnail_id( $postId ), [ 60, 60 ] );
+			$resolution = [];
 		}
+
+		$thumbnailId = get_post_thumbnail_id( $postId );
+		$metadata    = wp_get_attachment_metadata( $thumbnailId );
+
+		// If we fail to parse the resolution from the post meta
+		// Try to use thumbnail data
+		if ( count( $resolution ) !== 2 && $metadata !== false ) {
+			$resolution = [ $metadata['width'], $metadata['height'] ];
+		}
+
+		// If we still fail by then
+		// Use the most common resolution
+		if ( count( $resolution ) !== 2 ) {
+			$resolution = [ 16, 9 ];
+		}
+
+		$minimumSize = 60;
+
+		list( $width, $height ) = $resolution;
+		$ratio = $width / $height;
+
+		if ( $width > $height ) {
+			$width  = $ratio * $minimumSize;
+			$height = $minimumSize;
+		} else {
+			$width  = $minimumSize;
+			$height = $minimumSize / $ratio;
+		}
+
+		$image = wp_get_attachment_image_src( $thumbnailId, [ $width, $height ] );
 
 		if ( is_array( $image ) ) {
 			list( $poster, $w, $h ) = $image;
 
-			echo Timber::compile( __DIR__ . "/../../views/admin/thumbnail-column.html.twig", [
-				"poster"     => $poster,
-				"duration"   => $duration,
-				"assets"     => $postMeta['assets'],
-				"resolution" => $resolution
-			] );
+			echo Timber::compile(
+				__DIR__ . "/../../views/admin/thumbnail-column.html.twig",
+				[
+					"poster"     => $poster,
+					"duration"   => $duration,
+					"assets"     => $postMeta['assets'],
+					"resolution" => $resolution,
+				]
+			);
 		}
 	}
 
