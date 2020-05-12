@@ -5,6 +5,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Shortcode;
 
 
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use stdClass;
 use Timber\Timber;
 use WP_Query;
 
@@ -29,13 +30,13 @@ class Publish extends ShortcodeBase {
 		$post_id = $attr['post_id'];
 		$poster  = $attr['poster'];
 
-		$query = new WP_Query([
-			'post_type' => VideoPublisher::getTypeName(),
-			'post_status' => 'published',
-			'name' => $uuid
-		]);
+		$query = new WP_Query( [
+			                       'post_type'   => VideoPublisher::getTypeName(),
+			                       'post_status' => 'published',
+			                       'name'        => $uuid,
+		                       ] );
 
-		if ($query->post_count === 0) {
+		if ( $query->post_count === 0 ) {
 			return Timber::compile( __DIR__ . '/../../views/shortcode/publish-invalid.html.twig' );
 		}
 
@@ -75,11 +76,15 @@ class Publish extends ShortcodeBase {
 		$context['uuid']        = $uuid;
 		$context['video_url']   = $video_url;
 		$context['video_setup'] = [
-			'fluid' => true,
-			'html5' => [
+			'fluid'   => true,
+			'html5'   => [
 				'hls' => [
 					'handleManifestRedirects' => true,
 				],
+			],
+			"plugins" => [
+				"chromecast" => new StdClass(),
+				'airPlay'    => new StdClass(),
 			],
 		];
 

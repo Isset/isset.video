@@ -21,7 +21,8 @@
   "author": "isset.video",
   "license": "ISC",
   "dependencies": {
-    "@leochen1216/videojs-chromecast": "^2.0.0",
+    "@silvermine/videojs-airplay": "^1.0.0",
+    "@silvermine/videojs-chromecast": "https://github.com/silvermine/videojs-chromecast.git",
     "@wordpress/block-editor": "^3.7.6",
     "@wordpress/blocks": "^6.12.2",
     "react": "^16.13.1",
