@@ -24,6 +24,7 @@ use IssetBV\VideoPublisher\Wordpress\MetaBox\FrontPage;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\PublishInfo;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\ThumbnailSelect;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use IssetBV\VideoPublisher\Wordpress\Rest\DashboardEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Rest\PublishesEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Service\ThumbnailService;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
@@ -246,6 +247,7 @@ class Plugin {
 
 	public function initRest() {
 		PublishesEndpoint::publishes();
+		DashboardEndpoint::dashboard();
 	}
 
 	private function initBlocks() {

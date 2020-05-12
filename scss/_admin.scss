@@ -59,6 +59,10 @@
   display: flex;
 }
 
+.video-publisher-flex-1 {
+  flex: 1;
+}
+
 .video-publisher-hidden {
   display: none;
 }
@@ -71,9 +75,14 @@
   margin-top: 0.75rem;
 }
 
+.video-publisher-mb-2 {
+  margin-bottom: 0.75rem;
+}
+
 .video-publisher-ml-2 {
   margin-left: 0.75rem;
 }
+
 
 .video-publisher-thumbnail-stills {
   height: auto;

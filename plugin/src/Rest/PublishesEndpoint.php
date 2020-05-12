@@ -9,7 +9,7 @@ class PublishesEndpoint
 {
 	const LAZY_STEPS = 6;
 
-    public static function publishes()
+	public static function publishes()
     {
         add_action('rest_api_init', function () {
             register_rest_route('isset-publisher/v1', '/publishes', [
