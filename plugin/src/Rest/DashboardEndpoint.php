@@ -21,7 +21,7 @@ class DashboardEndpoint extends BaseEndpoint {
 
 			$context['user']               = $userInfo;
 			$context['logout_url']         = $service->getLogoutURL();
-			$context['videos_url']         = $context['video_url'] = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
+			$context['videos_url']         = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
 			$context['stats']              = $service->fetchStats();
 			$context['subscription_limit'] = $service->fetchSubscriptionLimit();
 			$context['streaming_stats']    = $service->fetchStatsV2( new DateTime( '-1 week' ) );

@@ -252,9 +252,16 @@ class Plugin {
 	}
 
 	public function initRest() {
-		foreach ( $this->endpoints as $endpoint ) {
-			$this->endpoint( $endpoint );
-		}
+		add_action( 'rest_api_init', function () {
+			foreach ( $this->endpoints as $endpoint ) {
+			    /** @var BaseEndpoint $endpointObj */
+				$endpointObj = $this->endpoint( $endpoint );
+				register_rest_route( 'isset-publisher/v1', $endpointObj->getRoute(), [
+					'methods'  => $endpointObj->getMethod(),
+					'callback' => $endpointObj
+				] );
+			}
+		} );
 	}
 
 	private function initBlocks() {
@@ -344,14 +351,7 @@ class Plugin {
 	}
 
 	public function endpoint( $endpoint ) {
-	    /** @var BaseEndpoint $endpointObj */
-		$endpointObj = new $endpoint( $this );
-
-		add_action( 'rest_api_init', function () use ($endpointObj) {
-			register_rest_route( 'isset-publisher/v1', $endpointObj->getRoute(), [
-				'methods'  => $endpointObj->getMethod(),
-				'callback' => $endpointObj
-			] );
-		} );
+		/** @var BaseEndpoint $endpointObj */
+		return new $endpoint( $this );
 	}
 }
