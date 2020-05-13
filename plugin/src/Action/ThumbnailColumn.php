@@ -50,7 +50,7 @@ class ThumbnailColumn extends BaseAction {
 
 		// If we fail to parse the resolution from the post meta
 		// Try to use thumbnail data
-		if ( count( $resolution ) !== 2 && $metadata !== false ) {
+		if ( count( $resolution ) !== 2 && $metadata !== false && isset( $metadata['width'] ) && isset( $metadata['height'] ) ) {
 			$resolution = [ $metadata['width'], $metadata['height'] ];
 		}
 

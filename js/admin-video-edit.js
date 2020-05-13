@@ -5,52 +5,6 @@ jQuery(($) => {
 
   if (adminpage === "edit-php" && typenow === "video-publisher") {
 
-    // Dashboard
-    $('.wp-header-end').after($('<div id="issetVideoDash" class="video-publisher-mb-2"></div>'));
-    $.ajax({
-      url: '/?rest_route=/isset-publisher/v1/dashboard',
-    }).done(function (res) {
-      $('#issetVideoDash').addClass('card').html(res.html);
-      let streamingViewsData = $('#videoPublisherStreamingViews').children();
-
-      let chart = new Chart('videoPublisherViewsChart', {
-        type: 'line',
-        data: {
-          labels: streamingViewsData.map(function () {
-            return new Date($(this).data('key')).getDate()
-          }),
-          datasets: [{
-            label: 'Views',
-            data: streamingViewsData.map(function () {
-              return $(this).data('value')
-            }),
-            backgroundColor: [
-                'rgba(46, 112, 157, .2)'
-            ],
-            borderColor: [
-              'rgba(46, 112, 157, 1)'
-            ],
-            borderWidth: 1
-          }]
-        },
-        options: {
-          maintainAspactRatio: false,
-          legend: {
-            display: false,
-          },
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true,
-              }
-            }]
-          },
-        }
-
-      })
-    });
-
-
     // Sync button
     let syncButton = $('<a class="page-title-action" />').text("Sync videos");
     $('.wp-header-end').before(syncButton);

@@ -18,19 +18,21 @@ class DashboardEndpoint extends BaseEndpoint {
 
 		if ( $context['isLoggedIn'] ) {
 			$userInfo = $service->getUserInfo();
+			$stats    = $service->fetchStatsV2( new DateTime( '-1 week' ) );
 
 			$context['user']               = $userInfo;
 			$context['logout_url']         = $service->getLogoutURL();
 			$context['videos_url']         = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
 			$context['stats']              = $service->fetchStats();
 			$context['subscription_limit'] = $service->fetchSubscriptionLimit();
-			$context['streaming_stats']    = $service->fetchStatsV2( new DateTime( '-1 week' ) );
+			$context['streaming_stats']    = $stats;
 		} else {
 			$context['login_url'] = $service->getLoginURL();
 		}
 
 		return [
-			'html' => Timber::compile( __DIR__ . '/../../views/admin/dashboard/api-dashboard.html.twig', $context )
+			'html' => Timber::compile( __DIR__ . '/../../views/admin/dashboard/api-dashboard.html.twig', $context ),
+			'stats' => $stats
 		];
 	}
 }

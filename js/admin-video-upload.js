@@ -100,6 +100,6 @@ jQuery(($) => {
   });
 
   $('#btnCancelUpload').click(function () {
-    location.reload()
+    location.reload();
   });
 });
