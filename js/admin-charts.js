@@ -7,10 +7,20 @@ jQuery(($) => {
         legend: {
             display: false,
         },
+        tooltips: {
+            callbacks: {
+                title: row => `${row[0].xLabel.getFullYear()}-${row[0].xLabel.getMonth() + 1}-${row[0].xLabel.getDate()}`,
+            }
+        },
         scales: {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    callback: row => row.getDate()
                 }
             }]
         },
@@ -40,7 +50,7 @@ jQuery(($) => {
                 type: 'line',
                 data: {
                     labels: streamingViewsData.map(function () {
-                        return new Date($(this).data('key')).getDate()
+                        return new Date($(this).data('key'))
                     }),
                     datasets: [{
                         label: 'Views',
@@ -55,23 +65,27 @@ jQuery(($) => {
                 options: baseOptions
             });
 
-            let chartData = new Chart('videoPublisherDataChart', {
+            let dataOptions = Object.assign({}, baseOptions);
+            dataOptions.scales.yAxes[0].ticks.callback = row => `${row} GB`;
+            dataOptions.tooltips.callbacks.label = row => `${parseFloat(row.value).toFixed(2)} GB`;
+
+            let chartDatea = new Chart('videoPublisherDataChart', {
                 type: 'line',
                 data: {
                     labels: streamingBytesData.map(function () {
-                        return new Date($(this).data('key')).getDate()
+                        return new Date($(this).data('key'))
                     }),
                     datasets: [{
                         label: 'Data send',
                         data: streamingBytesData.map(function () {
-                            return $(this).data('value')
+                            return $(this).data('value') / 1e+9
                         }),
                         backgroundColor: baseBgColor,
                         borderColor: baseBorderColor,
                         borderWidth: 1
                     }]
                 },
-                options: baseOptions
+                options: dataOptions
             });
 
             $('#videoPublisherChartToggleViews').on('click', function () {
