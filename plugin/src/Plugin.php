@@ -24,6 +24,8 @@ use IssetBV\VideoPublisher\Wordpress\MetaBox\FrontPage;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\PublishInfo;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\ThumbnailSelect;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use IssetBV\VideoPublisher\Wordpress\Rest\BaseEndpoint;
+use IssetBV\VideoPublisher\Wordpress\Rest\DashboardEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Rest\PublishesEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Service\ThumbnailService;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
@@ -71,13 +73,18 @@ class Plugin {
 		Upload\GenerateUploadUrl::class,
 		Upload\RegisterUpload::class,
 		Editor::class,
-        DeletePublish::class,
+		DeletePublish::class,
 	];
 
 	private $filters = [
 		ThumbnailColumnFilter::class,
 		VideoUpload::class,
 		Timber::class,
+	];
+
+	private $endpoints = [
+		DashboardEndpoint::class,
+		PublishesEndpoint::class
 	];
 
 	private $scripts = [
@@ -245,7 +252,16 @@ class Plugin {
 	}
 
 	public function initRest() {
-		PublishesEndpoint::publishes();
+		add_action( 'rest_api_init', function () {
+			foreach ( $this->endpoints as $endpoint ) {
+			    /** @var BaseEndpoint $endpointObj */
+				$endpointObj = $this->endpoint( $endpoint );
+				register_rest_route( 'isset-publisher/v1', $endpointObj->getRoute(), [
+					'methods'  => $endpointObj->getMethod(),
+					'callback' => $endpointObj
+				] );
+			}
+		} );
 	}
 
 	private function initBlocks() {
@@ -332,5 +348,10 @@ class Plugin {
 		$widgetObj = new $widget( $this );
 
 		wp_add_dashboard_widget( $widgetObj->getWidgetId(), $widgetObj->getWidgetName(), $widgetObj, $widgetObj->controlCallback(), $widgetObj->getArgs() );
+	}
+
+	public function endpoint( $endpoint ) {
+		/** @var BaseEndpoint $endpointObj */
+		return new $endpoint( $this );
 	}
 }

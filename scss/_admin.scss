@@ -39,6 +39,11 @@
     border-color: #d16767;
   }
 
+  .btn-inactive {
+    background-color: #c9b9ec;
+    border-color: #c9b9ec;
+  }
+
   p.submit {
     margin-top: 0;
     padding-bottom: 0;
@@ -59,6 +64,10 @@
   display: flex;
 }
 
+.video-publisher-flex-end {
+  justify-content: flex-end;
+}
+
 .video-publisher-hidden {
   display: none;
 }
@@ -71,9 +80,14 @@
   margin-top: 0.75rem;
 }
 
+.video-publisher-mb-2 {
+  margin-bottom: 0.75rem;
+}
+
 .video-publisher-ml-2 {
   margin-left: 0.75rem;
 }
+
 
 .video-publisher-thumbnail-stills {
   height: auto;

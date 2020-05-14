@@ -1,7 +1,11 @@
+import Chart from 'chart.js';
+
 jQuery(($) => {
 
 
   if (adminpage === "edit-php" && typenow === "video-publisher") {
+
+    // Sync button
     let syncButton = $('<a class="page-title-action" />').text("Sync videos");
     $('.wp-header-end').before(syncButton);
 
