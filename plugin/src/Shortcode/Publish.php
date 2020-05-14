@@ -76,13 +76,15 @@ class Publish extends ShortcodeBase {
 		$context['uuid']        = $uuid;
 		$context['video_url']   = $video_url;
 		$context['video_setup'] = [
-			'fluid'   => true,
-			'html5'   => [
+			'fluid'     => true,
+			'techOrder' => [ 'chromecast', 'html5' ],
+			'html5'     => [
+				'nativeTextTracks' => false,
 				'hls' => [
 					'handleManifestRedirects' => true,
 				],
 			],
-			"plugins" => [
+			"plugins"   => [
 				"chromecast" => new StdClass(),
 				'airPlay'    => new StdClass(),
 			],

@@ -22,7 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "@silvermine/videojs-airplay": "^1.0.0",
-    "@silvermine/videojs-chromecast": "https://github.com/silvermine/videojs-chromecast.git",
+    "@silvermine/videojs-chromecast": "^1.2.1",
     "@wordpress/block-editor": "^3.7.6",
     "@wordpress/blocks": "^6.12.2",
     "react": "^16.13.1",
