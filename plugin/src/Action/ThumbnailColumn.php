@@ -41,7 +41,7 @@ class ThumbnailColumn extends BaseAction {
 				explode( 'x', $postMeta['metadata'][0]['resolution'] )
 			);
 		} else {
-			$resolution = "{$metadata['width']}x{$metadata['height']}";
+			$resolution = [];
 		}
 
 		// If we fail to parse the resolution from the post meta

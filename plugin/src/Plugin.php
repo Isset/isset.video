@@ -72,7 +72,7 @@ class Plugin {
 		Settings\Menu::class,
 		ThumbnailColumn::class,
 		DurationColumn::class,
-        ResolutionColumn::class,
+		ResolutionColumn::class,
 		Upload\GenerateUploadUrl::class,
 		Upload\RegisterUpload::class,
 		Editor::class,
@@ -257,7 +257,7 @@ class Plugin {
 	public function initRest() {
 		add_action( 'rest_api_init', function () {
 			foreach ( $this->endpoints as $endpoint ) {
-			    /** @var BaseEndpoint $endpointObj */
+				/** @var BaseEndpoint $endpointObj */
 				$endpointObj = $this->endpoint( $endpoint );
 				register_rest_route( 'isset-publisher/v1', $endpointObj->getRoute(), [
 					'methods'  => $endpointObj->getMethod(),
