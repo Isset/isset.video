@@ -30,23 +30,24 @@ class ThumbnailColumn extends BaseAction {
 		$poster = null;
 
 		$postMeta = get_post_meta( $postId, 'video-publish', true );
+		$thumbnailId = get_post_thumbnail_id( $postId );
+		$metadata    = wp_get_attachment_metadata( $thumbnailId );
 
 		if ( isset( $postMeta['metadata'] ) && $postMeta['metadata'] !== null ) {
-			$seconds    = $postMeta['metadata'][0]['duration'];
-			$duration   = sprintf( '%02d:%02d:%02d', ( $seconds / 3600 ), ( $seconds / 60 % 60 ), $seconds % 60 );
-			$resolution = array_map(
+			$seconds           = $postMeta['metadata'][0]['duration'];
+			$biggestResolution = end( $postMeta['metadata'] )['resolution'];
+			$duration          = sprintf( '%02d:%02d:%02d', ( $seconds / 3600 ), ( $seconds / 60 % 60 ), $seconds % 60 );
+			$resolution        = array_map(
 				function ( $resolution ) {
 					return intval( $resolution );
 				},
 				explode( 'x', $postMeta['metadata'][0]['resolution'] )
 			);
 		} else {
-			$duration   = '';
-			$resolution = [];
+			$duration          = '';
+			$resolution        = "{$metadata['width']}x{$metadata['height']}";
+			$biggestResolution = '';
 		}
-
-		$thumbnailId = get_post_thumbnail_id( $postId );
-		$metadata    = wp_get_attachment_metadata( $thumbnailId );
 
 		// If we fail to parse the resolution from the post meta
 		// Try to use thumbnail data
@@ -81,9 +82,10 @@ class ThumbnailColumn extends BaseAction {
 			echo Timber::compile(
 				__DIR__ . "/../../views/admin/thumbnail-column.html.twig",
 				[
-					"poster"   => $poster,
-					"duration" => $duration,
-					"assets"   => $postMeta['assets'],
+					"poster"     => $poster,
+					"duration"   => $duration,
+					"assets"     => $postMeta['assets'],
+					"resolution" => $biggestResolution,
 				]
 			);
 		}
