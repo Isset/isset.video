@@ -23,7 +23,7 @@ class ThumbnailColumn extends BaseAction {
 	function execute( $arguments ) {
 		list( $columnName, $postId ) = $arguments;
 
-		if ( $columnName !== "video-publisher-thumbnail" || get_post($postId)->post_status === 'draft' ) {
+		if ( $columnName !== "video-publisher-thumbnail" || get_post( $postId )->post_status === 'draft' ) {
 			return;
 		}
 
@@ -34,14 +34,14 @@ class ThumbnailColumn extends BaseAction {
 		$metadata    = wp_get_attachment_metadata( $thumbnailId );
 
 		if ( isset( $postMeta['metadata'] ) && $postMeta['metadata'] !== null ) {
-			$resolution        = array_map(
+			$resolution = array_map(
 				function ( $resolution ) {
 					return intval( $resolution );
 				},
 				explode( 'x', $postMeta['metadata'][0]['resolution'] )
 			);
 		} else {
-			$resolution        = "{$metadata['width']}x{$metadata['height']}";
+			$resolution = "{$metadata['width']}x{$metadata['height']}";
 		}
 
 		// If we fail to parse the resolution from the post meta
@@ -77,9 +77,9 @@ class ThumbnailColumn extends BaseAction {
 			echo Timber::compile(
 				__DIR__ . "/../../views/admin/thumbnail-column.html.twig",
 				[
-					"poster"      => $poster,
-					"assets"      => $postMeta['assets'],
-					"preview" => isset($postMeta['preview']) ? $postMeta['preview'] : false
+					"poster"  => $poster,
+					"assets"  => $postMeta['assets'],
+					"preview" => isset( $postMeta['preview'] ) ? $postMeta['preview'] : false
 				]
 			);
 		}
