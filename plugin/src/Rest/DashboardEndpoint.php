@@ -26,12 +26,13 @@ class DashboardEndpoint extends BaseEndpoint {
 			$context['stats']              = $service->fetchStats();
 			$context['subscription_limit'] = $service->fetchSubscriptionLimit();
 			$context['streaming_stats']    = $stats;
+			$context['isset_video_url']    = $service->getMyIssetVideoURL();
 		} else {
 			$context['login_url'] = $service->getLoginURL();
 		}
 
 		return [
-			'html' => Timber::compile( __DIR__ . '/../../views/admin/dashboard/api-dashboard.html.twig', $context ),
+			'html'  => Timber::compile( __DIR__ . '/../../views/admin/dashboard/api-dashboard.html.twig', $context ),
 			'stats' => $stats
 		];
 	}

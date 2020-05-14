@@ -1,6 +1,7 @@
 <div class="video-publisher-admin">
     {% if isLoggedIn %}
-        <h2>{{ __('Logged in as %s', 'isset-video-publisher')|format(user.username) }}</h2>
+        <h2 class="video-publisher-mb-0">{{ __('Logged in as %s', 'isset-video-publisher')|format(user.username) }}</h2>
+        <p class="video-publisher-m-0"><a target="_blank" href="{{ isset_video_url }}">{{ __('isset.video') }}</a></p>
 
         <div class="video-publisher-flex" style="flex-direction: column">
             {% if stats %}
@@ -13,6 +14,12 @@
                         <span class="video-publisher-bold">Data streamed: </span>
                         <span>{{ (stats['streaming'] / 1e+9) | round(3) }} GB / {{ (subscription_limit['streaming_limit'] / 1e+9) | round(3) }} GB</span>
                     </div>
+                    {% if subscription_limit['name'] %}
+                        <div>
+                            <span class="video-publisher-bold">Subscription type: </span>
+                            <span>{{ subscription_limit['name'] }}</span>
+                        </div>
+                    {% endif %}
                 </div>
                 <div>
                     <div class="video-publisher-mb-2 video-publisher-flex video-publisher-flex-end">
