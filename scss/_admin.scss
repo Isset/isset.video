@@ -16,7 +16,15 @@
 }
 
 #video-publisher-thumbnail {
-  width: 450px;
+  width: 300px;
+}
+
+#video-publisher-duration {
+  width: 70px;
+}
+
+#video-publisher-max-resolution {
+  width: 100px;
 }
 
 .video-publisher-admin {
@@ -76,8 +84,16 @@
   font-weight: bold;
 }
 
+.video-publisher-m-0 {
+  margin: 0;
+}
+
 .video-publisher-mt-2 {
   margin-top: 0.75rem;
+}
+
+.video-publisher-mb-0 {
+  margin-bottom: 0;
 }
 
 .video-publisher-mb-2 {
@@ -90,6 +106,12 @@
 
 
 .video-publisher-thumbnail-stills {
+  height: auto;
+  width: 100%;
+  max-width: 300px;
+}
+
+.video-publisher-preview-video {
   height: auto;
   width: 100%;
   max-width: 300px;

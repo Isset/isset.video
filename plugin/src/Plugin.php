@@ -10,13 +10,14 @@ use IssetBV\VideoPublisher\Wordpress\Action\DurationColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Editor;
 use IssetBV\VideoPublisher\Wordpress\Action\HijackRouter;
 use IssetBV\VideoPublisher\Wordpress\Action\ImportPublishedVideos;
+use IssetBV\VideoPublisher\Wordpress\Action\ResolutionColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\SavePost;
 use IssetBV\VideoPublisher\Wordpress\Action\Settings;
 use IssetBV\VideoPublisher\Wordpress\Action\ThumbnailColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload;
 use IssetBV\VideoPublisher\Wordpress\Filter\BaseFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\DurationColumnFilter;
-use IssetBV\VideoPublisher\Wordpress\Filter\ThumbnailColumnFilter;
+use IssetBV\VideoPublisher\Wordpress\Filter\ExtraColumnFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\Timber;
 use IssetBV\VideoPublisher\Wordpress\Filter\VideoUpload;
 use IssetBV\VideoPublisher\Wordpress\MetaBox\BaseMetaBox;
@@ -70,6 +71,8 @@ class Plugin {
 		Settings\Init::class,
 		Settings\Menu::class,
 		ThumbnailColumn::class,
+		DurationColumn::class,
+		ResolutionColumn::class,
 		Upload\GenerateUploadUrl::class,
 		Upload\RegisterUpload::class,
 		Editor::class,
@@ -77,7 +80,7 @@ class Plugin {
 	];
 
 	private $filters = [
-		ThumbnailColumnFilter::class,
+		ExtraColumnFilter::class,
 		VideoUpload::class,
 		Timber::class,
 	];
@@ -254,7 +257,7 @@ class Plugin {
 	public function initRest() {
 		add_action( 'rest_api_init', function () {
 			foreach ( $this->endpoints as $endpoint ) {
-			    /** @var BaseEndpoint $endpointObj */
+				/** @var BaseEndpoint $endpointObj */
 				$endpointObj = $this->endpoint( $endpoint );
 				register_rest_route( 'isset-publisher/v1', $endpointObj->getRoute(), [
 					'methods'  => $endpointObj->getMethod(),
