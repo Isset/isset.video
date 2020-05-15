@@ -2,7 +2,7 @@
 set -e;
 cd "$(realpath "$(dirname "$0")")/..";
 
-WEBPACK_ENV=production yarn webpack
+NODE_ENV=production yarn webpack
 
 test -d out || mkdir out;
 

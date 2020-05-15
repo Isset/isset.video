@@ -9,29 +9,34 @@ require('./functions');
 
 require('../scss/isset-video-publisher.scss');
 
-if (document.querySelector('#isset-video-default')) {
-  let video = document.querySelector('#isset-video-default');
 
-  let player = videojs(video, {
-    fill: true,
-    textTrackSettings: false,
-    techOrder: ['chromecast', 'html5'],
-    plugins: {
-      httpSourceSelector: {
-        default: 'auto'
+window.addEventListener('load', () => {
+  console.log(document.querySelectorAll('.video-publisher-video video'));
+  for (const video of Array.from(document.querySelectorAll('.video-publisher-video video'))) {
+    let player = videojs(video, {
+      fill: true,
+      fluid: true,
+      controls: true,
+      textTrackSettings: false,
+      techOrder: ['chromecast', 'html5'],
+      plugins: {
+        httpSourceSelector: {
+          default: 'auto'
+        },
+        chromecast: {},
+        airPlay: {}
       },
-      chromecast: {},
-      airPlay: {}
-    },
-    html5: {
-      nativeTextTracks: false,
-      hls: {
-        handleManifestRedirects: true,
+      html5: {
+        nativeTextTracks: false,
+        hls: {
+          handleManifestRedirects: true,
+        }
       }
-    }
-  });
+    });
+    console.log(video, player);
 
-  player.httpSourceSelector();
-  player.chromecast();
-  player.airPlay();
-}
+    player.httpSourceSelector();
+    player.chromecast();
+    player.airPlay();
+  }
+})

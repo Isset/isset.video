@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = {
-  mode: process.env.WEBPACK_ENV || 'development',
+  mode: process.env.NODE_ENV || 'development',
   entry:
     fs.readdirSync(`${__dirname}/js`).reduce((carry, item) => {
       if (item.endsWith('.js') && fs.statSync(`${__dirname}/js/${item}`).isFile()) {

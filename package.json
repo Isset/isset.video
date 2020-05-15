@@ -29,7 +29,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "underscore": "^1.10.2",
-    "video.js": "^7.7.5",
+    "video.js": "^7.7.6",
     "videojs-contrib-quality-levels": "^2.0.9",
     "videojs-http-source-selector": "^1.1.6"
   },

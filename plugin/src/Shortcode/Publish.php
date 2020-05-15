@@ -5,7 +5,6 @@ namespace IssetBV\VideoPublisher\Wordpress\Shortcode;
 
 
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
-use stdClass;
 use Timber\Timber;
 use WP_Query;
 
@@ -13,6 +12,10 @@ class Publish extends ShortcodeBase {
 	const CODE = "publish";
 
 	function generate( $params, $content = null ) {
+		// If we have a video, attach chrome cast framework
+		wp_enqueue_script( 'chrome_cast',
+		                   "https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" );
+
 		$attr = shortcode_atts(
 			[
 				'uuid'     => false,
@@ -71,24 +74,10 @@ class Publish extends ShortcodeBase {
 			->getVideoPublisherService()
 			->getVideoUrlForWordpress( $uuid );
 
-		$context                = $attr;
-		$context['poster']      = $poster;
-		$context['uuid']        = $uuid;
-		$context['video_url']   = $video_url;
-		$context['video_setup'] = [
-			'fluid'     => true,
-			'techOrder' => [ 'chromecast', 'html5' ],
-			'html5'     => [
-				'nativeTextTracks' => false,
-				'hls' => [
-					'handleManifestRedirects' => true,
-				],
-			],
-			"plugins"   => [
-				"chromecast" => new StdClass(),
-				'airPlay'    => new StdClass(),
-			],
-		];
+		$context              = $attr;
+		$context['poster']    = $poster;
+		$context['uuid']      = $uuid;
+		$context['video_url'] = $video_url;
 
 		return Timber::compile( __DIR__ . '/../../views/shortcode/publish.html.twig', $context );
 	}
