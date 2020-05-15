@@ -21,14 +21,15 @@
   "author": "isset.video",
   "license": "ISC",
   "dependencies": {
-    "@leochen1216/videojs-chromecast": "^2.0.0",
+    "@silvermine/videojs-airplay": "^1.0.0",
+    "@silvermine/videojs-chromecast": "^1.2.1",
     "@wordpress/block-editor": "^3.7.6",
     "@wordpress/blocks": "^6.12.2",
     "chart.js": "^2.9.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "underscore": "^1.10.2",
-    "video.js": "^7.7.5",
+    "video.js": "^7.7.6",
     "videojs-contrib-quality-levels": "^2.0.9",
     "videojs-http-source-selector": "^1.1.6"
   },

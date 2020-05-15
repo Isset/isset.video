@@ -3,6 +3,7 @@
 .sass-cache
 /.docker-context/
 /plugin/js
+/plugin/images
 /plugin/css
 /out
 .idea

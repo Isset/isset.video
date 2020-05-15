@@ -1,28 +1,42 @@
-const videojs = require('video.js');
+import videojs from 'video.js';
 
 require('videojs-contrib-quality-levels');
 require('videojs-http-source-selector');
-require('@leochen1216/videojs-chromecast');
+require('@silvermine/videojs-chromecast')(videojs, {preloadWebComponents: true});
+require('@silvermine/videojs-airplay')(videojs);
 
 require('./functions');
 
 require('../scss/isset-video-publisher.scss');
 
-if (document.querySelector('#isset-video-default')) {
-    let video = document.querySelector('#isset-video-default');
 
-    let player = videojs.default(video, {
-        fill: true,
-        textTrackSettings: false,
-        plugins: {
-            httpSourceSelector: {
-                default: 'auto'
-            },
+window.addEventListener('load', () => {
+  console.log(document.querySelectorAll('.video-publisher-video video'));
+  for (const video of Array.from(document.querySelectorAll('.video-publisher-video video'))) {
+    let player = videojs(video, {
+      fill: true,
+      fluid: true,
+      controls: true,
+      textTrackSettings: false,
+      techOrder: ['chromecast', 'html5'],
+      plugins: {
+        httpSourceSelector: {
+          default: 'auto'
         },
-        chromecast:{
-            appId:'E0FB432F',
+        chromecast: {},
+        airPlay: {}
+      },
+      html5: {
+        nativeTextTracks: false,
+        hls: {
+          handleManifestRedirects: true,
         }
+      }
     });
+    console.log(video, player);
 
     player.httpSourceSelector();
-}
+    player.chromecast();
+    player.airPlay();
+  }
+})
