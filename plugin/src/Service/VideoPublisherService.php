@@ -4,6 +4,7 @@
 namespace IssetBV\VideoPublisher\Wordpress\Service;
 
 
+use DateTime;
 use IssetBV\VideoPublisher\Wordpress\Plugin;
 use WP_Http;
 
@@ -290,9 +291,9 @@ class VideoPublisherService {
 
 		if ( $data['status'] === 'publishOnline' ) {
 			wp_update_post( [
-				                'post_name' => $data['publish'],
-				                'ID'        => $post_id,
-			                ] );
+				'post_name' => $data['publish'],
+				'ID'        => $post_id,
+			] );
 
 			$publish_info = $this->fetchPublishInfo( $data['publish'] );
 			if ( $publish_info === false ) {
@@ -371,5 +372,10 @@ class VideoPublisherService {
 		}
 
 		return true;
+	}
+
+	public function fetchStatsV2( DateTime $dateFrom ) {
+
+		return $this->publisherGet( "/api/stats/v2?dateFrom={$dateFrom->format('Y-m-d')}" );
 	}
 }

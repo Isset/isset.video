@@ -4,7 +4,7 @@
 namespace IssetBV\VideoPublisher\Wordpress\Filter;
 
 
-class ThumbnailColumnFilter extends BaseFilter {
+class ExtraColumnFilter extends BaseFilter {
 	public function addColumn( $columns ) {
 		$newArray = [];
 		// Checkbox always first
@@ -13,7 +13,9 @@ class ThumbnailColumnFilter extends BaseFilter {
 			unset( $columns["cb"] );
 		}
 
-		$newArray["video-publisher-thumbnail"] = "";
+		$newArray["video-publisher-thumbnail"] = _('Thumbnail');
+		$newArray["video-publisher-duration"] = _('Duration');
+		$newArray["video-publisher-max-resolution"] = _('Max resolution');
 
 		return array_merge( $newArray, $columns );
 	}

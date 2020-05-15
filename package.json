@@ -25,6 +25,7 @@
     "@silvermine/videojs-chromecast": "^1.2.1",
     "@wordpress/block-editor": "^3.7.6",
     "@wordpress/blocks": "^6.12.2",
+    "chart.js": "^2.9.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "underscore": "^1.10.2",
