@@ -90,7 +90,6 @@ jQuery(($) => {
       }
       else {
         clearTimeout(stillCycleInterval);
-        $('.video-publisher-preview-video').remove();
       }
     }
   }, '.video-publisher-thumbnail-stills')
