@@ -155,7 +155,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             return (
                 <div className="video-block-container">
                     <div className="video-block-title-wrapper">
-                        isset.video Video
+                        Videos on isset.video
                     </div>
                     <form className="video-block-form" onSubmit={e => e.preventDefault()}>
                         <input className="video-block-input" placeholder="Search videos"

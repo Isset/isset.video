@@ -66,7 +66,7 @@ jQuery(($) => {
             });
 
             let dataOptions = Object.assign({}, baseOptions);
-            dataOptions.scales.yAxes[0].ticks.callback = row => `${row} GB`;
+            dataOptions.scales.yAxes[0].ticks.callback = row => `${row.toFixed(2)} GB`;
             dataOptions.tooltips.callbacks.label = row => `${parseFloat(row.value).toFixed(2)} GB`;
 
             let chartDatea = new Chart('videoPublisherDataChart', {

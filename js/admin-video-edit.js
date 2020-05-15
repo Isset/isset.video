@@ -70,9 +70,8 @@ jQuery(($) => {
         }
       }
       else {
-        img.after(`<video class="video-publisher-preview-video" style="display: none" autoplay muted loop><source src="${img.data('preview')}"></video>`);
         stillCycleInterval = setTimeout(function () {
-          $('.video-publisher-preview-video').show();
+          img.siblings('.video-publisher-preview-video').show();
           img.remove();
         }, 500)
       }
