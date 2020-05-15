@@ -10,8 +10,9 @@ jQuery(($) => {
   fileSelect.change(function () {
     let fileDisplay = $("#phase-select-file");
     let file = this.files[0];
+
     if (file) {
-      fileDisplay.html('Selected file: ' + file.name)
+      fileDisplay.html('Selected files: ' + [...this.files].map(file => file.name).join(',<br>'))
     } else {
       fileDisplay.html('')
     }
@@ -26,9 +27,36 @@ jQuery(($) => {
       return;
     }
 
+    let res;
+
+    let fileList = [...fileSelect[0].files];
+
     $(".phase-select").hide();
     $(".phase-upload").show();
 
+    for (const file of fileList) {
+      let i = fileList.indexOf(file);
+      res = await uploadFile(i);
+    }
+
+    let {response, registerResponse} = res;
+
+    $('.phase-upload').hide();
+    $('.phase-done')
+      .html("")
+      .append("Succesfully uploaded ", $('<span>').text(response.filename), ", Please wait while we get it ready for you")
+      .show();
+
+    let registerObj = await registerResponse.json();
+    window.onbeforeunload = null;
+    location.href = registerObj.url;
+  });
+
+  $('#btnCancelUpload').click(function () {
+    location.reload();
+  });
+
+  async function uploadFile(fileIndex) {
     let uploadReqForm = new URLSearchParams();
 
     uploadReqForm.set('_ajax_nonce', nonce);
@@ -41,11 +69,11 @@ jQuery(($) => {
 
     let uploadUrlObj = await uploadUrlResp.json();
 
-    let filename = fileSelect[0].files[0].name;
+    let filename = fileSelect[0].files[fileIndex].name;
     $("#uploadingTitle")[0].innerHTML = filename;
 
     let form = new FormData();
-    form.set("file", fileSelect.prop("files")[0], fileSelect.val().split("/").pop());
+    form.set("file", fileSelect.prop("files")[fileIndex]);
 
     let uploadXhr = new XMLHttpRequest();
 
@@ -75,13 +103,6 @@ jQuery(($) => {
 
     let response = JSON.parse(await uploadPromise);
 
-    $('.phase-upload').hide();
-    $('.phase-done')
-      .html("")
-      .append("Succesfully uploaded ", $('<span>').text(response.filename), ", Please wait while we get it ready for you")
-      .show();
-
-
     let registerResponse = await fetch(ajaxUrl, {
       method: 'POST',
       body: new URLSearchParams([
@@ -91,15 +112,9 @@ jQuery(($) => {
       ])
     });
 
-    $(window).unbind(function(){
-      return true;
-    });
-
-    let registerObj = await registerResponse.json();
-    location.href = registerObj.url;
-  });
-
-  $('#btnCancelUpload').click(function () {
-    location.reload();
-  });
+    return {
+      response,
+      registerResponse
+    };
+  }
 });
