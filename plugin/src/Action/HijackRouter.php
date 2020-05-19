@@ -27,7 +27,7 @@ class HijackRouter extends BaseAction {
 			exit( 0 );
 		}
 
-		if ( $action === 'deauth' && is_admin() ) {
+		if ( $action === 'deauth' ) {
 			$this->plugin
 				->getVideoPublisherService()
 				->logout();

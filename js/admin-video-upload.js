@@ -12,7 +12,7 @@ jQuery(($) => {
     let file = this.files[0];
 
     if (file) {
-      fileDisplay.html('Selected files: ' + [...this.files].map(file => file.name).join(',<br>'))
+      fileDisplay.html('Selected files: <ul>' + [...this.files].map(file => '<li>' + file.name + '</li>').join('') + '</ul>')
     } else {
       fileDisplay.html('')
     }
@@ -36,10 +36,23 @@ jQuery(($) => {
 
     for (const file of fileList) {
       let i = fileList.indexOf(file);
-      res = await uploadFile(i);
+      $('#btnCancelUpload').before(`<div class="video-publisher-mb-2" id="videoPublisherFile${i}">
+                    Uploading:
+                    <div class="indicator"></div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0;"></div>
+                    </div>
+                    <div class="uploading-text">Uploading: ${fileSelect[0].files[i].name}</div>
+                </div><hr>`);
+    }
+
+    for (const file of fileList) {
+      res = await uploadFile(fileList.indexOf(file));
     }
 
     let {response, registerResponse} = res;
+
+    $(window).off('beforeunload');
 
     $('.phase-upload').hide();
     $('.phase-done')
@@ -70,7 +83,6 @@ jQuery(($) => {
     let uploadUrlObj = await uploadUrlResp.json();
 
     let filename = fileSelect[0].files[fileIndex].name;
-    $("#uploadingTitle")[0].innerHTML = filename;
 
     let form = new FormData();
     form.set("file", fileSelect.prop("files")[fileIndex]);
@@ -78,7 +90,7 @@ jQuery(($) => {
     let uploadXhr = new XMLHttpRequest();
 
     uploadXhr.upload.addEventListener("progress", (e) => {
-      const progressContainer = $('.phase-upload');
+      const progressContainer = $(`#videoPublisherFile${fileIndex}`);
       const percent = Math.ceil((e.loaded / e.total) * 100);
       progressContainer.find('.progress-bar').width(`${percent}%`);
       progressContainer.find('.indicator').text(`${percent}%`);
