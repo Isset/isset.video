@@ -38,7 +38,7 @@ jQuery(($) => {
       let i = fileList.indexOf(file);
       $('#btnCancelUpload').before(`<div class="video-publisher-mb-2" id="videoPublisherFile${i}">
                     Uploading:
-                    <div class="indicator"></div>
+                    <div class="indicator">0%</div>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: 0;"></div>
                     </div>
