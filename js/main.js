@@ -11,7 +11,6 @@ require('../scss/isset-video-publisher.scss');
 
 
 window.addEventListener('load', () => {
-  console.log(document.querySelectorAll('.video-publisher-video video'));
   for (const video of Array.from(document.querySelectorAll('.video-publisher-video video'))) {
     let player = videojs(video, {
       fill: true,
@@ -39,4 +38,4 @@ window.addEventListener('load', () => {
     player.chromecast();
     player.airPlay();
   }
-})
+});
