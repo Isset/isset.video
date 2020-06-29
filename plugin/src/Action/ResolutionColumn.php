@@ -22,7 +22,7 @@ class ResolutionColumn extends BaseAction {
 	function execute( $arguments ) {
 		list( $columnName, $postId ) = $arguments;
 
-		if ( $columnName !== "video-publisher-max-resolution" || get_post($postId)->post_status === 'draft' ) {
+		if ( $columnName !== "video-publisher-max-resolution" || get_post( $postId )->post_status === 'draft' ) {
 			return;
 		}
 
@@ -33,15 +33,22 @@ class ResolutionColumn extends BaseAction {
 		$metadata    = wp_get_attachment_metadata( $thumbnailId );
 
 		if ( isset( $postMeta['metadata'] ) && $postMeta['metadata'] !== null ) {
-			$biggestResolution = end( $postMeta['metadata'] )['resolution'];
+			$biggestIndex = 0;
+
+			foreach ( array_values( $postMeta['metadata'] ) as $key => $meta ) {
+				if ( intval( explode( 'x', $meta['resolution'] )[0] ) > intval( explode( 'x', array_values( $postMeta['metadata'] )[ $biggestIndex ]['resolution'] )[0] ) ) {
+					$biggestIndex = $key;
+				}
+			}
+			$biggestResolution = array_values( $postMeta['metadata'] )[ $biggestIndex ]['resolution'];
 		} else {
-			$biggestResolution = "{$metadata['width']}x{$metadata['height']}";
+			$biggestResolution = "";
 		}
 
 		echo Timber::compile(
 			__DIR__ . "/../../views/admin/resolution-column.twig",
 			[
-				"resolution"  => $biggestResolution,
+				"resolution" => $biggestResolution,
 			]
 		);
 	}
