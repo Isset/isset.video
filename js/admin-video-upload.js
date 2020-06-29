@@ -57,7 +57,7 @@ jQuery(($) => {
     $('.phase-upload').hide();
     $('.phase-done')
       .html("")
-      .append("Succesfully uploaded ", $('<span>').text(response.filename), ", Please wait while we get it ready for you")
+      .append("Succesfully uploaded ", $('<span>').text(fileList.join(', ')), ", Please wait while we get it ready for you")
       .show();
 
     let registerObj = await registerResponse.json();
