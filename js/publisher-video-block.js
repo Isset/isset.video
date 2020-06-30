@@ -48,6 +48,11 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             type: 'array',
             source: 'children'
         },
+        autoplay: {
+            type: 'array',
+            source: 'children',
+            selector: 'video-autoplay'
+        }
     },
     edit: class extends React.Component {
         constructor(props) {
@@ -59,6 +64,8 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             this.getSuggestions = this.getSuggestions.bind(this);
             this.setValue = this.setValue.bind(this);
             this.changeSearchTerm = this.changeSearchTerm.bind(this);
+            this.updatedParsedUuid = this.updatedParsedUuid.bind(this);
+            this.setAttr = this.setAttr.bind(this);
         }
 
         componentDidMount() {
@@ -98,7 +105,8 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                     uuidParsed: '',
                     videoThumbnail: '',
                     videoName: '',
-                    videoSize: ''
+                    videoSize: '',
+                    autoplay: ''
                 });
             }
             else {
@@ -107,9 +115,35 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                     uuidParsed: `[publish uuid=${suggestion.post_name}]`,
                     videoThumbnail: suggestion.post_thumbnail,
                     videoName: suggestion.post_title,
-                    videoSize: suggestion.post_size
+                    videoSize: suggestion.post_size,
+                    autoplay: ''
                 });
+                this.updatedParsedUuid()
             }
+        }
+
+        setAttr(key, value) {
+            const {setAttributes} = this.props;
+
+            switch (key) {
+                case 'autoplay':
+                    setAttributes({
+                        autoplay: value === true ? 'autoplay' : ''
+                    });
+                    break;
+            }
+
+            this.updatedParsedUuid();
+        }
+
+        updatedParsedUuid() {
+            const {setAttributes, attributes: {uuid, autoplay}} = this.props;
+
+            setAttributes({
+                uuidParsed: `[publish uuid="${uuid}" autoplay="${autoplay}"]`,
+            });
+
+            console.log(`[publish uuid="${uuid}" autoplay="${autoplay}]"`)
         }
 
         changeSearchTerm(newTerm) {
@@ -119,7 +153,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
         }
 
         render() {
-            const {attributes: {uuid, suggestions, videoThumbnail, videoName, videoSize, searchTerm}} = this.props;
+            const {attributes: {uuid, suggestions, videoThumbnail, videoName, videoSize, searchTerm, autoplay, uuidParsed}} = this.props;
             let {lazyStep} = this.state;
 
             if ((typeof Array.isArray(uuid) && uuid.length === 1) || (typeof uuid === 'string' && uuid !== '')) {
@@ -137,6 +171,11 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                                         </PanelRow>
                                         <PanelRow>
                                             <span><b>Uuid: </b> {uuid}</span> <br/>
+                                        </PanelRow>
+                                    </PanelBody>
+                                    <PanelBody title="Options">
+                                        <PanelRow>
+                                            <span><b>Autoplay: </b> <input onChange={e => this.setAttr('autoplay', e.target.checked)} type="checkbox" /></span>
                                         </PanelRow>
                                     </PanelBody>
                                 </InspectorControls>
@@ -198,6 +237,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                 <video-thumbnail style={{display: 'none'}}>{attributes.videoThumbnail}</video-thumbnail>
                 <video-name style={{display: 'none'}}>{attributes.videoName}</video-name>
                 <video-size style={{display: 'none'}}>{attributes.videoSize}</video-size>
+                <video-autplay style={{display: 'none'}}>{attributes.autoplay}</video-autplay>
             </div>
         )
     },
