@@ -81,7 +81,7 @@ class WordpressService {
 		}
 
 		if ( $force_thumbnail ) {
-			$this->plugin->getThumbnailService()->setThumbnail( $post->ID, $publish['assets'][0]['url'] );
+			//$this->plugin->getThumbnailService()->setThumbnail( $post->ID, array_values($publish['assets'])[0]['url'] );
 		}
 
 		update_post_meta( $post->ID, 'video-isset-status', 'online' );

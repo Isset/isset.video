@@ -19,7 +19,6 @@ class PublishesEndpoint extends BaseEndpoint {
 	function execute( $request ) {
 		$reqBody = json_decode( $request->get_body(), true );
 		$page    = $reqBody['page'];
-		error_log( $page );
 
 		$args = [
 			'post_type'      => VideoPublisher::getTypeName(),
