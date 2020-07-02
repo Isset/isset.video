@@ -40,9 +40,6 @@ jQuery(($) => {
     })
   });
 
-  let stillCycleInterval = null;
-  let originalSrc = null;
-
   $(document).on({
     mouseleave: function () {
       $(this).get(0).pause();
@@ -52,10 +49,9 @@ jQuery(($) => {
     }
   }, '.video-publisher-preview-video').on({
     mouseenter: function(){
-      let img = $(this);
-
-      img.after(`<video class="video-publisher-preview-video" autoplay muted loop><source src="${img.data('preview')}"></video>`);
-      img.remove();
+      let video = $(this).siblings('.video-publisher-preview-video');
+      $(this).remove();
+      video.show().get(0).play();
     },
   }, '.video-publisher-thumbnail-stills')
 });
