@@ -10,6 +10,7 @@ use IssetBV\VideoPublisher\Wordpress\Action\DurationColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Editor;
 use IssetBV\VideoPublisher\Wordpress\Action\HijackRouter;
 use IssetBV\VideoPublisher\Wordpress\Action\ImportPublishedVideos;
+use IssetBV\VideoPublisher\Wordpress\Action\RecurringSync;
 use IssetBV\VideoPublisher\Wordpress\Action\ResolutionColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\SavePost;
 use IssetBV\VideoPublisher\Wordpress\Action\Settings;
@@ -77,6 +78,7 @@ class Plugin {
 		Upload\RegisterUpload::class,
 		Editor::class,
 		DeletePublish::class,
+        RecurringSync::class
 	];
 
 	private $filters = [
@@ -291,8 +293,8 @@ class Plugin {
 	}
 
 	private function initRecurring() {
-		if ( ! wp_next_scheduled( 'fetch_publishes' ) ) {
-			wp_schedule_event( time(), 'hourly', 'fetch_publishes' );
+		if ( ! wp_next_scheduled( 'isset-video-publisher-recurring-sync' ) ) {
+			wp_schedule_event( time(), 'hourly', 'isset-video-publisher-recurring-sync' );
 		}
 	}
 
@@ -302,8 +304,9 @@ class Plugin {
 				add_action( 'admin_notices', function () {
 					?>
                     <div class="error"><p>Isset video publisher plugin requires <a
-                                    href="https://wordpress.org/plugins/timber-library/" target="_blank">timber</a> to
-                            work, please install and activate the timber plugin.</p></div><?php
+                                href="<?= esc_url( admin_url( '/plugin-install.php?tab=plugin-information&plugin=timber-library' ) ) ?>"
+                                target="_blank">timber</a> to
+                        work, please install and activate the timber plugin.</p></div><?php
 				} );
 
 				deactivate_plugins( plugin_basename( __FILE__ ) );

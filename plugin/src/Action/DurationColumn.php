@@ -30,7 +30,7 @@ class DurationColumn extends BaseAction {
 		$postMeta    = get_post_meta( $postId, 'video-publish', true );
 
 		if ( isset( $postMeta['metadata'] ) && $postMeta['metadata'] !== null ) {
-			$seconds  = $postMeta['metadata'][0]['duration'];
+			$seconds  = array_values($postMeta['metadata'])[0]['duration'];
 			$duration = sprintf( '%02d:%02d:%02d', ( $seconds / 3600 ), ( $seconds / 60 % 60 ), $seconds % 60 );
 		} else {
 			$duration = '';

@@ -38,7 +38,7 @@ class ThumbnailColumn extends BaseAction {
 				function ( $resolution ) {
 					return intval( $resolution );
 				},
-				explode( 'x', $postMeta['metadata'][0]['resolution'] )
+				explode( 'x', array_values($postMeta['metadata'])[0]['resolution'] )
 			);
 		} else {
 			$resolution = [];
