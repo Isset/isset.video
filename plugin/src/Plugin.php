@@ -10,14 +10,12 @@ use IssetBV\VideoPublisher\Wordpress\Action\DurationColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Editor;
 use IssetBV\VideoPublisher\Wordpress\Action\HijackRouter;
 use IssetBV\VideoPublisher\Wordpress\Action\ImportPublishedVideos;
-use IssetBV\VideoPublisher\Wordpress\Action\RecurringSync;
 use IssetBV\VideoPublisher\Wordpress\Action\ResolutionColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\SavePost;
 use IssetBV\VideoPublisher\Wordpress\Action\Settings;
 use IssetBV\VideoPublisher\Wordpress\Action\ThumbnailColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload;
 use IssetBV\VideoPublisher\Wordpress\Filter\BaseFilter;
-use IssetBV\VideoPublisher\Wordpress\Filter\DurationColumnFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\ExtraColumnFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\Timber;
 use IssetBV\VideoPublisher\Wordpress\Filter\VideoUpload;
@@ -78,7 +76,6 @@ class Plugin {
 		Upload\RegisterUpload::class,
 		Editor::class,
 		DeletePublish::class,
-        RecurringSync::class
 	];
 
 	private $filters = [
@@ -116,6 +113,12 @@ class Plugin {
 	}
 
 	public function init() {
+		add_action('admin_menu', function () {
+			add_menu_page('test', 'test', 'Dit is een test pagina', 'test_page_very_nice_yes_yes', function () {
+				echo 'Test';
+			}, null, 2);
+		});
+
 		$this->initPostTypes();
 		$this->addShortcodes();
 		$this->initScripts();
@@ -123,7 +126,6 @@ class Plugin {
 		$this->initActions();
 		$this->initRest();
 		$this->initBlocks();
-		$this->initRecurring();
 		$this->registerActivationHooks();
 		$this->initFilters();
 
@@ -290,12 +292,6 @@ class Plugin {
 			'editor_script' => "isset-video-publisher-{$name}",
 			'editor_style'  => "isset-video-publisher-{$name}-style"
 		] );
-	}
-
-	private function initRecurring() {
-		if ( ! wp_next_scheduled( 'isset-video-publisher-recurring-sync' ) ) {
-			wp_schedule_event( time(), 'hourly', 'isset-video-publisher-recurring-sync' );
-		}
 	}
 
 	private function registerActivationHooks() {
