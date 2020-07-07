@@ -41,7 +41,7 @@ jQuery(($) => {
         $.ajax({
             url: '/?rest_route=/isset-publisher/v1/dashboard',
         }).done(function (res) {
-            $('#issetVideoDash').addClass('card').html(res.html);
+            $('#issetVideoDash').addClass('card').css('max-width', '100%').html(res.html);
 
             let streamingViewsData = $('#videoPublisherStreamingViews').children();
             let streamingBytesData = $('#videoPublisherStreamingData').children();
