@@ -14,7 +14,7 @@ class Publish extends ShortcodeBase {
 	function generate( $params, $content = null ) {
 		// If we have a video, attach chrome cast framework
 		wp_enqueue_script( 'chrome_cast',
-		                   "https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" );
+			"https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" );
 
 		$attr = shortcode_atts(
 			[
@@ -34,10 +34,10 @@ class Publish extends ShortcodeBase {
 		$poster  = $attr['poster'];
 
 		$query = new WP_Query( [
-			                       'post_type'   => VideoPublisher::getTypeName(),
-			                       'post_status' => 'published',
-			                       'name'        => $uuid,
-		                       ] );
+			'post_type'   => VideoPublisher::getTypeName(),
+			'post_status' => 'published',
+			'name'        => $uuid,
+		] );
 
 		if ( $query->post_count === 0 ) {
 			return Timber::compile( __DIR__ . '/../../views/shortcode/publish-invalid.html.twig' );

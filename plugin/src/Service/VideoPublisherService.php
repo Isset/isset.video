@@ -300,7 +300,7 @@ class VideoPublisherService {
 				return false;
 			}
 
-			$this->plugin->getWordpressService()->updatePostFromPublish( $publish_info, true );
+			$this->plugin->getWordpressService()->updatePostFromPublish( $publish_info );
 		}
 
 		return get_post_meta( $post_id, 'video-isset-status', true );

@@ -16,7 +16,6 @@ use IssetBV\VideoPublisher\Wordpress\Action\Settings;
 use IssetBV\VideoPublisher\Wordpress\Action\ThumbnailColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload;
 use IssetBV\VideoPublisher\Wordpress\Filter\BaseFilter;
-use IssetBV\VideoPublisher\Wordpress\Filter\DurationColumnFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\ExtraColumnFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\Timber;
 use IssetBV\VideoPublisher\Wordpress\Filter\VideoUpload;
@@ -114,6 +113,12 @@ class Plugin {
 	}
 
 	public function init() {
+		add_action('admin_menu', function () {
+			add_menu_page('test', 'test', 'Dit is een test pagina', 'test_page_very_nice_yes_yes', function () {
+				echo 'Test';
+			}, null, 2);
+		});
+
 		$this->initPostTypes();
 		$this->addShortcodes();
 		$this->initScripts();
@@ -121,7 +126,6 @@ class Plugin {
 		$this->initActions();
 		$this->initRest();
 		$this->initBlocks();
-		$this->initRecurring();
 		$this->registerActivationHooks();
 		$this->initFilters();
 
@@ -290,20 +294,15 @@ class Plugin {
 		] );
 	}
 
-	private function initRecurring() {
-		if ( ! wp_next_scheduled( 'fetch_publishes' ) ) {
-			wp_schedule_event( time(), 'hourly', 'fetch_publishes' );
-		}
-	}
-
 	private function registerActivationHooks() {
 		add_action( 'admin_init', function () {
 			if ( is_admin() && current_user_can( 'activate_plugins' ) && ! is_plugin_active( 'timber-library/timber.php' ) ) {
 				add_action( 'admin_notices', function () {
 					?>
                     <div class="error"><p>Isset video publisher plugin requires <a
-                                    href="https://wordpress.org/plugins/timber-library/" target="_blank">timber</a> to
-                            work, please install and activate the timber plugin.</p></div><?php
+                                href="<?= esc_url( admin_url( '/plugin-install.php?tab=plugin-information&plugin=timber-library' ) ) ?>"
+                                target="_blank">timber</a> to
+                        work, please install and activate the timber plugin.</p></div><?php
 				} );
 
 				deactivate_plugins( plugin_basename( __FILE__ ) );
