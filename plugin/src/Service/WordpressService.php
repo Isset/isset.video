@@ -40,7 +40,7 @@ class WordpressService {
 		return get_post( $post_id );
 	}
 
-	function updatePostFromPublish( $publish, $force_thumbnail = false ) {
+	function updatePostFromPublish( $publish ) {
 		if ( $publish['status'] === 'online' && (int) $publish['enabled'] === 1 ) {
 			$post_status = 'publish';
 		} else {
@@ -66,8 +66,6 @@ class WordpressService {
 
 			$post_id = wp_insert_post( $post_data, true );
 			$post    = get_post( $post_id );
-
-			$force_thumbnail = true;
 		} else {
 			$post = $WP_Query->next_post();
 
@@ -78,10 +76,6 @@ class WordpressService {
 			}
 
 			wp_update_post( $post_data );
-		}
-
-		if ( $force_thumbnail ) {
-			//$this->plugin->getThumbnailService()->setThumbnail( $post->ID, array_values($publish['assets'])[0]['url'] );
 		}
 
 		update_post_meta( $post->ID, 'video-isset-status', 'online' );
