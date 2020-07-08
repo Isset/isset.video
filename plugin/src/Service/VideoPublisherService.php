@@ -6,7 +6,9 @@ namespace IssetBV\VideoPublisher\Wordpress\Service;
 
 use DateTime;
 use IssetBV\VideoPublisher\Wordpress\Plugin;
+use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use WP_Http;
+use WP_Query;
 
 class VideoPublisherService {
 	/**
@@ -146,8 +148,8 @@ class VideoPublisherService {
 	/**
 	 * @return bool
 	 */
-	public function getPublishedVideos() {
-		$result            = $this->publisherGet( '/api/publishes?size=100' );
+	public function getPublishedVideos($from = 0) {
+		$result            = $this->publisherGet( "/api/publishes?size=100&from={$from}" );
 		$wordpress_service = $this->plugin->getWordpressService();
 
 		if ( is_array( $result['results'] ) ) {
@@ -157,6 +159,20 @@ class VideoPublisherService {
 				}
 
 				$wordpress_service->updatePostFromPublish( $publish );
+			}
+
+			if (count($result['results']) === 100) {
+				$uuid = array_values($result['results'])[count($result['results']) - 1]['uuid'];
+
+				$query = new WP_Query( [
+					'post_type'   => VideoPublisher::getTypeName(),
+					'post_status' => 'published',
+					'name'        => $uuid,
+				] );
+
+				if ($query->post_count === 0) {
+					$this->getPublishedVideos($from + 100);
+				}
 			}
 		}
 
