@@ -71,7 +71,11 @@ class ThumbnailColumn extends BaseAction {
 
 		$image = wp_get_attachment_image_src( $thumbnailId, [ $width, $height ] );
 
-		list( $poster, $w, $h ) = $image;
+		$poster = null;
+
+		if (is_array($image)) {
+			list( $poster, $w, $h ) = $image;
+		}
 
 		if ($poster === null) {
 			$poster = array_values($postMeta['assets'])[0]['url'];
