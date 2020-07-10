@@ -162,17 +162,7 @@ class VideoPublisherService {
 			}
 
 			if (count($result['results']) === 100) {
-				$uuid = array_values($result['results'])[count($result['results']) - 1]['uuid'];
-
-				$query = new WP_Query( [
-					'post_type'   => VideoPublisher::getTypeName(),
-					'post_status' => 'published',
-					'name'        => $uuid,
-				] );
-
-				if ($query->post_count === 0) {
-					$this->getPublishedVideos($from + 100);
-				}
+				$this->getPublishedVideos($from + 100);
 			}
 		}
 
