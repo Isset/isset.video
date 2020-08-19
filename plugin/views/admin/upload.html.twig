@@ -11,24 +11,18 @@
         <div class="upload-container">
             <div class="phase-select">
                 <div class="phase-select-dropzone">
-                    <input accept="video/mp4,video/x-m4v,video/*" type="file">
+                    <input multiple accept="video/mp4,video/x-m4v,video/*" type="file">
                     <div class="text-wrapper">
                         <span class="dashicons dashicons-download download-icon"></span>
                     </div>
                     <div class="text-wrapper">
-                        <p>Drop a single file here (4.3GB max) or <u><b>browse</b></u> your computer.</p>
+                        <p>Drop a one or more files here (4.3GB max) or <u><b>browse</b></u> your computer.</p>
                     </div>
                 </div>
                 <button class="btn">Upload</button>
                 <span id="phase-select-file"></span>
             </div>
             <div class="phase-upload">
-                Uploading:
-                <div class="indicator"></div>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 0;"></div>
-                </div>
-                <div class="uploading-text">Uploading: <span id="uploadingTitle"></span></div>
                 <button id="btnCancelUpload" class="btn btn-danger">Cancel upload</button>
             </div>
             <div class="phase-done">
