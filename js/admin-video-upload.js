@@ -140,7 +140,7 @@ jQuery(($) => {
             form.set('folder', rootFolder);
 
             let archiveXHR = new XMLHttpRequest();
-            archiveXHR.open("POST", 'https://test.archive.isset.video/api/files/upload');
+            archiveXHR.open("POST", `${archiveUrl}api/files/upload`);
             archiveXHR.setRequestHeader('x-token-auth', archiveToken);
             archiveXHR.send(form);
 
