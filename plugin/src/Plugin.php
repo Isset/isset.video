@@ -76,6 +76,8 @@ class Plugin {
 		Upload\RegisterUpload::class,
 		Editor::class,
 		DeletePublish::class,
+        Upload\GetArchiveToken::class,
+        Upload\GetArchiveUrl::class
 	];
 
 	private $filters = [
@@ -103,6 +105,7 @@ class Plugin {
 
 	const PUBLISHER_URL = 'https://publish.isset.video/';
 	const MY_ISSET_VIDEO_URL = 'https://my.isset.video/';
+	const ARCHIVE_URL = 'https://test.archive.isset.video/';
 
 	public static function instance() {
 		if ( self::$instance === null ) {
@@ -113,12 +116,6 @@ class Plugin {
 	}
 
 	public function init() {
-		add_action('admin_menu', function () {
-			add_menu_page('test', 'test', 'Dit is een test pagina', 'test_page_very_nice_yes_yes', function () {
-				echo 'Test';
-			}, null, 2);
-		});
-
 		$this->initPostTypes();
 		$this->addShortcodes();
 		$this->initScripts();

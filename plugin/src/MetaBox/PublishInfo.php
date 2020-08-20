@@ -40,7 +40,7 @@ class PublishInfo extends BaseMetaBox {
 		$context['meta'] = $item['metadata'];
 
 		if ($item['metadata']) {
-			$seconds = $item['metadata'][0]['duration'];
+			$seconds = array_values($item['metadata'])[0]['duration'];
 			$context['duration'] = sprintf('%02d:%02d:%02d', ($seconds/ 3600),($seconds/ 60 % 60), $seconds% 60);
 		}
 
