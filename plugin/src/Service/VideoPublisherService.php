@@ -34,6 +34,10 @@ class VideoPublisherService {
 		return $this->getOption( "my_isset_video_url", Plugin::MY_ISSET_VIDEO_URL );
 	}
 
+	public function getArchiveURL() {
+		return $this->getOption( "archive_url", Plugin::ARCHIVE_URL );
+	}
+
 	public function getLoginURL() {
 		$url = $this->getMyIssetVideoURL();
 
@@ -148,7 +152,7 @@ class VideoPublisherService {
 	/**
 	 * @return bool
 	 */
-	public function getPublishedVideos($from = 0) {
+	public function getPublishedVideos( $from = 0 ) {
 		$result            = $this->publisherGet( "/api/publishes?size=100&from={$from}" );
 		$wordpress_service = $this->plugin->getWordpressService();
 
@@ -161,8 +165,8 @@ class VideoPublisherService {
 				$wordpress_service->updatePostFromPublish( $publish );
 			}
 
-			if (count($result['results']) === 100) {
-				$this->getPublishedVideos($from + 100);
+			if ( count( $result['results'] ) === 100 ) {
+				$this->getPublishedVideos( $from + 100 );
 			}
 		}
 
@@ -274,6 +278,32 @@ class VideoPublisherService {
 		);
 
 		if ( ! $this->isResponseValid( 'GET', $url, $response ) ) {
+			error_log(json_encode($response));
+			return false;
+		}
+
+		return json_decode( $response['body'], true );
+	}
+
+	private function archiveGet( $path ) {
+		$auth_token = $this->getAuthToken();
+
+		if ( $auth_token === false ) {
+			return false;
+		}
+
+		$url      = rtrim( $this->getArchiveURL(), '/' ) . $path;
+		$response = wp_remote_get(
+			$url,
+			[
+				'headers' => [
+					'x-token-auth'     => $auth_token,
+					'x-token-platform' => 'archive',
+				],
+			]
+		);
+
+		if ( ! $this->isResponseValid( 'GET', $url, $response ) ) {
 			return false;
 		}
 
@@ -320,7 +350,11 @@ class VideoPublisherService {
 	}
 
 	public function fetchStats() {
-		return $this->publisherGet( '/api/stats/usage' );
+		return $this->publisherGet( '/api/statistics/user/streaming' );
+	}
+
+	public function fetchUsage() {
+		return $this->publisherGet( '/api/statistics/user/usage' );
 	}
 
 	public function fetchSubscriptionLimit() {
@@ -347,7 +381,6 @@ class VideoPublisherService {
 			]
 		);
 
-
 		if ( ! $this->isResponseValid( 'DELETE', $url, $response ) ) {
 			return false;
 		}
@@ -357,7 +390,7 @@ class VideoPublisherService {
 
 	public function uploadingAllowed() {
 		$limit   = $this->fetchSubscriptionLimit();
-		$current = $this->fetchStats();
+		$current = $this->fetchUsage();
 
 		return $limit['storage_limit'] > $current['storage'];
 	}
@@ -381,7 +414,14 @@ class VideoPublisherService {
 	}
 
 	public function fetchStatsV2( DateTime $dateFrom ) {
-
 		return $this->publisherGet( "/api/stats/v2?dateFrom={$dateFrom->format('Y-m-d')}" );
+	}
+
+	public function getArchiveRootFolder() {
+		return $this->archiveGet( '/api/root' );
+	}
+
+	public function exchangeToken( $platform ) {
+		return $this->issetVideoGet( '/api/token/platform/' . $platform )['token'];
 	}
 }
