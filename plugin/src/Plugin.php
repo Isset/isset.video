@@ -67,7 +67,6 @@ class Plugin {
 		HijackRouter::class,
 		SavePost::class,
 		ImportPublishedVideos::class,
-		Settings\Init::class,
 		Settings\Menu::class,
 		ThumbnailColumn::class,
 		DurationColumn::class,
@@ -105,7 +104,7 @@ class Plugin {
 
 	const PUBLISHER_URL = 'https://publish.isset.video/';
 	const MY_ISSET_VIDEO_URL = 'https://my.isset.video/';
-	const ARCHIVE_URL = 'https://test.archive.isset.video/';
+	const ARCHIVE_URL = 'https://archive.isset.video/';
 
 	public static function instance() {
 		if ( self::$instance === null ) {

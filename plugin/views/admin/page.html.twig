@@ -13,11 +13,4 @@
             <a class="btn mt-20" href="{{ login_url }}">{{ __("Connect to my.isset.video", 'isset-video-publisher') }}</a>
         </div>
     {% endif %}
-    <form method="post" action="options.php">
-        <div class="card">
-            {{ function('settings_fields', 'video_publisher_settings') }}
-            {{ function('do_settings_sections', 'publisher-admin') }}
-            {{ function('submit_button') }}
-        </div>
-    </form>
 </div>
