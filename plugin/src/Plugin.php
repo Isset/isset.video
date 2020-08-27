@@ -67,6 +67,7 @@ class Plugin {
 		HijackRouter::class,
 		SavePost::class,
 		ImportPublishedVideos::class,
+        Settings\Init::class,
 		Settings\Menu::class,
 		ThumbnailColumn::class,
 		DurationColumn::class,
