@@ -11,6 +11,10 @@ use WP_Http;
 use WP_Query;
 
 class VideoPublisherService {
+    const PRESET_720P = '720p';
+    const PRESET_1080P = '1080p';
+    const PRESET_4K = '4k';
+
 	/**
 	 * @var Plugin
 	 */
@@ -37,6 +41,10 @@ class VideoPublisherService {
 	public function getArchiveURL() {
 		return $this->getOption( "archive_url", Plugin::ARCHIVE_URL );
 	}
+
+	public function getUploaderURL() {
+        return $this->getOption( "uploader_url", Plugin::UPLOADER_BASE_URL );
+    }
 
 	public function getLoginURL() {
 		$url = $this->getMyIssetVideoURL();
@@ -235,6 +243,20 @@ class VideoPublisherService {
 		return $result['url'];
 	}
 
+	public function createArchiveFile( $filename, $url ) {
+        return $this->archiveJsonPost( '/api/files/create', [
+            'folder' => 'root',
+            'filename' => $filename,
+            'url' => $url,
+        ] );
+    }
+
+    public function publishArchiveFile( $uuid, $presets ) {
+        return $this->archiveJsonPost( "/api/files/{$uuid}/publish", [
+            'presets' => $presets,
+        ] );
+    }
+
 	private function publisherGet( $path ) {
 		$auth_token = $this->getAuthToken();
 
@@ -309,6 +331,32 @@ class VideoPublisherService {
 
 		return json_decode( $response['body'], true );
 	}
+
+    private function archiveJsonPost( $path, $data ) {
+        $auth_token = $this->exchangeToken( 'archive' );
+
+        if ( $auth_token === false ) {
+            return false;
+        }
+
+        $url      = rtrim( $this->getArchiveURL(), '/' ) . $path;
+        $response = wp_remote_post(
+            $url,
+            [
+                'headers' => [
+                    'x-token-auth'     => $auth_token,
+                    'x-token-platform' => 'archive',
+                ],
+                'body' => wp_json_encode( $data ),
+            ]
+        );
+
+        if ( ! $this->isResponseValid( 'POST', $url, $response ) ) {
+            return false;
+        }
+
+        return json_decode( $response['body'], true );
+    }
 
 	public function fetchUploadInfo( $id ) {
 		return $this->publisherGet( '/api/uploads/' . urlencode( $id ) . '/status' );
@@ -424,4 +472,28 @@ class VideoPublisherService {
 	public function exchangeToken( $platform ) {
 		return $this->issetVideoGet( '/api/token/platform/' . $platform )['token'];
 	}
+
+	public function fetchUserSettings() {
+        return $this->issetVideoGet( '/api/token/subscription' );
+    }
+
+    public function getPresetList()
+    {
+        $subscription = $this->fetchUserSettings();
+        $presets = [ self::PRESET_720P ];
+
+        if ( $subscription ) {
+            $allPresets = [ self::PRESET_1080P, self::PRESET_4K ];
+
+            foreach( $allPresets as $preset ) {
+                $presets[] = $preset;
+
+                if ( $preset === $subscription['subscription_maximum_quality'] ) {
+                    return $presets;
+                }
+            }
+        }
+
+        return $presets;
+    }
 }

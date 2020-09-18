@@ -15,6 +15,7 @@ use IssetBV\VideoPublisher\Wordpress\Action\SavePost;
 use IssetBV\VideoPublisher\Wordpress\Action\Settings;
 use IssetBV\VideoPublisher\Wordpress\Action\ThumbnailColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload;
+use IssetBV\VideoPublisher\Wordpress\Action\Upload\CreateArchiveFile;
 use IssetBV\VideoPublisher\Wordpress\Filter\BaseFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\ExtraColumnFilter;
 use IssetBV\VideoPublisher\Wordpress\Filter\Timber;
@@ -77,7 +78,9 @@ class Plugin {
 		Editor::class,
 		DeletePublish::class,
         Upload\GetArchiveToken::class,
-        Upload\GetArchiveUrl::class
+        Upload\GetArchiveUrl::class,
+        Upload\GetUploaderUrl::class,
+        CreateArchiveFile::class,
 	];
 
 	private $filters = [
@@ -103,9 +106,10 @@ class Plugin {
 		Dashboard::class
 	];
 
-	const PUBLISHER_URL = 'https://publish.isset.video/';
-	const MY_ISSET_VIDEO_URL = 'https://my.isset.video/';
-	const ARCHIVE_URL = 'https://archive.isset.video/';
+	const PUBLISHER_URL = 'https://test.publish.isset.video/';
+	const MY_ISSET_VIDEO_URL = 'https://test.my.isset.video/';
+	const ARCHIVE_URL = 'https://test.archive.isset.video/';
+	const UPLOADER_BASE_URL = 'https://test.upload.isset.video/';
 
 	public static function instance() {
 		if ( self::$instance === null ) {

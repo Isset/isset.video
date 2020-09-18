@@ -21,6 +21,7 @@
   "author": "isset.video",
   "license": "ISC",
   "dependencies": {
+    "@flowjs/flow.js": "^2.14.1",
     "@silvermine/videojs-airplay": "^1.0.0",
     "@silvermine/videojs-chromecast": "^1.2.1",
     "@wordpress/block-editor": "^3.7.6",

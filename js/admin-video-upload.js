@@ -1,12 +1,13 @@
 import "../scss/upload.scss"
 import {updateFaviconProgress} from "./progress-favicon";
+import Flow from '@flowjs/flow.js';
 
 jQuery(($) => {
     // noinspection JSUnresolvedVariable
     const {nonce, ajaxUrl} = IssetVideoPublisherAjax;
 
     let fileSelect = $('.phase-select input[type="file"]');
-    let rootFolder = '';
+    let uploaderUrl = '';
     let archiveUrl = '';
     let archiveToken = '';
 
@@ -21,19 +22,17 @@ jQuery(($) => {
     });
 
     $(".phase-select button").click(async () => {
-        if ($('#addToArchive').get(0).checked) {
-            await wpAjax('isset-video-fetch-archive-url').then(res => {
-                archiveUrl = res.url
-            });
+        await wpAjax('isset-video-fetch-archive-url').then(res => {
+            archiveUrl = res.url
+        });
 
-            await wpAjax('isset-video-fetch-archive-token').then(res => {
-                archiveToken = res.token;
-            });
+        await wpAjax('isset-video-fetch-archive-token').then(res => {
+            archiveToken = res.token;
+        });
 
-            await getArchiveRootFolder().then(res => {
-                rootFolder = res.root_folder
-            });
-        }
+        await wpAjax('isset-video-fetch-uploader-url').then(res => {
+            uploaderUrl = res.url
+        });
 
         $(window).bind('beforeunload', function () {
             return 'Are you sure you want to leave?';
@@ -43,7 +42,6 @@ jQuery(($) => {
             return;
         }
 
-        let res;
         let fileList = [...fileSelect[0].files];
 
         $(".phase-select").hide();
@@ -61,126 +59,88 @@ jQuery(($) => {
                 </div><hr>`);
         }
 
+        let promises =  [];
         for (const file of fileList) {
-            res = await uploadFile(fileList.indexOf(file));
+            promises.push(uploadFileToUploader(fileList.indexOf(file)));
         }
-
-        let {response, registerResponse} = res;
+        await Promise.all(promises);
 
         $(window).off('beforeunload');
 
-        $('.phase-upload').hide();
+        $('#btnCancelUpload').hide();
         $('.phase-done')
             .html("")
             .append("Succesfully uploaded ", $('<span>').text(fileList.map(file => file.name).join(', ')), ", Please wait while we get it ready for you")
             .show();
+        $('.card-footer').show();
 
-        let registerObj = await registerResponse.json();
         window.onbeforeunload = null;
-        location.href = registerObj.url;
+        await wpAjax('isset-video-sync');
     });
 
     $('#btnCancelUpload').click(function () {
         location.reload();
     });
 
-    async function uploadFile(fileIndex) {
-        let uploadReqForm = new URLSearchParams();
-
-        uploadReqForm.set('_ajax_nonce', nonce);
-        uploadReqForm.set('action', 'isset-video-fetch-upload-url');
-
-        let uploadUrlResp = await fetch(ajaxUrl, {
-            method: 'POST',
-            body: uploadReqForm
+    async function uploadFileToUploader(fileIndex) {
+        let flow = new Flow({
+            target: uploaderUrl + '/upload'
         });
 
-        let uploadUrlObj = await uploadUrlResp.json();
-        let filename = fileSelect[0].files[fileIndex].name;
-        let form = new FormData();
-        let uploadXhr = new XMLHttpRequest();
-
-        form.set("file", fileSelect.prop("files")[fileIndex], filename);
-
-        uploadXhr.upload.addEventListener("progress", (e) => {
-            const percent = Math.ceil((e.loaded / e.total) * 100);
-            $(`#progressBar${fileIndex}`).width(`${percent}%`);
-            $(`#indicator${fileIndex}`).text(`${percent}%`);
-
-            updateFaviconProgress(percent);
-            $(document).prop('title', `${percent}% - ${filename}`);
-        });
-
-        uploadXhr.open("POST", uploadUrlObj.url);
-        uploadXhr.send(form);
-        let uploadPromise = new Promise((res, err) => {
-            uploadXhr.addEventListener('readystatechange', (e) => {
-                if (uploadXhr.readyState === uploadXhr.DONE) {
-                    res(uploadXhr.responseText);
-                }
-            });
-
-            uploadXhr.addEventListener('error', (e) => {
-                err("Request failed");
-            })
-        });
-
-        let response = JSON.parse(await uploadPromise);
-
-        let registerResponse = await fetch(ajaxUrl, {
-            method: 'POST',
-            body: new URLSearchParams([
-                ["action", "isset-video-register-upload"],
-                ["_ajax_nonce", nonce],
-                ["id", response.id],
-            ])
-        });
-
-        if ($('#addToArchive').get(0).checked) {
-            form.set('folder', rootFolder);
-
-            let archiveXHR = new XMLHttpRequest();
-            archiveXHR.open("POST", `${archiveUrl}api/files/upload`);
-            archiveXHR.setRequestHeader('x-token-auth', archiveToken);
-            archiveXHR.send(form);
-
-            $(`#uploadingText${fileIndex}`).text(`Adding ${filename} to archive`)
-
-            await new Promise((res, err) => {
-                archiveXHR.addEventListener('readystatechange', (e) => {
-                    if (archiveXHR.readyState === archiveXHR.DONE) {
-                        $(`#uploadingText${fileIndex}`).text(`Successfully added ${filename} to archive`)
-                        res(archiveXHR.responseText);
-                    }
-                });
-
-                archiveXHR.addEventListener('error', (e) => {
-                    $(`#uploadingText${fileIndex}`).text(`Failed adding ${filename} to archive`)
-                    err("Request failed");
-                })
-            });
+        let file = fileSelect[0].files[fileIndex];
+        if (file) {
+            flow.addFile(file);
+            flow.upload();
         }
 
-        return {
-            response,
-            registerResponse
-        };
-    }
+        return new Promise((resolve, reject) => {
+            flow.on('progress', (e) => {
+                let percent = convertProgressToPercentage(flow.progress());
+                $(`#progressBar${fileIndex}`).width(`${percent}%`);
+                $(`#indicator${fileIndex}`).text(`${percent}%`);
 
-    async function getArchiveRootFolder() {
-        const response = await fetch(`${archiveUrl}api/root`, {
-            headers: {
-                'x-token-auth': archiveToken
-            }
+                updateFaviconProgress(percent);
+                $(document).prop('title', `${percent}% - ${file.name}`);
+            });
+
+            flow.on('fileSuccess', async (file) => {
+                let form = new FormData();
+                let filename = file.file.name;
+
+                form.set('filename', filename);
+                form.set('url', downloadUrl(file.uniqueIdentifier, filename));
+
+                let data = {
+                    filename: filename,
+                    url: downloadUrl(file.uniqueIdentifier, filename),
+                }
+
+                $(`#uploadingText${fileIndex}`).text(`Adding ${filename} to archive`);
+
+                await wpAjax('isset-video-create-archive-file', data).then(async response => {
+                    if (response.uuid) {
+                        $(`#uploadingText${fileIndex}`).text(`Successfully added ${filename} to archive`);
+                    }
+                    resolve();
+                }).catch(error => {
+                    $(`#uploadingText${fileIndex}`).text(`Failed adding ${filename} to archive`);
+                    reject();
+                });
+            });
         });
-        return response.json();
     }
 
-    async function wpAjax(action) {
-        let form = new URLSearchParams();
+    async function wpAjax(action, post = undefined) {
+        let form = new FormData();
 
         form.set('_ajax_nonce', nonce);
         form.set('action', action);
+
+        if (post) {
+            for (const key of Object.keys(post)) {
+                form.set(key, post[key]);
+            }
+        }
 
         let archiveUrlPromise = await fetch(ajaxUrl, {
             method: 'POST',
@@ -193,6 +153,14 @@ jQuery(($) => {
             }).catch(err => {
                 reject(err);
             })
-        })
+        });
+    }
+
+    function convertProgressToPercentage(progress) {
+        return Math.round(progress * 100);
+    }
+
+    function downloadUrl(identifier, filename) {
+        return `${uploaderUrl}/download/${identifier}/${encodeURI(filename)}`;
     }
 });

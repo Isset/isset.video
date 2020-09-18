@@ -26,6 +26,7 @@ class VideoUpload extends BaseFilter {
 			$context           = Timber::context();
 			$context['screen'] = get_current_screen();
 			$context['uploading_allowed'] = $service->uploadingAllowed();
+            $context['video_url'] = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
 
 			Timber::render( __DIR__ . '/../../views/admin/upload.html.twig', $context );
 
