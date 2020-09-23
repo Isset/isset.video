@@ -462,7 +462,7 @@ class VideoPublisherService {
 	}
 
 	public function fetchStatsV2( DateTime $dateFrom ) {
-		return $this->publisherGet( "/api/stats/v2?dateFrom={$dateFrom->format('Y-m-d')}" );
+		return $this->publisherGet( "/api/statistics/user/streaming?dateFrom={$dateFrom->format('Y-m-d')}" );
 	}
 
 	public function getArchiveRootFolder() {
