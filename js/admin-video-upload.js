@@ -4,7 +4,7 @@ import Flow from '@flowjs/flow.js';
 
 jQuery(($) => {
     // noinspection JSUnresolvedVariable
-    const {nonce, ajaxUrl} = IssetVideoPublisherAjax;
+    const {nonce, ajaxUrl, postId} = IssetVideoPublisherAjax;
 
     let fileSelect = $('.phase-select input[type="file"]');
     let uploaderUrl = '';
@@ -75,12 +75,28 @@ jQuery(($) => {
         $('.card-footer').show();
 
         window.onbeforeunload = null;
-        await wpAjax('isset-video-sync');
     });
 
     $('#btnCancelUpload').click(function () {
         location.reload();
     });
+
+    if (adminpage === "post-new-php" && typenow === "video-publisher") {
+        const toVideoButton = $('#videoPublisherSyncVideosAfterUpload');
+
+        toVideoButton.one('click', async (e) => {
+            e.preventDefault();
+            let i = 0;
+            setInterval(() => {
+                i = (i + 1) % 3;
+                toVideoButton.text('Syncing' + '.'.repeat(i + 1))
+            }, 500)
+
+            await wpAjax('isset-video-sync', {post_id: postId});
+
+            location = toVideoButton.attr('href');
+        });
+    }
 
     async function uploadFileToUploader(fileIndex) {
         let flow = new Flow({

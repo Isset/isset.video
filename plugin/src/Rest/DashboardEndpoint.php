@@ -24,9 +24,8 @@ class DashboardEndpoint extends BaseEndpoint {
 			$context['logout_url']         = $service->getLogoutURL();
 			$context['videos_url']         = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
 			$context['stats']              = $service->fetchStats();
-			$context['usage']        = $service->fetchUsage();
+			$context['usage']              = $service->fetchUsage();
 			$context['subscription_limit'] = $service->fetchSubscriptionLimit();
-			$context['streaming_stats']    = $stats;
 			$context['isset_video_url']    = $service->getMyIssetVideoURL();
 		} else {
 			$context['login_url'] = $service->getLoginURL();
