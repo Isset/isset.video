@@ -97,4 +97,8 @@ class ThumbnailService {
 
 		return true;
 	}
+
+	public function hasFeaturedImage( $post_id ) {
+        return get_post_meta( $post_id, '_thumbnail_id', true ) !== '';
+    }
 }

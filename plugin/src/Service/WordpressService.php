@@ -40,7 +40,7 @@ class WordpressService {
 		return get_post( $post_id );
 	}
 
-	function updatePostFromPublish( $publish ) {
+	public function updatePostFromPublish( $publish ) {
 		if ( $publish['status'] === 'online' && (int) $publish['enabled'] === 1 ) {
 			$post_status = 'publish';
 		} else {
@@ -78,6 +78,16 @@ class WordpressService {
 			wp_update_post( $post_data );
 		}
 
+		if ( isset( $publish['assets'] ) ) {
+		    $assets = array_filter( $publish['assets'], function( $asset ) {
+                return $asset['status'] === 'online';
+            } );
+
+            if ( count( $assets ) > 0 ) {
+                $this->setDefaultThumbnail( $post->ID, $assets );
+            }
+        }
+
 		update_post_meta( $post->ID, 'video-isset-status', 'online' );
 		delete_post_meta( $post->ID, 'video-isset-transcode' );
 		update_post_meta( $post->ID, 'video-publish', $publish );
@@ -101,4 +111,25 @@ class WordpressService {
 
 		return $drafts;
 	}
+
+	public function setDefaultThumbnail( $post_id, $assets ) {
+        $thumbnailService = $this->plugin->getThumbnailService();
+
+        if ( ! $thumbnailService->hasFeaturedImage( $post_id ) ) {
+            $asset = $this->findDefaultImage( $assets );
+
+            $thumbnailService->setThumbnail( $post_id, $asset['url'] );
+        }
+    }
+
+    private function findDefaultImage( $assets ) {
+        foreach( $assets as $asset ) {
+            if ( $asset['is_default'] ) {
+                return $asset;
+            }
+        }
+
+        return $assets[0];
+    }
+
 }
