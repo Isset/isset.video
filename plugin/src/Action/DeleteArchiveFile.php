@@ -8,7 +8,7 @@ use IssetBV\VideoPublisher\Wordpress\Plugin;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
 
-class DeletePublish extends BaseAction {
+class DeleteArchiveFile extends BaseAction {
 	function execute( $arguments ) {
 		list( $postId ) = $arguments;
 
@@ -19,7 +19,7 @@ class DeletePublish extends BaseAction {
 		}
 
 		$postMetaData = get_post_meta( $postId, 'video-publish', true );
-		$service->deletePublish( $postMetaData['uuid'] );
+		$service->deleteArchiveFile( $postMetaData['identifier'] );
 	}
 
 	function getAction() {

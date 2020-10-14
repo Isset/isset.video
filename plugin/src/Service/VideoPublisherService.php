@@ -25,6 +25,11 @@ class VideoPublisherService {
 	 */
 	private $issetVideoPublisherOptions;
 
+    /**
+     * @var string
+     */
+	private $archiveToken;
+
 	/**
 	 * VideoPublisherService constructor.
 	 *
@@ -163,7 +168,7 @@ class VideoPublisherService {
 	public function getPublishedVideos( $from = 0 ) {
 		$result            = $this->publisherGet( "/api/publishes?size=100&from={$from}" );
 		$wordpress_service = $this->plugin->getWordpressService();
-
+//var_dump($result); exit;
 		if ( is_array( $result['results'] ) ) {
 			foreach ( $result['results'] as $publish ) {
 				if ( empty( $publish['uuid'] ) ) {
@@ -257,6 +262,10 @@ class VideoPublisherService {
         ] );
     }
 
+    public function deleteArchiveFile( $uuid ) {
+        return $this->archiveDelete( "/api/files/{$uuid}/delete" );
+    }
+
 	private function publisherGet( $path ) {
 		$auth_token = $this->getAuthToken();
 
@@ -333,7 +342,7 @@ class VideoPublisherService {
 	}
 
     private function archiveJsonPost( $path, $data ) {
-        $auth_token = $this->exchangeToken( 'archive' );
+        $auth_token = $this->getArchiveToken();
 
         if ( $auth_token === false ) {
             return false;
@@ -356,6 +365,33 @@ class VideoPublisherService {
         }
 
         return json_decode( $response['body'], true );
+    }
+
+    private function archiveDelete( $path ) {
+        $auth_token = $this->getArchiveToken();
+
+        if ( $auth_token === false ) {
+            return false;
+        }
+
+        $client   = new WP_Http();
+        $url      = rtrim( $this->getArchiveURL(), '/' ) . $path;
+        $response = $client->request(
+            $url,
+            [
+                'method'  => 'DELETE',
+                'headers' => [
+                    'x-token-auth'     => $auth_token,
+                    'x-token-platform' => 'publisher',
+                ],
+            ]
+        );
+
+        if ( ! $this->isResponseValid( 'DELETE', $url, $response ) ) {
+            return false;
+        }
+
+        return true;
     }
 
 	public function fetchUploadInfo( $id ) {
@@ -407,33 +443,6 @@ class VideoPublisherService {
 
 	public function fetchSubscriptionLimit() {
 		return $this->issetVideoGet( '/api/token/subscription-limit' );
-	}
-
-	public function deletePublish( $publishUuid ) {
-		$auth_token = $this->getAuthToken();
-
-		if ( $auth_token === false ) {
-			return false;
-		}
-
-		$client   = new WP_Http();
-		$url      = rtrim( $this->getPublisherURL(), '/' ) . '/api/publishes/' . $publishUuid;
-		$response = $client->request(
-			$url,
-			[
-				'method'  => 'DELETE',
-				'headers' => [
-					'x-token-auth'     => $auth_token,
-					'x-token-platform' => 'publisher',
-				],
-			]
-		);
-
-		if ( ! $this->isResponseValid( 'DELETE', $url, $response ) ) {
-			return false;
-		}
-
-		return true;
 	}
 
 	public function uploadingAllowed() {
@@ -495,5 +504,20 @@ class VideoPublisherService {
         }
 
         return $presets;
+    }
+
+    private function getArchiveToken()
+    {
+        if ( $this->archiveToken ) {
+            return $this->archiveToken;
+        }
+
+        $token = $this->exchangeToken( 'archive' );
+
+        if ( $token ) {
+            $this->archiveToken = $token;
+        }
+
+        return $token;
     }
 }
