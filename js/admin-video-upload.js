@@ -10,6 +10,7 @@ jQuery(($) => {
     let uploaderUrl = '';
     let archiveUrl = '';
     let archiveToken = '';
+    let uploadPercentages = {};
 
     fileSelect.change(function () {
         let fileDisplay = $("#phase-select-file");
@@ -70,7 +71,8 @@ jQuery(($) => {
         $('#btnCancelUpload').hide();
         $('.phase-done')
             .html("")
-            .append("Succesfully uploaded ", $('<span>').text(fileList.map(file => file.name).join(', ')), ", Please wait while we get it ready for you")
+            .append("Succesfully uploaded ", $('<span>').text(fileList.map(file => file.name).join(', ')))
+            .append($('<p>').text('Your files will be queued for transcoding'))
             .show();
         $('.card-footer').show();
 
@@ -112,11 +114,15 @@ jQuery(($) => {
         return new Promise((resolve, reject) => {
             flow.on('progress', (e) => {
                 let percent = convertProgressToPercentage(flow.progress());
+                uploadPercentages[fileIndex] = percent;
+
                 $(`#progressBar${fileIndex}`).width(`${percent}%`);
                 $(`#indicator${fileIndex}`).text(`${percent}%`);
 
-                updateFaviconProgress(percent);
-                $(document).prop('title', `${percent}% - ${file.name}`);
+                let overallPercentage = calculateOverallPercentage(uploadPercentages);
+
+                updateFaviconProgress(overallPercentage);
+                $(document).prop('title', `${overallPercentage}% - ${file.name}`);
             });
 
             flow.on('fileSuccess', async (file) => {
@@ -178,5 +184,20 @@ jQuery(($) => {
 
     function downloadUrl(identifier, filename) {
         return `${uploaderUrl}/download/${identifier}/${encodeURI(filename)}`;
+    }
+
+    function calculateOverallPercentage(percentages) {
+        const numberOfUploads = Object.keys(percentages).length;
+        let total = 0;
+
+        if (numberOfUploads === 0) {
+            return 0;
+        }
+
+        for (const index of Object.keys(percentages)) {
+            total += percentages[index];
+        }
+
+        return Math.round(total / (numberOfUploads * 100) * 100);
     }
 });
