@@ -31,7 +31,7 @@ class Scripts extends BaseAction {
 			'postId'  => get_the_ID(),
 		] );
 
-		if ( $_GET['page'] === Plugin::MENU_MAIN_SLUG || ( isset( $arguments[0] ) && $this->editingOrNewPost( $arguments[0] ) ) ) {
+		if ( ( isset( $_GET['page'] ) && $_GET['page'] === Plugin::MENU_MAIN_SLUG ) || ( isset( $arguments[0] ) && $this->editingOrNewPost( $arguments[0] ) ) ) {
             $videoArchiveService = $this->plugin->getVideoArchiveService();
             $videoPublishService = $this->plugin->getVideoPublisherService();
 

@@ -6,7 +6,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Action\Settings;
 
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
 use IssetBV\VideoPublisher\Wordpress\Action\SetFeaturedImage;
-use Timber\Timber;
+use IssetBV\VideoPublisher\Wordpress\Renderer;
 
 class Init extends BaseAction {
 	public function isAdminOnly() {
@@ -107,12 +107,11 @@ class Init extends BaseAction {
 	}
 
 	private function renderInput( $name, $value, $type = 'text', $extra = [] ) {
-
-		Timber::render( __DIR__ . '/../../../views/admin/input.html.twig', [
-			'name'  => $name,
-			'value' => $value,
-			'type'  => $type,
-			'extra' => $extra,
-		] );
+        echo Renderer::render( 'admin/input.php', [
+            'name'  => $name,
+            'value' => $value,
+            'type'  => $type,
+            'extra' => $extra,
+        ] );
 	}
 }

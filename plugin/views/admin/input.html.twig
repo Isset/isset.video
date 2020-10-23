@@ -1,9 +1,0 @@
-{% if type == 'text' %}
-    <input type="text" id="{{ name }}" name="isset-video-publisher-options[{{ name }}]" value="{{ value }}"
-           class="large-text"/>
-{% elseif type == 'checkbox' %}
-    <input type="checkbox" id="{{ name }}" name="isset-video-publisher-options[{{ name }}]"
-            {{ extra.checked ? "checked" }} value="{{ value }}"/> {{ extra.postfix }}
-{% else %}
-    Unsupported type
-{% endif %}

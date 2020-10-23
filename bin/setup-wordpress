@@ -6,8 +6,6 @@ shopt -s extglob;
 cd "$(dirname "$(realpath "$0")")/.."
 # Download latest wordpress
 wget -O /tmp/wp.zip 'https://wordpress.org/latest.zip';
-# Download Timber 
-wget -O /tmp/wp_timber.zip 'https://downloads.wordpress.org/plugin/timber-library.1.15.2.zip';
 # Create if not exists and move into .docker-context
 test -d .docker-context || mkdir .docker-context;
 cd .docker-context;
@@ -15,7 +13,5 @@ cd .docker-context;
 unzip /tmp/wp.zip;
 # Move into plugins directory
 cd wordpress/wp-content/plugins;
-# Unpack timber
-unzip /tmp/wp_timber.zip;
 # Delete temp zip
 rm /tmp/wp.zip /tmp/wp_timber.zip;

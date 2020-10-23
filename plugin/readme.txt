@@ -24,8 +24,7 @@ The plugin itself is free. For the storing and streaming your video we have a pr
 You can create an account right here: <https://my.isset.video/register>
 After installing the plugin you can connect using the button in the settings.
 = What dependencies does the WordPress plugin have? =
-We decided to use Timber to make our lives as developer a bit more convenient.
-Find out more about Timber on their homepage: <https://www.upstatement.com/timber/>.
+None
 
 == Changelog ==
 For the plugin's changelog, please check out the full list of changes on [GitHub](https://github.com/Isset/isset.video).

@@ -6,24 +6,12 @@ namespace IssetBV\VideoPublisher\Wordpress;
 
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
 use IssetBV\VideoPublisher\Wordpress\Action\DeleteArchiveFile;
-use IssetBV\VideoPublisher\Wordpress\Action\DurationColumn;
-use IssetBV\VideoPublisher\Wordpress\Action\Editor;
 use IssetBV\VideoPublisher\Wordpress\Action\HijackRouter;
 use IssetBV\VideoPublisher\Wordpress\Action\ImportPublishedVideos;
-use IssetBV\VideoPublisher\Wordpress\Action\ResolutionColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\SavePost;
 use IssetBV\VideoPublisher\Wordpress\Action\Settings;
-use IssetBV\VideoPublisher\Wordpress\Action\ThumbnailColumn;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload\CreateArchiveFile;
-use IssetBV\VideoPublisher\Wordpress\Filter\BaseFilter;
-use IssetBV\VideoPublisher\Wordpress\Filter\ExtraColumnFilter;
-use IssetBV\VideoPublisher\Wordpress\Filter\Timber;
-use IssetBV\VideoPublisher\Wordpress\Filter\VideoUpload;
-use IssetBV\VideoPublisher\Wordpress\MetaBox\BaseMetaBox;
-use IssetBV\VideoPublisher\Wordpress\MetaBox\FrontPage;
-use IssetBV\VideoPublisher\Wordpress\MetaBox\PublishInfo;
-use IssetBV\VideoPublisher\Wordpress\MetaBox\ThumbnailSelect;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Rest\BaseEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Rest\DashboardEndpoint;
@@ -66,35 +54,19 @@ class Plugin {
 		Publish::class,
 	];
 
-	private $metaBoxes = [
-		FrontPage::class,
-		ThumbnailSelect::class,
-		PublishInfo::class
-	];
-
 	private $actions = [
 		HijackRouter::class,
 		SavePost::class,
 		ImportPublishedVideos::class,
         Settings\Init::class,
 		Settings\Menu::class,
-		ThumbnailColumn::class,
-		DurationColumn::class,
-		ResolutionColumn::class,
 		Upload\GenerateUploadUrl::class,
 		Upload\RegisterUpload::class,
-		Editor::class,
         DeleteArchiveFile::class,
         Upload\GetArchiveToken::class,
         Upload\GetArchiveUrl::class,
         Upload\GetUploaderUrl::class,
         CreateArchiveFile::class,
-	];
-
-	private $filters = [
-		ExtraColumnFilter::class,
-		VideoUpload::class,
-		Timber::class,
 	];
 
 	private $endpoints = [
@@ -136,11 +108,8 @@ class Plugin {
 		$this->initActions();
 		$this->initRest();
 		$this->initBlocks();
-		$this->registerActivationHooks();
-		$this->initFilters();
 
 		if ( is_admin() ) {
-			$this->initMetaBoxes();
 			$this->initDashboardWidgets();
 		}
 	}
@@ -201,12 +170,6 @@ class Plugin {
 		}
 	}
 
-	private function initFilters() {
-		foreach ( $this->filters as $filter ) {
-			$this->filter( $filter );
-		}
-	}
-
 	/**
 	 * @return VideoPublisherService
 	 */
@@ -238,18 +201,6 @@ class Plugin {
 		}
 
 		return $this->thumbnailService;
-	}
-
-	private function initMetaBoxes() {
-		add_action( 'add_meta_boxes', function () {
-			foreach ( $this->metaBoxes as $metaBox ) {
-				/** @var BaseMetaBox $metaBoxObj */
-				$metaBoxObj = new $metaBox( $this );
-				if ( $metaBoxObj->isVisible() ) {
-					add_meta_box( $metaBoxObj->getId(), $metaBoxObj->getTitle(), $metaBoxObj, $metaBoxObj->getScreen(), $metaBoxObj->getContext() );
-				}
-			}
-		} );
 	}
 
 	public function getFrontPageId() {
@@ -315,26 +266,6 @@ class Plugin {
 		] );
 	}
 
-	private function registerActivationHooks() {
-		add_action( 'admin_init', function () {
-			if ( is_admin() && current_user_can( 'activate_plugins' ) && ! is_plugin_active( 'timber-library/timber.php' ) ) {
-				add_action( 'admin_notices', function () {
-					?>
-                    <div class="error"><p>Isset video publisher plugin requires <a
-                                href="<?= esc_url( admin_url( '/plugin-install.php?tab=plugin-information&plugin=timber-library' ) ) ?>"
-                                target="_blank">timber</a> to
-                        work, please install and activate the timber plugin.</p></div><?php
-				} );
-
-				deactivate_plugins( plugin_basename( __FILE__ ) );
-
-				if ( isset( $_GET['activate'] ) ) {
-					unset( $_GET['activate'] );
-				}
-			}
-		} );
-	}
-
 	public function filter( $filter ) {
 		/** @var BaseFilter $filterObj */
 		$filterObj = new $filter( $this );
@@ -389,17 +320,39 @@ class Plugin {
         $this->addNewVideoItem();
     }
 
-    public function renderOverviewPage() {
-        echo Renderer::render( 'admin/overview.php' );
+    public function getOverviewPageUrl() {
+	    return admin_url( 'edit.php?page=' . self::MENU_MAIN_SLUG );
     }
+
+    public function renderOverviewPage() {
+        $vps     = $this->getVideoPublisherService();
+        $context = [];
+        $context['logged_in'] = $vps->isLoggedIn();
+
+        if ( $context['logged_in'] ) {
+            echo Renderer::render( 'admin/overview.php' );
+        } else {
+            $context['login_url'] = $vps->getLoginURL();
+
+            echo Renderer::render( 'admin/page.php', $context );
+        }
+	}
 
     public function renderUploadPage() {
         $service = new VideoPublisherService($this);
 
+        $data = [];
+        $data['logged_in'] = $service->isLoggedIn();
         $data['uploading_allowed'] = $service->uploadingAllowed();
         $data['video_url'] = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
 
-        echo Renderer::render( 'admin/upload.php', $data );
+        if ( $data['logged_in'] ) {
+            echo Renderer::render('admin/upload.php', $data);
+        } else {
+            $data['login_url'] = $service->getLoginURL();
+
+            echo Renderer::render( 'admin/page.php', $data );
+        }
     }
 
     private function addOverviewItem()

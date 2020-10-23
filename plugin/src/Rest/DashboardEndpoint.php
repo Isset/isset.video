@@ -5,7 +5,6 @@ namespace IssetBV\VideoPublisher\Wordpress\Rest;
 use DateTime;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Renderer;
-use Timber\Timber;
 
 class DashboardEndpoint extends BaseEndpoint {
 	function getRoute() {

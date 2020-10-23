@@ -8,7 +8,6 @@ use IssetBV\VideoPublisher\Wordpress\Plugin;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Renderer;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
-use Timber\Timber;
 
 class Dashboard extends BaseWidget {
 	/**

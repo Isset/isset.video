@@ -5,9 +5,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Action\Settings;
 
 
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
-use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Renderer;
-use Timber\Timber;
 
 class Menu extends BaseAction {
 	public function isAdminOnly() {
@@ -21,8 +19,8 @@ class Menu extends BaseAction {
 			'manage_options',
 			'isset-video-publisher-admin',
 			function () {
-				$context = Timber::context();
 				$vps     = $this->plugin->getVideoPublisherService();
+				$context = [];
 
 				$context['logged_in'] = $vps->isLoggedIn();
 
@@ -34,7 +32,7 @@ class Menu extends BaseAction {
 				$context['login_url']              = $vps->getLoginURL();
 				$context['show_advanced_settings'] = $vps->shouldShowAdvancedOptions();
 
-				$context['video_url'] = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
+				$context['video_url'] = $this->plugin->getOverviewPageUrl();
 
 				echo Renderer::render( 'admin/page.php', $context );
 			}
