@@ -19,8 +19,8 @@ class CreateArchiveFile extends BaseAction {
 		header( "Content-Type", "application/json" );
 
 		if ( array_key_exists( 'filename', $_POST ) && array_key_exists( 'url', $_POST ) ) {
-            $publisherService = $this->plugin->getVideoPublisherService();
-		    $archiveFile = $publisherService->createArchiveFile( $_POST['filename'], $_POST['url'] );
+            $service = $this->plugin->getVideoArchiveService();
+		    $archiveFile = $service->createArchiveFile( $_POST['filename'], $_POST['url'] );
 
 		    if ($archiveFile) {
                 $this->publishFile( $archiveFile );
@@ -37,7 +37,9 @@ class CreateArchiveFile extends BaseAction {
     private function publishFile( $archiveFile )
     {
         $publisherService = $this->plugin->getVideoPublisherService();
+        $archiveService = $this->plugin->getVideoArchiveService();
+
         $presets = $publisherService->getPresetList();
-        $publisherService->publishArchiveFile( $archiveFile['uuid'], $presets );
+        $archiveService->publishArchiveFile( $archiveFile['uuid'], $presets );
     }
 }

@@ -4,6 +4,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Rest;
 
 use DateTime;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use IssetBV\VideoPublisher\Wordpress\Renderer;
 use Timber\Timber;
 
 class DashboardEndpoint extends BaseEndpoint {
@@ -33,7 +34,7 @@ class DashboardEndpoint extends BaseEndpoint {
 		}
 
 		return [
-			'html'  => Timber::compile( __DIR__ . '/../../views/admin/dashboard/api-dashboard.html.twig', $context ),
+			'html'  => Renderer::render( 'admin/dashboard/api-dashboard.php', $context ),
 			'stats' => $stats
 		];
 	}

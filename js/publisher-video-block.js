@@ -1,4 +1,5 @@
 import React from "react";
+import {archiveAjax} from './ajax';
 
 const blocks = window.wp.blocks;
 const {
@@ -40,27 +41,43 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             }
         }
 
-        getSuggestions(searchTerm, lazyStep = null) {
-            let {setAttributes, attributes: {suggestions}} = this.props;
-
-            if (lazyStep === false) {
-                suggestions = [];
-                lazyStep = null;
+        renderStill(stills) {
+            if (stills.length > 0) {
+                return <img src={`${stills[0]}?width=300&height=168`} />
             }
 
-            fetch(`/?rest_route=/isset-publisher/v1/publishes`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({post_title: searchTerm, page: lazyStep})
-            }).then(res => {
-                res.json().then(json => {
-                    setAttributes({suggestions: [...suggestions, ...json]});
-                    this.setState({
-                        lazyStep: lazyStep + 1
-                    });
-                }).catch(err => console.log(err))
+            return <div className="isset-video-thumb-placeholder" />;
+        }
+
+        getSuggestions(searchTerm, page = null) {
+            let {setAttributes, attributes: {suggestions}} = this.props;
+            const {root} = window.IssetVideoArchiveAjax;
+            const {lazyStep} = this.state;
+
+            if (page === false) {
+                suggestions = [];
+            }
+
+            archiveAjax(`api/folders/${root}/files`, {
+                q: searchTerm,
+                offset: lazyStep * 25,
+            }).then(json => {
+                const {results} = json;
+
+                setAttributes({
+                    suggestions: [
+                        ...suggestions,
+                        ...results.map((result, index) => {
+                            result.processed = result.file.stills.length > 0;
+
+                            return result;
+                        })
+                    ],
+                });
+
+                this.setState({
+                    lazyStep: lazyStep + 1
+                });
             }).catch(err => console.log(err));
         }
 
@@ -68,24 +85,34 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             const {setAttributes} = this.props;
 
             if (suggestion === '') {
-                setAttributes({
-                    uuid: '',
-                    uuidParsed: '',
-                    videoThumbnail: '',
-                    videoName: '',
-                    videoSize: '',
-                    autoplay: ''
+                this.setState({lazyStep: 0}, () => {
+                    setAttributes({
+                        uuid: '',
+                        uuidParsed: '',
+                        videoThumbnail: '',
+                        videoName: '',
+                        videoSize: '',
+                        autoplay: '',
+                        searchTerm: '',
+                    });
+                    this.getSuggestions('', false);
                 });
             }
             else {
-                setAttributes({
-                    uuid: suggestion.post_name,
-                    uuidParsed: `[publish uuid=${suggestion.post_name}]`,
-                    videoThumbnail: suggestion.post_thumbnail,
-                    videoName: suggestion.post_title,
-                    videoSize: suggestion.post_size,
-                    autoplay: ''
-                });
+                const {file} = suggestion;
+
+                archiveAjax(`api/files/${file.uuid}/details`).then(json => {
+                    const {publish: {publish_uuid}} = json;
+
+                    setAttributes({
+                        uuid: publish_uuid,
+                        uuidParsed: `[publish uuid=${publish_uuid}]`,
+                        videoThumbnail: file.stills[0],
+                        videoName: file.filename,
+                        videoSize: file.size,
+                        autoplay: ''
+                    });
+                }).catch(err => console.log(err));
             }
         }
 
@@ -112,7 +139,34 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
         changeSearchTerm(newTerm) {
             const {setAttributes} = this.props;
             setAttributes({searchTerm: newTerm});
-            this.getSuggestions(newTerm, false)
+            this.setState({lazyStep: 0}, () => this.getSuggestions(newTerm, false));
+        }
+
+        renderSuggestions(suggestions) {
+            return suggestions.map(suggestion => {
+                const {file, processed} = suggestion;
+
+                if (!processed) {
+                    return <div className="video-block-suggestions-wrapper">
+                        <div className="isset-video-placeholder-container">
+                            <div className="isset-video-thumb-placeholder">
+                                <div className="isset-video-icon-container">
+                                    <span className="dashicons dashicons-backup" />
+                                    <div>Processing</div>
+                                </div>
+                            </div>
+                        </div>
+                        <span className="video-block-text">{file.filename}</span>
+                    </div>;
+                }
+
+                return <div className="video-block-suggestions-wrapper" onClick={() => this.setValue(suggestion)}>
+                    <div>
+                        {this.renderStill(file.stills)}
+                    </div>
+                    <span className="video-block-text">{file.filename}</span>
+                </div>;
+            })
         }
 
         render() {
@@ -145,7 +199,10 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                             </BlockControls>
                         }
                         <div className="video-block-relative">
-                            <div dangerouslySetInnerHTML={{__html: videoThumbnail + "<span class='dashicon dashicons-controls-play video-block-play-button'/>"}}/>
+                            <div>
+                                <img src={videoThumbnail} />
+                                <span className='dashicon dashicons-controls-play video-block-play-button'/>
+                            </div>
                             <div className="video-block-icon-close-wrapper" onClick={() => this.setValue('')}>
                                 <span className="video-block-icon-close dashicons dashicons-no"/>
                             </div>
@@ -166,20 +223,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                     </form>
                     <hr/>
                     <div className="video-block-suggestions-container">
-                        {suggestions.length === 0 ?
-                            <span className="video-block-text">No publishes found</span>
-                            :
-                            suggestions.map(suggestion => {
-                                return suggestion.type !== 'div' &&
-                                    <div className="video-block-suggestions-wrapper"
-                                         onClick={() => this.setValue(suggestion)}>
-                                        {suggestion.post_thumbnail !== null &&
-                                        <div dangerouslySetInnerHTML={{__html: suggestion.post_thumbnail}}/>
-                                        }
-                                        <span className="video-block-text">{suggestion.post_title}</span>
-                                    </div>
-                            })
-                        }
+                        {suggestions.length === 0 ? <span className="video-block-text">No publishes found</span> : this.renderSuggestions(suggestions)}
                     </div>
                     <div>
                         <button onClick={() => this.getSuggestions(searchTerm, lazyStep)}

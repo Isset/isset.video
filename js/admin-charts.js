@@ -16,13 +16,24 @@ jQuery(($) => {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
+                    fontColor: '#fff',
+                },
+                gridLines: {
+                    color: 'rgba(200, 200, 200, .15)',
+                    tickMarkLength: 5,
                 }
             }],
             xAxes: [{
                 ticks: {
-                    callback: row => row.getDate()
+                    callback: row => row.getDate(),
+                    fontColor: '#fff',
+                },
+                gridLines: {
+                    color: 'rgba(200, 200, 200, .25)',
+                    tickMarkLength: 5,
                 }
-            }]
+            }],
+
         },
     };
 
@@ -31,12 +42,12 @@ jQuery(($) => {
     ];
 
     const baseBorderColor = [
-        'rgba(46, 112, 157, 1)'
+        'rgb(80,158,210)'
     ];
 
-    if (adminpage === "edit-php" && typenow === "video-publisher") {
+    if (adminpage === "toplevel_page_isset-video-overview") {
         // Dashboard
-        $('.wp-header-end').after($('<div id="issetVideoDash" class="video-publisher-mb-2"></div>'));
+        $('.isset-video-chart-container').after($('<div id="issetVideoDash" class="video-publisher-mb-2 isset-video-chart-container"></div>'));
 
         $.ajax({
             url: '/?rest_route=/isset-publisher/v1/dashboard',

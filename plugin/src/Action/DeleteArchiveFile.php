@@ -12,7 +12,7 @@ class DeleteArchiveFile extends BaseAction {
 	function execute( $arguments ) {
 		list( $postId ) = $arguments;
 
-		$service = $this->plugin->getVideoPublisherService();
+		$service = $this->plugin->getVideoArchiveService();
 
 		if ( get_post_type( $postId ) !== VideoPublisher::getTypeName() ) {
 			return;

@@ -32,3 +32,7 @@ spl_autoload_register( new Autoloader() );
 add_action( 'init', function () {
 	Plugin::instance()->init();
 } );
+
+add_action( 'admin_menu', function () {
+    Plugin::instance()->addMenuItems();
+} );

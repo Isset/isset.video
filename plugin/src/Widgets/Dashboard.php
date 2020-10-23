@@ -6,6 +6,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Widgets;
 
 use IssetBV\VideoPublisher\Wordpress\Plugin;
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use IssetBV\VideoPublisher\Wordpress\Renderer;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
 use Timber\Timber;
 
@@ -44,6 +45,6 @@ class Dashboard extends BaseWidget {
 			$context['login_url'] = $this->service->getLoginURL();
 		}
 
-		echo Timber::compile( __DIR__ . '/../../views/admin/dashboard/dashboard.html.twig', $context);
+		echo Renderer::render( 'admin/dashboard/dashboard.php', $context );
 	}
 }

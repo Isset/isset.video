@@ -6,14 +6,12 @@ namespace IssetBV\VideoPublisher\Wordpress\Service;
 
 use DateTime;
 use IssetBV\VideoPublisher\Wordpress\Plugin;
-use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
-use WP_Http;
-use WP_Query;
 
-class VideoPublisherService {
+class VideoPublisherService extends BaseHttpService {
     const PRESET_720P = '720p';
     const PRESET_1080P = '1080p';
     const PRESET_4K = '4k';
+    const PUBLISHER_PLATFORM = 'publisher';
 
 	/**
 	 * @var Plugin
@@ -24,11 +22,6 @@ class VideoPublisherService {
 	 * @var array
 	 */
 	private $issetVideoPublisherOptions;
-
-    /**
-     * @var string
-     */
-	private $archiveToken;
 
 	/**
 	 * VideoPublisherService constructor.
@@ -81,6 +74,10 @@ class VideoPublisherService {
 	public function getPublisherURL() {
 		return $this->getOption( 'publisher_url', Plugin::PUBLISHER_URL );
 	}
+
+	public function getPublisherToken() {
+	    return $this->getAuthToken();
+    }
 
 	public function shouldShowAdvancedOptions() {
 		return $this->getOption( 'show_advanced_options', false );
@@ -168,7 +165,7 @@ class VideoPublisherService {
 	public function getPublishedVideos( $from = 0 ) {
 		$result            = $this->publisherGet( "/api/publishes?size=100&from={$from}" );
 		$wordpress_service = $this->plugin->getWordpressService();
-//var_dump($result); exit;
+
 		if ( is_array( $result['results'] ) ) {
 			foreach ( $result['results'] as $publish ) {
 				if ( empty( $publish['uuid'] ) ) {
@@ -191,28 +188,7 @@ class VideoPublisherService {
 	}
 
 	private function fetchUserInfo() {
-		$auth_token = $this->getAuthToken();
-
-		if ( $auth_token === false ) {
-			return false;
-		}
-
-		$url      = sprintf( rtrim( $this->getMyIssetVideoURL(), '/' ) . '/api/token/account' );
-		$response = wp_remote_get(
-			$url,
-			[
-				'headers' => [
-					'x-token-auth'     => $auth_token,
-					'x-token-platform' => 'publisher',
-				],
-			]
-		);
-
-		if ( ! $this->isResponseValid( 'GET', $url, $response ) ) {
-			return false;
-		}
-
-		return json_decode( $response['body'], true );
+		return $this->myIssetGet( '/api/token/account' );
 	}
 
 	public function logout() {
@@ -220,27 +196,23 @@ class VideoPublisherService {
 			return;
 		}
 
-		$auth_token = $this->getAuthToken();
-
-		if ( $auth_token === false ) {
-			return;
-		}
-
-		wp_remote_request(
-			sprintf( rtrim( $this->getMyIssetVideoURL(), '/' ) . '/api/token/delete/'
-			         . urlencode( $this->getAuthToken() ) ),
-			[
-				'method'  => 'DELETE',
-				'headers' => [
-					'x-token-auth'     => $auth_token,
-					'x-token-platform' => 'publisher',
-				],
-			]
-		);
+        $this->myIssetDelete( '/api/token/delete/' );
 
 		error_log( "Manual logout" );
 		$this->removeAuthToken();
 	}
+
+	protected function myIssetGet( $path ) {
+        $auth_token = $this->getAuthToken();
+
+        return $this->get( $this->getMyIssetVideoURL(), $path, $auth_token, self::PUBLISHER_PLATFORM );
+    }
+
+    protected function myIssetDelete( $path ) {
+        $auth_token = $this->getAuthToken();
+
+        return $this->delete( $this->getMyIssetVideoURL(), $path, $auth_token, self::PUBLISHER_PLATFORM );
+    }
 
 	public function getUploadURL() {
 		$result = $this->publisherGet( '/api/uploads/request-url' );
@@ -248,151 +220,15 @@ class VideoPublisherService {
 		return $result['url'];
 	}
 
-	public function createArchiveFile( $filename, $url ) {
-        return $this->archiveJsonPost( '/api/files/create', [
-            'folder' => 'root',
-            'filename' => $filename,
-            'url' => $url,
-        ] );
-    }
-
-    public function publishArchiveFile( $uuid, $presets ) {
-        return $this->archiveJsonPost( "/api/files/{$uuid}/publish", [
-            'presets' => $presets,
-        ] );
-    }
-
-    public function deleteArchiveFile( $uuid ) {
-        return $this->archiveDelete( "/api/files/{$uuid}/delete" );
-    }
-
 	private function publisherGet( $path ) {
 		$auth_token = $this->getAuthToken();
 
-		if ( $auth_token === false ) {
-			return false;
-		}
-
-		$url      = rtrim( $this->getPublisherURL(), '/' ) . $path;
-		$response = wp_remote_get(
-			$url,
-			[
-				'headers' => [
-					'x-token-auth' => $auth_token,
-				],
-			]
-		);
-
-		if ( ! $this->isResponseValid( 'GET', $url, $response ) ) {
-			return false;
-		}
-
-		return json_decode( $response['body'], true );
+        return $this->get( $this->getPublisherURL(), $path, $auth_token, self::PUBLISHER_PLATFORM );
 	}
 
 	private function issetVideoGet( $path ) {
-		$auth_token = $this->getAuthToken();
-
-		if ( $auth_token === false ) {
-			return false;
-		}
-
-		$url      = rtrim( $this->getMyIssetVideoURL(), '/' ) . $path;
-		$response = wp_remote_get(
-			$url,
-			[
-				'headers' => [
-					'x-token-auth'     => $auth_token,
-					'x-token-platform' => 'publisher',
-				],
-			]
-		);
-
-		if ( ! $this->isResponseValid( 'GET', $url, $response ) ) {
-			error_log(json_encode($response));
-			return false;
-		}
-
-		return json_decode( $response['body'], true );
+	    return $this->myIssetGet( $path );
 	}
-
-	private function archiveGet( $path ) {
-		$auth_token = $this->getAuthToken();
-
-		if ( $auth_token === false ) {
-			return false;
-		}
-
-		$url      = rtrim( $this->getArchiveURL(), '/' ) . $path;
-		$response = wp_remote_get(
-			$url,
-			[
-				'headers' => [
-					'x-token-auth'     => $auth_token,
-					'x-token-platform' => 'archive',
-				],
-			]
-		);
-
-		if ( ! $this->isResponseValid( 'GET', $url, $response ) ) {
-			return false;
-		}
-
-		return json_decode( $response['body'], true );
-	}
-
-    private function archiveJsonPost( $path, $data ) {
-        $auth_token = $this->getArchiveToken();
-
-        if ( $auth_token === false ) {
-            return false;
-        }
-
-        $url      = rtrim( $this->getArchiveURL(), '/' ) . $path;
-        $response = wp_remote_post(
-            $url,
-            [
-                'headers' => [
-                    'x-token-auth'     => $auth_token,
-                    'x-token-platform' => 'archive',
-                ],
-                'body' => wp_json_encode( $data ),
-            ]
-        );
-
-        if ( ! $this->isResponseValid( 'POST', $url, $response ) ) {
-            return false;
-        }
-
-        return json_decode( $response['body'], true );
-    }
-
-    private function archiveDelete( $path ) {
-        $auth_token = $this->getArchiveToken();
-
-        if ( $auth_token === false ) {
-            return false;
-        }
-
-        $client   = new WP_Http();
-        $url      = rtrim( $this->getArchiveURL(), '/' ) . $path;
-        $response = $client->request(
-            $url,
-            [
-                'method'  => 'DELETE',
-                'headers' => [
-                    'x-token-auth'     => $auth_token,
-                    'x-token-platform' => 'publisher',
-                ],
-            ]
-        );
-
-        if ( ! $this->isResponseValid( 'DELETE', $url, $response ) ) {
-            return false;
-        }
-
-        return true;
-    }
 
 	public function fetchUploadInfo( $id ) {
 		return $this->publisherGet( '/api/uploads/' . urlencode( $id ) . '/status' );
@@ -452,30 +288,8 @@ class VideoPublisherService {
 		return $limit['storage_limit'] > $current['storage'];
 	}
 
-	public function isResponseValid( $method, $url, $response ) {
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-		$response_code = wp_remote_retrieve_response_code( $response );
-		if ( $response_code === 200 ) {
-			return true;
-		}
-
-		if ( $response_code === 401 || $response_code === 403 ) {
-			error_log( "Logged out for $method $url [$response_code]" );
-			$this->removeAuthToken();
-		}
-
-		return true;
-	}
-
 	public function fetchStatsV2( DateTime $dateFrom ) {
 		return $this->publisherGet( "/api/statistics/user/streaming?dateFrom={$dateFrom->format('Y-m-d')}" );
-	}
-
-	public function getArchiveRootFolder() {
-		return $this->archiveGet( '/api/root' );
 	}
 
 	public function exchangeToken( $platform ) {
@@ -504,20 +318,5 @@ class VideoPublisherService {
         }
 
         return $presets;
-    }
-
-    private function getArchiveToken()
-    {
-        if ( $this->archiveToken ) {
-            return $this->archiveToken;
-        }
-
-        $token = $this->exchangeToken( 'archive' );
-
-        if ( $token ) {
-            $this->archiveToken = $token;
-        }
-
-        return $token;
     }
 }

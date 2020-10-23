@@ -4,7 +4,7 @@ import Flow from '@flowjs/flow.js';
 
 jQuery(($) => {
     // noinspection JSUnresolvedVariable
-    const {nonce, ajaxUrl, postId} = IssetVideoPublisherAjax;
+    const {nonce, ajaxUrl} = IssetVideoPublisherAjax;
 
     let fileSelect = $('.phase-select input[type="file"]');
     let uploaderUrl = '';
@@ -16,9 +16,9 @@ jQuery(($) => {
         let fileDisplay = $("#phase-select-file");
         let files = [...this.files];
         if (files) {
-            fileDisplay.html('Selected files: ' + files.map(file => file.name).join(', '))
+            fileDisplay.html('Selected files: ' + files.map(file => file.name).join(', '));
         } else {
-            fileDisplay.html('')
+            fileDisplay.html('');
         }
     });
 
@@ -88,14 +88,6 @@ jQuery(($) => {
 
         toVideoButton.one('click', async (e) => {
             e.preventDefault();
-            let i = 0;
-            setInterval(() => {
-                i = (i + 1) % 3;
-                toVideoButton.text('Syncing' + '.'.repeat(i + 1))
-            }, 500)
-
-            await wpAjax('isset-video-sync', {post_id: postId});
-
             location = toVideoButton.attr('href');
         });
     }
@@ -183,7 +175,7 @@ jQuery(($) => {
     }
 
     function downloadUrl(identifier, filename) {
-        return `${uploaderUrl}/download/${identifier}/${encodeURI(filename)}`;
+        return `${uploaderUrl}download/${identifier}/${encodeURI(filename)}`;
     }
 
     function calculateOverallPercentage(percentages) {

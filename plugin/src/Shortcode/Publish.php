@@ -5,6 +5,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Shortcode;
 
 
 use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
+use IssetBV\VideoPublisher\Wordpress\Renderer;
 use Timber\Timber;
 use WP_Query;
 
@@ -40,7 +41,7 @@ class Publish extends ShortcodeBase {
 		] );
 
 		if ( $query->post_count === 0 ) {
-			return Timber::compile( __DIR__ . '/../../views/shortcode/publish-invalid.html.twig' );
+		    return Renderer::render( 'shortcode/publish-invalid.php' );
 		}
 
 		/* @var int $post_id */
@@ -79,6 +80,6 @@ class Publish extends ShortcodeBase {
 		$context['uuid']      = $uuid;
 		$context['video_url'] = $video_url;
 
-		return Timber::compile( __DIR__ . '/../../views/shortcode/publish.html.twig', $context );
+		return Renderer::render( 'shortcode/publish.php', $context );
 	}
 }

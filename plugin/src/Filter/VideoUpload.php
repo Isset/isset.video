@@ -43,8 +43,8 @@ class VideoUpload extends BaseFilter {
 	 * @return bool
 	 */
 	public function hideScreenOptions( $_, $screen ) {
-		if ( $screen->post_type !== VideoPublisher::getTypeName() ) {
-			return $_;
+	    if ( $screen->post_type !== VideoPublisher::getTypeName() ) {
+		    return $_;
 		}
 
 		$this->plugin->enqueueScript( 'js/admin-video-upload.js' );

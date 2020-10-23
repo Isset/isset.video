@@ -29,6 +29,7 @@ use IssetBV\VideoPublisher\Wordpress\Rest\BaseEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Rest\DashboardEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Rest\PublishesEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Service\ThumbnailService;
+use IssetBV\VideoPublisher\Wordpress\Service\VideoArchiveService;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
 use IssetBV\VideoPublisher\Wordpress\Service\WordpressService;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\Publish;
@@ -37,12 +38,19 @@ use IssetBV\VideoPublisher\Wordpress\Widgets\BaseWidget;
 use IssetBV\VideoPublisher\Wordpress\Widgets\Dashboard;
 
 class Plugin {
+    const MENU_MAIN_SLUG = 'isset-video-overview';
+
 	static $instance;
 
 	/**
 	 * @var VideoPublisherService
 	 */
 	private $videoPublisherService;
+
+    /**
+     * @var VideoArchiveService
+     */
+    private $videoArchiveService;
 
 	/**
 	 * @var ThumbnailService
@@ -120,6 +128,7 @@ class Plugin {
 	}
 
 	public function init() {
+        $this->initSession();
 		$this->initPostTypes();
 		$this->addShortcodes();
 		$this->initScripts();
@@ -179,7 +188,7 @@ class Plugin {
 	}
 
 	private function initPostTypes() {
-		register_post_type( VideoPublisher::getTypeName(), VideoPublisher::getArgs() );
+		//register_post_type( VideoPublisher::getTypeName(), VideoPublisher::getArgs() );
 	}
 
 	private function loadTranslations() {
@@ -208,6 +217,17 @@ class Plugin {
 
 		return $this->videoPublisherService;
 	}
+
+    /**
+     * @return VideoArchiveService
+     */
+    public function getVideoArchiveService() {
+        if ( $this->videoArchiveService === null ) {
+            $this->videoArchiveService = new VideoArchiveService( $this );
+        }
+
+        return $this->videoArchiveService;
+    }
 
 	/**
 	 * @return ThumbnailService
@@ -357,4 +377,55 @@ class Plugin {
 		/** @var BaseEndpoint $endpointObj */
 		return new $endpoint( $this );
 	}
+
+    private function initSession() {
+        if ( ! session_id() ) {
+            session_start();
+        }
+    }
+
+    public function addMenuItems() {
+        $this->addOverviewItem();
+        $this->addNewVideoItem();
+    }
+
+    public function renderOverviewPage() {
+        echo Renderer::render( 'admin/overview.php' );
+    }
+
+    public function renderUploadPage() {
+        $service = new VideoPublisherService($this);
+
+        $data['uploading_allowed'] = $service->uploadingAllowed();
+        $data['video_url'] = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
+
+        echo Renderer::render( 'admin/upload.php', $data );
+    }
+
+    private function addOverviewItem()
+    {
+        $page_title = 'Isset Videos';
+        $menu_title = 'Videos';
+        $capability = 'manage_options';
+        $menu_slug  = self::MENU_MAIN_SLUG;
+        $function   = function() { $this->renderOverviewPage(); };
+        $icon_url   = 'dashicons-video-alt';
+        $position   = 11;
+
+        add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
+    }
+
+    private function addNewVideoItem()
+    {
+        $this->enqueueScript( 'js/admin-video-upload.js' );
+        $this->enqueueStyle( 'css/admin-video-upload.css' );
+
+        $page_title = 'Upload New Videos';
+        $menu_title = 'New Video';
+        $capability = 'manage_options';
+        $parent_slug = self::MENU_MAIN_SLUG;
+        $function   = function() { $this->renderUploadPage(); };
+
+        add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, 'isset-video-upload', $function );
+    }
 }

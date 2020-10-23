@@ -7,6 +7,7 @@ require('@silvermine/videojs-chromecast')(videojs, {preloadWebComponents: true})
 require('@silvermine/videojs-airplay')(videojs);
 
 require('./functions');
+require('./overview/components/admin-video-overview');
 
 require('../scss/isset-video-publisher.scss');
 
@@ -28,7 +29,7 @@ window.addEventListener('load', () => {
                 hls: {
                     handleManifestRedirects: true,
                 }
-            }
+            },
         });
         console.log(video, player);
 

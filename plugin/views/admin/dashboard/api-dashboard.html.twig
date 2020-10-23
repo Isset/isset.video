@@ -1,7 +1,6 @@
 <div class="video-publisher-admin">
     {% if isLoggedIn %}
         <div class="video-publisher-flex" style="flex-direction: row; justify-content: space-between">
-
             <div class="video-publisher-flex-1 video-publisher-flex" style="flex-direction: column;">
                 {% if stats %}
                     <div class="video-publisher-flex-1">
@@ -23,7 +22,6 @@
                     </div>
                 {% endif %}
                 <div class="mt-20">
-                    <a id="videoPublisherSyncVideos" class="btn">Sync videos</a>
                     <a class="btn btn-danger" href="{{ logout_url }}">{{ __("Logout", 'isset-video-publisher') }}</a>
                 </div>
             </div>
