@@ -19,8 +19,11 @@ class IssetVideoOverview extends React.Component {
             search: '',
             checkAll: false,
             checked: [],
+            orderBy: 'dateCreated',
+            orderDirection: 'desc',
         };
 
+        this.search = '';
         this.searchTimeout = null;
     }
 
@@ -28,14 +31,23 @@ class IssetVideoOverview extends React.Component {
         this.init();
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const {search, offset, orderBy, orderDirection} = this.state;
+
+        if (prevState.search !== search || prevState.orderBy !== orderBy || prevState.orderDirection !== orderDirection || prevState.offset !== offset) {
+            this.loadVideos(offset);
+        }
+    }
+
     init = () => {
         this.loadVideos(0)
     };
 
-    loadVideos = (offset, limit = 25, q = '') => {
+    loadVideos = (offset) => {
+        const {search, limit, orderBy, orderDirection} = this.state;
         const {root} = window.IssetVideoArchiveAjax;
 
-        archiveAjax(`api/folders/${root}/files`, {offset, limit, q}).then(result => {
+        archiveAjax(`api/folders/${root}/files`, {offset, limit, q: search, orderBy, orderDirection}).then(result => {
             const {offset, results, total} = result;
 
             if (results) {
@@ -73,16 +85,28 @@ class IssetVideoOverview extends React.Component {
         }
     };
 
+    sortBy = (type, direction) => {
+        const {orderBy} = this.state;
+
+        // If type is the same, toggle direction
+        if (type === orderBy) {
+            const newDirection = direction === 'asc' ? 'desc' : 'asc';
+            this.setState({'orderDirection': newDirection});
+        } else  {
+            this.setState({'orderBy': type});
+        }
+    }
+
     deleteChecked = () => {
         if (confirm('Are you sure you want to delete the selected videos?')) {
             const {checked} = this.state;
 
             archiveAjax(
-                '/api/files/batch-delete', {}, 'POST', {files: checked}
+                'api/files/batch-delete', {}, 'POST', {files: checked}
                 ).then(() => {
                     const {limit, offset, search} = this.state;
 
-                    this.loadVideos(offset, limit, search);
+                    this.loadVideos(offset);
                 }
             );
         }
@@ -90,25 +114,24 @@ class IssetVideoOverview extends React.Component {
 
     changeSearch = event => {
         const {value} = event.target;
-        this.setState({search: value});
-        const {limit} = this.state;
+        this.search = value;
 
         if (this.searchTimeout) {
             clearTimeout(this.searchTimeout);
         }
 
-        this.searchTimeout = setTimeout(() => this.loadVideos(0, limit, value), 500);
+        this.searchTimeout = setTimeout(() => this.setState({offset: 0, search: value}), 500);
     };
 
     render() {
-        const {offset, results, total, limit, uuid, search, checkAll} = this.state;
+        const {offset, results, total, limit, uuid, checkAll, orderDirection} = this.state;
 
         return <div>
             {uuid && <AdminVideoDetails uuid={uuid} onClose={this.onCloseDetails} />}
             <div className="video-publisher-flex video-publisher-flex-between">
                 <div>
-                    <button className="isset-video-delete-btn" onClick={this.deleteChecked}>Delete Selected</button>
-                    <input className="isset-video-search-input" placeholder="Search" value={search} onChange={this.changeSearch} />
+                    <button className="isset-video-btn btn-danger isset-overview-delete" onClick={this.deleteChecked}>Delete Selected</button>
+                    <input className="isset-video-search-input" placeholder="Search" value={this.search} onChange={this.changeSearch} />
                 </div>
 
                 <Pagination onNavigate={this.loadVideos} total={total} limit={limit} offset={offset} />
@@ -122,8 +145,8 @@ class IssetVideoOverview extends React.Component {
                         <th className="isset-video-thumbnail-th">Thumbnail</th>
                         <th>Duration</th>
                         <th>Size</th>
-                        <th>Filename</th>
-                        <th>Created</th>
+                        <th className="isset-video-pointer" onClick={() => this.sortBy('filename', orderDirection)}>Filename</th>
+                        <th className="isset-video-pointer" onClick={() => this.sortBy('dateCreated', orderDirection)}>Created</th>
                     </tr>
                 </thead>
                 <tbody>

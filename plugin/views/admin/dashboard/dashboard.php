@@ -11,10 +11,10 @@
                 <span><?php echo round( $stats['streaming'] / 1e+9, 3 ); ?> GB / <?php echo round( $subscription_limit['streaming_limit'] / 1e+9, 3 ) | round(3); ?> GB</span>
             </div>
         <?php endif; ?>
-        <a class="btn btn-danger mt-20" href="<?php echo $logout_url; ?>"><?php _e( 'Logout', 'isset-video-publisher' ); ?></a>
-        <a class="btn mt-20" href="<?php echo $video_url; ?>"><?php _e('Go to videos', 'isset-video-publisher' ); ?></a>
+        <a class="isset-video-btn btn-danger mt-20" href="<?php echo $logout_url; ?>"><?php _e( 'Logout', 'isset-video-publisher' ); ?></a>
+        <a class="isset-video-btn mt-20" href="<?php echo $video_url; ?>"><?php _e('Go to videos', 'isset-video-publisher' ); ?></a>
 
     <?php else: ?>
-        <a class="btn mt-20" href="<?php echo $login_url; ?>">Login to isset.video</a>
+        <a class="isset-video-btn mt-20" href="<?php echo $login_url; ?>">Login to isset.video</a>
     <?php endif; ?>
 </div>

@@ -5,8 +5,14 @@ import {secondsToHours} from '../helpers/duration';
 import moment from 'moment';
 import filesize from '../helpers/filesize';
 import AdminCopyText from './admin-copy-text';
+import PropTypes from 'prop-types';
 
 class AdminVideoDetails extends React.Component {
+    static propTypes = {
+        uuid: PropTypes.string.isRequired,
+        onClose: PropTypes.func.isRequired,
+    };
+
     constructor(props) {
         super(props);
 
@@ -27,6 +33,18 @@ class AdminVideoDetails extends React.Component {
     }
 
     componentDidMount() {
+        this.loadVideoDetails();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const {uuid} = this.state;
+
+        if (prevState.uuid !== uuid) {
+            this.loadPublish();
+        }
+    }
+
+    loadVideoDetails = () => {
         const {uuid} = this.props;
 
         archiveAjax(`api/files/${uuid}/details`).then(json => {
@@ -43,24 +61,22 @@ class AdminVideoDetails extends React.Component {
                 file,
             });
         }).catch(err => console.log(err));
-    }
+    };
 
-    componentDidUpdate(prevProps, prevState) {
+    loadPublish = () => {
         const {uuid} = this.state;
 
-        if (prevState.uuid !== uuid) {
-            publisherAjax(`api/publishes/${uuid}`).then(json => {
-                const {playout: {playout_url, player_url}, assets} = json;
+        publisherAjax(`api/publishes/${uuid}`).then(json => {
+            const {playout: {playout_url, player_url}, assets} = json;
 
-                this.setState({
-                    playout: playout_url,
-                    playerUrl: player_url,
-                    assets,
-                    defaultImage: this.findDefaultImage(assets),
-                });
-            }).catch(err => console.log(err));
-        }
-    }
+            this.setState({
+                playout: playout_url,
+                playerUrl: player_url,
+                assets,
+                defaultImage: this.findDefaultImage(assets),
+            });
+        }).catch(err => console.log(err));
+    };
 
     findDefaultImage(assets) {
         const filtered = assets.filter(asset => asset.is_default === true);
@@ -72,12 +88,12 @@ class AdminVideoDetails extends React.Component {
         const {uuid} = this.state;
 
         publisherAjax(`api/publishes/${uuid}/stills/${id}/set-default`, {}, 'POST').then(json => {
-            this.setState({defaultImage: id})
+            this.setState({defaultImage: id}, this.loadPublish)
         }).catch(err => console.log(err));
     };
 
     renderDetails = () => {
-        const {videoName, uuidParsed, assets,playerUrl, defaultImage, publish: {presets}} = this.state;
+        const {videoName, uuidParsed, assets, playerUrl, defaultImage, publish: {presets}} = this.state;
         const {file: {
             date_created,
             duration,

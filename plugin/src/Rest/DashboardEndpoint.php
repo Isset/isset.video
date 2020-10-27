@@ -34,7 +34,17 @@ class DashboardEndpoint extends BaseEndpoint {
 
 		return [
 			'html'  => Renderer::render( 'admin/dashboard/api-dashboard.php', $context ),
-			'stats' => $stats
+			'stats' => $stats,
+            'permission_callback' => '__return_true',
+//            'permission_callback' => function () {
+//                foreach ( $this->permissions as $permission ) {
+//                    if ( ! current_user_can( $permission ) ) {
+//                        return false;
+//                    }
+//                }
+//
+//                return true;
+//            }
 		];
 	}
 }

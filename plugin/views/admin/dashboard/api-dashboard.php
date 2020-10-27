@@ -22,15 +22,15 @@
                     </div>
                 <?php endif; ?>
                 <div class="mt-20">
-                    <a class="btn btn-danger" href="<?php echo $logout_url; ?>"><?php _e("Logout", 'isset-video-publisher'); ?></a>
+                    <a class="isset-video-btn btn-danger" href="<?php echo $logout_url; ?>"><?php _e("Logout", 'isset-video-publisher'); ?></a>
                 </div>
             </div>
             <?php if ( $stats ): ?>
                 <div class="video-publisher-flex-1">
                     <div class="">
                         <div class="video-publisher-mb-2 video-publisher-flex video-publisher-flex-end">
-                            <a href="#" id="videoPublisherChartToggleViews" class="btn btn-primary">Views</a>
-                            <a href="#" id="videoPublisherChartToggleData" class="btn btn-inactive video-publisher-ml-2">Data</a>
+                            <a href="#" id="videoPublisherChartToggleViews" class="isset-video-btn btn-primary">Views</a>
+                            <a href="#" id="videoPublisherChartToggleData" class="isset-video-btn btn-inactive video-publisher-ml-2">Data</a>
                         </div>
                         <canvas id="videoPublisherViewsChart"></canvas>
                         <canvas style="display: none;" id="videoPublisherDataChart"></canvas>
@@ -49,6 +49,6 @@
             <?php endif; ?>
         </div>
     <?php else: ?>
-        <a class="btn mt-20" href="<?php echo $login_url; ?>">Login to isset.video</a>
+        <a class="isset-video-btn mt-20" href="<?php echo $login_url; ?>">Login to isset.video</a>
     <?php endif; ?>
 </div>

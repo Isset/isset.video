@@ -1,6 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class AdminCopyText extends React.Component {
+    static propTypes = {
+        text: PropTypes.string.isRequired,
+    };
 
     constructor(props) {
         super(props);

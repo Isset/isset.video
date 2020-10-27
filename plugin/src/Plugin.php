@@ -12,10 +12,8 @@ use IssetBV\VideoPublisher\Wordpress\Action\SavePost;
 use IssetBV\VideoPublisher\Wordpress\Action\Settings;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload\CreateArchiveFile;
-use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Rest\BaseEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Rest\DashboardEndpoint;
-use IssetBV\VideoPublisher\Wordpress\Rest\PublishesEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Service\ThumbnailService;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoArchiveService;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
@@ -27,8 +25,9 @@ use IssetBV\VideoPublisher\Wordpress\Widgets\Dashboard;
 
 class Plugin {
     const MENU_MAIN_SLUG = 'isset-video-overview';
+    const MENU_UPLOAD_SLUG = 'isset-video-upload';
 
-	static $instance;
+    static $instance;
 
 	/**
 	 * @var VideoPublisherService
@@ -71,7 +70,6 @@ class Plugin {
 
 	private $endpoints = [
 		DashboardEndpoint::class,
-		PublishesEndpoint::class
 	];
 
 	private $scripts = [
@@ -101,7 +99,6 @@ class Plugin {
 
 	public function init() {
         $this->initSession();
-		$this->initPostTypes();
 		$this->addShortcodes();
 		$this->initScripts();
 		$this->loadTranslations();
@@ -154,10 +151,6 @@ class Plugin {
 		add_action( 'wp_enqueue_scripts', function () {
 			$this->enqueueScripts( 'site' );
 		} );
-	}
-
-	private function initPostTypes() {
-		//register_post_type( VideoPublisher::getTypeName(), VideoPublisher::getArgs() );
 	}
 
 	private function loadTranslations() {
@@ -237,7 +230,10 @@ class Plugin {
 				$endpointObj = $this->endpoint( $endpoint );
 				register_rest_route( 'isset-publisher/v1', $endpointObj->getRoute(), [
 					'methods'  => $endpointObj->getMethod(),
-					'callback' => $endpointObj
+					'callback' => $endpointObj,
+                    'permission_callback' => function () {
+				        return current_user_can( 'edit_posts' );
+                    }
 				] );
 			}
 		} );
@@ -321,7 +317,11 @@ class Plugin {
     }
 
     public function getOverviewPageUrl() {
-	    return admin_url( 'edit.php?page=' . self::MENU_MAIN_SLUG );
+	    return admin_url( 'admin.php?page=' . self::MENU_MAIN_SLUG );
+    }
+
+    public function getUploadUrl() {
+	    return admin_url( 'admin.php?page=' . self::MENU_UPLOAD_SLUG );
     }
 
     public function renderOverviewPage() {
@@ -330,7 +330,9 @@ class Plugin {
         $context['logged_in'] = $vps->isLoggedIn();
 
         if ( $context['logged_in'] ) {
-            echo Renderer::render( 'admin/overview.php' );
+            $context['uploadUrl'] = $this->getUploadUrl();
+
+            echo Renderer::render( 'admin/overview.php', $context );
         } else {
             $context['login_url'] = $vps->getLoginURL();
 
@@ -344,7 +346,7 @@ class Plugin {
         $data = [];
         $data['logged_in'] = $service->isLoggedIn();
         $data['uploading_allowed'] = $service->uploadingAllowed();
-        $data['video_url'] = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
+        $data['video_url'] = $this->getOverviewPageUrl();
 
         if ( $data['logged_in'] ) {
             echo Renderer::render('admin/upload.php', $data);
@@ -379,6 +381,6 @@ class Plugin {
         $parent_slug = self::MENU_MAIN_SLUG;
         $function   = function() { $this->renderUploadPage(); };
 
-        add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, 'isset-video-upload', $function );
+        add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, self::MENU_UPLOAD_SLUG, $function );
     }
 }

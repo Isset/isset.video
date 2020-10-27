@@ -14,11 +14,39 @@
   padding-right: 20px;
 }
 
-.isset-video-delete-btn {
-  height: 31px;
-  margin-right: 12px;
+
+
+.isset-video-btn {
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  color: #fff;
+  background-color: #4638c2;
+  border-color: #4638c2;
+}
+
+.isset-video-btn-success {
+  color: #5fae34;
+  border: 1px solid #5FAE34;
+}
+
+.isset-video-h1-with-btn {
+  line-height: 30px;
+}
+
+.isset-video-btn-danger {
   color: #ae3434;
   border: 1px solid #ae3434;
+}
+
+.isset-overview-delete {
+  margin-right: 20px;
+  line-height: 15px;
 }
 
 .isset-video-overview-table {
@@ -129,20 +157,6 @@
 }
 
 .video-publisher-admin {
-  .btn {
-    display: inline-block;
-    cursor: pointer;
-    user-select: none;
-    padding: 0.375rem 0.75rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    color: #fff;
-    background-color: #4638c2;
-    border-color: #4638c2;
-  }
-
   .btn-danger {
     background-color: #d16767;
     border-color: #d16767;
@@ -246,6 +260,10 @@
 
 .isset-video-thumbnail-th {
   width: 320px;
+}
+
+.isset-video-pointer {
+  cursor: pointer;
 }
 
 .isset-video-search-input {

@@ -46,11 +46,16 @@ jQuery(($) => {
     ];
 
     if (adminpage === "toplevel_page_isset-video-overview") {
+        const {restNonce} = IssetVideoPublisherAjax;
+
         // Dashboard
         $('.isset-video-chart-container').after($('<div id="issetVideoDash" class="video-publisher-mb-2 isset-video-chart-container"></div>'));
 
         $.ajax({
             url: '/?rest_route=/isset-publisher/v1/dashboard',
+            beforeSend: function ( xhr ) {
+                xhr.setRequestHeader( 'X-WP-Nonce', restNonce );
+            },
         }).done(function (res) {
             $('#issetVideoDash').addClass('card').css('max-width', '100%').html(res.html);
 

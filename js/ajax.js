@@ -51,13 +51,13 @@ async function ajax(url, token, method = 'GET', post = {}) {
     };
 
     if (Object.keys(post).length > 0) {
-        let form = new FormData();
+        // let form = new FormData();
+        //
+        // for (const key of Object.keys(post)) {
+        //     form.set(key, post[key]);
+        // }
 
-        for (const key of Object.keys(post)) {
-            form.set(key, post[key]);
-        }
-
-        options.body = form;
+        options.body = JSON.stringify(post);
     }
 
     let ajaxPromise = await fetch(url, options);

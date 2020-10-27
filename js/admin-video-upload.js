@@ -3,6 +3,10 @@ import {updateFaviconProgress} from "./progress-favicon";
 import Flow from '@flowjs/flow.js';
 
 jQuery(($) => {
+    if (adminpage && adminpage !== 'videos_page_isset-video-upload') {
+        return;
+    }
+
     // noinspection JSUnresolvedVariable
     const {nonce, ajaxUrl} = IssetVideoPublisherAjax;
 

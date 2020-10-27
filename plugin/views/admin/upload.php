@@ -19,11 +19,11 @@
                             <p>Drop one or more files here (4.3GB max) or <u><b>browse</b></u> your computer.</p>
                         </div>
                     </div>
-                    <button class="btn">Upload</button>
+                    <button class="isset-video-btn">Upload</button>
                     <div class="selected-files-container" id="phase-select-file"></div>
                 </div>
                 <div class="phase-upload">
-                    <button id="btnCancelUpload" class="btn btn-danger">Cancel upload</button>
+                    <button id="btnCancelUpload" class="isset-video-btn btn-danger">Cancel upload</button>
                 </div>
                 <div class="phase-done">
 
@@ -39,7 +39,7 @@
         <?php endif; ?>
     </div>
     <div class="card-footer" style="display: none;">
-        <a id="videoPublisherSyncVideosAfterUpload" class="btn" href="<?php echo $video_url; ?>"><?php _e("Go to videos", 'isset-video-publisher'); ?></a>
+        <a id="videoPublisherSyncVideosAfterUpload" class="isset-video-btn" href="<?php echo $video_url; ?>"><?php _e("Go to videos", 'isset-video-publisher'); ?></a>
     </div>
 </div>
 <canvas width=32 height=32 style="display: none;"></canvas>

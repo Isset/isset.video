@@ -1,8 +1,21 @@
 import React from 'react';
 import moment from 'moment';
 import {secondsToHours} from '../helpers/duration';
+import PropTypes from 'prop-types';
 
 class VideoItem extends React.Component {
+    static propTypes = {
+        uuid: PropTypes.string.isRequired,
+        filename: PropTypes.string.isRequired,
+        created: PropTypes.string.isRequired,
+        duration: PropTypes.number,
+        preview: PropTypes.string,
+        size: PropTypes.string,
+        stills: PropTypes.array,
+        onSelect: PropTypes.func.isRequired,
+        checked: PropTypes.bool.isRequired,
+        onCheck: PropTypes.func.isRequired,
+    };
 
     toggleChecked = event => {
         const {uuid} = this.props;
@@ -16,7 +29,7 @@ class VideoItem extends React.Component {
         this.props.onSelect(uuid);
     };
 
-    renderStill = (preview, stills) => {
+    renderStill = (preview, stills = []) => {
         if (preview) {
             return <video className="video-publisher-preview-video">
                 <source src={preview} />
@@ -43,7 +56,7 @@ class VideoItem extends React.Component {
                 <input type="checkbox" checked={checked} onChange={this.toggleChecked} />
             </td>
             <td onClick={event => this.showDetails(event, uuid)}>
-                {this.renderStill(preview, stills)}
+                {this.renderStill(preview, stills || [])}
             </td>
             <td>
                 {secondsToHours(duration)}
@@ -52,7 +65,7 @@ class VideoItem extends React.Component {
                 {size}
             </td>
             <td>
-                <a href="#" onClick={event => this.showDetails(event, uuid)}>{filename}</a>
+                {this.renderFilename(filename, uuid)}
             </td>
             <td>
                 {moment(created).format('MM-DD-YYYY HH:mm')}
@@ -60,6 +73,13 @@ class VideoItem extends React.Component {
         </tr>;
     }
 
+    renderFilename(filename, uuid) {
+        if (uuid) {
+            return <a href="#" onClick={event => this.showDetails(event, uuid)}>{filename}</a>;
+        }
+
+        return <strong>filename</strong>;
+    }
 }
 
 export default VideoItem;
