@@ -160,7 +160,7 @@ class IssetVideoOverview extends React.Component {
                             created={date_created}
                             duration={duration}
                             preview={preview}
-                            size={`${width}x${height}`}
+                            size={width ? `${width}x${height}` : ''}
                             stills={stills}
                             onSelect={this.onSelect}
                             checked={this.isVideoChecked(uuid)}

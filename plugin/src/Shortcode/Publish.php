@@ -30,55 +30,35 @@ class Publish extends ShortcodeBase {
 		);
 
 		$uuid    = $attr['uuid'];
-		$post_id = $attr['post_id'];
-		$poster  = $attr['poster'];
 
-		$query = new WP_Query( [
-			'post_type'   => VideoPublisher::getTypeName(),
-			'post_status' => 'published',
-			'name'        => $uuid,
-		] );
+        $publishService = $this->plugin->getVideoPublisherService();
+        $publish = $publishService->fetchPublishInfo( $uuid );
 
-		if ( $query->post_count === 0 ) {
-		    return Renderer::render( 'shortcode/publish-invalid.php' );
-		}
+        if (!$publish) {
+            return Renderer::render( 'shortcode/publish-invalid.php' );
+        }
 
-		/* @var int $post_id */
-		if ( $uuid === false && $post_id === false ) {
-			return false;
-		}
-
-		$args = [];
-		if ( $uuid ) {
-			$args['post_name__in'] = [ $uuid ];
-		}
-		$args['p']         = $post_id;
-		$args['post_type'] = VideoPublisher::getTypeName();
-		$query             = new WP_Query( $args );
-		if ( (int) $query->found_posts !== 1 ) {
-			return $content;
-		}
-
-		global $post;
-		$query->the_post();
-
-		$uuid  = $post->post_name;
-		$image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'large' );
-		if ( is_array( $image ) ) {
-			list( $poster, $w, $h ) = $image;
-		}
-
-		wp_reset_query();
-
-		$video_url = $this->plugin
-			->getVideoPublisherService()
-			->getVideoUrlForWordpress( $uuid );
+		$video_url = $publishService->getVideoUrlForWordpress( $uuid );
 
 		$context              = $attr;
-		$context['poster']    = $poster;
+		$context['poster']    = $this->findDefaultImage( $publish['assets'] );
 		$context['uuid']      = $uuid;
 		$context['video_url'] = $video_url;
 
 		return Renderer::render( 'shortcode/publish.php', $context );
 	}
+
+    private function findDefaultImage( $assets ) {
+	    if ( is_array( $assets ) && count( $assets ) > 0 ) {
+	        foreach( $assets as $asset ) {
+	            if ( $asset['is_default'] ) {
+	                return $asset['url'];
+                }
+            }
+
+	        return $assets[0]['url'];
+        }
+
+        return '';
+    }
 }
