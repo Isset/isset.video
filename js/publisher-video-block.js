@@ -27,6 +27,8 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             this.changeSearchTerm = this.changeSearchTerm.bind(this);
             this.updatedParsedUuid = this.updatedParsedUuid.bind(this);
             this.setAttr = this.setAttr.bind(this);
+            this.renderProcessingPlaceholder = this.renderProcessingPlaceholder.bind(this);
+            this.renderError = this.renderError.bind(this);
         }
 
         componentDidMount() {
@@ -142,6 +144,20 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             this.setState({lazyStep: 0}, () => this.getSuggestions(newTerm, false));
         }
 
+        renderProcessingPlaceholder() {
+            return <div className="isset-video-icon-container">
+                <span className="dashicons dashicons-backup" />
+                <div>Processing</div>
+            </div>;
+        }
+
+        renderError() {
+            return <div className="isset-video-icon-container isset-video-warning">
+                <span className="dashicons dashicons-warning" />
+                <div>Error</div>
+            </div>;
+        }
+
         renderSuggestions(suggestions) {
             return suggestions.map(suggestion => {
                 const {file, processed} = suggestion;
@@ -150,13 +166,10 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                     return <div className="video-block-suggestions-wrapper">
                         <div className="isset-video-placeholder-container">
                             <div className="isset-video-thumb-placeholder">
-                                <div className="isset-video-icon-container">
-                                    <span className="dashicons dashicons-backup" />
-                                    <div>Processing</div>
-                                </div>
+                                {file ? this.renderProcessingPlaceholder() : this.renderError()}
                             </div>
                         </div>
-                        <span className="video-block-text">{file.filename}</span>
+                        <span className="video-block-text">{file ? file.filename : 'File nof found'}</span>
                     </div>;
                 }
 

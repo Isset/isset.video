@@ -177,7 +177,7 @@ class IssetVideoOverview extends React.Component {
 }
 
 window.addEventListener('load', () => {
-    if (adminpage && adminpage === 'toplevel_page_isset-video-overview') {
+    if (typeof adminpage !== 'undefined' && adminpage === 'toplevel_page_isset-video-overview') {
         const issetVideoOverviewContainer = document.getElementById('isset-video-overview-container');
         ReactDOM.render(<IssetVideoOverview />, issetVideoOverviewContainer);
     }

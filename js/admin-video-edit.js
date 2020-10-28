@@ -2,7 +2,6 @@ import Chart from 'chart.js';
 
 jQuery(($) => {
 
-
     if (adminpage === "edit-php" && typenow === "video-publisher") {
 
         $('#videoPublisherSyncVideos').one('click', () => {
@@ -22,7 +21,6 @@ jQuery(($) => {
             }, 500)
         });
     }
-
 
     $('.thumbnail-item button').click(function () {
         // noinspection JSUnresolvedVariable
