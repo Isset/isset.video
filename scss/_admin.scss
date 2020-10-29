@@ -1,12 +1,24 @@
 .isset-video-chart-container {
-  &.card {
-    color: #eee;
-    background-color: #32373c;
-    padding-bottom: 20px;
-  }
+  padding: 10px;
+  color: #eee;
+  background-color: #32373c;
+  padding-bottom: 20px;
 
   h2 {
     color: orange;
+  }
+
+  .isset-video-stats-container {
+    margin-top: 31px;
+    flex-direction: column;
+
+    a {
+      color: orange;
+
+      &.isset-video-a-icon {
+        text-decoration: none;
+      }
+    }
   }
 }
 
@@ -14,6 +26,15 @@
   padding-right: 20px;
 }
 
+.isset-video-overview-container {
+  background-color: #464d52;
+  padding: 10px;
+
+  .isset-video-upload-btn {
+    margin-right: 10px;
+    background-color: #45a164;
+  }
+}
 
 
 .isset-video-btn {
@@ -25,9 +46,13 @@
   line-height: 1.5;
   border-radius: 0.25rem;
   text-decoration: none;
-  color: #fff;
+  color: #eee;
   background-color: #4638c2;
   border-color: #4638c2;
+
+  &:hover, &:focus {
+    color: #fff;
+  }
 }
 
 .isset-video-btn-success {
@@ -45,8 +70,9 @@
 }
 
 .isset-overview-delete {
-  margin-right: 20px;
-  line-height: 15px;
+  margin-right: 10px;
+  border-width: 0px;
+  line-height: 21px;
 }
 
 .isset-video-overview-table {
@@ -207,6 +233,14 @@
   flex: 1;
 }
 
+.video-publisher-flex-2 {
+  flex: 2;
+}
+
+.video-publisher-flex-3 {
+  flex: 3;
+}
+
 .video-publisher-flex-end {
   justify-content: flex-end;
 }
@@ -229,6 +263,10 @@
 
 .video-publisher-mt-2 {
   margin-top: 0.75rem;
+}
+
+.video-publisher-mt-2 {
+  margin-top: 1rem;
 }
 
 .video-publisher-mb-0 {
@@ -279,8 +317,19 @@
     margin-left: 8px;
     padding: 5px 11px;
     border: 1px solid #333;
+    background-color: #23282C;
+
+    &.active {
+      background-color: orange;
+      color: #23282C;
+
+      a {
+        color: #23282C;
+      }
+    }
 
     a {
+      color: #eee;
       font-weight: bold;
       text-decoration: none;
     }
@@ -308,7 +357,7 @@
     color: #eee;
 
     h1 {
-      color: #eee;
+      color: orange;
     }
 
     iframe {
@@ -340,6 +389,15 @@
         }
       }
 
+    }
+
+    .isset-video-copytext-container {
+      background-color: #333;
+      padding: 10px;
+
+      .dashicons {
+        cursor: pointer;
+      }
     }
 
     .isset-video-details-table {

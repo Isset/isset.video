@@ -1,8 +1,8 @@
 import Chart from 'chart.js';
 
 jQuery(($) => {
-
     const baseOptions = {
+        responsive: true,
         maintainAspactRatio: false,
         legend: {
             display: false,
@@ -48,81 +48,71 @@ jQuery(($) => {
     if (adminpage === "toplevel_page_isset-video-overview") {
         const {restNonce} = IssetVideoPublisherAjax;
 
-        // Dashboard
-        $('.isset-video-chart-container').after($('<div id="issetVideoDash" class="video-publisher-mb-2 isset-video-chart-container"></div>'));
+        let streamingViewsData = $('#videoPublisherStreamingViews').children();
+        let streamingBytesData = $('#videoPublisherStreamingData').children();
 
-        $.ajax({
-            url: '/?rest_route=/isset-publisher/v1/dashboard',
-            beforeSend: function ( xhr ) {
-                xhr.setRequestHeader( 'X-WP-Nonce', restNonce );
+        let chartViews = new Chart('videoPublisherViewsChart', {
+            type: 'line',
+            data: {
+                labels: streamingViewsData.map(function () {
+                    return new Date($(this).data('key'))
+                }),
+                datasets: [{
+                    label: 'Views',
+                    data: streamingViewsData.map(function () {
+                        return $(this).data('value')
+                    }),
+                    backgroundColor: baseBgColor,
+                    borderColor: baseBorderColor,
+                    borderWidth: 1
+                }]
             },
-        }).done(function (res) {
-            $('#issetVideoDash').addClass('card').css('max-width', '100%').html(res.html);
+            options: baseOptions
+        });
 
-            let streamingViewsData = $('#videoPublisherStreamingViews').children();
-            let streamingBytesData = $('#videoPublisherStreamingData').children();
+        chartViews.height = 200;
 
-            let chartViews = new Chart('videoPublisherViewsChart', {
-                type: 'line',
-                data: {
-                    labels: streamingViewsData.map(function () {
-                        return new Date($(this).data('key'))
+        let dataOptions = Object.assign({}, baseOptions);
+        dataOptions.scales.yAxes[0].ticks.callback = row => `${row.toFixed(2)} GB`;
+        dataOptions.tooltips.callbacks.label = row => `${parseFloat(row.value).toFixed(2)} GB`;
+
+        let chartDatea = new Chart('videoPublisherDataChart', {
+            type: 'line',
+            data: {
+                labels: streamingBytesData.map(function () {
+                    return new Date($(this).data('key'))
+                }),
+                datasets: [{
+                    label: 'Data send',
+                    data: streamingBytesData.map(function () {
+                        return $(this).data('value') / 1e+9
                     }),
-                    datasets: [{
-                        label: 'Views',
-                        data: streamingViewsData.map(function () {
-                            return $(this).data('value')
-                        }),
-                        backgroundColor: baseBgColor,
-                        borderColor: baseBorderColor,
-                        borderWidth: 1
-                    }]
-                },
-                options: baseOptions
-            });
+                    backgroundColor: baseBgColor,
+                    borderColor: baseBorderColor,
+                    borderWidth: 1
+                }]
+            },
+            options: dataOptions
+        });
 
-            let dataOptions = Object.assign({}, baseOptions);
-            dataOptions.scales.yAxes[0].ticks.callback = row => `${row.toFixed(2)} GB`;
-            dataOptions.tooltips.callbacks.label = row => `${parseFloat(row.value).toFixed(2)} GB`;
+        $('#videoPublisherChartToggleViews').on('click', function () {
+            $(this).removeClass('btn-inactive');
+            if (!$('#videoPublisherChartToggleData').hasClass('btn-inactive')) {
+                $('#videoPublisherChartToggleData').addClass('btn-inactive')
+            }
 
-            let chartDatea = new Chart('videoPublisherDataChart', {
-                type: 'line',
-                data: {
-                    labels: streamingBytesData.map(function () {
-                        return new Date($(this).data('key'))
-                    }),
-                    datasets: [{
-                        label: 'Data send',
-                        data: streamingBytesData.map(function () {
-                            return $(this).data('value') / 1e+9
-                        }),
-                        backgroundColor: baseBgColor,
-                        borderColor: baseBorderColor,
-                        borderWidth: 1
-                    }]
-                },
-                options: dataOptions
-            });
+            $('#videoPublisherViewsChart').show();
+            $('#videoPublisherDataChart').hide();
+        });
 
-            $('#videoPublisherChartToggleViews').on('click', function () {
-                $(this).removeClass('btn-inactive');
-                if (!$('#videoPublisherChartToggleData').hasClass('btn-inactive')) {
-                    $('#videoPublisherChartToggleData').addClass('btn-inactive')
-                }
+        $('#videoPublisherChartToggleData').on('click', function () {
+            $(this).removeClass('btn-inactive');
+            if (!$('#videoPublisherChartToggleViews').hasClass('btn-inactive')) {
+                $('#videoPublisherChartToggleViews').addClass('btn-inactive')
+            }
 
-                $('#videoPublisherViewsChart').show();
-                $('#videoPublisherDataChart').hide();
-            });
-
-            $('#videoPublisherChartToggleData').on('click', function () {
-                $(this).removeClass('btn-inactive');
-                if (!$('#videoPublisherChartToggleViews').hasClass('btn-inactive')) {
-                    $('#videoPublisherChartToggleViews').addClass('btn-inactive')
-                }
-
-                $('#videoPublisherDataChart').show();
-                $('#videoPublisherViewsChart').hide();
-            });
+            $('#videoPublisherDataChart').show();
+            $('#videoPublisherViewsChart').hide();
         });
     }
 });

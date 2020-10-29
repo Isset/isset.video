@@ -75,8 +75,8 @@ jQuery(($) => {
         $('#btnCancelUpload').hide();
         $('.phase-done')
             .html("")
-            .append("Succesfully uploaded ", $('<span>').text(fileList.map(file => file.name).join(', ')))
-            .append($('<p>').text('Your files will be queued for transcoding'))
+            .append("Uploaded ", $('<span>').text(fileList.map(file => file.name).join(', ')))
+            .append($('<p class="isset-video-upload-success">').text('Your files will be queued for transcoding'))
             .show();
         $('.card-footer').show();
 

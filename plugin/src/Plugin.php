@@ -12,6 +12,7 @@ use IssetBV\VideoPublisher\Wordpress\Action\SavePost;
 use IssetBV\VideoPublisher\Wordpress\Action\Settings;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload\CreateArchiveFile;
+use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Rest\BaseEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Rest\DashboardEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Service\ThumbnailService;
@@ -84,6 +85,10 @@ class Plugin {
 		Dashboard::class
 	];
 
+	private $helpers = [
+	    'Statistics',
+    ];
+
 	const PUBLISHER_URL = 'https://test.publish.isset.video/';
 	const MY_ISSET_VIDEO_URL = 'https://test.my.isset.video/';
 	const ARCHIVE_URL = 'https://test.archive.isset.video/';
@@ -102,6 +107,7 @@ class Plugin {
 		$this->addShortcodes();
 		$this->initScripts();
 		$this->loadTranslations();
+		$this->loadHelpers();
 		$this->initActions();
 		$this->initRest();
 		$this->initBlocks();
@@ -162,6 +168,12 @@ class Plugin {
 			$this->action( $action );
 		}
 	}
+
+	private function loadHelpers() {
+        foreach ( $this->helpers as $helper ) {
+            include_once(ISSET_VIDEO_PUBLISHER_PATH . 'src/Helpers/' . $helper . '.php');
+        }
+    }
 
 	/**
 	 * @return VideoPublisherService
@@ -331,6 +343,7 @@ class Plugin {
 
         if ( $context['logged_in'] ) {
             $context['uploadUrl'] = $this->getUploadUrl();
+            $context['chart'] = $this->renderChart();
 
             echo Renderer::render( 'admin/overview.php', $context );
         } else {
@@ -382,5 +395,29 @@ class Plugin {
         $function   = function() { $this->renderUploadPage(); };
 
         add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, self::MENU_UPLOAD_SLUG, $function );
+    }
+
+    private function renderChart()
+    {
+        $service = $this->getVideoPublisherService();
+
+        $context['isLoggedIn'] = $service->isLoggedIn();
+
+        if ( $context['isLoggedIn'] ) {
+            $userInfo = $service->getUserInfo();
+
+            $context['user']               = $userInfo;
+            $context['logout_url']         = $service->getLogoutURL();
+            $context['videos_url']         = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
+            $context['stats']              = $service->fetchStats();
+            $context['usage']              = $service->fetchUsage();
+            $context['subscription_limit'] = $service->fetchSubscriptionLimit();
+            $context['isset_video_url']    = $service->getMyIssetVideoURL();
+        } else {
+            $context['login_url'] = $service->getLoginURL();
+            $stats                = [];
+        }
+
+        return Renderer::render( 'admin/dashboard/api-dashboard.php', $context );
     }
 }

@@ -14,23 +14,24 @@ class HijackRouter extends BaseAction {
 		}
 
 		if ( $action === 'auth' ) {
+		    // Remove archive auth info from session
+            $this->plugin->getVideoArchiveService()->removeAuthToken();
+
 			$token = TextService::validateAndSanitizeText( $_GET, 'token' );
 			if ( $token === false ) {
 				return;
 			}
 
-			$this->plugin
-				->getVideoPublisherService()
-				->updateAuthToken( $token );
+			$this->plugin->getVideoPublisherService()->updateAuthToken( $token );
 
 			wp_redirect( admin_url( "options-general.php?page=isset-video-publisher-admin" ), 302 );
 			exit( 0 );
 		}
 
 		if ( $action === 'deauth' ) {
-			$this->plugin
-				->getVideoPublisherService()
-				->logout();
+            // Remove archive auth info from session
+            $this->plugin->getVideoArchiveService()->removeAuthToken();
+			$this->plugin->getVideoPublisherService()->logout();
 
 			wp_redirect( admin_url( "options-general.php?page=isset-video-publisher-admin" ), 302 );
 			exit( 0 );
@@ -42,9 +43,7 @@ class HijackRouter extends BaseAction {
 				return;
 			}
 
-			$video = $this->plugin
-				->getVideoPublisherService()
-				->getVideoUrl( $uuid );
+			$video = $this->plugin->getVideoPublisherService()->getVideoUrl( $uuid );
 
 			if ( ! $video ) {
 				wp_die( 'No video found with given uuid' );

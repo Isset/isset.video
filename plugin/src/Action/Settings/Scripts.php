@@ -30,6 +30,7 @@ class Scripts extends BaseAction {
             'restNonce'   => wp_create_nonce( 'wp_rest' ),
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 			'postId'  => get_the_ID(),
+            'adminUrl' => admin_url(),
 		] );
 
 		if ( ( isset( $_GET['page'] ) && $_GET['page'] === Plugin::MENU_MAIN_SLUG ) || ( isset( $arguments[0] ) && $this->editingOrNewPost( $arguments[0] ) ) ) {

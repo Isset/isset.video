@@ -125,12 +125,18 @@ class IssetVideoOverview extends React.Component {
 
     render() {
         const {offset, results, total, limit, uuid, checkAll, orderDirection} = this.state;
+        const {adminUrl} = window.IssetVideoPublisherAjax;
 
         return <div>
             {uuid && <AdminVideoDetails uuid={uuid} onClose={this.onCloseDetails} />}
             <div className="video-publisher-flex video-publisher-flex-between">
                 <div>
-                    <button className="isset-video-btn btn-danger isset-overview-delete" onClick={this.deleteChecked}>Delete Selected</button>
+                    <a className="isset-video-btn isset-video-upload-btn" href={`${adminUrl} admin.php?page=isset-video-upload`}>
+                        <span className="dashicons dashicons-plus-alt"></span> Upload New
+                    </a>
+                    <button className="isset-video-btn btn-danger isset-overview-delete" onClick={this.deleteChecked}>
+                        <span className="dashicons dashicons-trash" /> Delete Selected
+                    </button>
                     <input className="isset-video-search-input" placeholder="Search" value={this.search} onChange={this.changeSearch} />
                 </div>
 

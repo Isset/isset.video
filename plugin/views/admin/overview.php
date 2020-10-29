@@ -3,14 +3,15 @@
 <div id="issetVideoOverlay"></div>
 
 <div class="video-publisher-admin">
-    <div class="isset-video-chart-container"></div>
-
     <h1 class="video-publisher-flex video-publisher-flex-between">
-        <span>Isset Videos</span>
-        <a class="isset-video-btn" href="<?php echo $uploadUrl; ?>">Upload New</a>
+        <span>Your Videos</span>
     </h1>
 
-    <p>Overview of your videos</p>
+    <div class="isset-video-chart-container">
+        <div id="issetVideoDash" class="video-publisher-mb-2">
+            <?php echo $chart; ?>
+        </div>
+    </div>
 
     <div id="isset-video-overview-container" class="isset-video-overview-container"></div>
 </div>

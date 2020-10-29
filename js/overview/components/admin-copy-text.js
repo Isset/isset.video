@@ -33,7 +33,8 @@ class AdminCopyText extends React.Component {
         const {copied} = this.state;
 
         return <div>
-            <p>
+            <p className="isset-video-copytext-container">
+                <span className="dashicons dashicons-admin-page" onClick={() => this.copy(text)} />
                 <code onClick={() => this.copy(text)}>{text}</code>
             </p>
 

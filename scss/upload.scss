@@ -106,6 +106,13 @@
   .phase-done {
     display: none;
     margin-top: 14px;
+
+    .isset-video-upload-success {
+      font-size: 14px;
+      margin-top: 26px;
+      font-weight: bold;
+      color: orange;
+    }
   }
 
   .phase-select {
