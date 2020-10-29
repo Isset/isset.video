@@ -131,7 +131,7 @@ class IssetVideoOverview extends React.Component {
             {uuid && <AdminVideoDetails uuid={uuid} onClose={this.onCloseDetails} />}
             <div className="video-publisher-flex video-publisher-flex-between">
                 <div>
-                    <a className="isset-video-btn isset-video-upload-btn" href={`${adminUrl} admin.php?page=isset-video-upload`}>
+                    <a className="isset-video-btn isset-video-upload-btn" href={`${adminUrl}admin.php?page=isset-video-upload`}>
                         <span className="dashicons dashicons-plus-alt"></span> Upload New
                     </a>
                     <button className="isset-video-btn btn-danger isset-overview-delete" onClick={this.deleteChecked}>
