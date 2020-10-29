@@ -36,7 +36,7 @@ class Dashboard extends BaseWidget {
 
 			$context['user']       = $userInfo;
 			$context['logout_url'] = $this->service->getLogoutURL();
-			$context['videos_url'] = $context['video_url'] = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
+			$context['videos_url'] = $context['video_url'] = admin_url( 'admin.php?page=' . Plugin::MENU_MAIN_SLUG );
 			$context['stats'] = $this->service->fetchUsage();
 			$context['subscription_limit'] = $this->service->fetchSubscriptionLimit();
 		}
