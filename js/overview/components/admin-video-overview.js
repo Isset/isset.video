@@ -116,11 +116,13 @@ class IssetVideoOverview extends React.Component {
         const {value} = event.target;
         this.search = value;
 
-        if (this.searchTimeout) {
-            clearTimeout(this.searchTimeout);
-        }
+        this.setState({search: this.search}, () => {
+            if (this.searchTimeout) {
+                clearTimeout(this.searchTimeout);
+            }
 
-        this.searchTimeout = setTimeout(() => this.setState({offset: 0, search: value}), 500);
+            this.searchTimeout = setTimeout(() => this.setState({offset: 0, search: value}), 500);
+        });
     };
 
     render() {
