@@ -225,7 +225,7 @@ class Plugin {
 		wp_register_script(
 			"isset-video-publisher-{$name}",
 			plugins_url( "../js/publisher-{$name}.js", __FILE__ ),
-			[ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components' ]
+			[ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ]
 		);
 
 		wp_register_style(
@@ -238,6 +238,8 @@ class Plugin {
 			'editor_script' => "isset-video-publisher-{$name}",
 			'editor_style'  => "isset-video-publisher-{$name}-style"
 		] );
+
+        wp_set_script_translations( "isset-video-publisher-{$name}", "isset-video-publisher" );
 	}
 
 	public function filter( $filter ) {

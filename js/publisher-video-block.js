@@ -44,7 +44,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
         }
 
         renderStill(stills) {
-            if (stills.length > 0) {
+            if (stills && stills.length > 0) {
                 return <img src={`${stills[0]}?width=300&height=168`} />
             }
 

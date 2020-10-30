@@ -3,5 +3,5 @@
 <?php elseif ( $type == 'checkbox' ): ?>
     <input type="checkbox" id="<?php echo $name; ?>" name="isset-video-publisher-options[<?php echo $name; ?>]" <?php echo isset($extra['checked']) && $extra['checked'] ? "checked" : ''; ?> value="<?php echo $value; ?>"/> <?php echo isset($extra['postfix']) ? $extra['postfix'] : ''; ?>
 <?php else: ?>
-    Unsupported type
+    <?php _e( 'Unsupported type', 'isset-video-publisher' ); ?>
 <?php endif; ?>

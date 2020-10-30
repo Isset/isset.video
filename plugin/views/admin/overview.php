@@ -4,7 +4,7 @@
 
 <div class="video-publisher-admin">
     <h1 class="video-publisher-flex video-publisher-flex-between">
-        <span>Your Videos</span>
+        <span><?php _e( 'Your Videos', 'isset-video-publisher' ); ?></span>
     </h1>
 
     <div class="isset-video-chart-container">
