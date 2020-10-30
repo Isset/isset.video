@@ -5,7 +5,6 @@ namespace IssetBV\VideoPublisher\Wordpress\Widgets;
 
 
 use IssetBV\VideoPublisher\Wordpress\Plugin;
-use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Renderer;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
 
@@ -20,8 +19,7 @@ class Dashboard extends BaseWidget {
 	}
 
 	public function getWidgetId() {
-		$typeName = VideoPublisher::getTypeName();
-		return "{$typeName}-connect-widget";
+		return "video-publisher-connect-widget";
 	}
 
 	public function getWidgetName() {

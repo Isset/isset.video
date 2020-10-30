@@ -6,8 +6,6 @@ namespace IssetBV\VideoPublisher\Wordpress\Action\Settings;
 
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
 use IssetBV\VideoPublisher\Wordpress\Plugin;
-use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
-use IssetBV\VideoPublisher\Wordpress\Service\VideoArchiveService;
 
 class Scripts extends BaseAction {
 	public function isAdminOnly() {
@@ -19,7 +17,7 @@ class Scripts extends BaseAction {
 	}
 
 	function execute( $arguments ) {
-	    if ( isset($_GET['post_type']) && $_GET['post_type'] !== VideoPublisher::getTypeName() && get_post_type() !== VideoPublisher::getTypeName() ) {
+	    if ( isset($_GET['post_type']) && $_GET['post_type'] !== '' ) {
 			return;
 		}
 

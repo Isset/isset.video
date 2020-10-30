@@ -159,30 +159,6 @@ class VideoPublisherService extends BaseHttpService {
 		return $this->publisherGet( '/api/publishes/' . urlencode( $uuid ) );
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function getPublishedVideos( $from = 0 ) {
-		$result            = $this->publisherGet( "/api/publishes?size=100&from={$from}" );
-		$wordpress_service = $this->plugin->getWordpressService();
-
-		if ( is_array( $result['results'] ) ) {
-			foreach ( $result['results'] as $publish ) {
-				if ( empty( $publish['uuid'] ) ) {
-					continue;
-				}
-
-				$wordpress_service->updatePostFromPublish( $publish );
-			}
-
-			if ( count( $result['results'] ) === 100 ) {
-				$this->getPublishedVideos( $from + 100 );
-			}
-		}
-
-		return false;
-	}
-
 	public function isLoggedIn() {
 		return false !== $this->getAuthToken();
 	}
@@ -232,41 +208,6 @@ class VideoPublisherService extends BaseHttpService {
 
 	public function fetchUploadInfo( $id ) {
 		return $this->publisherGet( '/api/uploads/' . urlencode( $id ) . '/status' );
-	}
-
-	public function updateUpload( $post_id ) {
-		$status = get_post_meta( $post_id, 'video-isset-status', true );
-
-		if ( $status !== 'transcoding' ) {
-			return $status;
-		}
-
-		$transcode = get_post_meta( $post_id, 'video-isset-transcode', true );
-
-		$data = $this->fetchUploadInfo( $transcode['id'] );
-
-		if ( $data['status'] === 'publishOnline' ) {
-			wp_update_post( [
-				'post_name' => $data['publish'],
-				'ID'        => $post_id,
-			] );
-
-			$publish_info = $this->fetchPublishInfo( $data['publish'] );
-			if ( $publish_info === false ) {
-				return false;
-			}
-
-			$this->plugin->getWordpressService()->updatePostFromPublish( $publish_info );
-		}
-
-		return get_post_meta( $post_id, 'video-isset-status', true );
-	}
-
-	public function updateUploads() {
-		$drafts = $this->plugin->getWordpressService()->getUploadDrafts();
-		foreach ( $drafts as $draft ) {
-			$this->updateUpload( $draft );
-		}
 	}
 
 	public function fetchStats() {

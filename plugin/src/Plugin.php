@@ -3,22 +3,14 @@
 
 namespace IssetBV\VideoPublisher\Wordpress;
 
-
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
-use IssetBV\VideoPublisher\Wordpress\Action\DeleteArchiveFile;
 use IssetBV\VideoPublisher\Wordpress\Action\HijackRouter;
-use IssetBV\VideoPublisher\Wordpress\Action\ImportPublishedVideos;
-use IssetBV\VideoPublisher\Wordpress\Action\SavePost;
 use IssetBV\VideoPublisher\Wordpress\Action\Settings;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload\CreateArchiveFile;
-use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Rest\BaseEndpoint;
-use IssetBV\VideoPublisher\Wordpress\Rest\DashboardEndpoint;
-use IssetBV\VideoPublisher\Wordpress\Service\ThumbnailService;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoArchiveService;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
-use IssetBV\VideoPublisher\Wordpress\Service\WordpressService;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\Publish;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\ShortcodeBase;
 use IssetBV\VideoPublisher\Wordpress\Widgets\BaseWidget;
@@ -40,29 +32,15 @@ class Plugin {
      */
     private $videoArchiveService;
 
-	/**
-	 * @var ThumbnailService
-	 */
-	private $thumbnailService;
-
-	/**
-	 * @var WordpressService
-	 */
-	private $wordpressService;
-
 	private $shortcodes = [
 		Publish::class,
 	];
 
 	private $actions = [
 		HijackRouter::class,
-		SavePost::class,
-		ImportPublishedVideos::class,
         Settings\Init::class,
 		Settings\Menu::class,
 		Upload\GenerateUploadUrl::class,
-		Upload\RegisterUpload::class,
-        DeleteArchiveFile::class,
         Upload\GetArchiveToken::class,
         Upload\GetArchiveUrl::class,
         Upload\GetUploaderUrl::class,
@@ -70,7 +48,6 @@ class Plugin {
 	];
 
 	private $endpoints = [
-		DashboardEndpoint::class,
 	];
 
 	private $scripts = [
@@ -197,17 +174,6 @@ class Plugin {
         return $this->videoArchiveService;
     }
 
-	/**
-	 * @return ThumbnailService
-	 */
-	public function getThumbnailService() {
-		if ( $this->thumbnailService === null ) {
-			$this->thumbnailService = new ThumbnailService( $this );
-		}
-
-		return $this->thumbnailService;
-	}
-
 	public function getFrontPageId() {
 		return get_option( 'isset-video-publisher-frontpage-id' );
 	}
@@ -287,14 +253,6 @@ class Plugin {
 			[],
 			ISSET_VIDEO_PUBLISHER_VERSION . '-' . filemtime( ISSET_VIDEO_PUBLISHER_PATH . '/' . $style )
 		);
-	}
-
-	public function getWordpressService() {
-		if ( $this->wordpressService === null ) {
-			$this->wordpressService = new WordpressService( $this );
-		}
-
-		return $this->wordpressService;
 	}
 
 	private function initDashboardWidgets() {
@@ -408,14 +366,13 @@ class Plugin {
 
             $context['user']               = $userInfo;
             $context['logout_url']         = $service->getLogoutURL();
-            $context['videos_url']         = admin_url( 'edit.php?post_type=' . urlencode( VideoPublisher::getTypeName() ) );
+            $context['videos_url']         = $this->getOverviewPageUrl();
             $context['stats']              = $service->fetchStats();
             $context['usage']              = $service->fetchUsage();
             $context['subscription_limit'] = $service->fetchSubscriptionLimit();
             $context['isset_video_url']    = $service->getMyIssetVideoURL();
         } else {
             $context['login_url'] = $service->getLoginURL();
-            $stats                = [];
         }
 
         return Renderer::render( 'admin/dashboard/api-dashboard.php', $context );

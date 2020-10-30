@@ -5,7 +5,6 @@ namespace IssetBV\VideoPublisher\Wordpress\Action\Settings;
 
 
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
-use IssetBV\VideoPublisher\Wordpress\Action\SetFeaturedImage;
 use IssetBV\VideoPublisher\Wordpress\Renderer;
 
 class Init extends BaseAction {
@@ -20,7 +19,6 @@ class Init extends BaseAction {
 
 	function execute( $arguments ) {
 		$this->plugin->action( Scripts::class );
-		$this->plugin->action( SetFeaturedImage::class );
 		$vps = $this->plugin->getVideoPublisherService();
 
 		register_setting(

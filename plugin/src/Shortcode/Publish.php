@@ -3,10 +3,7 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Shortcode;
 
-
-use IssetBV\VideoPublisher\Wordpress\PostType\VideoPublisher;
 use IssetBV\VideoPublisher\Wordpress\Renderer;
-use WP_Query;
 
 class Publish extends ShortcodeBase {
 	const CODE = "publish";
