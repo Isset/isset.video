@@ -1,0 +1,84 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: js/admin-video-upload.js:132
+msgid "Successfully added %s to archive"
+msgstr ""
+
+#: js/admin-video-upload.js:136
+msgid "Failed adding %s to archive"
+msgstr ""
+
+#: js/admin-video-upload.js:24
+msgid "Selected files"
+msgstr ""
+
+#: js/admin-video-upload.js:44
+msgid "Are you sure you want to leave?"
+msgstr ""
+
+#: js/admin-video-upload.js:64
+msgid "Uploading"
+msgstr ""
+
+#: js/admin-video-upload.js:79
+msgid "Uploaded"
+msgstr ""
+
+#: js/admin-video-upload.js:80
+msgid "Your files will be queued for transcoding"
+msgstr ""
+
+#: js/publisher-video-block.js:151
+msgid "Processing"
+msgstr ""
+
+#: js/publisher-video-block.js:158
+msgid "Error"
+msgstr ""
+
+#: js/publisher-video-block.js:173
+msgid "File nof found"
+msgstr ""
+
+#: js/publisher-video-block.js:196
+msgid "Video info"
+msgstr ""
+
+#: js/publisher-video-block.js:198
+msgid "Video name"
+msgstr ""
+
+#: js/publisher-video-block.js:201
+msgid "Video size"
+msgstr ""
+
+#: js/publisher-video-block.js:207
+msgid "Options"
+msgstr ""
+
+#: js/publisher-video-block.js:209
+msgid "Autoplay"
+msgstr ""
+
+#: js/publisher-video-block.js:231
+msgid "Videos on isset.video"
+msgstr ""
+
+#: js/publisher-video-block.js:234
+msgid "Search videos"
+msgstr ""
+
+#: js/publisher-video-block.js:236
+msgid "Search"
+msgstr ""
+
+#: js/publisher-video-block.js:240
+msgid "No publishes found"
+msgstr ""
+
+#: js/publisher-video-block.js:244
+msgid "More results"
+msgstr ""

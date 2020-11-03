@@ -1,6 +1,7 @@
 import "../scss/upload.scss"
 import {updateFaviconProgress} from "./progress-favicon";
 import Flow from '@flowjs/flow.js';
+import {__} from '@wordpress/i18n';
 
 jQuery(($) => {
     if (adminpage && adminpage !== 'videos_page_isset-video-upload') {
@@ -20,7 +21,7 @@ jQuery(($) => {
         let fileDisplay = $("#phase-select-file");
         let files = [...this.files];
         if (files) {
-            fileDisplay.html('Selected files: ' + files.map(file => file.name).join(', '));
+            fileDisplay.html(__('Selected files', 'isset-video-publisher') + ': ' + files.map(file => file.name).join(', '));
         } else {
             fileDisplay.html('');
         }
@@ -40,7 +41,7 @@ jQuery(($) => {
         });
 
         $(window).bind('beforeunload', function () {
-            return 'Are you sure you want to leave?';
+            return __('Are you sure you want to leave?', 'isset-video-publisher');
         });
 
         if (fileSelect.val() === "") {
@@ -55,12 +56,12 @@ jQuery(($) => {
         for (const file of fileList) {
             let i = fileList.indexOf(file);
             $('#btnCancelUpload').before(`<div class="video-publisher-mb-2" id="videoPublisherFile${i}">
-                    Uploading:
+                    ${__('Uploading', 'isset-video-publisher')}:
                     <div id="indicator${i}" class="indicator">0%</div>
                     <div class="progress">
                         <div id="progressBar${i}" class="progress-bar" role="progressbar" style="width: 0;"></div>
                     </div>
-                    <div id="uploadingText${i}" class="uploading-text">Uploading: ${fileSelect[0].files[i].name}</div>
+                    <div id="uploadingText${i}" class="uploading-text">${__('Uploading', 'isset-video-publisher')}: ${fileSelect[0].files[i].name}</div>
                 </div><hr>`);
         }
 
@@ -75,8 +76,8 @@ jQuery(($) => {
         $('#btnCancelUpload').hide();
         $('.phase-done')
             .html("")
-            .append("Uploaded ", $('<span>').text(fileList.map(file => file.name).join(', ')))
-            .append($('<p class="isset-video-upload-success">').text('Your files will be queued for transcoding'))
+            .append(__('Uploaded', 'isset-video-publisher') + ' ', $('<span>').text(fileList.map(file => file.name).join(', ')))
+            .append($('<p class="isset-video-upload-success">').text(__('Your files will be queued for transcoding', 'isset-video-publisher')))
             .show();
         $('.card-footer').show();
 
@@ -86,15 +87,6 @@ jQuery(($) => {
     $('#btnCancelUpload').click(function () {
         location.reload();
     });
-
-    if (adminpage === "post-new-php" && typenow === "video-publisher") {
-        const toVideoButton = $('#videoPublisherSyncVideosAfterUpload');
-
-        toVideoButton.one('click', async (e) => {
-            e.preventDefault();
-            location = toVideoButton.attr('href');
-        });
-    }
 
     async function uploadFileToUploader(fileIndex) {
         let flow = new Flow({
@@ -133,15 +125,15 @@ jQuery(($) => {
                     url: downloadUrl(file.uniqueIdentifier, filename),
                 }
 
-                $(`#uploadingText${fileIndex}`).text(`Adding ${filename} to archive`);
+                $(`#uploadingText${fileIndex}`).text(sprintf(__(`Adding %s to archive`, 'isset-video-publisher'), filename));
 
                 await wpAjax('isset-video-create-archive-file', data).then(async response => {
                     if (response.uuid) {
-                        $(`#uploadingText${fileIndex}`).text(`Successfully added ${filename} to archive`);
+                        $(`#uploadingText${fileIndex}`).text(sprintf(__('Successfully added %s to archive', 'isset-video-publisher'), filename));
                     }
                     resolve();
                 }).catch(error => {
-                    $(`#uploadingText${fileIndex}`).text(`Failed adding ${filename} to archive`);
+                    $(`#uploadingText${fileIndex}`).text(sprintf(__('Failed adding %s to archive', 'isset-video-publisher'), filename) );
                     reject();
                 });
             });

@@ -1,17 +1,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
+"Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 "Language: nl_NL\n"
 "X-Generator: Poedit 2.2.4\n"
 
-#: inc/class.admin-page.php:56 inc/class.admin-page.php:57
+#: inc/class.admin-page.php:56
+#: inc/class.admin-page.php:57
 #: inc/class.admin-page.php:96
 msgid "isset.video settings"
 msgstr "Video publisher instellingen"
@@ -94,11 +96,8 @@ msgid "http://isset.nl"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid ""
-"Video integration from the video publisher from isset.video"
-msgstr ""
-"Video integratie, gemaakt voor de video publisher gemaakt door Isset "
-"Internet Professionals"
+msgid "Video integration from the video publisher from isset.video"
+msgstr "Video integratie, gemaakt voor de video publisher gemaakt door Isset Internet Professionals"
 
 #. Author of the plugin/theme
 msgid "isset.video"

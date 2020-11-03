@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {__} from '@wordpress/i18n';
 
 class AdminCopyText extends React.Component {
     static propTypes = {
@@ -38,7 +39,7 @@ class AdminCopyText extends React.Component {
                 <code onClick={() => this.copy(text)}>{text}</code>
             </p>
 
-            {copied && <p>Copied shortcode!</p>}
+            {copied && <p>{__('Copied shortcode', 'isset-video-publisher')}!</p>}
         </div>;
     }
 

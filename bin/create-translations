@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+cd "$(realpath "$(dirname "$0")")/..";
+
+wp i18n make-pot plugin languages/isset-video-publisher-php.pot --domain=isset-video-publisher
+msgcat languages/*.pot > plugin/languages/isset-video-publisher.pot

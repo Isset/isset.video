@@ -14,4 +14,4 @@ unzip /tmp/wp.zip;
 # Move into plugins directory
 cd wordpress/wp-content/plugins;
 # Delete temp zip
-rm /tmp/wp.zip /tmp/wp_timber.zip;
+rm /tmp/wp.zip;

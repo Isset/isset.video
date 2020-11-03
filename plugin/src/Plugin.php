@@ -238,8 +238,6 @@ class Plugin {
 			'editor_script' => "isset-video-publisher-{$name}",
 			'editor_style'  => "isset-video-publisher-{$name}-style"
 		] );
-
-        wp_set_script_translations( "isset-video-publisher-{$name}", "isset-video-publisher" );
 	}
 
 	public function filter( $filter ) {

@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import {secondsToHours} from '../helpers/duration';
 import PropTypes from 'prop-types';
+import {__} from '@wordpress/i18n';
 
 class VideoItem extends React.Component {
     static propTypes = {
@@ -43,7 +44,7 @@ class VideoItem extends React.Component {
         return <div className="isset-video-thumb-placeholder">
             <div className="isset-video-icon-container">
                 <span className="dashicons dashicons-backup" />
-                <div>Processing</div>
+                <div>{__('Processing', 'isset-video-publisher')}</div>
             </div>
         </div>;
     }
@@ -78,7 +79,7 @@ class VideoItem extends React.Component {
             return <a href="#" onClick={event => this.showDetails(event, uuid)}>{filename}</a>;
         }
 
-        return <strong>filename</strong>;
+        return <strong>{filename}</strong>;
     }
 }
 

@@ -4,6 +4,7 @@ import {archiveAjax, wpAjax} from '../../ajax';
 import VideoItem from './video-item';
 import Pagination from './pagination';
 import AdminVideoDetails from './admin-video-details';
+import {__} from '@wordpress/i18n'
 
 class IssetVideoOverview extends React.Component {
 
@@ -98,7 +99,7 @@ class IssetVideoOverview extends React.Component {
     }
 
     deleteChecked = () => {
-        if (confirm('Are you sure you want to delete the selected videos?')) {
+        if (confirm(__('Are you sure you want to delete the selected videos?', 'isset-video-publisher'))) {
             const {checked} = this.state;
 
             archiveAjax(
@@ -134,14 +135,13 @@ class IssetVideoOverview extends React.Component {
             <div className="video-publisher-flex video-publisher-flex-between">
                 <div>
                     <a className="isset-video-btn isset-video-upload-btn" href={`${adminUrl}admin.php?page=isset-video-upload`}>
-                        <span className="dashicons dashicons-plus-alt"></span> Upload New
+                        <span className="dashicons dashicons-plus-alt" /> {__('Upload New', 'isset-video-publisher')}
                     </a>
                     <button className="isset-video-btn btn-danger isset-overview-delete" onClick={this.deleteChecked}>
-                        <span className="dashicons dashicons-trash" /> Delete Selected
+                        <span className="dashicons dashicons-trash" /> {__('Delete Selected', 'isset-video-publisher')}
                     </button>
-                    <input className="isset-video-search-input" placeholder="Search" value={this.search} onChange={this.changeSearch} />
+                    <input className="isset-video-search-input" placeholder={__('Search', 'isset-video-publisher')} value={this.search} onChange={this.changeSearch} />
                 </div>
-
                 <Pagination onNavigate={this.loadVideos} total={total} limit={limit} offset={offset} />
             </div>
             <table className="iv-w-100 isset-video-overview-table">
@@ -150,11 +150,11 @@ class IssetVideoOverview extends React.Component {
                         <th className="isset-video-table-spacer">
                             <input type="checkbox" checked={checkAll} onChange={this.toggleCheckAll} />
                         </th>
-                        <th className="isset-video-thumbnail-th">Thumbnail</th>
-                        <th>Duration</th>
-                        <th>Size</th>
-                        <th className="isset-video-pointer" onClick={() => this.sortBy('filename', orderDirection)}>Filename</th>
-                        <th className="isset-video-pointer" onClick={() => this.sortBy('dateCreated', orderDirection)}>Created</th>
+                        <th className="isset-video-thumbnail-th">{__('Thumbnail', 'isset-video-publisher')}</th>
+                        <th>{__('Duration', 'isset-video-publisher')}</th>
+                        <th>{__('Size', 'isset-video-publisher')}</th>
+                        <th className="isset-video-pointer" onClick={() => this.sortBy('filename', orderDirection)}>{__('Filename', 'isset-video-publisher')}</th>
+                        <th className="isset-video-pointer" onClick={() => this.sortBy('dateCreated', orderDirection)}>{__('Created', 'isset-video-publisher')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -183,6 +183,8 @@ class IssetVideoOverview extends React.Component {
         </div>;
     }
 }
+
+export default IssetVideoOverview;
 
 window.addEventListener('load', () => {
     if (typeof adminpage !== 'undefined' && adminpage === 'toplevel_page_isset-video-overview') {

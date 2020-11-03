@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: js/overview/components/admin-copy-text.js:42
+msgid "Copied shortcode"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:122
+msgid "Use the following code to embed this video"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:135
+#: js/overview/components/admin-video-overview.js:156
+msgid "Filename"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:139
+#: js/overview/components/admin-video-overview.js:157
+msgid "Created"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:143
+msgid "Filesize"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:147
+msgid "Length"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:151
+msgid "Resolution"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:155
+msgid "Presets"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:102
+msgid "Are you sure you want to delete the selected videos?"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:138
+msgid "Upload New"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:141
+msgid "Delete Selected"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:143
+msgid "Search"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:153
+msgid "Thumbnail"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:154
+msgid "Duration"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:155
+msgid "Size"
+msgstr ""
+
+#: js/overview/components/video-item.js:47
+msgid "Processing"
+msgstr ""

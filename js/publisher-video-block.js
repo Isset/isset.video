@@ -1,5 +1,6 @@
 import React from "react";
 import {archiveAjax} from './ajax';
+import {__} from '@wordpress/i18n';
 
 const blocks = window.wp.blocks;
 const {
@@ -147,14 +148,14 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
         renderProcessingPlaceholder() {
             return <div className="isset-video-icon-container">
                 <span className="dashicons dashicons-backup" />
-                <div>Processing</div>
+                <div>{__('Processing', 'isset-video-publisher')}</div>
             </div>;
         }
 
         renderError() {
             return <div className="isset-video-icon-container isset-video-warning">
                 <span className="dashicons dashicons-warning" />
-                <div>Error</div>
+                <div>{__('Error', 'isset-video-publisher')}</div>
             </div>;
         }
 
@@ -169,7 +170,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                                 {file ? this.renderProcessingPlaceholder() : this.renderError()}
                             </div>
                         </div>
-                        <span className="video-block-text">{file ? file.filename : 'File nof found'}</span>
+                        <span className="video-block-text">{file ? file.filename : __('File nof found', 'isset-video-publisher')}</span>
                     </div>;
                 }
 
@@ -192,20 +193,20 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                         {
                             <BlockControls>
                                 <InspectorControls>
-                                    <PanelBody title="Video info">
+                                    <PanelBody title={__('Video info', 'isset-video-publisher')}>
                                         <PanelRow>
-                                            <span><b>Video name: </b> {videoName}</span>
+                                            <span><b>{__('Video name', 'isset-video-publisher')}: </b> {videoName}</span>
                                         </PanelRow>
                                         <PanelRow>
-                                            <span><b>Video size: </b> {(parseInt(videoSize) / 1e+9).toFixed(3)} GB</span>
+                                            <span><b>{__('Video size', 'isset-video-publisher')}: </b> {(parseInt(videoSize) / 1e+9).toFixed(3)} GB</span>
                                         </PanelRow>
                                         <PanelRow>
                                             <span><b>Uuid: </b> {uuid}</span> <br/>
                                         </PanelRow>
                                     </PanelBody>
-                                    <PanelBody title="Options">
+                                    <PanelBody title={__('Options', 'isset-video-publisher')}>
                                         <PanelRow>
-                                            <span><b>Autoplay: </b> <input onChange={e => this.setAttr('autoplay', e.target.checked)} type="checkbox" /></span>
+                                            <span><b>{__('Autoplay', 'isset-video-publisher')}: </b> <input onChange={e => this.setAttr('autoplay', e.target.checked)} type="checkbox" /></span>
                                         </PanelRow>
                                     </PanelBody>
                                 </InspectorControls>
@@ -227,20 +228,20 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
             return (
                 <div className="video-block-container">
                     <div className="video-block-title-wrapper">
-                        Videos on isset.video
+                        {__('Videos on isset.video', 'isset-video-publisher')}
                     </div>
                     <form className="video-block-form" onSubmit={e => e.preventDefault()}>
-                        <input className="video-block-input" placeholder="Search videos"
+                        <input className="video-block-input" placeholder={__('Search videos', 'isset-video-publisher')}
                                onBlur={e => this.changeSearchTerm(e.target.value)}/>
-                        <button className="video-block-button" type="submit">Search</button>
+                        <button className="video-block-button" type="submit">{__('Search', 'isset-video-publisher')}</button>
                     </form>
                     <hr/>
                     <div className="video-block-suggestions-container">
-                        {suggestions.length === 0 ? <span className="video-block-text">No publishes found</span> : this.renderSuggestions(suggestions)}
+                        {suggestions.length === 0 ? <span className="video-block-text">{__('No publishes found', 'isset-video-publisher')}</span> : this.renderSuggestions(suggestions)}
                     </div>
                     <div>
                         <button onClick={() => this.getSuggestions(searchTerm, lazyStep)}
-                                className="video-block-button">More results
+                                className="video-block-button">{__('More results', 'isset-video-publisher')}
                         </button>
                     </div>
                 </div>

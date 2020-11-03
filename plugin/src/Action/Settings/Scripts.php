@@ -31,6 +31,10 @@ class Scripts extends BaseAction {
             'adminUrl' => admin_url(),
 		] );
 
+        wp_enqueue_script( 'isset-video-publisher', ISSET_VIDEO_PUBLISHER_URL . 'js/admin-video-edit.js' );
+        wp_localize_script('isset-video-publisher', 'issetVideoTranslations', $this->getTranslationLabels() );
+        wp_set_script_translations( 'isset-video-publisher', 'isset-video-publisher', 'isset-video-publisher/languages' );
+
 		if ( ( isset( $_GET['page'] ) && $_GET['page'] === Plugin::MENU_MAIN_SLUG ) || ( isset( $arguments[0] ) && $this->editingOrNewPost( $arguments[0] ) ) ) {
             $videoArchiveService = $this->plugin->getVideoArchiveService();
             $videoPublishService = $this->plugin->getVideoPublisherService();
@@ -43,11 +47,23 @@ class Scripts extends BaseAction {
                 'publisherToken' => $videoPublishService->getPublisherToken(),
                 'root' => $videoArchiveService->getArchiveRoot(),
             ] );
+
         }
 	}
 
     private function editingOrNewPost( $page )
     {
         return $page === 'post.php' || $page === 'new.php';
+    }
+
+    private function getTranslationLabels() {
+        global $l10n;
+        $translations = [];
+
+        foreach( $l10n['isset-video-publisher']->entries as $key=>$entry ) {
+            $translations[$key] = $entry->translations;
+        }
+
+        return $translations;
     }
 }

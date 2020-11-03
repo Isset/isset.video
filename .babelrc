@@ -2,6 +2,9 @@
   "plugins": [
     [ "transform-react-jsx", {
       "pragma": "wp.element.createElement"
+    } ],
+    [ "@wordpress/babel-plugin-makepot", {
+      "output": "languages/isset-video-publisher-js.pot"
     } ]
   ]
 }

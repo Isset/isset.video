@@ -6,6 +6,7 @@ import moment from 'moment';
 import filesize from '../helpers/filesize';
 import AdminCopyText from './admin-copy-text';
 import PropTypes from 'prop-types';
+import {__} from '@wordpress/i18n';
 
 class AdminVideoDetails extends React.Component {
     static propTypes = {
@@ -118,7 +119,7 @@ class AdminVideoDetails extends React.Component {
                         src={playerUrl}
                     />
 
-                    <p>Use the following code to embed this video:</p>
+                    <p>{__('Use the following code to embed this video', 'isset-video-publisher')}:</p>
 
                     <AdminCopyText text={uuidParsed} />
 
@@ -131,27 +132,27 @@ class AdminVideoDetails extends React.Component {
                     <table className="isset-video-details-table">
                         <tbody>
                             <tr>
-                                <td>Filename:</td>
+                                <td>{__('Filename', 'isset-video-publisher')}:</td>
                                 <td>{videoName}</td>
                             </tr>
                             <tr>
-                                <td>Created:</td>
+                                <td>{__('Created', 'isset-video-publisher')}:</td>
                                 <td>{moment(date_created).format('MM-DD-YYYY HH:mm')}</td>
                             </tr>
                             <tr>
-                                <td>Filesize:</td>
+                                <td>{__('Filesize', 'isset-video-publisher')}:</td>
                                 <td>{filesize(size)}</td>
                             </tr>
                             <tr>
-                                <td>Length:</td>
+                                <td>{__('Length', 'isset-video-publisher')}:</td>
                                 <td>{secondsToHours(duration)}</td>
                             </tr>
                             <tr>
-                                <td>Resolution:</td>
+                                <td>{__('Resolution', 'isset-video-publisher')}:</td>
                                 <td>{`${width}x${height}`}</td>
                             </tr>
                             <tr>
-                                <td>Presets:</td>
+                                <td>{__('Presets', 'isset-video-publisher')}:</td>
                                 <td className="isset-video-preset-container">{presets.map(preset => <span className="isset-video-preset" key={`preset-${preset}`}>{preset}</span>)}</td>
                             </tr>
                         </tbody>

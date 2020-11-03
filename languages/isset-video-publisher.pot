@@ -1,130 +1,165 @@
-# Copyright (C) 2019 isset.video
-# This file is distributed under the same license as the Isset Video Publisher plugin package.
+# #-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.5.0)  #-#-#-#-#
+# Copyright (C) 2020 isset.video
+# This file is distributed under the same license as the isset.video plugin.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Isset Video Publisher plugin 0.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
-"POT-Creation-Date: 2019-07-16 13:04:28+00:00\n"
-"MIME-Version: 1.0\n"
+"#-#-#-#-#  isset-video-publisher-js.pot  #-#-#-#-#\n"
 "Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"X-Generator: babel-plugin-makepot\n"
+"#-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.5.0)  #-#-#-#-#\n"
+"Project-Id-Version: isset.video 0.5.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"X-Generator: grunt-wp-i18n 1.0.3\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-11-02T10:48:02+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: isset-video-publisher\n"
+"#-#-#-#-#  myplugin.pot  #-#-#-#-#\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
 
-#: inc/class.admin-page.php:56 inc/class.admin-page.php:57
-#: inc/class.admin-page.php:96
-msgid "isset.video settings"
-msgstr ""
-
-#: inc/class.admin-page.php:144
-msgid "Enter your settings below:"
-msgstr ""
-
-#: inc/class.isset-video-publisher-meta-box.php:26
-msgid "Publisher preview"
-msgstr ""
-
-#: inc/class.isset-video-publisher-meta-box.php:27
-msgid "Front page video"
-msgstr ""
-
-#: inc/class.isset-video-publisher-meta-box.php:35
-msgid "Use this shortcode in a post to include the video."
-msgstr ""
-
-#: inc/class.isset-video-publisher-meta-box.php:49
-msgid "Use as video on homepage."
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:313
-msgid "Your browser does not support the video tag."
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:315
-msgid "Video canot be loaded"
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:334
-msgid "Add New Video"
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:335
-msgid "Import from publisher"
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:336
-msgid "Edit Video"
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:337
-msgid "View Video"
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:338
-msgid "All Videos"
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:339
-msgid "Search Videos"
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:340
-msgid "Parent Videos:"
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:341
-msgid "No videos found."
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:342
-msgid "No videos found in Trash."
-msgstr ""
-
-#: inc/class.isset-video-publisher.php:347
-msgid "Description."
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "Isset Video Publisher plugin"
-msgstr ""
-
-#. Plugin URI of the plugin/theme
-msgid "http://isset.nl"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid ""
-"Video integration from the video publisher from Isset Internet "
-"Professionals"
-msgstr ""
-
-#. Author of the plugin/theme
+#. Plugin Name of the plugin
+#. Author of the plugin
 msgid "isset.video"
 msgstr ""
 
-#: inc/class.isset-video-publisher.php:329
-msgctxt "post type general name"
-msgid "Videos"
+#. Plugin URI of the plugin
+msgid "https://isset.video/wp-plugin/"
 msgstr ""
 
-#: inc/class.isset-video-publisher.php:330
-msgctxt "post type singular name"
-msgid "Video"
+#. Description of the plugin
+msgid "Wordpress isset.video implementation"
 msgstr ""
 
-#: inc/class.isset-video-publisher.php:331
-msgctxt "admin menu"
-msgid "Videos"
+#. Author URI of the plugin
+msgid "http://isset.nl/"
 msgstr ""
 
-#: inc/class.isset-video-publisher.php:332
-msgctxt "add new on admin bar"
-msgid "Video"
+#: src/Action/Settings/Init.php:52 src/Action/Settings/Menu.php:17
+#: src/Action/Settings/Menu.php:18
+msgid "isset.video settings"
 msgstr ""
 
-#: inc/class.isset-video-publisher.php:333
-msgctxt "video"
-msgid "Import from publisher"
+#: src/Action/Settings/Init.php:54 src/Action/Settings/Init.php:77
+msgid "Enter your settings below:"
+msgstr ""
+
+#: src/Action/Settings/Init.php:61
+msgid "Show advanced options"
+msgstr ""
+
+#: src/Action/Settings/Init.php:75
+msgid "Advanced settings"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:7
+#: views/admin/dashboard/dashboard.php:6
+msgid "Storage used"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:14
+#: views/admin/dashboard/dashboard.php:10
+msgid "Data streamed"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:23
+msgid "Logged in as"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:25
+#: views/admin/dashboard/dashboard.php:14 views/admin/page.php:6
+msgid "Logout"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:31
+msgid "Subscription type"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:48
+msgid "Views"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:49
+msgid "Data"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:70
+#: views/admin/dashboard/dashboard.php:18
+msgid "Login to isset.video"
+msgstr ""
+
+#: views/admin/dashboard/dashboard.php:3
+msgid "Logged in as %s"
+msgstr ""
+
+#: views/admin/dashboard/dashboard.php:15 views/admin/page.php:7
+#: views/admin/upload.php:42
+msgid "Go to videos"
+msgstr ""
+
+#: views/admin/input.php:6
+msgid "Unsupported type"
+msgstr ""
+
+#: views/admin/overview.php:7
+msgid "Your Videos"
+msgstr ""
+
+#: views/admin/page.php:4
+msgid "Hi, %s"
+msgstr ""
+
+#: views/admin/page.php:5
+msgid ""
+"You are now connected to my.isset.video. Click the button below to unlink "
+"your account and logout."
+msgstr ""
+
+#: views/admin/page.php:11 views/admin/page.php:13
+msgid "Connect to my.isset.video"
+msgstr ""
+
+#: views/admin/page.php:12
+msgid ""
+"Please connect your my.isset.video account by clicking the button below. We "
+"will redirect you to my.isset.video to ask for your permission."
+msgstr ""
+
+#: views/admin/upload.php:6
+msgid "Upload new video"
+msgstr ""
+
+#: views/admin/upload.php:19
+msgid "Drop one or more files here (4.3GB max) or browse your computer."
+msgstr ""
+
+#: views/admin/upload.php:22
+msgid "Upload"
+msgstr ""
+
+#: views/admin/upload.php:26
+msgid "Cancel upload"
+msgstr ""
+
+#: views/admin/upload.php:35
+msgid ""
+"Storage limit is already reached, please remove video's to upload again or "
+"upgrade your subscription"
+msgstr ""
+
+#: views/shortcode/publish-invalid.php:3
+msgid "Video is not available"
+msgstr ""
+
+#: views/shortcode/publish.php:7
+msgid "Your browser does not support the video tag."
+msgstr ""
+
+#: views/shortcode/publish.php:12
+msgid "Video cannot be loaded"
 msgstr ""

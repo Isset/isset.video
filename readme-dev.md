@@ -59,11 +59,6 @@ bin/setup-webpack
 
 Which will start a webpack watch job
 
-
-## Timber
-
-Timber is a tool that provides us a Twig environment and shortcuts, documentations can be found here: https://timber.github.io/docs/
-
 ## File structure
 
 ```
@@ -87,4 +82,28 @@ Timber is a tool that provides us a Twig environment and shortcuts, documentatio
     |   # scripts and other components happens here
     | - Plugin.php 
 ```
+
+## Translations ##
+
+To make this work we need to do the following steps:
+
+- Create translation files
+- Translate the labels
+- Compile translations to a .mo file
+
+#### Follow the steps below to accomplish this: ####
+
+To generate the .pot files we need the wp-cli commandline tool. Install it using the instructions found [here](https://make.wordpress.org/cli/handbook/guides/installing/).
+
+To create a new .pot file, run 
+
+```bash
+bin/create-translations
+```
+
+This will scan the plugin for labels being used, generate a .pot file for php and merge it with the js .pot file. (This is automatically being built by babel during transpilation).
+
+To translate the labels, I used an external tool called [POEdit](https://poedit.net/). Open the .po file for the locale you want to edit, and click Catalogue -> Update from POT file, and select `isset-video-publisher.pot`.
+
+This will add the missing labels to your list of translations. When you're done, you need to compile the translations to an .mo file. Do this by clicking File -> Compile to MO.
 

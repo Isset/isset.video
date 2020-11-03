@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import {setLocaleData} from '@wordpress/i18n';
 
 require('jquery');
 require('videojs-contrib-quality-levels');
@@ -36,4 +37,6 @@ window.addEventListener('load', () => {
         player.chromecast();
         player.airPlay();
     }
+
+    setLocaleData(window.issetVideoTranslations, 'isset-video-publisher');
 });

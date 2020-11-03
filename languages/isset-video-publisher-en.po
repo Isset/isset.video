@@ -1,4 +1,18 @@
-#: inc/class.admin-page.php:56 inc/class.admin-page.php:57
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-11-02T13:59:52+00:00\n"
+"PO-Revision-Date: 2020-11-02T13:59:52+00:00\n"
+"Language: \n"
+
+#: inc/class.admin-page.php:56
+#: inc/class.admin-page.php:57
 #: inc/class.admin-page.php:96
 msgid "isset.video settings"
 msgstr ""
@@ -80,8 +94,7 @@ msgid "http://isset.nl"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid ""
-"Video integration from the video publisher from isset.video"
+msgid "Video integration from the video publisher from isset.video"
 msgstr ""
 
 #. Author of the plugin/theme

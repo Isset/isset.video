@@ -51,12 +51,6 @@ async function ajax(url, token, method = 'GET', post = {}) {
     };
 
     if (Object.keys(post).length > 0) {
-        // let form = new FormData();
-        //
-        // for (const key of Object.keys(post)) {
-        //     form.set(key, post[key]);
-        // }
-
         options.body = JSON.stringify(post);
     }
 
