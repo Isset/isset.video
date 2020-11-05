@@ -48,7 +48,7 @@ class IssetVideoOverview extends React.Component {
         const {search, limit, orderBy, orderDirection} = this.state;
         const {root} = window.IssetVideoArchiveAjax;
 
-        archiveAjax(`api/folders/${root}/files`, {offset, limit, q: search, orderBy, orderDirection}).then(result => {
+        archiveAjax(`api/search`, {offset, limit, q: search, orderBy, orderDirection}).then(result => {
             const {offset, results, total} = result;
 
             if (results) {
@@ -159,7 +159,7 @@ class IssetVideoOverview extends React.Component {
                 </thead>
                 <tbody>
                     {results.map((result) => {
-                        const {uuid, filename, date_created, duration, preview, width, height, stills} = result.file;
+                        const {uuid, filename, date_created, duration, preview, width, height, stills} = result;
 
                         return <VideoItem
                             key={`isset-video-item-${uuid}`}

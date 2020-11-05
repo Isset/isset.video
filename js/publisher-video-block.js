@@ -61,7 +61,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                 suggestions = [];
             }
 
-            archiveAjax(`api/folders/${root}/files`, {
+            archiveAjax(`api/search`, {
                 q: searchTerm,
                 offset: lazyStep * 25,
             }).then(json => {
@@ -71,7 +71,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                     suggestions: [
                         ...suggestions,
                         ...results.map((result, index) => {
-                            result.processed = result.file.stills.length > 0;
+                            result.processed = result.stills.length > 0;
 
                             return result;
                         })
@@ -102,10 +102,10 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                 });
             }
             else {
-                const {file} = suggestion;
+                const {uuid} = suggestion;
 
-                archiveAjax(`api/files/${file.uuid}/details`).then(json => {
-                    const {publish: {publish_uuid}} = json;
+                archiveAjax(`api/files/${uuid}/details`).then(json => {
+                    const {publish: {publish_uuid}, file} = json;
 
                     setAttributes({
                         uuid: publish_uuid,
@@ -161,24 +161,24 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
 
         renderSuggestions(suggestions) {
             return suggestions.map(suggestion => {
-                const {file, processed} = suggestion;
+                const {processed, filename, stills} = suggestion;
 
                 if (!processed) {
                     return <div className="video-block-suggestions-wrapper">
                         <div className="isset-video-placeholder-container">
                             <div className="isset-video-thumb-placeholder">
-                                {file ? this.renderProcessingPlaceholder() : this.renderError()}
+                                {this.renderProcessingPlaceholder()}
                             </div>
                         </div>
-                        <span className="video-block-text">{file ? file.filename : __('File nof found', 'isset-video-publisher')}</span>
+                        <span className="video-block-text">{filename ? filename : __('File nof found', 'isset-video-publisher')}</span>
                     </div>;
                 }
 
                 return <div className="video-block-suggestions-wrapper" onClick={() => this.setValue(suggestion)}>
                     <div>
-                        {this.renderStill(file.stills)}
+                        {this.renderStill(stills)}
                     </div>
-                    <span className="video-block-text">{file.filename}</span>
+                    <span className="video-block-text">{filename}</span>
                 </div>;
             })
         }
