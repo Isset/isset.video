@@ -223,6 +223,22 @@
   .iv-t-align-left {
     text-align: left;
   }
+
+  .isset-video-search-container {
+    display: inline-block;
+    position: relative;
+
+    .dashicons {
+      color: #444;
+      position: absolute;
+      right: 6px;
+      top: 17px;
+
+      &.isset-video-clear:hover {
+        color: #f00;
+      }
+    }
+  }
 }
 
 .video-publisher-flex {
@@ -281,6 +297,21 @@
   margin-left: 0.75rem;
 }
 
+.video-publisher-mr-2 {
+  margin-right: 0.75rem;
+}
+
+.video-publisher-p-2 {
+  padding: 0.75rem !important;
+}
+
+.video-publisher-text-white {
+  color: #eee;
+}
+
+.video-publisher-inline-block {
+  display: inline-block;
+}
 
 .video-publisher-thumbnail-stills {
   align-self: flex-start;
@@ -305,6 +336,8 @@
 }
 
 .isset-video-search-input {
+  padding-left: 8px;
+  padding-right: 28px;
   height: 31px;
   margin-top: 12px;
   width: 400px;

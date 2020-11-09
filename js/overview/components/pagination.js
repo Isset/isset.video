@@ -45,8 +45,8 @@ class Pagination extends React.Component {
         const totalPages = this.calculateTotalPages(limit, total);
         const activePages = this.getActivePages(current, totalPages);
 
-        return <nav aria-label="pagination">
-            <ul className="isset-video-pagination mb-0">
+        return <nav aria-label="pagination" className="video-publisher-inline-block">
+            <ul className="isset-video-pagination video-publisher-mb-0">
                 {current > 4 && <li className="page-item"><a className="page-link" href="#" data-page={1} onClick={this.navigate}>&laquo;</a></li>}
                 {current > 1 && <li className="page-item"><a className="page-link" href="#" data-page={current - 1} onClick={this.navigate}>&lsaquo;</a></li>}
 

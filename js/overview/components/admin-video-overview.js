@@ -126,13 +126,18 @@ class IssetVideoOverview extends React.Component {
         });
     };
 
+    clearSearch = () => {
+        this.search = '';
+        this.setState({offset: 0, search: ''});
+    };
+
     render() {
         const {offset, results, total, limit, uuid, checkAll, orderDirection} = this.state;
         const {adminUrl} = window.IssetVideoPublisherAjax;
 
         return <div>
             {uuid && <AdminVideoDetails uuid={uuid} onClose={this.onCloseDetails} />}
-            <div className="video-publisher-flex video-publisher-flex-between">
+            <div className="video-publisher-flex video-publisher-flex-between video-publisher-mb-2">
                 <div>
                     <a className="isset-video-btn isset-video-upload-btn" href={`${adminUrl}admin.php?page=isset-video-upload`}>
                         <span className="dashicons dashicons-plus-alt" /> {__('Upload New', 'isset-video-publisher')}
@@ -140,9 +145,16 @@ class IssetVideoOverview extends React.Component {
                     <button className="isset-video-btn btn-danger isset-overview-delete" onClick={this.deleteChecked}>
                         <span className="dashicons dashicons-trash" /> {__('Delete Selected', 'isset-video-publisher')}
                     </button>
-                    <input className="isset-video-search-input" placeholder={__('Search', 'isset-video-publisher')} value={this.search} onChange={this.changeSearch} />
+                    <div className="isset-video-search-container">
+                        <input className="isset-video-search-input" placeholder={__('Search', 'isset-video-publisher')} value={this.search} onChange={this.changeSearch} />
+                        {!this.search && <span className="dashicons dashicons-search" />}
+                        {this.search && <span className="dashicons dashicons-no-alt isset-video-clear" onClick={this.clearSearch} />}
+                    </div>
                 </div>
-                <Pagination onNavigate={this.loadVideos} total={total} limit={limit} offset={offset} />
+                <div>
+                    <span className="video-publisher-inline-block video-publisher-mr-2 video-publisher-text-white">{__('Total results', 'isset-video-publisher')}: {total}</span>
+                    <Pagination onNavigate={this.loadVideos} total={total} limit={limit} offset={offset} />
+                </div>
             </div>
             <table className="iv-w-100 isset-video-overview-table">
                 <thead>
@@ -175,6 +187,11 @@ class IssetVideoOverview extends React.Component {
                             onCheck={this.toggleChecked}
                         />
                     })}
+                    {results.length === 0 && <tr className="iv-v-align-top">
+                        <td colSpan={6} className="video-publisher-p-2">
+                            {__('No publishes found', 'isset-video-publisher')}
+                        </td>
+                    </tr>}
                 </tbody>
             </table>
             <div className="video-publisher-flex video-publisher-flex-end">
