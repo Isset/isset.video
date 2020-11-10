@@ -51,7 +51,7 @@ class Plugin {
 	];
 
 	private $scripts = [
-		'js/main.js' => [ 'site', 'admin' ],
+		'js/main.js' => [ 'site' ],
 	];
 
 	private $styles = [

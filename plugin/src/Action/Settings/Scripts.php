@@ -21,9 +21,9 @@ class Scripts extends BaseAction {
 			return;
 		}
 
-		wp_enqueue_script( 'isset-video-publisher-edit', ISSET_VIDEO_PUBLISHER_URL . 'js/admin-video-edit.js', [ 'jquery' ], true );
+		wp_enqueue_script( 'isset-video-main', ISSET_VIDEO_PUBLISHER_URL . 'js/main.js', [ 'jquery' ], true );
 		wp_enqueue_script( 'isset-video-publisher-charts', ISSET_VIDEO_PUBLISHER_URL . 'js/admin-charts.js', [ 'jquery' ], true );
-		wp_localize_script( 'isset-video-publisher-edit', 'IssetVideoPublisherAjax', [
+		wp_localize_script( 'isset-video-main', 'IssetVideoPublisherAjax', [
 			'nonce'   => wp_create_nonce( 'isset-video' ),
             'restNonce'   => wp_create_nonce( 'wp_rest' ),
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
@@ -31,23 +31,20 @@ class Scripts extends BaseAction {
             'adminUrl' => admin_url(),
 		] );
 
-        wp_enqueue_script( 'isset-video-publisher', ISSET_VIDEO_PUBLISHER_URL . 'js/admin-video-edit.js' );
-        wp_localize_script('isset-video-publisher', 'issetVideoTranslations', $this->getTranslationLabels() );
-        wp_set_script_translations( 'isset-video-publisher', 'isset-video-publisher', 'isset-video-publisher/languages' );
+        wp_localize_script('isset-video-main', 'issetVideoTranslations', $this->getTranslationLabels() );
+        wp_set_script_translations( 'isset-video-main', 'isset-video-publisher', 'isset-video-publisher/languages' );
 
 		if ( ( isset( $_GET['page'] ) && $_GET['page'] === Plugin::MENU_MAIN_SLUG ) || ( isset( $arguments[0] ) && $this->editingOrNewPost( $arguments[0] ) ) ) {
             $videoArchiveService = $this->plugin->getVideoArchiveService();
             $videoPublishService = $this->plugin->getVideoPublisherService();
 
-            wp_enqueue_script( 'isset-video-archive', ISSET_VIDEO_PUBLISHER_URL . 'js/admin-video-edit.js' );
-            wp_localize_script( 'isset-video-archive', 'IssetVideoArchiveAjax', [
+            wp_localize_script( 'isset-video-main', 'IssetVideoArchiveAjax', [
                 'archiveUrl' => $videoArchiveService->getArchiveUrl(),
                 'archiveToken' => $videoArchiveService->getArchiveToken(),
                 'publisherUrl' => $videoPublishService->getPublisherURL(),
                 'publisherToken' => $videoPublishService->getPublisherToken(),
                 'root' => $videoArchiveService->getArchiveRoot(),
             ] );
-
         }
 	}
 
