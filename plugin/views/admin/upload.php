@@ -12,15 +12,16 @@
                 <div class="phase-select">
                     <div class="phase-select-dropzone">
                         <input multiple accept="video/mp4,video/x-m4v,video/*" type="file">
-                        <div class="text-wrapper">
-                            <span class="dashicons dashicons-download download-icon"></span>
-                        </div>
-                        <div class="text-wrapper">
-                            <p><?php _e( 'Drop one or more files here (4.3GB max) or browse your computer.', 'isset-video-publisher' ); ?></p>
+                        <div class="selected-files-container video-publisher-p-2" id="phase-select-file">
+                            <div class="text-wrapper">
+                                <span class="dashicons dashicons-download download-icon"></span>
+                            </div>
+                            <div class="text-wrapper">
+                                <p><?php _e( 'Drop one or more files here (4.3GB max) or browse your computer.', 'isset-video-publisher' ); ?></p>
+                            </div>
                         </div>
                     </div>
                     <button class="isset-video-btn"><?php _e( 'Upload', 'isset-video-publisher' ); ?></button>
-                    <div class="selected-files-container" id="phase-select-file"></div>
                 </div>
                 <div class="phase-upload">
                     <button id="btnCancelUpload" class="isset-video-btn btn-danger"><?php _e( 'Cancel upload', 'isset-video-publisher' ); ?></button>

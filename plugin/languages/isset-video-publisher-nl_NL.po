@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
 "POT-Creation-Date: 2020-11-09T14:18:31+00:00\n"
-"PO-Revision-Date: 2020-11-09 15:19+0100\n"
+"PO-Revision-Date: 2020-11-10 11:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -114,7 +114,10 @@ msgstr "Upgeload"
 
 #: js/admin-video-upload.js:80
 msgid "Your files will be queued for transcoding"
-msgstr "Uw bestanden worden in de wachtrij gezet om te worden verwerkt"
+msgstr ""
+"Uw bestanden worden gearchiveerd en omgezet om ze geschikt te maken voor "
+"video streamen. Dit kan enige tijd duren, afhankelijk van bestandsgrootte "
+"en afspeeltijd van het videobestand"
 
 #: js/publisher-video-block.js:158
 msgid "Error"

@@ -1,11 +1,17 @@
 import "../scss/upload.scss"
 import {updateFaviconProgress} from "./progress-favicon";
 import Flow from '@flowjs/flow.js';
-import {__} from '@wordpress/i18n';
 
+window.addEventListener('load', () => {
 jQuery(($) => {
     if (adminpage && adminpage !== 'videos_page_isset-video-upload') {
         return;
+    }
+
+    // The __ function from wp.i18n REFUSES to work
+    function __(key) {
+        // noinspection JSUnresolvedVariable
+        return issetVideoTranslations[key] ? issetVideoTranslations[key][0] : key;
     }
 
     // noinspection JSUnresolvedVariable
@@ -65,18 +71,21 @@ jQuery(($) => {
                 </div><hr>`);
         }
 
-        let promises =  [];
-        for (const file of fileList) {
-            promises.push(uploadFileToUploader(fileList.indexOf(file)));
+        let promises = [];
+        const initNumberOfFiles = 3;
+        const iterations = initNumberOfFiles < fileList.length ? initNumberOfFiles - 1 : fileList.length;
+
+        for (let i = 0; i < iterations; i++) {
+            promises.push(uploadFileToUploader(i));
         }
-        await Promise.all(promises);
+
+        await throttleUploads(promises, fileList, iterations);
 
         $(window).off('beforeunload');
 
         $('#btnCancelUpload').hide();
         $('.phase-done')
             .html("")
-            .append(__('Uploaded', 'isset-video-publisher') + ' ', $('<span>').text(fileList.map(file => file.name).join(', ')))
             .append($('<p class="isset-video-upload-success">').text(__('Your files will be queued for transcoding', 'isset-video-publisher')))
             .show();
         $('.card-footer').show();
@@ -87,6 +96,20 @@ jQuery(($) => {
     $('#btnCancelUpload').click(function () {
         location.reload();
     });
+
+    async function throttleUploads(promises, fileList, index) {
+        if (promises.length < fileList.length) {
+            promises.push(uploadFileToUploader(index));
+
+            await Promise.any(promises).then(() => throttleUploads(promises, fileList, index + 1));
+        } else {
+            return new Promise((resolve, reject) => {
+                Promise.all(promises)
+                    .then(() => resolve())
+                    .catch((err) => reject(err));
+            });
+        }
+    }
 
     async function uploadFileToUploader(fileIndex) {
         let flow = new Flow({
@@ -188,4 +211,5 @@ jQuery(($) => {
 
         return Math.round(total / (numberOfUploads * 100) * 100);
     }
+});
 });
