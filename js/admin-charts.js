@@ -45,7 +45,7 @@ jQuery(($) => {
         'rgb(80,158,210)'
     ];
 
-    if (adminpage === "toplevel_page_isset-video-overview") {
+    if (typeof adminpage !== 'undefined' && adminpage === "toplevel_page_isset-video-overview") {
         const {restNonce} = IssetVideoPublisherAjax;
 
         let streamingViewsData = $('#videoPublisherStreamingViews').children();
