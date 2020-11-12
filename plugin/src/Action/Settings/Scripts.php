@@ -57,8 +57,10 @@ class Scripts extends BaseAction {
         global $l10n;
         $translations = [];
 
-        foreach( $l10n['isset-video-publisher']->entries as $key=>$entry ) {
-            $translations[$key] = $entry->translations;
+        if ($l10n) {
+            foreach( $l10n['isset-video-publisher']->entries as $key=>$entry ) {
+                $translations[$key] = $entry->translations;
+            }
         }
 
         return $translations;

@@ -23,7 +23,7 @@ Setting up your dev environment can be done by running
 bin/setup
 ```
 
-This will install wordpress and the [Timber](https://timber.github.io/docs/) plugin into `.docker-context`
+This will install wordpress into `.docker-context`
 You will need to change a setting in wp-config.php
 ```$xslt
 define('FS_METHOD','direct');
