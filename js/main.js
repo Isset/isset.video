@@ -32,7 +32,6 @@ window.addEventListener('load', () => {
                 }
             },
         });
-        console.log(video, player);
 
         player.chromecast();
         player.airPlay();
