@@ -3,7 +3,7 @@ Contributors: rommertvantil, peekopeeko
 Tags: external video, cdn, video processing, hls video
 Plugin URI: https://isset.video/wp-plugin/
 Requires at least: 5.0
-Tested up to: 5.4
+Tested up to: 5.5.3
 Requires PHP: 7.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,8 +24,7 @@ The plugin itself is free. For the storing and streaming your video we have a pr
 You can create an account right here: <https://my.isset.video/register>
 After installing the plugin you can connect using the button in the settings.
 = What dependencies does the WordPress plugin have? =
-We decided to use Timber to make our lives as developer a bit more convenient.
-Find out more about Timber on their homepage: <https://www.upstatement.com/timber/>.
+None
 
 == Changelog ==
 For the plugin's changelog, please check out the full list of changes on [GitHub](https://github.com/Isset/isset.video).
