@@ -107,3 +107,23 @@ To translate the labels, I used an external tool called [POEdit](https://poedit.
 
 This will add the missing labels to your list of translations. When you're done, you need to compile the translations to an .mo file. Do this by clicking File -> Compile to MO.
 
+## Codestyles ##
+
+Install WP codestandards and PHP CodeSniffer:
+
+```bash
+composer install
+```
+
+Check:
+
+```bash
+make cscheck
+```
+
+Automatically Fix:
+
+```bash
+make csfix
+```
+
