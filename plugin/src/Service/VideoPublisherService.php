@@ -79,6 +79,10 @@ class VideoPublisherService extends BaseHttpService {
 	}
 
 	public function shouldShowAdvancedOptions() {
+		if ( isset( $_GET['advanced'] ) && $_GET['advanced'] === 'true' ) {
+			return true;
+		}
+
 		return $this->getOption( 'show_advanced_options', false );
 	}
 
@@ -203,10 +207,6 @@ class VideoPublisherService extends BaseHttpService {
 
 	private function issetVideoGet( $path ) {
 		return $this->myIssetGet( $path );
-	}
-
-	public function fetchUploadInfo( $id ) {
-		return $this->publisherGet( '/api/uploads/' . urlencode( $id ) . '/status' );
 	}
 
 	public function fetchStats() {

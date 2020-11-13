@@ -14,3 +14,13 @@
         </div>
     <?php endif; ?>
 </div>
+
+<?php if ( $show_advanced_settings ): ?>
+    <form method="post" action="options.php">
+        <div class="card">
+            <?php settings_fields('video_publisher_settings'); ?>
+            <?php do_settings_sections('publisher-admin'); ?>
+            <?php submit_button(); ?>
+        </div>
+    </form>
+<?php endif; ?>
