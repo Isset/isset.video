@@ -1,2 +1,4 @@
+cscheck:
+	./vendor/bin/phpcs --standard=WordPress-Extra,WordPress-Docs  ./plugin/src/
 csfix:
-	./vendor/bin/phpcs --standard=WordPress-Extra,WordPress-Docs  ./plugin/src/Plugin.php
+	./vendor/bin/phpcbf --standard=WordPress-Extra,WordPress-Docs  ./plugin/src/

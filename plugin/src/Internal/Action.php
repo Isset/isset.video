@@ -3,7 +3,6 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Internal;
 
-
 class Action {
 	private $controller;
 	private $method;
@@ -28,9 +27,9 @@ class Action {
 			throw new \RuntimeException( "Function $name doesn't exist on " . get_class( $this->controller ) );
 		}
 
-		return [
+		return array(
 			'methods'             => $this->method,
-			'callback'            => [ $this->controller, $name ],
+			'callback'            => array( $this->controller, $name ),
 			'permission_callback' => function () {
 				foreach ( $this->permissions as $permission ) {
 					if ( ! current_user_can( $permission ) ) {
@@ -39,7 +38,7 @@ class Action {
 				}
 
 				return true;
-			}
-		];
+			},
+		);
 	}
 }

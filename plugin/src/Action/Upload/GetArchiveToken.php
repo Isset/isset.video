@@ -3,7 +3,6 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Action\Upload;
 
-
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
 
 class GetArchiveToken extends BaseAction {
@@ -16,10 +15,12 @@ class GetArchiveToken extends BaseAction {
 	 */
 	function execute( $arguments ) {
 		check_ajax_referer( 'isset-video' );
-		header( "Content-Type", "application/json" );
-		echo json_encode( [
-			"token" => $this->plugin->getVideoPublisherService()->exchangeToken( 'archive' )
-		] );
+		header( 'Content-Type', 'application/json' );
+		echo json_encode(
+			array(
+				'token' => $this->plugin->getVideoPublisherService()->exchangeToken( 'archive' ),
+			)
+		);
 		exit;
 	}
 

@@ -3,100 +3,99 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Service;
 
-
 use WP_Http;
 
-abstract class BaseHttpService
-{
-    public abstract function removeAuthToken();
+abstract class BaseHttpService {
 
-    protected function get( $baseUrl, $path, $token, $platform ) {
-        if ( $token === false ) {
-            return false;
-        }
+	abstract public function removeAuthToken();
 
-        $url      = rtrim( $baseUrl, '/' ) . $path;
-        $response = wp_remote_get(
-            $url,
-            [
-                'headers' => [
-                    'x-token-auth'     => $token,
-                    'x-token-platform' => $platform,
-                ],
-            ]
-        );
+	protected function get( $baseUrl, $path, $token, $platform ) {
+		if ( $token === false ) {
+			return false;
+		}
 
-        if ( ! $this->isResponseValid( 'GET', $url, $response ) ) {
-            return false;
-        }
+		$url      = rtrim( $baseUrl, '/' ) . $path;
+		$response = wp_remote_get(
+			$url,
+			array(
+				'headers' => array(
+					'x-token-auth'     => $token,
+					'x-token-platform' => $platform,
+				),
+			)
+		);
 
-        return json_decode( $response['body'], true );
-    }
+		if ( ! $this->isResponseValid( 'GET', $url, $response ) ) {
+			return false;
+		}
 
-    protected function post( $baseUrl, $path, $token, $data, $platform ) {
-        if ( $token === false ) {
-            return false;
-        }
+		return json_decode( $response['body'], true );
+	}
 
-        $url      = rtrim( $baseUrl, '/' ) . $path;
-        $response = wp_remote_post(
-            $url,
-            [
-                'headers' => [
-                    'x-token-auth'     => $token,
-                    'x-token-platform' => $platform,
-                ],
-                'body' => wp_json_encode( $data ),
-            ]
-        );
+	protected function post( $baseUrl, $path, $token, $data, $platform ) {
+		if ( $token === false ) {
+			return false;
+		}
 
-        if ( ! $this->isResponseValid( 'POST', $url, $response ) ) {
-            return false;
-        }
+		$url      = rtrim( $baseUrl, '/' ) . $path;
+		$response = wp_remote_post(
+			$url,
+			array(
+				'headers' => array(
+					'x-token-auth'     => $token,
+					'x-token-platform' => $platform,
+				),
+				'body'    => wp_json_encode( $data ),
+			)
+		);
 
-        return json_decode( $response['body'], true );
-    }
+		if ( ! $this->isResponseValid( 'POST', $url, $response ) ) {
+			return false;
+		}
 
-    protected function delete( $baseUrl, $path, $token, $platform ) {
-        if ( $token === false ) {
-            return false;
-        }
+		return json_decode( $response['body'], true );
+	}
 
-        $client   = new WP_Http();
-        $url      = rtrim( $baseUrl, '/' ) . $path;
-        $response = $client->request(
-            $url,
-            [
-                'method'  => 'DELETE',
-                'headers' => [
-                    'x-token-auth'     => $token,
-                    'x-token-platform' => $platform,
-                ],
-            ]
-        );
+	protected function delete( $baseUrl, $path, $token, $platform ) {
+		if ( $token === false ) {
+			return false;
+		}
 
-        if ( ! $this->isResponseValid( 'DELETE', $url, $response ) ) {
-            return false;
-        }
+		$client   = new WP_Http();
+		$url      = rtrim( $baseUrl, '/' ) . $path;
+		$response = $client->request(
+			$url,
+			array(
+				'method'  => 'DELETE',
+				'headers' => array(
+					'x-token-auth'     => $token,
+					'x-token-platform' => $platform,
+				),
+			)
+		);
 
-        return true;
-    }
+		if ( ! $this->isResponseValid( 'DELETE', $url, $response ) ) {
+			return false;
+		}
 
-    public function isResponseValid( $method, $url, $response ) {
-        if ( is_wp_error( $response ) ) {
-            return false;
-        }
+		return true;
+	}
 
-        $response_code = wp_remote_retrieve_response_code( $response );
-        if ( $response_code === 200 ) {
-            return true;
-        }
+	public function isResponseValid( $method, $url, $response ) {
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
 
-        if ( $response_code === 401 || $response_code === 403 ) {
-            error_log( "Logged out for $method $url [$response_code]" );
-            $this->removeAuthToken();
-        }
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( $response_code === 200 ) {
+			return true;
+		}
 
-        return true;
-    }
+		if ( $response_code === 401 || $response_code === 403 ) {
+			error_log( "Logged out for $method $url [$response_code]" );
+			$this->removeAuthToken();
+		}
+
+		return true;
+	}
 }

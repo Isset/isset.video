@@ -3,7 +3,6 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Widgets;
 
-
 abstract class BaseWidget {
 	abstract public function getWidgetId();
 
@@ -11,14 +10,12 @@ abstract class BaseWidget {
 
 	abstract public function execute( $args );
 
-	public function controlCallback()
-	{
-		return null;
+	public function controlCallback() {
+		 return null;
 	}
 
-	public function getArgs()
-	{
-		return 1;
+	public function getArgs() {
+		 return 1;
 	}
 
 	public function __invoke( ...$args ) {

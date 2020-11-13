@@ -6,7 +6,7 @@ namespace IssetBV\VideoPublisher\Wordpress\Shortcode;
 use IssetBV\VideoPublisher\Wordpress\Plugin;
 
 abstract class ShortcodeBase {
-	const CODE = "noop";
+	const CODE = 'noop';
 	protected $plugin;
 
 	public function __construct( Plugin $plugin ) {

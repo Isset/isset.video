@@ -17,59 +17,58 @@ use IssetBV\VideoPublisher\Wordpress\Widgets\BaseWidget;
 use IssetBV\VideoPublisher\Wordpress\Widgets\Dashboard;
 
 class Plugin {
-    const MENU_MAIN_SLUG = 'isset-video-overview';
-    const MENU_UPLOAD_SLUG = 'isset-video-upload';
+	const MENU_MAIN_SLUG   = 'isset-video-overview';
+	const MENU_UPLOAD_SLUG = 'isset-video-upload';
 
-    static $instance;
+	static $instance;
 
 	/**
 	 * @var VideoPublisherService
 	 */
 	private $videoPublisherService;
 
-    /**
-     * @var VideoArchiveService
-     */
-    private $videoArchiveService;
+	/**
+	 * @var VideoArchiveService
+	 */
+	private $videoArchiveService;
 
-	private $shortcodes = [
+	private $shortcodes = array(
 		Publish::class,
-	];
+	);
 
-	private $actions = [
+	private $actions = array(
 		HijackRouter::class,
-        Settings\Init::class,
+		Settings\Init::class,
 		Settings\Menu::class,
 		Upload\GenerateUploadUrl::class,
-        Upload\GetArchiveToken::class,
-        Upload\GetArchiveUrl::class,
-        Upload\GetUploaderUrl::class,
-        CreateArchiveFile::class,
-	];
+		Upload\GetArchiveToken::class,
+		Upload\GetArchiveUrl::class,
+		Upload\GetUploaderUrl::class,
+		CreateArchiveFile::class,
+	);
 
-	private $endpoints = [
-	];
+	private $endpoints = array();
 
-	private $scripts = [
-		'js/main.js' => [ 'site' ],
-	];
+	private $scripts = array(
+		'js/main.js' => array( 'site' ),
+	);
 
-	private $styles = [
-		'css/main.css' => [ 'site', 'admin' ],
-	];
+	private $styles = array(
+		'css/main.css' => array( 'site', 'admin' ),
+	);
 
-	private $dashboardWidgets = [
-		Dashboard::class
-	];
+	private $dashboardWidgets = array(
+		Dashboard::class,
+	);
 
-	private $helpers = [
-	    'Statistics',
-    ];
+	private $helpers = array(
+		'Statistics',
+	);
 
-	const PUBLISHER_URL = 'https://test.publish.isset.video/';
+	const PUBLISHER_URL      = 'https://test.publish.isset.video/';
 	const MY_ISSET_VIDEO_URL = 'https://test.my.isset.video/';
-	const ARCHIVE_URL = 'https://test.archive.isset.video/';
-	const UPLOADER_BASE_URL = 'https://test.upload.isset.video/';
+	const ARCHIVE_URL        = 'https://test.archive.isset.video/';
+	const UPLOADER_BASE_URL  = 'https://test.upload.isset.video/';
 
 	public static function instance() {
 		if ( self::$instance === null ) {
@@ -80,7 +79,7 @@ class Plugin {
 	}
 
 	public function init() {
-        $this->initSession();
+		$this->initSession();
 		$this->addShortcodes();
 		$this->initScripts();
 		$this->loadTranslations();
@@ -106,7 +105,7 @@ class Plugin {
 		wp_enqueue_script(
 			'isset-video-publisher-' . $script,
 			ISSET_VIDEO_PUBLISHER_URL . '/' . $script,
-			[],
+			array(),
 			ISSET_VIDEO_PUBLISHER_VERSION . '-' . filemtime( ISSET_VIDEO_PUBLISHER_PATH . '/' . $script ),
 			true
 		);
@@ -127,13 +126,19 @@ class Plugin {
 	}
 
 	private function initScripts() {
-		add_action( 'admin_enqueue_scripts', function () {
-			$this->enqueueScripts( 'admin' );
-		} );
+		add_action(
+			'admin_enqueue_scripts',
+			function () {
+				$this->enqueueScripts( 'admin' );
+			}
+		);
 
-		add_action( 'wp_enqueue_scripts', function () {
-			$this->enqueueScripts( 'site' );
-		} );
+		add_action(
+			'wp_enqueue_scripts',
+			function () {
+				$this->enqueueScripts( 'site' );
+			}
+		);
 	}
 
 	private function loadTranslations() {
@@ -147,10 +152,10 @@ class Plugin {
 	}
 
 	private function loadHelpers() {
-        foreach ( $this->helpers as $helper ) {
-            include_once(ISSET_VIDEO_PUBLISHER_PATH . 'src/Helpers/' . $helper . '.php');
-        }
-    }
+		foreach ( $this->helpers as $helper ) {
+			include_once ISSET_VIDEO_PUBLISHER_PATH . 'src/Helpers/' . $helper . '.php';
+		}
+	}
 
 	/**
 	 * @return VideoPublisherService
@@ -163,16 +168,16 @@ class Plugin {
 		return $this->videoPublisherService;
 	}
 
-    /**
-     * @return VideoArchiveService
-     */
-    public function getVideoArchiveService() {
-        if ( $this->videoArchiveService === null ) {
-            $this->videoArchiveService = new VideoArchiveService( $this );
-        }
+	/**
+	 * @return VideoArchiveService
+	 */
+	public function getVideoArchiveService() {
+		if ( $this->videoArchiveService === null ) {
+			$this->videoArchiveService = new VideoArchiveService( $this );
+		}
 
-        return $this->videoArchiveService;
-    }
+		return $this->videoArchiveService;
+	}
 
 	public function getFrontPageId() {
 		return get_option( 'isset-video-publisher-frontpage-id' );
@@ -180,15 +185,6 @@ class Plugin {
 
 	public function setFrontPageId( $id ) {
 		return update_option( 'isset-video-publisher-frontpage-id', $id, true );
-	}
-
-	/**
-	 * @param $class
-	 *
-	 * @return BaseEntrypoint
-	 */
-	public function entrypoint( $class ) {
-		return new $class( $this );
 	}
 
 	public function action( $action ) {
@@ -202,19 +198,26 @@ class Plugin {
 	}
 
 	public function initRest() {
-		add_action( 'rest_api_init', function () {
-			foreach ( $this->endpoints as $endpoint ) {
-				/** @var BaseEndpoint $endpointObj */
-				$endpointObj = $this->endpoint( $endpoint );
-				register_rest_route( 'isset-publisher/v1', $endpointObj->getRoute(), [
-					'methods'  => $endpointObj->getMethod(),
-					'callback' => $endpointObj,
-                    'permission_callback' => function () {
-				        return current_user_can( 'edit_posts' );
-                    }
-				] );
+		add_action(
+			'rest_api_init',
+			function () {
+				foreach ( $this->endpoints as $endpoint ) {
+					/** @var BaseEndpoint $endpointObj */
+					$endpointObj = $this->endpoint( $endpoint );
+					register_rest_route(
+						'isset-publisher/v1',
+						$endpointObj->getRoute(),
+						array(
+							'methods'             => $endpointObj->getMethod(),
+							'callback'            => $endpointObj,
+							'permission_callback' => function () {
+								return current_user_can( 'edit_posts' );
+							},
+						)
+					);
+				}
 			}
-		} );
+		);
 	}
 
 	private function initBlocks() {
@@ -225,19 +228,22 @@ class Plugin {
 		wp_register_script(
 			"isset-video-publisher-{$name}",
 			plugins_url( "../js/publisher-{$name}.js", __FILE__ ),
-			[ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ]
+			array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' )
 		);
 
 		wp_register_style(
 			"isset-video-publisher-{$name}-style",
 			plugins_url( '../css/main.css', __FILE__ ),
-			[ 'wp-edit-blocks' ]
+			array( 'wp-edit-blocks' )
 		);
 
-		register_block_type( "isset-video-publisher/{$name}", [
-			'editor_script' => "isset-video-publisher-{$name}",
-			'editor_style'  => "isset-video-publisher-{$name}-style"
-		] );
+		register_block_type(
+			"isset-video-publisher/{$name}",
+			array(
+				'editor_script' => "isset-video-publisher-{$name}",
+				'editor_style'  => "isset-video-publisher-{$name}-style",
+			)
+		);
 	}
 
 	public function filter( $filter ) {
@@ -250,17 +256,20 @@ class Plugin {
 		wp_enqueue_style(
 			'isset-video-publisher-' . $style,
 			ISSET_VIDEO_PUBLISHER_URL . '/' . $style,
-			[],
+			array(),
 			ISSET_VIDEO_PUBLISHER_VERSION . '-' . filemtime( ISSET_VIDEO_PUBLISHER_PATH . '/' . $style )
 		);
 	}
 
 	private function initDashboardWidgets() {
-		add_action( 'wp_dashboard_setup', function () {
-			foreach ( $this->dashboardWidgets as $widget ) {
-				$this->dashboardWidget( $widget );
+		add_action(
+			'wp_dashboard_setup',
+			function () {
+				foreach ( $this->dashboardWidgets as $widget ) {
+					$this->dashboardWidget( $widget );
+				}
 			}
-		} );
+		);
 	}
 
 	public function dashboardWidget( $widget ) {
@@ -275,106 +284,107 @@ class Plugin {
 		return new $endpoint( $this );
 	}
 
-    private function initSession() {
-        if ( ! session_id() ) {
-            session_start();
-        }
-    }
-
-    public function addMenuItems() {
-        $this->addOverviewItem();
-        $this->addNewVideoItem();
-    }
-
-    public function getOverviewPageUrl() {
-	    return admin_url( 'admin.php?page=' . self::MENU_MAIN_SLUG );
-    }
-
-    public function getUploadUrl() {
-	    return admin_url( 'admin.php?page=' . self::MENU_UPLOAD_SLUG );
-    }
-
-    public function renderOverviewPage() {
-        $vps     = $this->getVideoPublisherService();
-        $context = [];
-        $context['logged_in'] = $vps->isLoggedIn();
-
-        if ( $context['logged_in'] ) {
-            $context['uploadUrl'] = $this->getUploadUrl();
-            $context['chart'] = $this->renderChart();
-
-            echo Renderer::render( 'admin/overview.php', $context );
-        } else {
-            $context['login_url'] = $vps->getLoginURL();
-
-            echo Renderer::render( 'admin/page.php', $context );
-        }
+	private function initSession() {
+		if ( ! session_id() ) {
+			session_start();
+		}
 	}
 
-    public function renderUploadPage() {
-        $service = new VideoPublisherService($this);
+	public function addMenuItems() {
+		$this->addOverviewItem();
+		$this->addNewVideoItem();
+	}
 
-        $data = [];
-        $data['logged_in'] = $service->isLoggedIn();
-        $data['uploading_allowed'] = $service->uploadingAllowed();
-        $data['video_url'] = $this->getOverviewPageUrl();
+	public function getOverviewPageUrl() {
+		return admin_url( 'admin.php?page=' . self::MENU_MAIN_SLUG );
+	}
 
-        if ( $data['logged_in'] ) {
-            echo Renderer::render('admin/upload.php', $data);
-        } else {
-            $data['login_url'] = $service->getLoginURL();
+	public function getUploadUrl() {
+		return admin_url( 'admin.php?page=' . self::MENU_UPLOAD_SLUG );
+	}
 
-            echo Renderer::render( 'admin/page.php', $data );
-        }
-    }
+	public function renderOverviewPage() {
+		$vps                  = $this->getVideoPublisherService();
+		$context              = array();
+		$context['logged_in'] = $vps->isLoggedIn();
 
-    private function addOverviewItem()
-    {
-        $page_title = 'Isset Videos';
-        $menu_title = 'Videos';
-        $capability = 'manage_options';
-        $menu_slug  = self::MENU_MAIN_SLUG;
-        $function   = function() { $this->renderOverviewPage(); };
-        $icon_url   = 'dashicons-video-alt';
-        $position   = 11;
+		if ( $context['logged_in'] ) {
+			$context['uploadUrl'] = $this->getUploadUrl();
+			$context['chart']     = $this->renderChart();
 
-        add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
-    }
+			echo Renderer::render( 'admin/overview.php', $context );
+		} else {
+			$context['login_url'] = $vps->getLoginURL();
 
-    private function addNewVideoItem()
-    {
-        $this->enqueueScript( 'js/admin-video-upload.js' );
-        $this->enqueueStyle( 'css/admin-video-upload.css' );
+			echo Renderer::render( 'admin/page.php', $context );
+		}
+	}
 
-        $page_title = 'Upload New Videos';
-        $menu_title = 'New Video';
-        $capability = 'manage_options';
-        $parent_slug = self::MENU_MAIN_SLUG;
-        $function   = function() { $this->renderUploadPage(); };
+	public function renderUploadPage() {
+		$service = new VideoPublisherService( $this );
 
-        add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, self::MENU_UPLOAD_SLUG, $function );
-    }
+		$data                      = array();
+		$data['logged_in']         = $service->isLoggedIn();
+		$data['uploading_allowed'] = $service->uploadingAllowed();
+		$data['video_url']         = $this->getOverviewPageUrl();
 
-    private function renderChart()
-    {
-        $service = $this->getVideoPublisherService();
+		if ( $data['logged_in'] ) {
+			echo Renderer::render( 'admin/upload.php', $data );
+		} else {
+			$data['login_url'] = $service->getLoginURL();
 
-        $context['isLoggedIn'] = $service->isLoggedIn();
+			echo Renderer::render( 'admin/page.php', $data );
+		}
+	}
 
-        if ( $context['isLoggedIn'] ) {
-            $userInfo = $service->getUserInfo();
+	private function addOverviewItem() {
+		$page_title = 'Isset Videos';
+		$menu_title = 'Videos';
+		$capability = 'manage_options';
+		$menu_slug  = self::MENU_MAIN_SLUG;
+		$function   = function() {
+			$this->renderOverviewPage();
+		};
+		$icon_url   = 'dashicons-video-alt';
+		$position   = 11;
 
-            $context['user']               = $userInfo;
-            $context['logout_url']         = $service->getLogoutURL();
-            $context['videos_url']         = $this->getOverviewPageUrl();
-            $context['stats']              = $service->fetchStats();
-            $context['usage']              = $service->fetchUsage();
-            $context['subscription_limit'] = $service->fetchSubscriptionLimit();
-            $context['isset_video_url']    = $service->getMyIssetVideoURL();
-        } else {
-            $context['login_url'] = $service->getLoginURL();
-        }
+		add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
+	}
 
-        return Renderer::render( 'admin/dashboard/api-dashboard.php', $context );
-    }
+	private function addNewVideoItem() {
+		$this->enqueueScript( 'js/admin-video-upload.js' );
+		$this->enqueueStyle( 'css/admin-video-upload.css' );
+
+		$page_title  = 'Upload New Videos';
+		$menu_title  = 'New Video';
+		$capability  = 'manage_options';
+		$parent_slug = self::MENU_MAIN_SLUG;
+		$function    = function() {
+			$this->renderUploadPage();
+		};
+
+		add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, self::MENU_UPLOAD_SLUG, $function );
+	}
+
+	private function renderChart() {
+		$service = $this->getVideoPublisherService();
+
+		$context['isLoggedIn'] = $service->isLoggedIn();
+
+		if ( $context['isLoggedIn'] ) {
+			$userInfo = $service->getUserInfo();
+
+			$context['user']               = $userInfo;
+			$context['logout_url']         = $service->getLogoutURL();
+			$context['videos_url']         = $this->getOverviewPageUrl();
+			$context['stats']              = $service->fetchStats();
+			$context['usage']              = $service->fetchUsage();
+			$context['subscription_limit'] = $service->fetchSubscriptionLimit();
+			$context['isset_video_url']    = $service->getMyIssetVideoURL();
+		} else {
+			$context['login_url'] = $service->getLoginURL();
+		}
+
+		return Renderer::render( 'admin/dashboard/api-dashboard.php', $context );
+	}
 }

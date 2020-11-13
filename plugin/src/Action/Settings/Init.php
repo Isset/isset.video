@@ -3,7 +3,6 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Action\Settings;
 
-
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
 use IssetBV\VideoPublisher\Wordpress\Renderer;
 
@@ -25,20 +24,18 @@ class Init extends BaseAction {
 			'video_publisher_settings', // Option group
 			'isset-video-publisher-options', // Option name
 			function ( $input ) {
-				$new_input = [];
+				$new_input = array();
 				if ( isset( $input['show_advanced_options'] ) ) {
-					$new_input['show_advanced_options'] = sanitize_text_field( $input['show_advanced_options'] ) === "1";
+					$new_input['show_advanced_options'] = sanitize_text_field( $input['show_advanced_options'] ) === '1';
 				}
 
 				if ( isset( $input['my_isset_video_url'] ) ) {
 					$new_input['my_isset_video_url'] = sanitize_text_field( $input['my_isset_video_url'] );
 				}
 
-
 				if ( isset( $input['publisher_url'] ) ) {
 					$new_input['publisher_url'] = sanitize_text_field( $input['publisher_url'] );
 				}
-
 
 				return $new_input;
 			}
@@ -57,13 +54,18 @@ class Init extends BaseAction {
 		);
 
 		add_settings_field(
-			"show_advanced_options", // ID
+			'show_advanced_options', // ID
 			__( 'Show advanced options', 'isset-video-publisher' ), // Title
 			function () {
 				$issetVideoPublisher = $this->plugin->getVideoPublisherService();
-				$this->renderInput( "show_advanced_options", "1", "checkbox", [
-					'checked' => $issetVideoPublisher->shouldShowAdvancedOptions()
-				] );
+				$this->renderInput(
+					'show_advanced_options',
+					'1',
+					'checkbox',
+					array(
+						'checked' => $issetVideoPublisher->shouldShowAdvancedOptions(),
+					)
+				);
 			},
 			'publisher-admin', // Page
 			$default_section // Section
@@ -79,24 +81,23 @@ class Init extends BaseAction {
 				'publisher-admin' // Page
 			);
 
-
 			add_settings_field(
-				"my_isset_video_url", // ID
+				'my_isset_video_url', // ID
 				'My isset video URL', // Name
 				function () {
 					$issetVideoPublisher = $this->plugin->getVideoPublisherService();
-					$this->renderInput( "my_isset_video_url", $issetVideoPublisher->getMyIssetVideoURL() );
+					$this->renderInput( 'my_isset_video_url', $issetVideoPublisher->getMyIssetVideoURL() );
 				},
 				'publisher-admin', // Page
 				$advanced_section // Section
 			);
 
 			add_settings_field(
-				"publisher_url", // ID
+				'publisher_url', // ID
 				'Publisher URL', // Name
 				function () {
 					$issetVideoPublisher = $this->plugin->getVideoPublisherService();
-					$this->renderInput( "publisher_url", $issetVideoPublisher->getPublisherURL() );
+					$this->renderInput( 'publisher_url', $issetVideoPublisher->getPublisherURL() );
 				},
 				'publisher-admin', // Page
 				$advanced_section // Section
@@ -104,12 +105,15 @@ class Init extends BaseAction {
 		}
 	}
 
-	private function renderInput( $name, $value, $type = 'text', $extra = [] ) {
-        echo Renderer::render( 'admin/input.php', [
-            'name'  => $name,
-            'value' => $value,
-            'type'  => $type,
-            'extra' => $extra,
-        ] );
+	private function renderInput( $name, $value, $type = 'text', $extra = array() ) {
+		echo Renderer::render(
+			'admin/input.php',
+			array(
+				'name'  => $name,
+				'value' => $value,
+				'type'  => $type,
+				'extra' => $extra,
+			)
+		);
 	}
 }

@@ -10,6 +10,6 @@ class Autoloader {
 		}
 
 		/** @noinspection PhpIncludeInspection */
-		include_once __DIR__ . str_replace( "\\", DIRECTORY_SEPARATOR, substr( $className, $namespaceLen ) . '.php' );
+		include_once __DIR__ . str_replace( '\\', DIRECTORY_SEPARATOR, substr( $className, $namespaceLen ) . '.php' );
 	}
 }

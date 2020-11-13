@@ -3,7 +3,6 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Action\Settings;
 
-
 use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
 use IssetBV\VideoPublisher\Wordpress\Renderer;
 
@@ -20,7 +19,7 @@ class Menu extends BaseAction {
 			'isset-video-publisher-admin',
 			function () {
 				$vps     = $this->plugin->getVideoPublisherService();
-				$context = [];
+				$context = array();
 
 				$context['logged_in'] = $vps->isLoggedIn();
 

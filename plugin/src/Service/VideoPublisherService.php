@@ -3,15 +3,14 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Service;
 
-
 use DateTime;
 use IssetBV\VideoPublisher\Wordpress\Plugin;
 
 class VideoPublisherService extends BaseHttpService {
-    const PRESET_720P = '720p';
-    const PRESET_1080P = '1080p';
-    const PRESET_4K = '4k';
-    const PUBLISHER_PLATFORM = 'publisher';
+	const PRESET_720P        = '720p';
+	const PRESET_1080P       = '1080p';
+	const PRESET_4K          = '4k';
+	const PUBLISHER_PLATFORM = 'publisher';
 
 	/**
 	 * @var Plugin
@@ -33,30 +32,30 @@ class VideoPublisherService extends BaseHttpService {
 	}
 
 	public function getMyIssetVideoURL() {
-		return $this->getOption( "my_isset_video_url", Plugin::MY_ISSET_VIDEO_URL );
+		return $this->getOption( 'my_isset_video_url', Plugin::MY_ISSET_VIDEO_URL );
 	}
 
 	public function getArchiveURL() {
-		return $this->getOption( "archive_url", Plugin::ARCHIVE_URL );
+		return $this->getOption( 'archive_url', Plugin::ARCHIVE_URL );
 	}
 
 	public function getUploaderURL() {
-        return $this->getOption( "uploader_url", Plugin::UPLOADER_BASE_URL );
-    }
+		return $this->getOption( 'uploader_url', Plugin::UPLOADER_BASE_URL );
+	}
 
 	public function getLoginURL() {
 		$url = $this->getMyIssetVideoURL();
 
-		return rtrim( $url, "/" ) .
-		       "/publisher-token-request?referrer=" .
-		       urlencode( add_query_arg( [ 'ivp-action' => 'auth' ], site_url( 'index.php' ) ) );
+		return rtrim( $url, '/' ) .
+			   '/publisher-token-request?referrer=' .
+			   urlencode( add_query_arg( array( 'ivp-action' => 'auth' ), site_url( 'index.php' ) ) );
 	}
 
 	public function getLogoutURL() {
 		return add_query_arg(
-			[
+			array(
 				'ivp-action' => 'deauth',
-			],
+			),
 			site_url( 'index.php' )
 		);
 	}
@@ -76,8 +75,8 @@ class VideoPublisherService extends BaseHttpService {
 	}
 
 	public function getPublisherToken() {
-	    return $this->getAuthToken();
-    }
+		return $this->getAuthToken();
+	}
 
 	public function shouldShowAdvancedOptions() {
 		return $this->getOption( 'show_advanced_options', false );
@@ -135,10 +134,10 @@ class VideoPublisherService extends BaseHttpService {
 
 	public function getVideoUrlForWordpress( $uuid ) {
 		return add_query_arg(
-			[
+			array(
 				'uuid'       => $uuid,
 				'ivp-action' => 'video-redirect',
-			],
+			),
 			site_url( 'index.php' )
 		);
 	}
@@ -147,7 +146,7 @@ class VideoPublisherService extends BaseHttpService {
 		$body = $this->fetchPublishInfo( $uuid );
 
 		if ( ! isset( $body['playout'] ) || ! $body['playout'] || ! isset( $body['playout'] ['playout_url'] )
-		     || ! $body['playout']['playout_url']
+			 || ! $body['playout']['playout_url']
 		) {
 			return false;
 		}
@@ -172,23 +171,23 @@ class VideoPublisherService extends BaseHttpService {
 			return;
 		}
 
-        $this->myIssetDelete( '/api/token/delete/' );
+		$this->myIssetDelete( '/api/token/delete/' );
 
-		error_log( "Manual logout" );
+		error_log( 'Manual logout' );
 		$this->removeAuthToken();
 	}
 
 	protected function myIssetGet( $path ) {
-        $auth_token = $this->getAuthToken();
+		$auth_token = $this->getAuthToken();
 
-        return $this->get( $this->getMyIssetVideoURL(), $path, $auth_token, self::PUBLISHER_PLATFORM );
-    }
+		return $this->get( $this->getMyIssetVideoURL(), $path, $auth_token, self::PUBLISHER_PLATFORM );
+	}
 
-    protected function myIssetDelete( $path ) {
-        $auth_token = $this->getAuthToken();
+	protected function myIssetDelete( $path ) {
+		$auth_token = $this->getAuthToken();
 
-        return $this->delete( $this->getMyIssetVideoURL(), $path, $auth_token, self::PUBLISHER_PLATFORM );
-    }
+		return $this->delete( $this->getMyIssetVideoURL(), $path, $auth_token, self::PUBLISHER_PLATFORM );
+	}
 
 	public function getUploadURL() {
 		$result = $this->publisherGet( '/api/uploads/request-url' );
@@ -199,11 +198,11 @@ class VideoPublisherService extends BaseHttpService {
 	private function publisherGet( $path ) {
 		$auth_token = $this->getAuthToken();
 
-        return $this->get( $this->getPublisherURL(), $path, $auth_token, self::PUBLISHER_PLATFORM );
+		return $this->get( $this->getPublisherURL(), $path, $auth_token, self::PUBLISHER_PLATFORM );
 	}
 
 	private function issetVideoGet( $path ) {
-	    return $this->myIssetGet( $path );
+		return $this->myIssetGet( $path );
 	}
 
 	public function fetchUploadInfo( $id ) {
@@ -238,39 +237,38 @@ class VideoPublisherService extends BaseHttpService {
 	}
 
 	public function fetchUserSettings() {
-        return $this->issetVideoGet( '/api/token/subscription' );
-    }
+		return $this->issetVideoGet( '/api/token/subscription' );
+	}
 
-    public function getPresetList()
-    {
-        $subscription = $this->fetchUserSettings();
-        $presets = [ self::PRESET_720P ];
+	public function getPresetList() {
+		$subscription = $this->fetchUserSettings();
+		$presets      = array( self::PRESET_720P );
 
-        if ( $subscription ) {
-            $allPresets = [ self::PRESET_1080P, self::PRESET_4K ];
+		if ( $subscription ) {
+			$allPresets = array( self::PRESET_1080P, self::PRESET_4K );
 
-            foreach( $allPresets as $preset ) {
-                $presets[] = $preset;
+			foreach ( $allPresets as $preset ) {
+				$presets[] = $preset;
 
-                if ( $preset === $subscription['subscription_maximum_quality'] ) {
-                    return $presets;
-                }
-            }
-        }
+				if ( $preset === $subscription['subscription_maximum_quality'] ) {
+					return $presets;
+				}
+			}
+		}
 
-        return $presets;
-    }
+		return $presets;
+	}
 
-    protected function getClientIp() {
-        if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-            //to check ip is pass from proxy
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
-        }
+	protected function getClientIp() {
+		if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
+		} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+			// to check ip is pass from proxy
+			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		} else {
+			$ip = $_SERVER['REMOTE_ADDR'];
+		}
 
-        return $ip;
-    }
+		return $ip;
+	}
 }

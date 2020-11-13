@@ -3,154 +3,157 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Service;
 
-
 use IssetBV\VideoPublisher\Wordpress\Plugin;
 
-class VideoArchiveService extends BaseHttpService
-{
-    const ARCHIVE_TOKEN_SESSION_KEY = 'issetbv-video-archive-token';
-    const ARCHIVE_ROOT_SESSION_KEY = 'issetbv-video-archive-root';
-    const ARCHIVE_PLATFORM = 'archive';
+class VideoArchiveService extends BaseHttpService {
 
-    /** @var Plugin */
-    private $plugin;
+	const ARCHIVE_TOKEN_SESSION_KEY = 'issetbv-video-archive-token';
+	const ARCHIVE_ROOT_SESSION_KEY  = 'issetbv-video-archive-root';
+	const ARCHIVE_PLATFORM          = 'archive';
 
-    /** @var string */
-    private $archiveUrl;
+	/** @var Plugin */
+	private $plugin;
 
-    /** @var string */
-    private $archiveToken;
+	/** @var string */
+	private $archiveUrl;
 
-    /** @var VideoPublisherService */
-    private $videoPublisherService;
+	/** @var string */
+	private $archiveToken;
 
-    public function __construct( Plugin $plugin ) {
-        $this->plugin = $plugin;
-        $this->videoPublisherService = $plugin->getVideoPublisherService();
-        $this->archiveUrl = $this->videoPublisherService->getArchiveURL();
-        $this->archiveToken = $this->getArchiveToken();
-    }
+	/** @var VideoPublisherService */
+	private $videoPublisherService;
 
-    public function getArchiveToken() {
-        $token = $this->getTokenFromSession();
+	public function __construct( Plugin $plugin ) {
+		$this->plugin                = $plugin;
+		$this->videoPublisherService = $plugin->getVideoPublisherService();
+		$this->archiveUrl            = $this->videoPublisherService->getArchiveURL();
+		$this->archiveToken          = $this->getArchiveToken();
+	}
 
-        if ( $token === '' ) {
-            $token = $this->videoPublisherService->exchangeToken( self::ARCHIVE_PLATFORM );
+	public function getArchiveToken() {
+		$token = $this->getTokenFromSession();
 
-            $this->storeTokenInSession( $token );
-        }
+		if ( $token === '' ) {
+			$token = $this->videoPublisherService->exchangeToken( self::ARCHIVE_PLATFORM );
 
-        return $token;
-    }
+			$this->storeTokenInSession( $token );
+		}
 
-    public function getArchiveRoot() {
-        $root = $this->getRootFromSession();
+		return $token;
+	}
 
-        if ( $root === '' ) {
-            $response = $this->getArchiveRootFolder();
+	public function getArchiveRoot() {
+		$root = $this->getRootFromSession();
 
-            if ( isset( $response['root_folder'] ) ) {
-                $root = $response['root_folder'];
+		if ( $root === '' ) {
+			$response = $this->getArchiveRootFolder();
 
-                $this->storeRootInSession( $root );
-            }
-        }
+			if ( isset( $response['root_folder'] ) ) {
+				$root = $response['root_folder'];
 
-        return $root;
-    }
+				$this->storeRootInSession( $root );
+			}
+		}
 
-    public function getArchiveUrl()
-    {
-        return $this->archiveUrl;
-    }
+		return $root;
+	}
 
-    private function getTokenFromSession() {
-        return $this->getValueFromSession( self::ARCHIVE_TOKEN_SESSION_KEY );
-    }
+	public function getArchiveUrl() {
+		return $this->archiveUrl;
+	}
 
-    private function getRootFromSession() {
-        return $this->getValueFromSession( self::ARCHIVE_ROOT_SESSION_KEY );
-    }
+	private function getTokenFromSession() {
+		return $this->getValueFromSession( self::ARCHIVE_TOKEN_SESSION_KEY );
+	}
 
-    private function storeTokenInSession( $token ) {
-        $this->storeValueInSession( self::ARCHIVE_TOKEN_SESSION_KEY, $token );
-    }
+	private function getRootFromSession() {
+		return $this->getValueFromSession( self::ARCHIVE_ROOT_SESSION_KEY );
+	}
 
-    private function storeRootInSession( $root ) {
-        $this->storeValueInSession( self::ARCHIVE_ROOT_SESSION_KEY, $root );
-    }
+	private function storeTokenInSession( $token ) {
+		$this->storeValueInSession( self::ARCHIVE_TOKEN_SESSION_KEY, $token );
+	}
 
-    private function removeTokenFromSession() {
-        $this->removeValueFromSession( self::ARCHIVE_TOKEN_SESSION_KEY );
-    }
+	private function storeRootInSession( $root ) {
+		$this->storeValueInSession( self::ARCHIVE_ROOT_SESSION_KEY, $root );
+	}
 
-    private function removeRootFromSession() {
-        $this->removeValueFromSession( self::ARCHIVE_ROOT_SESSION_KEY );
-    }
+	private function removeTokenFromSession() {
+		$this->removeValueFromSession( self::ARCHIVE_TOKEN_SESSION_KEY );
+	}
 
-    private function getValueFromSession( $key ) {
-        if ( isset( $_SESSION ) && isset( $_SESSION[$key] ) ) {
-            return $_SESSION[$key];
-        }
+	private function removeRootFromSession() {
+		$this->removeValueFromSession( self::ARCHIVE_ROOT_SESSION_KEY );
+	}
 
-        return '';
-    }
+	private function getValueFromSession( $key ) {
+		if ( isset( $_SESSION ) && isset( $_SESSION[ $key ] ) ) {
+			return $_SESSION[ $key ];
+		}
 
-    private function storeValueInSession( $key, $value ) {
-        if ( isset( $_SESSION ) ) {
-            $_SESSION[$key] = $value;
-        }
-    }
+		return '';
+	}
 
-    private function removeValueFromSession( $key ) {
-        if ( isset( $_SESSION ) && isset( $_SESSION[self::ARCHIVE_TOKEN_SESSION_KEY] ) ) {
-            unset( $_SESSION[self::ARCHIVE_TOKEN_SESSION_KEY] );
-        }
-    }
+	private function storeValueInSession( $key, $value ) {
+		if ( isset( $_SESSION ) ) {
+			$_SESSION[ $key ] = $value;
+		}
+	}
 
-    public function createArchiveFile( $filename, $url ) {
-        return $this->archiveJsonPost( '/api/files/create', [
-            'folder' => 'root',
-            'filename' => $filename,
-            'url' => $url,
-        ] );
-    }
+	private function removeValueFromSession( $key ) {
+		if ( isset( $_SESSION ) && isset( $_SESSION[ self::ARCHIVE_TOKEN_SESSION_KEY ] ) ) {
+			unset( $_SESSION[ self::ARCHIVE_TOKEN_SESSION_KEY ] );
+		}
+	}
 
-    public function getArchiveRootFolder() {
-        return $this->archiveGet( '/api/root' );
-    }
+	public function createArchiveFile( $filename, $url ) {
+		return $this->archiveJsonPost(
+			'/api/files/create',
+			array(
+				'folder'   => 'root',
+				'filename' => $filename,
+				'url'      => $url,
+			)
+		);
+	}
 
-    private function archiveGet( $path ) {
-        $auth_token = $this->getArchiveToken();
+	public function getArchiveRootFolder() {
+		return $this->archiveGet( '/api/root' );
+	}
 
-        return $this->get($this->archiveUrl, $path, $auth_token, self::ARCHIVE_PLATFORM);
-    }
+	private function archiveGet( $path ) {
+		$auth_token = $this->getArchiveToken();
 
-    private function archiveDelete( $path ) {
-        $auth_token = $this->getArchiveToken();
+		return $this->get( $this->archiveUrl, $path, $auth_token, self::ARCHIVE_PLATFORM );
+	}
 
-        return $this->delete($this->archiveUrl, $path, $auth_token, self::ARCHIVE_PLATFORM);
-    }
+	private function archiveDelete( $path ) {
+		$auth_token = $this->getArchiveToken();
 
-    private function archiveJsonPost( $path, $data ) {
-        $auth_token = $this->getArchiveToken();
+		return $this->delete( $this->archiveUrl, $path, $auth_token, self::ARCHIVE_PLATFORM );
+	}
 
-        return $this->post($this->archiveUrl, $path, $auth_token, $data, self::ARCHIVE_PLATFORM);
-    }
+	private function archiveJsonPost( $path, $data ) {
+		$auth_token = $this->getArchiveToken();
 
-    public function deleteArchiveFile( $uuid ) {
-        return $this->archiveDelete( "/api/files/{$uuid}/delete" );
-    }
+		return $this->post( $this->archiveUrl, $path, $auth_token, $data, self::ARCHIVE_PLATFORM );
+	}
 
-    public function publishArchiveFile( $uuid, $presets ) {
-        return $this->archiveJsonPost( "/api/files/{$uuid}/publish", [
-            'presets' => $presets,
-        ] );
-    }
+	public function deleteArchiveFile( $uuid ) {
+		return $this->archiveDelete( "/api/files/{$uuid}/delete" );
+	}
 
-    public function removeAuthToken()
-    {
-        $this->removeTokenFromSession();
-        $this->removeRootFromSession();
-    }
+	public function publishArchiveFile( $uuid, $presets ) {
+		return $this->archiveJsonPost(
+			"/api/files/{$uuid}/publish",
+			array(
+				'presets' => $presets,
+			)
+		);
+	}
+
+	public function removeAuthToken() {
+		$this->removeTokenFromSession();
+		$this->removeRootFromSession();
+	}
 }

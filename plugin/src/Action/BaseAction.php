@@ -3,7 +3,6 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Action;
 
-
 use IssetBV\VideoPublisher\Wordpress\Plugin;
 
 abstract class BaseAction {

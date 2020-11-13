@@ -3,7 +3,6 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Widgets;
 
-
 use IssetBV\VideoPublisher\Wordpress\Plugin;
 use IssetBV\VideoPublisher\Wordpress\Renderer;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
@@ -15,11 +14,11 @@ class Dashboard extends BaseWidget {
 	private $service;
 
 	public function __construct() {
-		$this->service = new VideoPublisherService(Plugin::instance());
+		$this->service = new VideoPublisherService( Plugin::instance() );
 	}
 
 	public function getWidgetId() {
-		return "video-publisher-connect-widget";
+		return 'video-publisher-connect-widget';
 	}
 
 	public function getWidgetName() {
@@ -29,16 +28,15 @@ class Dashboard extends BaseWidget {
 	public function execute( $args ) {
 		$context['isLoggedIn'] = $this->service->isLoggedIn();
 
-		if ($context['isLoggedIn']) {
+		if ( $context['isLoggedIn'] ) {
 			$userInfo = $this->service->getUserInfo();
 
-			$context['user']       = $userInfo;
-			$context['logout_url'] = $this->service->getLogoutURL();
-			$context['videos_url'] = $context['video_url'] = admin_url( 'admin.php?page=' . Plugin::MENU_MAIN_SLUG );
-			$context['stats'] = $this->service->fetchUsage();
+			$context['user']               = $userInfo;
+			$context['logout_url']         = $this->service->getLogoutURL();
+			$context['videos_url']         = $context['video_url'] = admin_url( 'admin.php?page=' . Plugin::MENU_MAIN_SLUG );
+			$context['stats']              = $this->service->fetchUsage();
 			$context['subscription_limit'] = $this->service->fetchSubscriptionLimit();
-		}
-		else {
+		} else {
 			$context['login_url'] = $this->service->getLoginURL();
 		}
 

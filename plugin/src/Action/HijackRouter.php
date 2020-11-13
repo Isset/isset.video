@@ -3,7 +3,6 @@
 
 namespace IssetBV\VideoPublisher\Wordpress\Action;
 
-
 use IssetBV\VideoPublisher\Wordpress\Service\TextService;
 
 class HijackRouter extends BaseAction {
@@ -14,8 +13,8 @@ class HijackRouter extends BaseAction {
 		}
 
 		if ( $action === 'auth' ) {
-		    // Remove archive auth info from session
-            $this->plugin->getVideoArchiveService()->removeAuthToken();
+			// Remove archive auth info from session
+			$this->plugin->getVideoArchiveService()->removeAuthToken();
 
 			$token = TextService::validateAndSanitizeText( $_GET, 'token' );
 			if ( $token === false ) {
@@ -24,16 +23,16 @@ class HijackRouter extends BaseAction {
 
 			$this->plugin->getVideoPublisherService()->updateAuthToken( $token );
 
-			wp_redirect( admin_url( "options-general.php?page=isset-video-publisher-admin" ), 302 );
+			wp_redirect( admin_url( 'options-general.php?page=isset-video-publisher-admin' ), 302 );
 			exit( 0 );
 		}
 
 		if ( $action === 'deauth' ) {
-            // Remove archive auth info from session
-            $this->plugin->getVideoArchiveService()->removeAuthToken();
+			// Remove archive auth info from session
+			$this->plugin->getVideoArchiveService()->removeAuthToken();
 			$this->plugin->getVideoPublisherService()->logout();
 
-			wp_redirect( admin_url( "options-general.php?page=isset-video-publisher-admin" ), 302 );
+			wp_redirect( admin_url( 'options-general.php?page=isset-video-publisher-admin' ), 302 );
 			exit( 0 );
 		}
 
