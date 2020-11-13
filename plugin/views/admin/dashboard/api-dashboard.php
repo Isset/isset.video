@@ -32,7 +32,7 @@
 						<span>
 							<a target="_blank" href="<?php echo $isset_video_url; ?>subscriptions">
 								<?php echo ucwords( $subscription_limit['name'] ); ?>
-				s			</a>
+				            </a>
 						</span>
 					</div>
 				</div>
