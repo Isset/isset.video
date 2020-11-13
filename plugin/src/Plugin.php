@@ -65,10 +65,10 @@ class Plugin {
 		'Statistics',
 	);
 
-	const PUBLISHER_URL      = 'https://test.publish.isset.video/';
-	const MY_ISSET_VIDEO_URL = 'https://test.my.isset.video/';
-	const ARCHIVE_URL        = 'https://test.archive.isset.video/';
-	const UPLOADER_BASE_URL  = 'https://test.upload.isset.video/';
+	const PUBLISHER_URL      = 'https://publish.isset.video/';
+	const MY_ISSET_VIDEO_URL = 'https://my.isset.video/';
+	const ARCHIVE_URL        = 'https://archive.isset.video/';
+	const UPLOADER_BASE_URL  = 'https://upload.isset.video/';
 
 	public static function instance() {
 		if ( self::$instance === null ) {
