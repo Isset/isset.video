@@ -204,10 +204,12 @@ class IssetVideoOverview extends React.Component {
 export default IssetVideoOverview;
 
 window.addEventListener('load', () => {
-    const {loggedIn} = IssetVideoPublisherAjax;
+    if (typeof adminpage !== 'undefined' && adminpage === 'toplevel_page_isset-video-overview') {
+        const {loggedIn} = window.IssetVideoPublisherAjax;
 
-    if (loggedIn && typeof adminpage !== 'undefined' && adminpage === 'toplevel_page_isset-video-overview') {
-        const issetVideoOverviewContainer = document.getElementById('isset-video-overview-container');
-        ReactDOM.render(<IssetVideoOverview />, issetVideoOverviewContainer);
+        if (loggedIn) {
+            const issetVideoOverviewContainer = document.getElementById('isset-video-overview-container');
+            ReactDOM.render(<IssetVideoOverview />, issetVideoOverviewContainer);
+        }
     }
 });
