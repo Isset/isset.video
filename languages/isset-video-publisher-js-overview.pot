@@ -7,33 +7,35 @@ msgstr ""
 msgid "Copied shortcode"
 msgstr ""
 
-#: js/overview/components/admin-video-details.js:122
+#: js/overview/components/admin-video-details.js:127
 msgid "Use the following code to embed this video"
 msgstr ""
 
-#: js/overview/components/admin-video-details.js:135
+#: js/overview/components/admin-video-details.js:140
+#: js/overview/components/admin-video-details.js:139
 #: js/overview/components/admin-video-overview.js:168
 msgid "Filename"
 msgstr ""
 
-#: js/overview/components/admin-video-details.js:139
+#: js/overview/components/admin-video-details.js:144
+#: js/overview/components/admin-video-details.js:143
 #: js/overview/components/admin-video-overview.js:169
 msgid "Created"
 msgstr ""
 
-#: js/overview/components/admin-video-details.js:143
+#: js/overview/components/admin-video-details.js:148
 msgid "Filesize"
 msgstr ""
 
-#: js/overview/components/admin-video-details.js:147
+#: js/overview/components/admin-video-details.js:152
 msgid "Length"
 msgstr ""
 
-#: js/overview/components/admin-video-details.js:151
+#: js/overview/components/admin-video-details.js:156
 msgid "Resolution"
 msgstr ""
 
-#: js/overview/components/admin-video-details.js:155
+#: js/overview/components/admin-video-details.js:160
 msgid "Presets"
 msgstr ""
 

@@ -67,6 +67,11 @@ class AdminVideoDetails extends React.Component {
     loadPublish = () => {
         const {uuid} = this.state;
 
+        if (!uuid) {
+            this.props.onClose();
+            return null;
+        }
+
         publisherAjax(`api/publishes/${uuid}`).then(json => {
             const {playout: {playout_url, player_url}, assets} = json;
 
@@ -149,7 +154,7 @@ class AdminVideoDetails extends React.Component {
                             </tr>
                             <tr>
                                 <td>{__('Resolution', 'isset-video-publisher')}:</td>
-                                <td>{`${width}x${height}`}</td>
+                                <td>{width && height ? `${width}x${height}` : '-'}</td>
                             </tr>
                             <tr>
                                 <td>{__('Presets', 'isset-video-publisher')}:</td>
