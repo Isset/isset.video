@@ -28,9 +28,7 @@ class Menu extends BaseAction {
 					$context['logout_url'] = $vps->getLogoutURL();
 				}
 
-				$context['login_url']              = $vps->getLoginURL();
-				$context['show_advanced_settings'] = $vps->shouldShowAdvancedOptions();
-
+				$context['login_url'] = $vps->getLoginURL();
 				$context['video_url'] = $this->plugin->getOverviewPageUrl();
 
 				echo Renderer::render( 'admin/page.php', $context );

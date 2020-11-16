@@ -9,3 +9,4 @@
 .idea
 .yarn-error.log
 **/.DS_Store
+/plugin/src/config_override.php

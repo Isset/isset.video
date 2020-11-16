@@ -32,9 +32,17 @@ class Plugin {
 	 */
 	private $videoArchiveService;
 
+	/**
+	 * @var string[]
+	 */
 	private $shortcodes = array(
 		Publish::class,
 	);
+
+	/**
+	 * @var string[]
+	 */
+	private $config = array();
 
 	private $actions = array(
 		HijackRouter::class,
@@ -65,10 +73,10 @@ class Plugin {
 		'Statistics',
 	);
 
-	const PUBLISHER_URL      = 'https://publish.isset.video/';
-	const MY_ISSET_VIDEO_URL = 'https://my.isset.video/';
-	const ARCHIVE_URL        = 'https://archive.isset.video/';
-	const UPLOADER_BASE_URL  = 'https://upload.isset.video/';
+	// const PUBLISHER_URL      = 'https://publish.isset.video/';
+	// const MY_ISSET_VIDEO_URL = 'https://my.isset.video/';
+	// const ARCHIVE_URL        = 'https://archive.isset.video/';
+	// const UPLOADER_BASE_URL  = 'https://upload.isset.video/';
 
 	public static function instance() {
 		if ( self::$instance === null ) {
@@ -80,6 +88,7 @@ class Plugin {
 
 	public function init() {
 		$this->initSession();
+		$this->initConfig();
 		$this->addShortcodes();
 		$this->initScripts();
 		$this->loadTranslations();
@@ -162,7 +171,7 @@ class Plugin {
 	 */
 	public function getVideoPublisherService() {
 		if ( $this->videoPublisherService === null ) {
-			$this->videoPublisherService = new VideoPublisherService( $this );
+			$this->videoPublisherService = new VideoPublisherService( $this, $this->config );
 		}
 
 		return $this->videoPublisherService;
@@ -386,5 +395,15 @@ class Plugin {
 		}
 
 		return Renderer::render( 'admin/dashboard/api-dashboard.php', $context );
+	}
+
+	private function initConfig() {
+		require_once ISSET_VIDEO_PUBLISHER_PATH . 'src/config.php';
+
+		if ( file_exists( ISSET_VIDEO_PUBLISHER_PATH . 'src/config_override.php' ) ) {
+			require_once ISSET_VIDEO_PUBLISHER_PATH . 'src/config_override.php';
+		}
+
+		$this->config = $isset_video_config;
 	}
 }

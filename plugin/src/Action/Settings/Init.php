@@ -42,7 +42,6 @@ class Init extends BaseAction {
 		);
 
 		$default_section  = 'isset-video-publisher-default-section';
-		$advanced_section = 'isset-video-publisher-advanced-section';
 
 		add_settings_section(
 			$default_section, // ID
@@ -51,69 +50,6 @@ class Init extends BaseAction {
 				_e( 'Enter your settings below:', 'isset-video-publisher' );
 			},
 			'publisher-admin' // Page
-		);
-
-		add_settings_field(
-			'show_advanced_options', // ID
-			__( 'Show advanced options', 'isset-video-publisher' ), // Title
-			function () {
-				$issetVideoPublisher = $this->plugin->getVideoPublisherService();
-				$this->renderInput(
-					'show_advanced_options',
-					'1',
-					'checkbox',
-					array(
-						'checked' => $issetVideoPublisher->shouldShowAdvancedOptions(),
-					)
-				);
-			},
-			'publisher-admin', // Page
-			$default_section // Section
-		);
-
-		if ( $vps->shouldShowAdvancedOptions() ) {
-			add_settings_section(
-				$advanced_section, // ID
-				__( 'Advanced settings', 'isset-video-publisher' ), // Title
-				function () {
-					_e( 'Enter your settings below:', 'isset-video-publisher' );
-				},
-				'publisher-admin' // Page
-			);
-
-			add_settings_field(
-				'my_isset_video_url', // ID
-				'My isset video URL', // Name
-				function () {
-					$issetVideoPublisher = $this->plugin->getVideoPublisherService();
-					$this->renderInput( 'my_isset_video_url', $issetVideoPublisher->getMyIssetVideoURL() );
-				},
-				'publisher-admin', // Page
-				$advanced_section // Section
-			);
-
-			add_settings_field(
-				'publisher_url', // ID
-				'Publisher URL', // Name
-				function () {
-					$issetVideoPublisher = $this->plugin->getVideoPublisherService();
-					$this->renderInput( 'publisher_url', $issetVideoPublisher->getPublisherURL() );
-				},
-				'publisher-admin', // Page
-				$advanced_section // Section
-			);
-		}
-	}
-
-	private function renderInput( $name, $value, $type = 'text', $extra = array() ) {
-		echo Renderer::render(
-			'admin/input.php',
-			array(
-				'name'  => $name,
-				'value' => $value,
-				'type'  => $type,
-				'extra' => $extra,
-			)
 		);
 	}
 }

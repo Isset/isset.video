@@ -1,6 +1,12 @@
 import Chart from 'chart.js';
 
 jQuery(($) => {
+    const {loggedIn} = IssetVideoPublisherAjax;
+
+    if (!loggedIn) {
+        return;
+    }
+
     const baseOptions = {
         responsive: true,
         maintainAspactRatio: false,
@@ -46,8 +52,6 @@ jQuery(($) => {
     ];
 
     if (typeof adminpage !== 'undefined' && adminpage === "toplevel_page_isset-video-overview") {
-        const {restNonce} = IssetVideoPublisherAjax;
-
         let streamingViewsData = $('#videoPublisherStreamingViews').children();
         let streamingBytesData = $('#videoPublisherStreamingData').children();
 

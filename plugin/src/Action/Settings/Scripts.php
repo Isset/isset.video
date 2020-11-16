@@ -20,6 +20,8 @@ class Scripts extends BaseAction {
 			return;
 		}
 
+		$videoPublishService = $this->plugin->getVideoPublisherService();
+
 		wp_enqueue_script( 'isset-video-main', ISSET_VIDEO_PUBLISHER_URL . 'js/main.js', array( 'jquery' ), true );
 		wp_enqueue_script( 'isset-video-publisher-charts', ISSET_VIDEO_PUBLISHER_URL . 'js/admin-charts.js', array( 'jquery' ), true );
 		wp_localize_script(
@@ -31,6 +33,7 @@ class Scripts extends BaseAction {
 				'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
 				'postId'    => get_the_ID(),
 				'adminUrl'  => admin_url(),
+				'loggedIn'  => $videoPublishService->isLoggedIn(),
 			)
 		);
 
@@ -39,7 +42,6 @@ class Scripts extends BaseAction {
 
 		if ( ( isset( $_GET['page'] ) && $_GET['page'] === Plugin::MENU_MAIN_SLUG ) || ( isset( $arguments[0] ) && $this->editingOrNewPost( $arguments[0] ) ) ) {
 			$videoArchiveService = $this->plugin->getVideoArchiveService();
-			$videoPublishService = $this->plugin->getVideoPublisherService();
 
 			wp_localize_script(
 				'isset-video-main',

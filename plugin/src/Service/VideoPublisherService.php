@@ -22,25 +22,35 @@ class VideoPublisherService extends BaseHttpService {
 	 */
 	private $issetVideoPublisherOptions;
 
-	/**
+    /**
+     * @var array
+     */
+    private $config;
+
+    /**
 	 * VideoPublisherService constructor.
 	 *
 	 * @param $plugin
 	 */
-	public function __construct( Plugin $plugin ) {
+	public function __construct( Plugin $plugin, $config = array() ) {
 		$this->plugin = $plugin;
+		$this->config = $config;
 	}
 
 	public function getMyIssetVideoURL() {
-		return $this->getOption( 'my_isset_video_url', Plugin::MY_ISSET_VIDEO_URL );
+		return $this->getConfig( 'my_isset_video_url' );
 	}
 
 	public function getArchiveURL() {
-		return $this->getOption( 'archive_url', Plugin::ARCHIVE_URL );
+		return $this->getConfig( 'archive_url' );
 	}
 
-	public function getUploaderURL() {
-		return $this->getOption( 'uploader_url', Plugin::UPLOADER_BASE_URL );
+    public function getPublisherURL() {
+        return $this->getConfig( 'publisher_url' );
+    }
+
+    public function getUploaderURL() {
+		return $this->getConfig( 'uploader_url' );
 	}
 
 	public function getLoginURL() {
@@ -68,10 +78,6 @@ class VideoPublisherService extends BaseHttpService {
 	public function removeAuthToken() {
 		delete_option( 'isset-video-publisher-auth-token' );
 		$this->flushUserInfo();
-	}
-
-	public function getPublisherURL() {
-		return $this->getOption( 'publisher_url', Plugin::PUBLISHER_URL );
 	}
 
 	public function getPublisherToken() {
@@ -270,5 +276,9 @@ class VideoPublisherService extends BaseHttpService {
 		}
 
 		return $ip;
+	}
+
+	private function getConfig( $key ) {
+		return isset( $this->config[ $key ] ) ? $this->config[ $key ] : null;
 	}
 }

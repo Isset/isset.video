@@ -204,7 +204,9 @@ class IssetVideoOverview extends React.Component {
 export default IssetVideoOverview;
 
 window.addEventListener('load', () => {
-    if (typeof adminpage !== 'undefined' && adminpage === 'toplevel_page_isset-video-overview') {
+    const {loggedIn} = IssetVideoPublisherAjax;
+
+    if (loggedIn && typeof adminpage !== 'undefined' && adminpage === 'toplevel_page_isset-video-overview') {
         const issetVideoOverviewContainer = document.getElementById('isset-video-overview-container');
         ReactDOM.render(<IssetVideoOverview />, issetVideoOverviewContainer);
     }
