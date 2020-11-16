@@ -73,11 +73,6 @@ class Plugin {
 		'Statistics',
 	);
 
-	// const PUBLISHER_URL      = 'https://publish.isset.video/';
-	// const MY_ISSET_VIDEO_URL = 'https://my.isset.video/';
-	// const ARCHIVE_URL        = 'https://archive.isset.video/';
-	// const UPLOADER_BASE_URL  = 'https://upload.isset.video/';
-
 	public static function instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new Plugin();
@@ -330,7 +325,7 @@ class Plugin {
 	}
 
 	public function renderUploadPage() {
-		$service = new VideoPublisherService( $this );
+		$service = $this->getVideoPublisherService();
 
 		$data                      = array();
 		$data['logged_in']         = $service->isLoggedIn();

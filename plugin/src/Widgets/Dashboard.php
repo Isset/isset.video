@@ -14,7 +14,7 @@ class Dashboard extends BaseWidget {
 	private $service;
 
 	public function __construct() {
-		$this->service = new VideoPublisherService( Plugin::instance() );
+		$this->service = Plugin::instance()->getVideoPublisherService();
 	}
 
 	public function getWidgetId() {
