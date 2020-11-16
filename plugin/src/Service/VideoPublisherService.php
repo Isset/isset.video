@@ -22,12 +22,12 @@ class VideoPublisherService extends BaseHttpService {
 	 */
 	private $issetVideoPublisherOptions;
 
-    /**
-     * @var array
-     */
-    private $config;
+	/**
+	 * @var array
+	 */
+	private $config;
 
-    /**
+	/**
 	 * VideoPublisherService constructor.
 	 *
 	 * @param $plugin
@@ -45,11 +45,11 @@ class VideoPublisherService extends BaseHttpService {
 		return $this->getConfig( 'archive_url' );
 	}
 
-    public function getPublisherURL() {
-        return $this->getConfig( 'publisher_url' );
-    }
+	public function getPublisherURL() {
+		return $this->getConfig( 'publisher_url' );
+	}
 
-    public function getUploaderURL() {
+	public function getUploaderURL() {
 		return $this->getConfig( 'uploader_url' );
 	}
 

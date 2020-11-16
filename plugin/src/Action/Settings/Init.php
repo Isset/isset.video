@@ -41,7 +41,7 @@ class Init extends BaseAction {
 			}
 		);
 
-		$default_section  = 'isset-video-publisher-default-section';
+		$default_section = 'isset-video-publisher-default-section';
 
 		add_settings_section(
 			$default_section, // ID
