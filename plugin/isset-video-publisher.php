@@ -4,7 +4,7 @@
 Plugin Name: isset.video
 Plugin URI: https://isset.video/wp-plugin/
 Description: Wordpress isset.video implementation
-Version: 0.5.0
+Version: 0.7.0
 Requires at least: 5.0
 Required PHP: 7.1
 Author: isset.video

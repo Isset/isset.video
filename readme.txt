@@ -1,10 +1,10 @@
 === isset.video ===
-Contributors: rommertvantil, peekopeeko
+Contributors: rommertvantil
 Tags: external video, cdn, video processing, hls video
 Plugin URI: https://isset.video/wp-plugin/
 Requires at least: 5.0
 Tested up to: 5.5.3
-Requires PHP: 7.1
+Requires PHP: 7.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
