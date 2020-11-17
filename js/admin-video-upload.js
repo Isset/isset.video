@@ -22,6 +22,21 @@ window.addEventListener('load', () => {
         let archiveUrl = '';
         let archiveToken = '';
         let uploadPercentages = {};
+        let actionList = {
+            list: [],
+            index: 0,
+            uploadNext: function() {
+                return new Promise(async (resolve) => {
+                    while (this.index < this.list.length) {
+                        let currentIndex = this.index;
+                        this.index++;
+                        await uploadFileToUploader(currentIndex);
+                    }
+
+                    resolve();
+                });
+            }
+        };
 
         fileSelect.change(function () {
             let fileDisplay = $("#phase-select-file");
@@ -71,15 +86,7 @@ window.addEventListener('load', () => {
                     </div><hr>`);
             }
 
-            let promises = [];
-            const initNumberOfFiles = 3;
-            const iterations = initNumberOfFiles < fileList.length ? initNumberOfFiles - 1 : fileList.length;
-
-            for (let i = 0; i < iterations; i++) {
-                promises.push(uploadFileToUploader(i));
-            }
-
-            await throttleUploads(promises, fileList, iterations);
+            await handleUploadActions(fileList);
 
             $(window).off('beforeunload');
 
@@ -97,23 +104,28 @@ window.addEventListener('load', () => {
             location.reload();
         });
 
-        async function throttleUploads(promises, fileList, index) {
-            if (promises.length < fileList.length) {
-                promises.push(uploadFileToUploader(index));
+        async function handleUploadActions(fileList) {
+            let promises = [];
+            actionList.list = fileList;
 
-                await Promise.any(promises).then(() => throttleUploads(promises, fileList, index + 1));
-            } else {
-                return new Promise((resolve, reject) => {
-                    Promise.all(promises)
-                        .then(() => resolve())
-                        .catch((err) => reject(err));
-                });
+            const initNumberOfFiles = 3;
+            const iterations = initNumberOfFiles < fileList.length ? initNumberOfFiles : fileList.length;
+
+            for (let i = 0; i < iterations; i++) {
+                promises.push(actionList.uploadNext());
             }
+
+            return new Promise((resolve, reject) => {
+                Promise.all(promises)
+                    .then(() => resolve())
+                    .catch((err) => reject(err));
+            });
         }
 
         async function uploadFileToUploader(fileIndex) {
             let flow = new Flow({
-                target: uploaderUrl + '/upload'
+                target: uploaderUrl + '/upload',
+                chunkSize: 1048576 * 4, //4mb
             });
 
             let file = fileSelect[0].files[fileIndex];

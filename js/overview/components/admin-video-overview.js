@@ -68,7 +68,8 @@ class IssetVideoOverview extends React.Component {
     toggleCheckAll = event => {
         const {checked} = event.target;
         const {results} = this.state;
-        const list = checked ? results.map(result => result.file.uuid) : [];
+
+        const list = checked ? results.map(result => result.uuid) : [];
 
         this.setState({checkAll: checked, checked: list});
     }

@@ -71,7 +71,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                     suggestions: [
                         ...suggestions,
                         ...results.map((result, index) => {
-                            result.processed = result.stills.length > 0;
+                            result.processed = result.stills && result.stills.length > 0;
 
                             return result;
                         })

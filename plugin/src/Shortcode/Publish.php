@@ -40,7 +40,7 @@ class Publish extends ShortcodeBase {
 		$video_url = $publishService->getVideoUrlForWordpress( $uuid );
 
 		$context              = $attr;
-		$context['poster']    = $this->findDefaultImage( $publish['assets'] );
+		$context['poster']    = isset( $publish['assets'] ) ? $this->findDefaultImage( $publish['assets'] ) : null;
 		$context['uuid']      = $uuid;
 		$context['video_url'] = $video_url;
 
