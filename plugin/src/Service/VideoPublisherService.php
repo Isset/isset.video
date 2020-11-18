@@ -248,15 +248,15 @@ class VideoPublisherService extends BaseHttpService {
 
 	public function getPresetList() {
 		$subscription = $this->fetchUserSettings();
-		$presets      = array( self::PRESET_720P );
+		$presets      = array();
 
 		if ( $subscription ) {
-			$allPresets = array( self::PRESET_1080P, self::PRESET_4K );
+			$allPresets = array( self::PRESET_720P, self::PRESET_1080P, self::PRESET_4K );
 
 			foreach ( $allPresets as $preset ) {
 				$presets[] = $preset;
 
-				if ( $preset === $subscription['subscription_maximum_quality'] ) {
+				if ( $preset === $subscription['subscription_maximum_quality'] || $preset === $subscription['preferred_maximum_quality'] ) {
 					return $presets;
 				}
 			}
