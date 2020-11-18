@@ -12,11 +12,15 @@ msgid "Use the following code to embed this video"
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:140
+#: js/overview/components/admin-video-details.js:135
+#: js/overview/components/admin-video-details.js:134
 #: js/overview/components/admin-video-overview.js:169
 msgid "Filename"
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:144
+#: js/overview/components/admin-video-details.js:139
+#: js/overview/components/admin-video-details.js:138
 #: js/overview/components/admin-video-overview.js:170
 msgid "Created"
 msgstr ""
@@ -73,6 +77,6 @@ msgstr ""
 msgid "No publishes found"
 msgstr ""
 
-#: js/overview/components/video-item.js:47
+#: js/overview/components/video-item.js:41
 msgid "Processing"
 msgstr ""

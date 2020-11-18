@@ -31,12 +31,6 @@ class VideoItem extends React.Component {
     };
 
     renderStill = (preview, stills = []) => {
-        if (preview) {
-            return <video className="video-publisher-preview-video">
-                <source src={preview} />
-            </video>;
-        }
-
         if (stills.length > 0) {
             return <img src={`${stills[0]}?width=300&height=168`} alt="" />
         }
