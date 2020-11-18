@@ -11,7 +11,7 @@
             <div class="upload-container">
                 <div class="phase-select">
                     <div class="phase-select-dropzone">
-                        <input multiple accept="video/mp4,video/x-m4v,video/*" type="file">
+                        <input multiple accept="video/mp4,video/x-m4v,video/x-flv,video/*,.mkv,.ts" type="file">
                         <div class="selected-files-container video-publisher-p-2" id="phase-select-file">
                             <div class="text-wrapper">
                                 <span class="dashicons dashicons-download download-icon"></span>
