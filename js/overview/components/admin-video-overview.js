@@ -166,7 +166,7 @@ class IssetVideoOverview extends React.Component {
                         <th className="isset-video-thumbnail-th">{__('Thumbnail', 'isset-video-publisher')}</th>
                         <th>{__('Duration', 'isset-video-publisher')}</th>
                         <th>{__('Size', 'isset-video-publisher')}</th>
-                        <th className="isset-video-pointer" onClick={() => this.sortBy('filename', orderDirection)}>{__('Filename', 'isset-video-publisher')}</th>
+                        <th className="isset-video-pointer isset-video-filename-header" onClick={() => this.sortBy('filename', orderDirection)}>{__('Filename', 'isset-video-publisher')}</th>
                         <th className="isset-video-pointer" onClick={() => this.sortBy('dateCreated', orderDirection)}>{__('Created', 'isset-video-publisher')}</th>
                     </tr>
                 </thead>

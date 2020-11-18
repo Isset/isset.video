@@ -84,6 +84,33 @@
     text-decoration: none;
   }
 
+  th:nth-child(1) {
+    width: 30px;
+  }
+
+  th:nth-child(3) {
+    width: 140px;
+  }
+
+  th:nth-child(3) {
+    width: 140px;
+  }
+
+  th:nth-child(4) {
+    width: 100px;
+  }
+
+  th:nth-child(6) {
+    width: 140px;
+  }
+
+  .isset-video-filename {
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   tr:nth-child(even) {
     background-color: #23282C;
   }

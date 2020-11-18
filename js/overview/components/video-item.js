@@ -59,7 +59,7 @@ class VideoItem extends React.Component {
             <td>
                 {size}
             </td>
-            <td>
+            <td className="isset-video-filename">
                 {this.renderFilename(filename, uuid)}
             </td>
             <td>
