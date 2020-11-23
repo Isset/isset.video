@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
-"POT-Creation-Date: 2020-11-09T14:18:31+00:00\n"
-"PO-Revision-Date: 2020-11-10 11:13+0100\n"
+"POT-Creation-Date: 2020-11-23T15:20:16+00:00\n"
+"PO-Revision-Date: 2020-11-23 16:23+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -16,108 +16,104 @@ msgstr ""
 msgid "Copied shortcode"
 msgstr "Shortcode gekopieerd"
 
-#: js/overview/components/admin-video-details.js:122
+#: js/overview/components/admin-video-details.js:127
 msgid "Use the following code to embed this video"
 msgstr "Gebruik de volgende code om de video toe te voegen"
 
-#: js/overview/components/admin-video-details.js:135
-#: js/overview/components/admin-video-overview.js:168
+#: js/overview/components/admin-video-details.js:140
+#: js/overview/components/admin-video-overview.js:169
 msgid "Filename"
 msgstr "Bestandsnaam"
 
-#: js/overview/components/admin-video-details.js:139
-#: js/overview/components/admin-video-overview.js:169
+#: js/overview/components/admin-video-details.js:144
+#: js/overview/components/admin-video-overview.js:170
 msgid "Created"
 msgstr "Aangemaakt"
 
-#: js/overview/components/admin-video-details.js:143
+#: js/overview/components/admin-video-details.js:148
 msgid "Filesize"
 msgstr "Grootte"
 
-#: js/overview/components/admin-video-details.js:147
+#: js/overview/components/admin-video-details.js:152
 msgid "Length"
 msgstr "Speelduur"
 
-#: js/overview/components/admin-video-details.js:151
+#: js/overview/components/admin-video-details.js:156
 msgid "Resolution"
 msgstr "Resolutie"
 
-#: js/overview/components/admin-video-details.js:155
+#: js/overview/components/admin-video-details.js:160
 msgid "Presets"
 msgstr "Preset"
 
-#: js/overview/components/admin-video-overview.js:102
+#: js/overview/components/admin-video-overview.js:103
 msgid "Are you sure you want to delete the selected videos?"
 msgstr "Weet u zeker dat u de geselecteerde video's wilt verwijderen?"
 
-#: js/overview/components/admin-video-overview.js:143
+#: js/overview/components/admin-video-overview.js:144
 msgid "Upload New"
 msgstr "Upload Nieuw"
 
-#: js/overview/components/admin-video-overview.js:146
+#: js/overview/components/admin-video-overview.js:147
 msgid "Delete Selected"
 msgstr "Verwijder Geselecteerde"
 
-#: js/overview/components/admin-video-overview.js:149
+#: js/overview/components/admin-video-overview.js:150
 #: js/publisher-video-block.js:236
 msgid "Search"
 msgstr "Zoeken"
 
-#: js/overview/components/admin-video-overview.js:155
+#: js/overview/components/admin-video-overview.js:156
 msgid "Total results"
 msgstr "Totaal aantal resultaten"
 
-#: js/overview/components/admin-video-overview.js:165
+#: js/overview/components/admin-video-overview.js:166
 msgid "Thumbnail"
 msgstr "Voorbeeld"
 
-#: js/overview/components/admin-video-overview.js:166
+#: js/overview/components/admin-video-overview.js:167
 msgid "Duration"
 msgstr "Speelduur"
 
-#: js/overview/components/admin-video-overview.js:167
+#: js/overview/components/admin-video-overview.js:168
 msgid "Size"
 msgstr "Grootte"
 
-#: js/overview/components/admin-video-overview.js:192
+#: js/overview/components/admin-video-overview.js:193
 #: js/publisher-video-block.js:240
 msgid "No publishes found"
 msgstr "Geen videos gevonden"
 
-#: js/overview/components/video-item.js:47 js/publisher-video-block.js:151
+#: js/overview/components/video-item.js:41 js/publisher-video-block.js:151
 msgid "Processing"
 msgstr "Bezig"
 
-#: js/admin-video-upload.js:132
+#: js/admin-video-upload.js:167
 msgid "Successfully added %s to archive"
 msgstr "%s succesvol toegevoegd aan archief"
 
-#: js/admin-video-upload.js:136
+#: js/admin-video-upload.js:171
 msgid "Failed adding %s to archive"
 msgstr "Fout tijdens het toevoegen van %s aan archief"
 
-#: js/admin-video-upload.js:24
+#: js/admin-video-upload.js:45
 msgid "Selected files"
 msgstr "Geselecteerd bestand"
 
-#: js/admin-video-upload.js:44
+#: js/admin-video-upload.js:65
 msgid "Are you sure you want to leave?"
 msgstr "Weet u zeker dat u de pagina wilt verlaten?"
 
-#: js/admin-video-upload.js:64
+#: js/admin-video-upload.js:85
 msgid "Uploading"
 msgstr "Uploaden"
 
-#: js/admin-video-upload.js:79
-msgid "Uploaded"
-msgstr "Upgeload"
-
-#: js/admin-video-upload.js:80
+#: js/admin-video-upload.js:96
 msgid "Your files will be queued for transcoding"
 msgstr ""
 "Uw bestanden worden gearchiveerd en omgezet om ze geschikt te maken voor "
-"video streamen. Dit kan enige tijd duren, afhankelijk van bestandsgrootte "
-"en afspeeltijd van het videobestand"
+"video streamen. Dit kan enige tijd duren, afhankelijk van bestandsgrootte en "
+"afspeeltijd van het videobestand"
 
 #: js/publisher-video-block.js:158
 msgid "Error"
@@ -176,22 +172,24 @@ msgstr "Wordpress isset.video implementatie"
 msgid "http://isset.nl/"
 msgstr ""
 
-#: src/Action/Settings/Init.php:52 src/Action/Settings/Menu.php:17
+#: src/Action/Settings/Init.php:48 src/Action/Settings/Menu.php:16
+#: src/Action/Settings/Menu.php:17 src/Action/Settings/Init.php:52
 #: src/Action/Settings/Menu.php:18
 msgid "isset.video settings"
 msgstr "isset.video instellingen"
 
-#: src/Action/Settings/Init.php:54 src/Action/Settings/Init.php:77
+#: src/Action/Settings/Init.php:50 src/Action/Settings/Init.php:54
+#: src/Action/Settings/Init.php:77
 msgid "Enter your settings below:"
 msgstr "Voer hieronder je instellingen van de publisher in"
 
-#: src/Action/Settings/Init.php:61
-msgid "Show advanced options"
-msgstr "Laat geavanceerde opties zien"
+#: src/Plugin.php:362
+msgid "Upload New Videos"
+msgstr "Upload Nieuwe Videos"
 
-#: src/Action/Settings/Init.php:75
-msgid "Advanced settings"
-msgstr "Geavanceerde opties"
+#: src/Plugin.php:363
+msgid "New Video"
+msgstr "Nieuwe Video"
 
 #: views/admin/dashboard/api-dashboard.php:7
 #: views/admin/dashboard/dashboard.php:6
@@ -224,8 +222,9 @@ msgstr "Views"
 msgid "Data"
 msgstr "Data"
 
-#: views/admin/dashboard/api-dashboard.php:70
+#: views/admin/dashboard/api-dashboard.php:74
 #: views/admin/dashboard/dashboard.php:18
+#: views/admin/dashboard/api-dashboard.php:70
 msgid "Login to isset.video"
 msgstr "Inloggen op isset.video"
 
@@ -234,7 +233,7 @@ msgid "Logged in as %s"
 msgstr "Ingelogd als %s"
 
 #: views/admin/dashboard/dashboard.php:15 views/admin/page.php:7
-#: views/admin/upload.php:42
+#: views/admin/upload.php:43 views/admin/upload.php:42
 msgid "Go to videos"
 msgstr "Naar video's"
 
@@ -274,21 +273,21 @@ msgstr ""
 msgid "Upload new video"
 msgstr "Nieuwe video"
 
-#: views/admin/upload.php:19
+#: views/admin/upload.php:20 views/admin/upload.php:19
 msgid "Drop one or more files here (4.3GB max) or browse your computer."
 msgstr ""
 "Sleep hier een of meerdere videobestanden op (4,3GB max) of blader op uw "
 "computer. "
 
-#: views/admin/upload.php:22
+#: views/admin/upload.php:24 views/admin/upload.php:22
 msgid "Upload"
 msgstr "Upload"
 
-#: views/admin/upload.php:26
+#: views/admin/upload.php:27 views/admin/upload.php:26
 msgid "Cancel upload"
 msgstr "Annuleer upload"
 
-#: views/admin/upload.php:35
+#: views/admin/upload.php:36 views/admin/upload.php:35
 msgid ""
 "Storage limit is already reached, please remove video's to upload again or "
 "upgrade your subscription"
@@ -308,6 +307,17 @@ msgstr "Jouw browser ondersteund geen videos"
 msgid "Video cannot be loaded"
 msgstr "Deze video kan niet geladen worden"
 
+#: src/Action/Settings/Init.php:61
+msgid "Show advanced options"
+msgstr "Laat geavanceerde opties zien"
+
+#: src/Action/Settings/Init.php:75
+msgid "Advanced settings"
+msgstr "Geavanceerde opties"
+
+#~ msgid "Uploaded"
+#~ msgstr "Upgeload"
+
 #~ msgid "Publisher preview"
 #~ msgstr "Preview"
 
@@ -317,9 +327,6 @@ msgstr "Deze video kan niet geladen worden"
 
 #~ msgid "Import from publisher"
 #~ msgstr "Importeer"
-
-#~ msgid "Edit Video"
-#~ msgstr "Bewerk"
 
 #~ msgid "Parent Videos:"
 #~ msgstr "Hoort hij:"

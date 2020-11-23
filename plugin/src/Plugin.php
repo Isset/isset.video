@@ -146,7 +146,7 @@ class Plugin {
 	}
 
 	private function loadTranslations() {
-		load_plugin_textdomain( 'isset-video-publisher', false, 'isset-video-publisher/languages' );
+		load_plugin_textdomain( 'isset-video-publisher', false, 'isset-video/languages' );
 	}
 
 	private function initActions() {
@@ -359,8 +359,8 @@ class Plugin {
 		$this->enqueueScript( 'js/admin-video-upload.js' );
 		$this->enqueueStyle( 'css/admin-video-upload.css' );
 
-		$page_title  = 'Upload New Videos';
-		$menu_title  = 'New Video';
+		$page_title  = __( 'Upload New Videos', 'isset-video-publisher' );
+		$menu_title  = __( 'New Video', 'isset-video-publisher' );
 		$capability  = 'manage_options';
 		$parent_slug = self::MENU_MAIN_SLUG;
 		$function    = function() {
