@@ -7,4 +7,4 @@ NODE_ENV=production yarn webpack
 test -d out || mkdir out;
 
 cd plugin;
-zip -x 'src/config_override.php' -r ../out/wp-video-publisher.zip ./*;
+zip -x 'src/config_override.php' -r ../out/isset-video.zip ./*;
