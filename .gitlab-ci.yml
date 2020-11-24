@@ -14,7 +14,7 @@ build:
     - ./bin/create-release
   artifacts:
     paths:
-      - out/wp-video-publisher.zip
+      - out/isset-video.zip
     expire_in: 30 days
 publish_nightly:
   only:
@@ -27,5 +27,5 @@ publish_nightly:
     - mkdir ~/.ssh
     - echo 'Host *' >> ~/.ssh/config
     - echo '  StrictHostKeyChecking no' >> ~/.ssh/config
-    - scp out/wp-video-publisher.zip wptest@isset122.isset.net:web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip
-    - ssh wptest@isset122.isset.net sh -c "cd ~/web/WordPress/wp-content/plugins/wp-video-publisher && rm -rf ~/web/WordPress/wp-content/plugins/wp-video-publisher/* && unzip ~/web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip -d ~/web/WordPress/wp-content/plugins/wp-video-publisher"
+    - scp out/isset-video.zip wptest@isset122.isset.net:web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip
+    - ssh wptest@isset122.isset.net sh -c "cd ~/web/WordPress/wp-content/plugins/isset-video && rm -rf ~/web/WordPress/wp-content/plugins/isset-video/* && unzip ~/web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip -d ~/web/WordPress/wp-content/plugins/isset-video"
