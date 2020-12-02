@@ -12,12 +12,12 @@ msgid "Use the following code to embed this video"
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:140
-#: js/overview/components/admin-video-overview.js:169
+#: js/overview/components/admin-video-overview.js:177
 msgid "Filename"
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:144
-#: js/overview/components/admin-video-overview.js:170
+#: js/overview/components/admin-video-overview.js:178
 msgid "Created"
 msgstr ""
 
@@ -37,42 +37,86 @@ msgstr ""
 msgid "Presets"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:103
+#: js/overview/components/admin-video-overview.js:109
 msgid "Are you sure you want to delete the selected videos?"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:144
+#: js/overview/components/admin-video-overview.js:152
 msgid "Upload New"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:147
+#: js/overview/components/admin-video-overview.js:155
 msgid "Delete Selected"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:150
+#: js/overview/components/admin-video-overview.js:158
 msgid "Search"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:156
+#: js/overview/components/admin-video-overview.js:164
 msgid "Total results"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:166
+#: js/overview/components/admin-video-overview.js:174
 msgid "Thumbnail"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:167
+#: js/overview/components/admin-video-overview.js:175
 msgid "Duration"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:168
+#: js/overview/components/admin-video-overview.js:176
 msgid "Size"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:193
+#: js/overview/components/admin-video-overview.js:201
 msgid "No publishes found"
 msgstr ""
 
 #: js/overview/components/video-item.js:41
 msgid "Processing"
+msgstr ""
+
+#: js/overview/components/video-upload.js:103
+msgid "Successfully added %s to archive"
+msgstr ""
+
+#: js/overview/components/video-upload.js:105
+msgid "Failed adding %s to archive"
+msgstr ""
+
+#: js/overview/components/video-upload.js:107
+msgid "Uploading"
+msgstr ""
+
+#: js/overview/components/video-upload.js:113
+msgid "Selected files"
+msgstr ""
+
+#: js/overview/components/video-upload.js:121
+msgid "Drop one or more files here (4.3GB max) or browse your computer."
+msgstr ""
+
+#: js/overview/components/video-upload.js:150
+msgid "Upload new video"
+msgstr ""
+
+#: js/overview/components/video-upload.js:162
+msgid "Upload"
+msgstr ""
+
+#: js/overview/components/video-upload.js:168
+msgid "Cancel upload"
+msgstr ""
+
+#: js/overview/components/video-upload.js:172
+msgid "Your files will be queued for transcoding"
+msgstr ""
+
+#: js/overview/components/video-upload.js:176
+msgid "Uploads Cancelled"
+msgstr ""
+
+#: js/overview/components/video-upload.js:182
+msgid "Upload More"
 msgstr ""

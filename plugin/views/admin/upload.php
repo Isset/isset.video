@@ -43,4 +43,4 @@
         <a id="videoPublisherSyncVideosAfterUpload" class="isset-video-btn" href="<?php echo $video_url; ?>"><?php _e( 'Go to videos', 'isset-video-publisher' ); ?></a>
     </div>
 </div>
-<canvas width=32 height=32 style="display: none;"></canvas>
+<canvas id="favicon-canvas" width=32 height=32 style="display: none;"></canvas>

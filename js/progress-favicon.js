@@ -1,16 +1,24 @@
-let canvas = document.querySelector('canvas');
-let favicon = document.querySelector('link[rel*="icon"]');
+let canvas = null;
+let favicon = null;
 
-// Create favicon dynamically if it doesn't exist
-if (!favicon) {
-    let link = document.createElement('link');
-    link.type = 'image/x-icon';
-    link.rel = 'shortcut icon';
-    document.getElementsByTagName('head')[0].appendChild(link);
-    favicon = document.querySelector('link[rel*="icon"]');
-}
+window.addEventListener('load', () => {
+    let canvas = document.querySelector('canvas#favicon-canvas');
+    let favicon = document.querySelector('link[rel*="icon"]');
+
+    // Create favicon dynamically if it doesn't exist
+    if (!favicon) {
+        let link = document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        document.getElementsByTagName('head')[0].appendChild(link);
+        favicon = document.querySelector('link[rel*="icon"]');
+    }
+});
 
 export function updateFaviconProgress(progress) {
+    let canvas = document.querySelector('canvas#favicon-canvas');
+    let favicon = document.querySelector('link[rel*="icon"]');
+
     let context = canvas.getContext('2d');
     context.clearRect(0, 0, 32, 32);
 

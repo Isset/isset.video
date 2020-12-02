@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
-"POT-Creation-Date: 2020-11-23T15:20:16+00:00\n"
-"PO-Revision-Date: 2020-11-23 16:23+0100\n"
+"POT-Creation-Date: 2020-12-02T11:00:23+00:00\n"
+"PO-Revision-Date: 2020-12-02 12:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -21,12 +21,12 @@ msgid "Use the following code to embed this video"
 msgstr "Gebruik de volgende code om de video toe te voegen"
 
 #: js/overview/components/admin-video-details.js:140
-#: js/overview/components/admin-video-overview.js:169
+#: js/overview/components/admin-video-overview.js:177
 msgid "Filename"
 msgstr "Bestandsnaam"
 
 #: js/overview/components/admin-video-details.js:144
-#: js/overview/components/admin-video-overview.js:170
+#: js/overview/components/admin-video-overview.js:178
 msgid "Created"
 msgstr "Aangemaakt"
 
@@ -46,40 +46,40 @@ msgstr "Resolutie"
 msgid "Presets"
 msgstr "Preset"
 
-#: js/overview/components/admin-video-overview.js:103
+#: js/overview/components/admin-video-overview.js:109
 msgid "Are you sure you want to delete the selected videos?"
 msgstr "Weet u zeker dat u de geselecteerde video's wilt verwijderen?"
 
-#: js/overview/components/admin-video-overview.js:144
+#: js/overview/components/admin-video-overview.js:152
 msgid "Upload New"
 msgstr "Upload Nieuw"
 
-#: js/overview/components/admin-video-overview.js:147
+#: js/overview/components/admin-video-overview.js:155
 msgid "Delete Selected"
 msgstr "Verwijder Geselecteerde"
 
-#: js/overview/components/admin-video-overview.js:150
+#: js/overview/components/admin-video-overview.js:158
 #: js/publisher-video-block.js:236
 msgid "Search"
 msgstr "Zoeken"
 
-#: js/overview/components/admin-video-overview.js:156
+#: js/overview/components/admin-video-overview.js:164
 msgid "Total results"
 msgstr "Totaal aantal resultaten"
 
-#: js/overview/components/admin-video-overview.js:166
+#: js/overview/components/admin-video-overview.js:174
 msgid "Thumbnail"
 msgstr "Voorbeeld"
 
-#: js/overview/components/admin-video-overview.js:167
+#: js/overview/components/admin-video-overview.js:175
 msgid "Duration"
 msgstr "Speelduur"
 
-#: js/overview/components/admin-video-overview.js:168
+#: js/overview/components/admin-video-overview.js:176
 msgid "Size"
 msgstr "Grootte"
 
-#: js/overview/components/admin-video-overview.js:193
+#: js/overview/components/admin-video-overview.js:201
 #: js/publisher-video-block.js:240
 msgid "No publishes found"
 msgstr "Geen videos gevonden"
@@ -88,32 +88,61 @@ msgstr "Geen videos gevonden"
 msgid "Processing"
 msgstr "Bezig"
 
-#: js/admin-video-upload.js:167
+#: js/overview/components/video-upload.js:103 js/admin-video-upload.js:167
 msgid "Successfully added %s to archive"
 msgstr "%s succesvol toegevoegd aan archief"
 
-#: js/admin-video-upload.js:171
+#: js/overview/components/video-upload.js:105 js/admin-video-upload.js:171
 msgid "Failed adding %s to archive"
 msgstr "Fout tijdens het toevoegen van %s aan archief"
 
-#: js/admin-video-upload.js:45
-msgid "Selected files"
-msgstr "Geselecteerd bestand"
-
-#: js/admin-video-upload.js:65
-msgid "Are you sure you want to leave?"
-msgstr "Weet u zeker dat u de pagina wilt verlaten?"
-
-#: js/admin-video-upload.js:85
+#: js/overview/components/video-upload.js:107 js/admin-video-upload.js:85
 msgid "Uploading"
 msgstr "Uploaden"
 
-#: js/admin-video-upload.js:96
+#: js/overview/components/video-upload.js:113 js/admin-video-upload.js:45
+msgid "Selected files"
+msgstr "Geselecteerd bestand"
+
+#: js/overview/components/video-upload.js:121 views/admin/upload.php:20
+#: views/admin/upload.php:19
+msgid "Drop one or more files here (4.3GB max) or browse your computer."
+msgstr ""
+"Sleep hier een of meerdere videobestanden op (4,3GB max) of blader op uw "
+"computer. "
+
+#: js/overview/components/video-upload.js:150 views/admin/upload.php:6
+msgid "Upload new video"
+msgstr "Nieuwe video"
+
+#: js/overview/components/video-upload.js:162 views/admin/upload.php:24
+#: views/admin/upload.php:22
+msgid "Upload"
+msgstr "Upload"
+
+#: js/overview/components/video-upload.js:168 views/admin/upload.php:27
+#: views/admin/upload.php:26
+msgid "Cancel upload"
+msgstr "Annuleer upload"
+
+#: js/overview/components/video-upload.js:172 js/admin-video-upload.js:96
 msgid "Your files will be queued for transcoding"
 msgstr ""
 "Uw bestanden worden gearchiveerd en omgezet om ze geschikt te maken voor "
 "video streamen. Dit kan enige tijd duren, afhankelijk van bestandsgrootte en "
 "afspeeltijd van het videobestand"
+
+#: js/overview/components/video-upload.js:176
+msgid "Uploads Cancelled"
+msgstr "Uploads geannuleerd"
+
+#: js/overview/components/video-upload.js:182
+msgid "Upload More"
+msgstr "Meer Uploaden"
+
+#: js/admin-video-upload.js:65
+msgid "Are you sure you want to leave?"
+msgstr "Weet u zeker dat u de pagina wilt verlaten?"
 
 #: js/publisher-video-block.js:158
 msgid "Error"
@@ -162,7 +191,7 @@ msgstr "isset.video"
 
 #. Plugin URI of the plugin
 msgid "https://isset.video/wp-plugin/"
-msgstr ""
+msgstr "https://isset.video/wp-plugin/"
 
 #. Description of the plugin
 msgid "Wordpress isset.video implementation"
@@ -170,7 +199,7 @@ msgstr "Wordpress isset.video implementatie"
 
 #. Author URI of the plugin
 msgid "http://isset.nl/"
-msgstr ""
+msgstr "http://isset.nl/"
 
 #: src/Action/Settings/Init.php:48 src/Action/Settings/Menu.php:16
 #: src/Action/Settings/Menu.php:17 src/Action/Settings/Init.php:52
@@ -183,11 +212,11 @@ msgstr "isset.video instellingen"
 msgid "Enter your settings below:"
 msgstr "Voer hieronder je instellingen van de publisher in"
 
-#: src/Plugin.php:362
+#: src/Plugin.php:356
 msgid "Upload New Videos"
 msgstr "Upload Nieuwe Videos"
 
-#: src/Plugin.php:363
+#: src/Plugin.php:357
 msgid "New Video"
 msgstr "Nieuwe Video"
 
@@ -269,24 +298,6 @@ msgstr ""
 "Verbind met uw my.isset.video account door op de knop hieronder te klikken. "
 "U wordt doorverwezen naar my.isset.video om hiervoor toestemming te vragen."
 
-#: views/admin/upload.php:6
-msgid "Upload new video"
-msgstr "Nieuwe video"
-
-#: views/admin/upload.php:20 views/admin/upload.php:19
-msgid "Drop one or more files here (4.3GB max) or browse your computer."
-msgstr ""
-"Sleep hier een of meerdere videobestanden op (4,3GB max) of blader op uw "
-"computer. "
-
-#: views/admin/upload.php:24 views/admin/upload.php:22
-msgid "Upload"
-msgstr "Upload"
-
-#: views/admin/upload.php:27 views/admin/upload.php:26
-msgid "Cancel upload"
-msgstr "Annuleer upload"
-
 #: views/admin/upload.php:36 views/admin/upload.php:35
 msgid ""
 "Storage limit is already reached, please remove video's to upload again or "
@@ -314,9 +325,6 @@ msgstr "Laat geavanceerde opties zien"
 #: src/Action/Settings/Init.php:75
 msgid "Advanced settings"
 msgstr "Geavanceerde opties"
-
-#~ msgid "Uploaded"
-#~ msgstr "Upgeload"
 
 #~ msgid "Publisher preview"
 #~ msgstr "Preview"
