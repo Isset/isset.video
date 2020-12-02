@@ -16,3 +16,4 @@
     <div id="isset-video-overview-container" class="isset-video-overview-container"></div>
 </div>
 
+<canvas id="favicon-canvas" width=32 height=32 style="display: none;"></canvas>

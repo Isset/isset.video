@@ -296,15 +296,10 @@ class Plugin {
 
 	public function addMenuItems() {
 		$this->addOverviewItem();
-		$this->addNewVideoItem();
 	}
 
 	public function getOverviewPageUrl() {
 		return admin_url( 'admin.php?page=' . self::MENU_MAIN_SLUG );
-	}
-
-	public function getUploadUrl() {
-		return admin_url( 'admin.php?page=' . self::MENU_UPLOAD_SLUG );
 	}
 
 	public function renderOverviewPage() {
@@ -313,7 +308,6 @@ class Plugin {
 		$context['logged_in'] = $vps->isLoggedIn();
 
 		if ( $context['logged_in'] ) {
-			$context['uploadUrl'] = $this->getUploadUrl();
 			$context['chart']     = $this->renderChart();
 
 			echo Renderer::render( 'admin/overview.php', $context );
@@ -323,24 +317,7 @@ class Plugin {
 			echo Renderer::render( 'admin/page.php', $context );
 		}
 	}
-
-	public function renderUploadPage() {
-		$service = $this->getVideoPublisherService();
-
-		$data                      = array();
-		$data['logged_in']         = $service->isLoggedIn();
-		$data['uploading_allowed'] = $service->uploadingAllowed();
-		$data['video_url']         = $this->getOverviewPageUrl();
-
-		if ( $data['logged_in'] ) {
-			echo Renderer::render( 'admin/upload.php', $data );
-		} else {
-			$data['login_url'] = $service->getLoginURL();
-
-			echo Renderer::render( 'admin/page.php', $data );
-		}
-	}
-
+	
 	private function addOverviewItem() {
 		$page_title = 'Isset Videos';
 		$menu_title = 'Videos';
@@ -353,21 +330,6 @@ class Plugin {
 		$position   = 11;
 
 		add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
-	}
-
-	private function addNewVideoItem() {
-		$this->enqueueScript( 'js/admin-video-upload.js' );
-		$this->enqueueStyle( 'css/admin-video-upload.css' );
-
-		$page_title  = __( 'Upload New Videos', 'isset-video-publisher' );
-		$menu_title  = __( 'New Video', 'isset-video-publisher' );
-		$capability  = 'manage_options';
-		$parent_slug = self::MENU_MAIN_SLUG;
-		$function    = function() {
-			$this->renderUploadPage();
-		};
-
-		add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, self::MENU_UPLOAD_SLUG, $function );
 	}
 
 	private function renderChart() {

@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the isset.video plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: isset.video 0.7.1\n"
+"Project-Id-Version: isset.video 0.7.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-11-23T15:20:16+00:00\n"
+"POT-Creation-Date: 2020-12-02T11:00:23+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: isset-video-publisher\n"
@@ -41,11 +41,11 @@ msgstr ""
 msgid "Enter your settings below:"
 msgstr ""
 
-#: src/Plugin.php:362
+#: src/Plugin.php:356
 msgid "Upload New Videos"
 msgstr ""
 
-#: src/Plugin.php:363
+#: src/Plugin.php:357
 msgid "New Video"
 msgstr ""
 

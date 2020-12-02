@@ -5,6 +5,7 @@ import VideoItem from './video-item';
 import Pagination from './pagination';
 import AdminVideoDetails from './admin-video-details';
 import {__} from '@wordpress/i18n'
+import VideoUpload from './video-upload';
 
 class IssetVideoOverview extends React.Component {
 
@@ -22,6 +23,7 @@ class IssetVideoOverview extends React.Component {
             checked: [],
             orderBy: 'dateCreated',
             orderDirection: 'desc',
+            showUpload: false,
         };
 
         this.search = '';
@@ -46,7 +48,6 @@ class IssetVideoOverview extends React.Component {
 
     loadVideos = (offset) => {
         const {search, limit, orderBy, orderDirection} = this.state;
-        const {root} = window.IssetVideoArchiveAjax;
 
         archiveAjax(`api/search`, {offset, limit, q: search, orderBy, orderDirection}).then(result => {
             const {offset, results, total} = result;
@@ -55,6 +56,11 @@ class IssetVideoOverview extends React.Component {
                 this.setState({offset, results, total, checked: []});
             }
         });
+    };
+
+    refresh = () => {
+        const {offset} = this.state;
+        this.loadVideos(offset);
     };
 
     onSelect = (uuid) => {
@@ -132,17 +138,19 @@ class IssetVideoOverview extends React.Component {
         this.setState({offset: 0, search: ''});
     };
 
+    showUploadDialog = showUpload => this.setState({showUpload});
+
     render() {
-        const {offset, results, total, limit, uuid, checkAll, orderDirection} = this.state;
+        const {offset, results, total, limit, uuid, checkAll, orderDirection, showUpload} = this.state;
         const {adminUrl} = window.IssetVideoPublisherAjax;
 
         return <div>
             {uuid && <AdminVideoDetails uuid={uuid} onClose={this.onCloseDetails} />}
             <div className="video-publisher-flex video-publisher-flex-between video-publisher-mb-2">
                 <div>
-                    <a className="isset-video-btn isset-video-upload-btn" href={`${adminUrl}admin.php?page=isset-video-upload`}>
+                    <button className="isset-video-btn isset-video-upload-btn" onClick={() => this.showUploadDialog(true)}>
                         <span className="dashicons dashicons-plus-alt" /> {__('Upload New', 'isset-video-publisher')}
-                    </a>
+                    </button>
                     <button className="isset-video-btn btn-danger isset-overview-delete" onClick={this.deleteChecked}>
                         <span className="dashicons dashicons-trash" /> {__('Delete Selected', 'isset-video-publisher')}
                     </button>
@@ -198,6 +206,7 @@ class IssetVideoOverview extends React.Component {
             <div className="video-publisher-flex video-publisher-flex-end">
                 <Pagination onNavigate={this.loadVideos} total={total} limit={limit} offset={offset} />
             </div>
+            <VideoUpload show={showUpload} toggleShow={this.showUploadDialog} refresh={this.refresh} />
         </div>;
     }
 }

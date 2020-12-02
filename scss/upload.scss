@@ -1,5 +1,7 @@
 .isset-video-upload-card {
   background-color: #23282C;
+  min-width: 520px;
+  border-color: #555;
 
   &.card {
     padding: 0;
@@ -30,6 +32,11 @@
 
       .text-wrapper {
         color: #eee;
+      }
+
+      .isset-video-progressbar-container {
+        max-height: 400px;
+        overflow-y: auto;
       }
     }
 
@@ -63,7 +70,6 @@
   }
 
   .phase-upload {
-    display: none;
 
     hr {
       border: 0;
@@ -79,7 +85,7 @@
     .progress {
       margin-top: 10px;
       display: flex;
-      height: 1.5rem;
+      height: 8px;
       overflow: hidden;
       font-size: .65625rem;
       border-radius: .25rem;
@@ -104,12 +110,8 @@
   }
 
   .phase-done {
-    display: none;
-    margin-top: 14px;
-
     .isset-video-upload-success {
       font-size: 14px;
-      margin-top: 26px;
       font-weight: bold;
       color: orange;
     }
@@ -165,4 +167,59 @@
       }
     }
   }
+}
+
+.isset-video-upload-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+  background-color: #464d52;
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid orange;
+
+  & > span {
+    width: 46px;
+    height: 44px;
+    font-size: 30px;
+    color: orange;
+
+    &::before {
+      display: block;
+      margin-top: 6px;
+    }
+  }
+
+  .isset-video-progressbar-striped {
+    height: 5px;
+
+    .isset-video-progressbar-colored {
+      height: 100%;
+      background-color: orange;
+    }
+  }
+
+  .isset-video-progress-label {
+    width: 160px;
+    margin-bottom: 8px;
+    color: white;
+    font-size: 0.9em;
+  }
+
+  .isset-video-upload-progressbar-container {
+    padding: 5px 10px;
+  }
+}
+
+.isset-video-overlay {
+  > div.isset-video-upload-container {
+    width: auto;
+  }
+}
+
+.isset-video-progressbar-striped {
+  background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+  background-size: 1rem 1rem;
 }

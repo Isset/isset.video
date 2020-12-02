@@ -33,6 +33,7 @@
   .isset-video-upload-btn {
     margin-right: 10px;
     background-color: #45a164;
+    border-width: 0;
   }
 }
 
@@ -406,7 +407,8 @@
   z-index: 10000;
   display: flex;
 
-  .isset-video-details {
+  .isset-video-details,
+  .isset-video-upload-container {
     width: 1010px;
     background-color: #23282C;
     position: fixed;

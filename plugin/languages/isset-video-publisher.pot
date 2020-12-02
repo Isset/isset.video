@@ -1,4 +1,4 @@
-# #-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.7.1)  #-#-#-#-#
+# #-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.7.3)  #-#-#-#-#
 # Copyright (C) 2020 isset.video
 # This file is distributed under the same license as the isset.video plugin.
 # #-#-#-#-#  isset-video-publisher.pot (isset.video 0.5.0)  #-#-#-#-#
@@ -14,15 +14,15 @@ msgstr ""
 "#-#-#-#-#  isset-video-publisher-js.pot  #-#-#-#-#\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
-"#-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.7.1)  #-#-#-#-#\n"
-"Project-Id-Version: isset.video 0.7.1\n"
+"#-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.7.3)  #-#-#-#-#\n"
+"Project-Id-Version: isset.video 0.7.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-11-23T15:20:16+00:00\n"
+"POT-Creation-Date: 2020-12-02T11:00:23+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: isset-video-publisher\n"
@@ -55,12 +55,12 @@ msgid "Use the following code to embed this video"
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:140
-#: js/overview/components/admin-video-overview.js:169
+#: js/overview/components/admin-video-overview.js:177
 msgid "Filename"
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:144
-#: js/overview/components/admin-video-overview.js:170
+#: js/overview/components/admin-video-overview.js:178
 msgid "Created"
 msgstr ""
 
@@ -80,40 +80,40 @@ msgstr ""
 msgid "Presets"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:103
+#: js/overview/components/admin-video-overview.js:109
 msgid "Are you sure you want to delete the selected videos?"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:144
+#: js/overview/components/admin-video-overview.js:152
 msgid "Upload New"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:147
+#: js/overview/components/admin-video-overview.js:155
 msgid "Delete Selected"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:150
+#: js/overview/components/admin-video-overview.js:158
 #: js/publisher-video-block.js:236
 msgid "Search"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:156
+#: js/overview/components/admin-video-overview.js:164
 msgid "Total results"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:166
+#: js/overview/components/admin-video-overview.js:174
 msgid "Thumbnail"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:167
+#: js/overview/components/admin-video-overview.js:175
 msgid "Duration"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:168
+#: js/overview/components/admin-video-overview.js:176
 msgid "Size"
 msgstr ""
 
-#: js/overview/components/admin-video-overview.js:193
+#: js/overview/components/admin-video-overview.js:201
 #: js/publisher-video-block.js:240
 msgid "No publishes found"
 msgstr ""
@@ -122,28 +122,55 @@ msgstr ""
 msgid "Processing"
 msgstr ""
 
-#: js/admin-video-upload.js:167
+#: js/overview/components/video-upload.js:103 js/admin-video-upload.js:167
 msgid "Successfully added %s to archive"
 msgstr ""
 
-#: js/admin-video-upload.js:171
+#: js/overview/components/video-upload.js:105 js/admin-video-upload.js:171
 msgid "Failed adding %s to archive"
 msgstr ""
 
-#: js/admin-video-upload.js:45
+#: js/overview/components/video-upload.js:107 js/admin-video-upload.js:85
+msgid "Uploading"
+msgstr ""
+
+#: js/overview/components/video-upload.js:113 js/admin-video-upload.js:45
 msgid "Selected files"
+msgstr ""
+
+#: js/overview/components/video-upload.js:121 views/admin/upload.php:20
+#: views/admin/upload.php:19
+msgid "Drop one or more files here (4.3GB max) or browse your computer."
+msgstr ""
+
+#: js/overview/components/video-upload.js:150 views/admin/upload.php:6
+msgid "Upload new video"
+msgstr ""
+
+#: js/overview/components/video-upload.js:162 views/admin/upload.php:24
+#: views/admin/upload.php:22
+msgid "Upload"
+msgstr ""
+
+#: js/overview/components/video-upload.js:168 views/admin/upload.php:27
+#: views/admin/upload.php:26
+msgid "Cancel upload"
+msgstr ""
+
+#: js/overview/components/video-upload.js:172 js/admin-video-upload.js:96
+msgid "Your files will be queued for transcoding"
+msgstr ""
+
+#: js/overview/components/video-upload.js:176
+msgid "Uploads Cancelled"
+msgstr ""
+
+#: js/overview/components/video-upload.js:182
+msgid "Upload More"
 msgstr ""
 
 #: js/admin-video-upload.js:65
 msgid "Are you sure you want to leave?"
-msgstr ""
-
-#: js/admin-video-upload.js:85
-msgid "Uploading"
-msgstr ""
-
-#: js/admin-video-upload.js:96
-msgid "Your files will be queued for transcoding"
 msgstr ""
 
 #: js/publisher-video-block.js:158
@@ -214,11 +241,11 @@ msgstr ""
 msgid "Enter your settings below:"
 msgstr ""
 
-#: src/Plugin.php:362
+#: src/Plugin.php:356
 msgid "Upload New Videos"
 msgstr ""
 
-#: src/Plugin.php:363
+#: src/Plugin.php:357
 msgid "New Video"
 msgstr ""
 
@@ -294,22 +321,6 @@ msgstr ""
 msgid ""
 "Please connect your my.isset.video account by clicking the button below. We "
 "will redirect you to my.isset.video to ask for your permission."
-msgstr ""
-
-#: views/admin/upload.php:6
-msgid "Upload new video"
-msgstr ""
-
-#: views/admin/upload.php:20 views/admin/upload.php:19
-msgid "Drop one or more files here (4.3GB max) or browse your computer."
-msgstr ""
-
-#: views/admin/upload.php:24 views/admin/upload.php:22
-msgid "Upload"
-msgstr ""
-
-#: views/admin/upload.php:27 views/admin/upload.php:26
-msgid "Cancel upload"
 msgstr ""
 
 #: views/admin/upload.php:36 views/admin/upload.php:35
