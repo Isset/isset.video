@@ -23,12 +23,13 @@ publish_nightly:
     - apt install -y -f openssh-client
     - eval "$(ssh-agent)"
     - ssh-add <(echo "${SSH_PRIV_KEY}")
+    - ssh-add <(echo "${SSH_PRIV_KEY_ISSETVIDEO}")
     - mkdir ~/.ssh
     - echo 'Host *' >> ~/.ssh/config
     - echo '  StrictHostKeyChecking no' >> ~/.ssh/config
     - scp out/isset-video.zip wptest@isset122.isset.net:web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip
-    - ssh wptest@isset122.isset.net sh -c "cd ~/web/WordPress/wp-content/plugins/isset-video && rm -rf ~/web/WordPress/wp-content/plugins/isset-video/* && unzip ~/web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip -d ~/web/WordPress/wp-content/plugins/isset-video"
-publish_release:
+    - scp out/isset-video.zip issetdotvideo@isset122.isset.net:web/plugin/isset-video.zip
+    - ssh wptest@isset122.isset.net sh -c "cd ~/web/WordPress/wp-content/plugins/isset-video && rm -rf ~/web/WordPress/wp-content/plugins/isset-video/* && unzip ~/web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip -d ~/web/WordPress/wp-content/plugins/isset-video"publish_release:
   only:
     - master
   script:
