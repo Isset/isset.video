@@ -17,7 +17,6 @@ use IssetBV\VideoPublisher\Wordpress\Widgets\Dashboard;
 
 class Plugin {
 	const MENU_MAIN_SLUG   = 'isset-video-overview';
-	const MENU_UPLOAD_SLUG = 'isset-video-upload';
 
 	static $instance;
 
@@ -46,7 +45,6 @@ class Plugin {
 	private $actions = array(
 		HijackRouter::class,
 		Settings\Init::class,
-		Settings\Menu::class,
 		Upload\GenerateUploadUrl::class,
 		Upload\GetArchiveToken::class,
 		Upload\GetArchiveUrl::class,

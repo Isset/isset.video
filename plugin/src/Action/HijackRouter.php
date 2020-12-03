@@ -23,7 +23,7 @@ class HijackRouter extends BaseAction {
 
 			$this->plugin->getVideoPublisherService()->updateAuthToken( $token );
 
-			wp_redirect( admin_url( 'options-general.php?page=isset-video-publisher-admin' ), 302 );
+            wp_redirect( $this->plugin->getOverviewPageUrl(), 302 );
 			exit( 0 );
 		}
 
@@ -32,7 +32,7 @@ class HijackRouter extends BaseAction {
 			$this->plugin->getVideoArchiveService()->removeAuthToken();
 			$this->plugin->getVideoPublisherService()->logout();
 
-			wp_redirect( admin_url( 'options-general.php?page=isset-video-publisher-admin' ), 302 );
+			wp_redirect( $this->plugin->getOverviewPageUrl(), 302 );
 			exit( 0 );
 		}
 
