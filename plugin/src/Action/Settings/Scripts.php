@@ -48,7 +48,7 @@ class Scripts extends BaseAction {
 				'IssetVideoArchiveAjax',
 				array(
 					'archiveUrl'     => $videoArchiveService->getArchiveUrl(),
-                    'uploaderUrl'    => $videoPublishService->getUploaderURL(),
+					'uploaderUrl'    => $videoPublishService->getUploaderURL(),
 					'archiveToken'   => $videoArchiveService->getArchiveToken(),
 					'publisherUrl'   => $videoPublishService->getPublisherURL(),
 					'publisherToken' => $videoPublishService->getPublisherToken(),

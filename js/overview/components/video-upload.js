@@ -5,11 +5,13 @@ import Queue from '../upload/queue';
 import {UPLOAD_ADDED, UPLOAD_ARCHIVE_FAILED, UPLOAD_ARCHIVED, UPLOAD_ARCHIVING} from '../upload/uploadStatuses';
 import PropTypes from 'prop-types';
 import {updateFaviconProgress} from '../../progress-favicon';
+import {wpAjax} from '../../ajax';
 
 const initialUploadState = {
     files: [],
     uploadStatus: '',
     totalProgress: 0,
+    uploadsAllowed: false,
 };
 
 class VideoUpload extends React.Component {
@@ -22,12 +24,14 @@ class VideoUpload extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = initialUploadState;
+        const uploadsAllowed = this.getUploadsAllowed();
+        this.state = {...initialUploadState, uploadsAllowed};
     }
 
     resetUploads = () => {
         this.queue = null;
-        this.setState(initialUploadState);
+        const uploadsAllowed = this.getUploadsAllowed();
+        this.setState({...initialUploadState, uploadsAllowed});
     };
 
     filesAdded = (event) => {
@@ -58,6 +62,10 @@ class VideoUpload extends React.Component {
 
         window.onbeforeunload = () => "";
     }
+
+    getUploadsAllowed = async () => {
+        return await wpAjax('isset-video-fetch-uploading-allowed').then(response => response.allowed ? response.allowed : false);
+    };
 
     cancelUploads = () => {
         this.queue && this.queue.cancelUploads();
@@ -123,6 +131,43 @@ class VideoUpload extends React.Component {
         </>;
     };
 
+    renderUploaderContent = () => {
+        const {files, uploadStatus, uploadsAllowed} = this.state;
+
+        if (!uploadsAllowed) {
+            return <p>
+                {__('Storage limit is already reached, please remove videos to upload again or upgrade your subscription', 'isset-video-publisher')}
+                : <a href="https://my.isset.video/subscriptions">https://my.isset.video/subscriptions</a>
+            </p>;
+        }
+
+        return <>
+            {uploadStatus === '' && <div className="phase-select">
+                <div className="phase-select-dropzone">
+                    <input multiple accept="video/mp4,video/x-m4v,video/x-flv,video/*,.mkv,.ts" type="file" onChange={this.filesAdded} />
+                    <div className="selected-files-container video-publisher-p-2" id="phase-select-file">
+                        {this.renderFileList(files)}
+                    </div>
+                </div>
+                {files.length > 0 ? <button className="isset-video-btn" onClick={this.doUpload}>{__('Upload', 'isset-video-publisher')}</button> : ''}
+            </div>}
+            {(uploadStatus === 'uploading' || uploadStatus === 'finished') && <div className="phase-upload">
+                {this.renderProgressBars(files)}
+            </div>}
+            {uploadStatus === 'uploading' && <button id="btnCancelUpload" className="isset-video-btn btn-danger" onClick={this.cancelUploads} >
+                {__('Cancel upload', 'isset-video-publisher')}
+            </button>}
+            {uploadStatus === 'finished' && <div className="phase-done">
+                <div className="isset-video-upload-success">
+                    {__('Your files will be queued for transcoding', 'isset-video-publisher')}
+                </div>
+            </div>}
+            {uploadStatus === 'cancelled' && <div className="phase-upload">
+                <p>{__('Uploads Cancelled', 'isset-video-publisher')}</p>
+            </div>}
+        </>;
+    }
+
     renderUpload = () => {
         const {files, uploadStatus, totalProgress} = this.state;
         const {show, toggleShow} = this.props;
@@ -152,29 +197,7 @@ class VideoUpload extends React.Component {
                     </div>
                     <div className="card-body">
                         <div className="upload-container">
-                            {uploadStatus === '' && <div className="phase-select">
-                                <div className="phase-select-dropzone">
-                                    <input multiple accept="video/mp4,video/x-m4v,video/x-flv,video/*,.mkv,.ts" type="file" onChange={this.filesAdded} />
-                                    <div className="selected-files-container video-publisher-p-2" id="phase-select-file">
-                                        {this.renderFileList(files)}
-                                    </div>
-                                </div>
-                                {files.length > 0 ? <button className="isset-video-btn" onClick={this.doUpload}>{__('Upload', 'isset-video-publisher')}</button> : ''}
-                            </div>}
-                            {(uploadStatus === 'uploading' || uploadStatus === 'finished') && <div className="phase-upload">
-                                {this.renderProgressBars(files)}
-                            </div>}
-                            {uploadStatus === 'uploading' && <button id="btnCancelUpload" className="isset-video-btn btn-danger" onClick={this.cancelUploads} >
-                                {__('Cancel upload', 'isset-video-publisher')}
-                            </button>}
-                            {uploadStatus === 'finished' && <div className="phase-done">
-                                <div className="isset-video-upload-success">
-                                    {__('Your files will be queued for transcoding', 'isset-video-publisher')}
-                                </div>
-                            </div>}
-                            {uploadStatus === 'cancelled' && <div className="phase-upload">
-                                <p>{__('Uploads Cancelled', 'isset-video-publisher')}</p>
-                            </div>}
+                            {this.renderUploaderContent()}
                         </div>
                     </div>
                     {(uploadStatus === 'finished' || uploadStatus === 'cancelled') && <div className="card-footer">

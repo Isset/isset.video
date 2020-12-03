@@ -7,7 +7,6 @@ use IssetBV\VideoPublisher\Wordpress\Action\BaseAction;
 use IssetBV\VideoPublisher\Wordpress\Action\HijackRouter;
 use IssetBV\VideoPublisher\Wordpress\Action\Settings;
 use IssetBV\VideoPublisher\Wordpress\Action\Upload;
-use IssetBV\VideoPublisher\Wordpress\Action\Upload\CreateArchiveFile;
 use IssetBV\VideoPublisher\Wordpress\Rest\BaseEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoArchiveService;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
@@ -52,7 +51,8 @@ class Plugin {
 		Upload\GetArchiveToken::class,
 		Upload\GetArchiveUrl::class,
 		Upload\GetUploaderUrl::class,
-		CreateArchiveFile::class,
+		Upload\CreateArchiveFile::class,
+		Upload\GetUploadAllowed::class,
 	);
 
 	private $endpoints = array();
@@ -308,7 +308,7 @@ class Plugin {
 		$context['logged_in'] = $vps->isLoggedIn();
 
 		if ( $context['logged_in'] ) {
-			$context['chart']     = $this->renderChart();
+			$context['chart'] = $this->renderChart();
 
 			echo Renderer::render( 'admin/overview.php', $context );
 		} else {
@@ -317,7 +317,7 @@ class Plugin {
 			echo Renderer::render( 'admin/page.php', $context );
 		}
 	}
-	
+
 	private function addOverviewItem() {
 		$page_title = 'Isset Videos';
 		$menu_title = 'Videos';

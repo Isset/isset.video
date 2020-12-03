@@ -4,3 +4,5 @@ csfix:
 	./vendor/bin/phpcbf --standard=WordPress-Extra,WordPress-Docs  ./plugin/src/
 release: csfix
 	bin/create-release
+translation:
+	bin/create-translations

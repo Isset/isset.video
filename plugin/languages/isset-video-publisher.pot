@@ -1,10 +1,6 @@
 # #-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.7.3)  #-#-#-#-#
 # Copyright (C) 2020 isset.video
 # This file is distributed under the same license as the isset.video plugin.
-# #-#-#-#-#  isset-video-publisher.pot (isset.video 0.5.0)  #-#-#-#-#
-# #-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.5.0)  #-#-#-#-#
-# Copyright (C) 2020 isset.video
-# This file is distributed under the same license as the isset.video plugin.
 #, fuzzy
 msgid ""
 msgstr ""
@@ -22,29 +18,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-12-02T11:00:23+00:00\n"
+"POT-Creation-Date: 2020-12-03T14:31:15+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: isset-video-publisher\n"
-"#-#-#-#-#  isset-video-publisher.pot (isset.video 0.5.0)  #-#-#-#-#\n"
-"#-#-#-#-#  isset-video-publisher-js.pot  #-#-#-#-#\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"X-Generator: babel-plugin-makepot\n"
-"#-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.5.0)  #-#-#-#-#\n"
-"Project-Id-Version: isset.video 0.5.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-11-02T10:48:02+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.4.0\n"
-"X-Domain: isset-video-publisher\n"
-"#-#-#-#-#  myplugin.pot  #-#-#-#-#\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"X-Generator: babel-plugin-makepot\n"
 
 #: js/overview/components/admin-copy-text.js:42
 msgid "Copied shortcode"
@@ -122,50 +99,53 @@ msgstr ""
 msgid "Processing"
 msgstr ""
 
-#: js/overview/components/video-upload.js:103 js/admin-video-upload.js:167
+#: js/overview/components/video-upload.js:111 js/admin-video-upload.js:167
 msgid "Successfully added %s to archive"
 msgstr ""
 
-#: js/overview/components/video-upload.js:105 js/admin-video-upload.js:171
+#: js/overview/components/video-upload.js:113 js/admin-video-upload.js:171
 msgid "Failed adding %s to archive"
 msgstr ""
 
-#: js/overview/components/video-upload.js:107 js/admin-video-upload.js:85
+#: js/overview/components/video-upload.js:115 js/admin-video-upload.js:85
 msgid "Uploading"
 msgstr ""
 
-#: js/overview/components/video-upload.js:113 js/admin-video-upload.js:45
+#: js/overview/components/video-upload.js:121 js/admin-video-upload.js:45
 msgid "Selected files"
 msgstr ""
 
-#: js/overview/components/video-upload.js:121 views/admin/upload.php:20
-#: views/admin/upload.php:19
+#: js/overview/components/video-upload.js:129
 msgid "Drop one or more files here (4.3GB max) or browse your computer."
 msgstr ""
 
-#: js/overview/components/video-upload.js:150 views/admin/upload.php:6
-msgid "Upload new video"
+#: js/overview/components/video-upload.js:139
+msgid ""
+"Storage limit is already reached, please remove videos to upload again or "
+"upgrade your subscription"
 msgstr ""
 
-#: js/overview/components/video-upload.js:162 views/admin/upload.php:24
-#: views/admin/upload.php:22
+#: js/overview/components/video-upload.js:152
 msgid "Upload"
 msgstr ""
 
-#: js/overview/components/video-upload.js:168 views/admin/upload.php:27
-#: views/admin/upload.php:26
+#: js/overview/components/video-upload.js:158
 msgid "Cancel upload"
 msgstr ""
 
-#: js/overview/components/video-upload.js:172 js/admin-video-upload.js:96
+#: js/overview/components/video-upload.js:162 js/admin-video-upload.js:96
 msgid "Your files will be queued for transcoding"
 msgstr ""
 
-#: js/overview/components/video-upload.js:176
+#: js/overview/components/video-upload.js:166
 msgid "Uploads Cancelled"
 msgstr ""
 
-#: js/overview/components/video-upload.js:182
+#: js/overview/components/video-upload.js:195
+msgid "Upload new video"
+msgstr ""
+
+#: js/overview/components/video-upload.js:205
 msgid "Upload More"
 msgstr ""
 
@@ -231,22 +211,12 @@ msgid "http://isset.nl/"
 msgstr ""
 
 #: src/Action/Settings/Init.php:48 src/Action/Settings/Menu.php:16
-#: src/Action/Settings/Menu.php:17 src/Action/Settings/Init.php:52
-#: src/Action/Settings/Menu.php:18
+#: src/Action/Settings/Menu.php:17
 msgid "isset.video settings"
 msgstr ""
 
-#: src/Action/Settings/Init.php:50 src/Action/Settings/Init.php:54
-#: src/Action/Settings/Init.php:77
+#: src/Action/Settings/Init.php:50
 msgid "Enter your settings below:"
-msgstr ""
-
-#: src/Plugin.php:356
-msgid "Upload New Videos"
-msgstr ""
-
-#: src/Plugin.php:357
-msgid "New Video"
 msgstr ""
 
 #: views/admin/dashboard/api-dashboard.php:7
@@ -282,7 +252,6 @@ msgstr ""
 
 #: views/admin/dashboard/api-dashboard.php:74
 #: views/admin/dashboard/dashboard.php:18
-#: views/admin/dashboard/api-dashboard.php:70
 msgid "Login to isset.video"
 msgstr ""
 
@@ -291,7 +260,6 @@ msgid "Logged in as %s"
 msgstr ""
 
 #: views/admin/dashboard/dashboard.php:15 views/admin/page.php:7
-#: views/admin/upload.php:43 views/admin/upload.php:42
 msgid "Go to videos"
 msgstr ""
 
@@ -323,12 +291,6 @@ msgid ""
 "will redirect you to my.isset.video to ask for your permission."
 msgstr ""
 
-#: views/admin/upload.php:36 views/admin/upload.php:35
-msgid ""
-"Storage limit is already reached, please remove video's to upload again or "
-"upgrade your subscription"
-msgstr ""
-
 #: views/shortcode/publish-invalid.php:3
 msgid "Video is not available"
 msgstr ""
@@ -339,12 +301,4 @@ msgstr ""
 
 #: views/shortcode/publish.php:12
 msgid "Video cannot be loaded"
-msgstr ""
-
-#: src/Action/Settings/Init.php:61
-msgid "Show advanced options"
-msgstr ""
-
-#: src/Action/Settings/Init.php:75
-msgid "Advanced settings"
 msgstr ""

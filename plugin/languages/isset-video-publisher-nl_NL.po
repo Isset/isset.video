@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
-"POT-Creation-Date: 2020-12-02T11:00:23+00:00\n"
-"PO-Revision-Date: 2020-12-02 12:03+0100\n"
+"POT-Creation-Date: 2020-12-03T14:17:50+00:00\n"
+"PO-Revision-Date: 2020-12-03 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -88,55 +88,60 @@ msgstr "Geen videos gevonden"
 msgid "Processing"
 msgstr "Bezig"
 
-#: js/overview/components/video-upload.js:103 js/admin-video-upload.js:167
+#: js/overview/components/video-upload.js:111 js/admin-video-upload.js:167
 msgid "Successfully added %s to archive"
 msgstr "%s succesvol toegevoegd aan archief"
 
-#: js/overview/components/video-upload.js:105 js/admin-video-upload.js:171
+#: js/overview/components/video-upload.js:113 js/admin-video-upload.js:171
 msgid "Failed adding %s to archive"
 msgstr "Fout tijdens het toevoegen van %s aan archief"
 
-#: js/overview/components/video-upload.js:107 js/admin-video-upload.js:85
+#: js/overview/components/video-upload.js:115 js/admin-video-upload.js:85
 msgid "Uploading"
 msgstr "Uploaden"
 
-#: js/overview/components/video-upload.js:113 js/admin-video-upload.js:45
+#: js/overview/components/video-upload.js:121 js/admin-video-upload.js:45
 msgid "Selected files"
 msgstr "Geselecteerd bestand"
 
-#: js/overview/components/video-upload.js:121 views/admin/upload.php:20
-#: views/admin/upload.php:19
+#: js/overview/components/video-upload.js:129 views/admin/upload.php:19
 msgid "Drop one or more files here (4.3GB max) or browse your computer."
 msgstr ""
 "Sleep hier een of meerdere videobestanden op (4,3GB max) of blader op uw "
 "computer. "
 
-#: js/overview/components/video-upload.js:150 views/admin/upload.php:6
-msgid "Upload new video"
-msgstr "Nieuwe video"
+#: js/overview/components/video-upload.js:139
+msgid ""
+"Storage limit is already reached, please remove videos to upload again or "
+"upgrade your subscription"
+msgstr ""
+"Opslaglimiet is reeds bereikt, verwijder video's om nieuwe video's te kunnen "
+"uploaden, of upgrade uw abonnement."
 
-#: js/overview/components/video-upload.js:162 views/admin/upload.php:24
-#: views/admin/upload.php:22
+#: js/overview/components/video-upload.js:152 views/admin/upload.php:22
 msgid "Upload"
 msgstr "Upload"
 
-#: js/overview/components/video-upload.js:168 views/admin/upload.php:27
-#: views/admin/upload.php:26
+#: js/overview/components/video-upload.js:158 views/admin/upload.php:26
 msgid "Cancel upload"
 msgstr "Annuleer upload"
 
-#: js/overview/components/video-upload.js:172 js/admin-video-upload.js:96
+#: js/overview/components/video-upload.js:162 js/admin-video-upload.js:96
 msgid "Your files will be queued for transcoding"
 msgstr ""
 "Uw bestanden worden gearchiveerd en omgezet om ze geschikt te maken voor "
 "video streamen. Dit kan enige tijd duren, afhankelijk van bestandsgrootte en "
 "afspeeltijd van het videobestand"
 
-#: js/overview/components/video-upload.js:176
+#: js/overview/components/video-upload.js:166
 msgid "Uploads Cancelled"
 msgstr "Uploads geannuleerd"
 
-#: js/overview/components/video-upload.js:182
+#: js/overview/components/video-upload.js:195 views/admin/upload.php:6
+msgid "Upload new video"
+msgstr "Nieuwe video"
+
+#: js/overview/components/video-upload.js:205
 msgid "Upload More"
 msgstr "Meer Uploaden"
 
@@ -212,14 +217,6 @@ msgstr "isset.video instellingen"
 msgid "Enter your settings below:"
 msgstr "Voer hieronder je instellingen van de publisher in"
 
-#: src/Plugin.php:356
-msgid "Upload New Videos"
-msgstr "Upload Nieuwe Videos"
-
-#: src/Plugin.php:357
-msgid "New Video"
-msgstr "Nieuwe Video"
-
 #: views/admin/dashboard/api-dashboard.php:7
 #: views/admin/dashboard/dashboard.php:6
 msgid "Storage used"
@@ -262,7 +259,7 @@ msgid "Logged in as %s"
 msgstr "Ingelogd als %s"
 
 #: views/admin/dashboard/dashboard.php:15 views/admin/page.php:7
-#: views/admin/upload.php:43 views/admin/upload.php:42
+#: views/admin/upload.php:42
 msgid "Go to videos"
 msgstr "Naar video's"
 
@@ -298,14 +295,6 @@ msgstr ""
 "Verbind met uw my.isset.video account door op de knop hieronder te klikken. "
 "U wordt doorverwezen naar my.isset.video om hiervoor toestemming te vragen."
 
-#: views/admin/upload.php:36 views/admin/upload.php:35
-msgid ""
-"Storage limit is already reached, please remove video's to upload again or "
-"upgrade your subscription"
-msgstr ""
-"Opslaglimiet is reeds vereikt, verwijder video's om nieuwe video's te kunne "
-"uploaden of upgrade uw abonnement."
-
 #: views/shortcode/publish-invalid.php:3
 msgid "Video is not available"
 msgstr "Deze video kan niet geladen worden"
@@ -325,6 +314,20 @@ msgstr "Laat geavanceerde opties zien"
 #: src/Action/Settings/Init.php:75
 msgid "Advanced settings"
 msgstr "Geavanceerde opties"
+
+#: views/admin/upload.php:35
+msgid ""
+"Storage limit is already reached, please remove video's to upload again or "
+"upgrade your subscription"
+msgstr ""
+"Opslaglimiet is reeds vereikt, verwijder video's om nieuwe video's te kunne "
+"uploaden of upgrade uw abonnement."
+
+#~ msgid "Upload New Videos"
+#~ msgstr "Upload Nieuwe Videos"
+
+#~ msgid "New Video"
+#~ msgstr "Nieuwe Video"
 
 #~ msgid "Publisher preview"
 #~ msgstr "Preview"

@@ -1,4 +1,4 @@
-export async function wpAjax(action, post = undefined) {
+export async function wpAjax (action, post = undefined) {
     const {nonce, ajaxUrl} = window.IssetVideoPublisherAjax;
 
     let form = new FormData();

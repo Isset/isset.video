@@ -1,4 +1,3 @@
-import {updateFaviconProgress} from '../../progress-favicon';
 import Flow from '@flowjs/flow.js';
 import {
     UPLOAD_ADDED,
@@ -7,6 +6,7 @@ import {
     UPLOAD_ARCHIVING,
     UPLOAD_IN_PROGRESS
 } from './uploadStatuses';
+import {wpAjax} from '../../ajax';
 
 export default class Queue {
     constructor(files, onProgress, onFinished) {
@@ -63,7 +63,7 @@ export default class Queue {
         this.files[fileIndex].status = UPLOAD_ARCHIVING;
         this.returnProgress();
 
-        await this.wpAjax('isset-video-create-archive-file', data).then(response => {
+        await wpAjax('isset-video-create-archive-file', data).then(response => {
             if (response.uuid) {
                 this.files[fileIndex].status = UPLOAD_ARCHIVED;
                 this.returnProgress();
@@ -123,31 +123,6 @@ export default class Queue {
         return Math.round(total / (numberOfUploads * 100) * 100);
     };
 
-    wpAjax = async (action, post = undefined) => {
-        const {nonce, ajaxUrl} = window.IssetVideoPublisherAjax;
-        let form = new FormData();
 
-        form.set('_ajax_nonce', nonce);
-        form.set('action', action);
-
-        if (post) {
-            for (const key of Object.keys(post)) {
-                form.set(key, post[key]);
-            }
-        }
-
-        let archiveUrlPromise = await fetch(ajaxUrl, {
-            method: 'POST',
-            body: form
-        });
-
-        return new Promise((resolve, reject) => {
-            archiveUrlPromise.json().then(json => {
-                resolve(json);
-            }).catch(err => {
-                reject(err);
-            })
-        });
-    };
 };
 
