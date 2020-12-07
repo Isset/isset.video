@@ -16,7 +16,7 @@ use IssetBV\VideoPublisher\Wordpress\Widgets\BaseWidget;
 use IssetBV\VideoPublisher\Wordpress\Widgets\Dashboard;
 
 class Plugin {
-	const MENU_MAIN_SLUG   = 'isset-video-overview';
+	const MENU_MAIN_SLUG = 'isset-video-overview';
 
 	static $instance;
 
@@ -144,7 +144,7 @@ class Plugin {
 	}
 
 	private function loadTranslations() {
-		load_plugin_textdomain( 'isset-video-publisher', false, 'isset-video/languages' );
+		load_plugin_textdomain( 'isset-video', false, 'isset-video/languages' );
 	}
 
 	private function initActions() {
@@ -318,7 +318,7 @@ class Plugin {
 
 	private function addOverviewItem() {
 		$page_title = 'Isset Videos';
-		$menu_title = 'Videos';
+		$menu_title = __( 'Videos', 'isset-video' );
 		$capability = 'manage_options';
 		$menu_slug  = self::MENU_MAIN_SLUG;
 		$function   = function() {

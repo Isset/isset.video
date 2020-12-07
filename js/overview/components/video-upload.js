@@ -6,6 +6,7 @@ import {UPLOAD_ADDED, UPLOAD_ARCHIVE_FAILED, UPLOAD_ARCHIVED, UPLOAD_ARCHIVING} 
 import PropTypes from 'prop-types';
 import {updateFaviconProgress} from '../../progress-favicon';
 import {wpAjax} from '../../ajax';
+import "../../../scss/upload.scss"
 
 const initialUploadState = {
     files: [],
@@ -89,7 +90,7 @@ class VideoUpload extends React.Component {
             {files.map((file, index) => {
                 return <div key={`progressbar-${index}`}>
                     <div className="video-publisher-mb-2" id={`videoPublisherFile${index}`}>
-                        {__('Uploading', 'isset-video-publisher')}: <div id={`indicator${index}`} className="indicator">{file.progress}%</div>
+                        {__('Uploading', 'isset-video')}: <div id={`indicator${index}`} className="indicator">{file.progress}%</div>
                         <div className="progress">
                             <div id={`progressBar${index}`} className="progress-bar" role="progressbar" style={{width: `${file.progress}%`}} />
                         </div>
@@ -106,19 +107,19 @@ class VideoUpload extends React.Component {
     renderUploadText = (status, filename) => {
         switch(status) {
             case UPLOAD_ARCHIVING:
-                return sprintf(__(`Adding %s to archive`, 'isset-video-publisher'), filename);
+                return sprintf(__(`Adding %s to archive`, 'isset-video'), filename);
             case UPLOAD_ARCHIVED:
-                return sprintf(__('Successfully added %s to archive', 'isset-video-publisher'), filename);
+                return sprintf(__('Successfully added %s to archive', 'isset-video'), filename);
             case UPLOAD_ARCHIVE_FAILED:
-                return sprintf(__('Failed adding %s to archive', 'isset-video-publisher'), filename);
+                return sprintf(__('Failed adding %s to archive', 'isset-video'), filename);
             default:
-                return `${__('Uploading', 'isset-video-publisher')}: ${filename}`;
+                return `${__('Uploading', 'isset-video')}: ${filename}`;
         }
     }
 
     renderFileList = files => {
         if (files.length > 0) {
-            return __('Selected files', 'isset-video-publisher') + ': ' + files.map(file => file.name).join(', ');
+            return __('Selected files', 'isset-video') + ': ' + files.map(file => file.name).join(', ');
         }
 
         return <>
@@ -126,7 +127,7 @@ class VideoUpload extends React.Component {
                 <span className="dashicons dashicons-download download-icon" />
             </div>
             <div className="text-wrapper">
-                <p>{__('Drop one or more files here (4.3GB max) or browse your computer.', 'isset-video-publisher')}</p>
+                <p>{__('Drop one or more files here (4.3GB max) or browse your computer.', 'isset-video')}</p>
             </div>
         </>;
     };
@@ -136,7 +137,7 @@ class VideoUpload extends React.Component {
 
         if (!uploadsAllowed) {
             return <p>
-                {__('Storage limit is already reached, please remove videos to upload again or upgrade your subscription', 'isset-video-publisher')}
+                {__('Storage limit is already reached, please remove videos to upload again or upgrade your subscription', 'isset-video')}
                 : <a href="https://my.isset.video/subscriptions">https://my.isset.video/subscriptions</a>
             </p>;
         }
@@ -149,21 +150,21 @@ class VideoUpload extends React.Component {
                         {this.renderFileList(files)}
                     </div>
                 </div>
-                {files.length > 0 ? <button className="isset-video-btn" onClick={this.doUpload}>{__('Upload', 'isset-video-publisher')}</button> : ''}
+                {files.length > 0 ? <button className="isset-video-btn" onClick={this.doUpload}>{__('Upload', 'isset-video')}</button> : ''}
             </div>}
             {(uploadStatus === 'uploading' || uploadStatus === 'finished') && <div className="phase-upload">
                 {this.renderProgressBars(files)}
             </div>}
             {uploadStatus === 'uploading' && <button id="btnCancelUpload" className="isset-video-btn btn-danger" onClick={this.cancelUploads} >
-                {__('Cancel upload', 'isset-video-publisher')}
+                {__('Cancel upload', 'isset-video')}
             </button>}
             {uploadStatus === 'finished' && <div className="phase-done">
                 <div className="isset-video-upload-success">
-                    {__('Your files will be queued for transcoding', 'isset-video-publisher')}
+                    {__('Your files will be queued for transcoding', 'isset-video')}
                 </div>
             </div>}
             {uploadStatus === 'cancelled' && <div className="phase-upload">
-                <p>{__('Uploads Cancelled', 'isset-video-publisher')}</p>
+                <p>{__('Uploads Cancelled', 'isset-video')}</p>
             </div>}
         </>;
     }
@@ -176,7 +177,7 @@ class VideoUpload extends React.Component {
             return <div className="isset-video-upload-widget" onClick={() => toggleShow(true)}>
                 {files.length > 0 && <div className="isset-video-upload-progressbar-container">
                     <div className="isset-video-progress-label">
-                        {sprintf(__(`Uploading %s files`, 'isset-video-publisher'), files.length)};
+                        {sprintf(__(`Uploading %s files`, 'isset-video'), files.length)};
                     </div>
                     <div className="isset-video-progressbar-striped">
                         <div className="isset-video-progressbar-colored" style={{width: `${totalProgress}%`}} />
@@ -192,7 +193,7 @@ class VideoUpload extends React.Component {
                 <div className="card isset-video-upload-card">
                     <div className="card-header">
                         <h1 className="wp-heading-inline">
-                            <span className="dashicons dashicons-cloud-upload" /> {__('Upload new video', 'isset-video-publisher')}
+                            <span className="dashicons dashicons-cloud-upload" /> {__('Upload new video', 'isset-video')}
                         </h1>
                     </div>
                     <div className="card-body">
@@ -202,7 +203,7 @@ class VideoUpload extends React.Component {
                     </div>
                     {(uploadStatus === 'finished' || uploadStatus === 'cancelled') && <div className="card-footer">
                         <button className="isset-video-btn isset-video-upload-btn" onClick={() => this.resetUploads()}>
-                            <span className="dashicons dashicons-image-rotate" /> {__('Upload More', 'isset-video-publisher')}
+                            <span className="dashicons dashicons-image-rotate" /> {__('Upload More', 'isset-video')}
                         </button>
                     </div>}
                 </div>

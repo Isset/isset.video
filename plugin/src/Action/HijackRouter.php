@@ -23,7 +23,7 @@ class HijackRouter extends BaseAction {
 
 			$this->plugin->getVideoPublisherService()->updateAuthToken( $token );
 
-            wp_redirect( $this->plugin->getOverviewPageUrl(), 302 );
+			wp_redirect( $this->plugin->getOverviewPageUrl(), 302 );
 			exit( 0 );
 		}
 

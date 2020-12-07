@@ -4,10 +4,10 @@
                poster="<?php echo $poster; ?>" preload="auto" class="video-js vjs-big-play-centered vjs-default-skin" controls x-webkit-airplay="allow">
             <source src="<?php echo esc_attr($video_url); ?>" type="application/x-mpegURL">
             <p class="vjs-no-js">
-                <?php _e( 'Your browser does not support the video tag.', 'isset-video-publisher' ); ?>
+                <?php _e( 'Your browser does not support the video tag.', 'isset-video' ); ?>
             </p>
         </video>
     </div>
 <?php else: ?>
-    <?php _e( 'Video cannot be loaded', 'isset-video-publisher' ); ?>
+    <?php _e( 'Video cannot be loaded', 'isset-video' ); ?>
 <?php endif; ?>

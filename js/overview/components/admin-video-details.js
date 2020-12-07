@@ -124,7 +124,7 @@ class AdminVideoDetails extends React.Component {
                         src={playerUrl}
                     />
 
-                    <p>{__('Use the following code to embed this video', 'isset-video-publisher')}:</p>
+                    <p>{__('Use the following code to embed this video', 'isset-video')}:</p>
 
                     <AdminCopyText text={uuidParsed} />
 
@@ -137,27 +137,27 @@ class AdminVideoDetails extends React.Component {
                     <table className="isset-video-details-table">
                         <tbody>
                             <tr>
-                                <td>{__('Filename', 'isset-video-publisher')}:</td>
+                                <td>{__('Filename', 'isset-video')}:</td>
                                 <td>{videoName}</td>
                             </tr>
                             <tr>
-                                <td>{__('Created', 'isset-video-publisher')}:</td>
+                                <td>{__('Created', 'isset-video')}:</td>
                                 <td>{moment(date_created).format('MM-DD-YYYY HH:mm')}</td>
                             </tr>
                             <tr>
-                                <td>{__('Filesize', 'isset-video-publisher')}:</td>
+                                <td>{__('Filesize', 'isset-video')}:</td>
                                 <td>{filesize(size)}</td>
                             </tr>
                             <tr>
-                                <td>{__('Length', 'isset-video-publisher')}:</td>
+                                <td>{__('Length', 'isset-video')}:</td>
                                 <td>{secondsToHours(duration)}</td>
                             </tr>
                             <tr>
-                                <td>{__('Resolution', 'isset-video-publisher')}:</td>
+                                <td>{__('Resolution', 'isset-video')}:</td>
                                 <td>{width && height ? `${width}x${height}` : '-'}</td>
                             </tr>
                             <tr>
-                                <td>{__('Presets', 'isset-video-publisher')}:</td>
+                                <td>{__('Presets', 'isset-video')}:</td>
                                 <td className="isset-video-preset-container">{presets.map(preset => <span className="isset-video-preset" key={`preset-${preset}`}>{preset}</span>)}</td>
                             </tr>
                         </tbody>

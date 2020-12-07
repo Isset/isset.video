@@ -38,7 +38,7 @@ class Scripts extends BaseAction {
 		);
 
 		wp_localize_script( 'isset-video-main', 'issetVideoTranslations', $this->getTranslationLabels() );
-		wp_set_script_translations( 'isset-video-main', 'isset-video-publisher', 'isset-video-publisher/languages' );
+		wp_set_script_translations( 'isset-video-main', 'isset-video', 'isset-video/languages' );
 
 		if ( ( isset( $_GET['page'] ) && $_GET['page'] === Plugin::MENU_MAIN_SLUG ) || ( isset( $arguments[0] ) && $this->editingOrNewPost( $arguments[0] ) ) ) {
 			$videoArchiveService = $this->plugin->getVideoArchiveService();
@@ -67,7 +67,7 @@ class Scripts extends BaseAction {
 		$translations = array();
 
 		if ( $l10n ) {
-			foreach ( $l10n['isset-video-publisher']->entries as $key => $entry ) {
+			foreach ( $l10n['isset-video']->entries as $key => $entry ) {
 				$translations[ $key ] = $entry->translations;
 			}
 		}

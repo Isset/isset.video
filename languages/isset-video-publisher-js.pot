@@ -3,30 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: js/admin-video-upload.js:167
-msgid "Successfully added %s to archive"
-msgstr ""
-
-#: js/admin-video-upload.js:171
-msgid "Failed adding %s to archive"
-msgstr ""
-
-#: js/admin-video-upload.js:45
-msgid "Selected files"
-msgstr ""
-
-#: js/admin-video-upload.js:65
-msgid "Are you sure you want to leave?"
-msgstr ""
-
-#: js/admin-video-upload.js:85
-msgid "Uploading"
-msgstr ""
-
-#: js/admin-video-upload.js:96
-msgid "Your files will be queued for transcoding"
-msgstr ""
-
 #: js/publisher-video-block.js:151
 msgid "Processing"
 msgstr ""

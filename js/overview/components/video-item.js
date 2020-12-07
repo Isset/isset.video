@@ -38,7 +38,7 @@ class VideoItem extends React.Component {
         return <div className="isset-video-thumb-placeholder">
             <div className="isset-video-icon-container">
                 <span className="dashicons dashicons-backup" />
-                <div>{__('Processing', 'isset-video-publisher')}</div>
+                <div>{__('Processing', 'isset-video')}</div>
             </div>
         </div>;
     }

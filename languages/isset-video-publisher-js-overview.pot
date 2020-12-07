@@ -77,52 +77,52 @@ msgstr ""
 msgid "Processing"
 msgstr ""
 
-#: js/overview/components/video-upload.js:111
+#: js/overview/components/video-upload.js:112
 msgid "Successfully added %s to archive"
 msgstr ""
 
-#: js/overview/components/video-upload.js:113
+#: js/overview/components/video-upload.js:114
 msgid "Failed adding %s to archive"
 msgstr ""
 
-#: js/overview/components/video-upload.js:115
+#: js/overview/components/video-upload.js:116
 msgid "Uploading"
 msgstr ""
 
-#: js/overview/components/video-upload.js:121
+#: js/overview/components/video-upload.js:122
 msgid "Selected files"
 msgstr ""
 
-#: js/overview/components/video-upload.js:129
+#: js/overview/components/video-upload.js:130
 msgid "Drop one or more files here (4.3GB max) or browse your computer."
 msgstr ""
 
-#: js/overview/components/video-upload.js:139
+#: js/overview/components/video-upload.js:140
 msgid ""
 "Storage limit is already reached, please remove videos to upload again or "
 "upgrade your subscription"
 msgstr ""
 
-#: js/overview/components/video-upload.js:152
+#: js/overview/components/video-upload.js:153
 msgid "Upload"
 msgstr ""
 
-#: js/overview/components/video-upload.js:158
+#: js/overview/components/video-upload.js:159
 msgid "Cancel upload"
 msgstr ""
 
-#: js/overview/components/video-upload.js:162
+#: js/overview/components/video-upload.js:163
 msgid "Your files will be queued for transcoding"
 msgstr ""
 
-#: js/overview/components/video-upload.js:166
+#: js/overview/components/video-upload.js:167
 msgid "Uploads Cancelled"
 msgstr ""
 
-#: js/overview/components/video-upload.js:195
+#: js/overview/components/video-upload.js:196
 msgid "Upload new video"
 msgstr ""
 
-#: js/overview/components/video-upload.js:205
+#: js/overview/components/video-upload.js:206
 msgid "Upload More"
 msgstr ""

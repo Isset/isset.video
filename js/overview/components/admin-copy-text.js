@@ -39,7 +39,7 @@ class AdminCopyText extends React.Component {
                 <code onClick={() => this.copy(text)}>{text}</code>
             </p>
 
-            {copied && <p>{__('Copied shortcode', 'isset-video-publisher')}!</p>}
+            {copied && <p>{__('Copied shortcode', 'isset-video')}!</p>}
         </div>;
     }
 

@@ -37,5 +37,5 @@ window.addEventListener('load', () => {
         player.airPlay();
     }
 
-    setLocaleData(window.issetVideoTranslations, 'isset-video-publisher');
+    setLocaleData(window.issetVideoTranslations, 'isset-video');
 });

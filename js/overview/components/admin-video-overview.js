@@ -106,7 +106,7 @@ class IssetVideoOverview extends React.Component {
     }
 
     deleteChecked = () => {
-        if (confirm(__('Are you sure you want to delete the selected videos?', 'isset-video-publisher'))) {
+        if (confirm(__('Are you sure you want to delete the selected videos?', 'isset-video'))) {
             const {checked} = this.state;
 
             archiveAjax(
@@ -149,19 +149,19 @@ class IssetVideoOverview extends React.Component {
             <div className="video-publisher-flex video-publisher-flex-between video-publisher-mb-2">
                 <div>
                     <button className="isset-video-btn isset-video-upload-btn" onClick={() => this.showUploadDialog(true)}>
-                        <span className="dashicons dashicons-plus-alt" /> {__('Upload New', 'isset-video-publisher')}
+                        <span className="dashicons dashicons-plus-alt" /> {__('Upload New', 'isset-video')}
                     </button>
                     <button className="isset-video-btn btn-danger isset-overview-delete" onClick={this.deleteChecked}>
-                        <span className="dashicons dashicons-trash" /> {__('Delete Selected', 'isset-video-publisher')}
+                        <span className="dashicons dashicons-trash" /> {__('Delete Selected', 'isset-video')}
                     </button>
                     <div className="isset-video-search-container">
-                        <input className="isset-video-search-input" placeholder={__('Search', 'isset-video-publisher')} value={this.search} onChange={this.changeSearch} />
+                        <input className="isset-video-search-input" placeholder={__('Search', 'isset-video')} value={this.search} onChange={this.changeSearch} />
                         {!this.search && <span className="dashicons dashicons-search" />}
                         {this.search && <span className="dashicons dashicons-no-alt isset-video-clear" onClick={this.clearSearch} />}
                     </div>
                 </div>
                 <div>
-                    <span className="video-publisher-inline-block video-publisher-mr-2 video-publisher-text-white">{__('Total results', 'isset-video-publisher')}: {total}</span>
+                    <span className="video-publisher-inline-block video-publisher-mr-2 video-publisher-text-white">{__('Total results', 'isset-video')}: {total}</span>
                     <Pagination onNavigate={this.loadVideos} total={total} limit={limit} offset={offset} />
                 </div>
             </div>
@@ -171,11 +171,11 @@ class IssetVideoOverview extends React.Component {
                         <th className="isset-video-table-spacer">
                             <input type="checkbox" checked={checkAll} onChange={this.toggleCheckAll} />
                         </th>
-                        <th className="isset-video-thumbnail-th">{__('Thumbnail', 'isset-video-publisher')}</th>
-                        <th>{__('Duration', 'isset-video-publisher')}</th>
-                        <th>{__('Size', 'isset-video-publisher')}</th>
-                        <th className="isset-video-pointer isset-video-filename-header" onClick={() => this.sortBy('filename', orderDirection)}>{__('Filename', 'isset-video-publisher')}</th>
-                        <th className="isset-video-pointer" onClick={() => this.sortBy('dateCreated', orderDirection)}>{__('Created', 'isset-video-publisher')}</th>
+                        <th className="isset-video-thumbnail-th">{__('Thumbnail', 'isset-video')}</th>
+                        <th>{__('Duration', 'isset-video')}</th>
+                        <th>{__('Size', 'isset-video')}</th>
+                        <th className="isset-video-pointer isset-video-filename-header" onClick={() => this.sortBy('filename', orderDirection)}>{__('Filename', 'isset-video')}</th>
+                        <th className="isset-video-pointer" onClick={() => this.sortBy('dateCreated', orderDirection)}>{__('Created', 'isset-video')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -198,7 +198,7 @@ class IssetVideoOverview extends React.Component {
                     })}
                     {results.length === 0 && <tr className="iv-v-align-top">
                         <td colSpan={6} className="video-publisher-p-2">
-                            {__('No publishes found', 'isset-video-publisher')}
+                            {__('No publishes found', 'isset-video')}
                         </td>
                     </tr>}
                 </tbody>
