@@ -9,6 +9,7 @@ require('@silvermine/videojs-airplay')(videojs);
 
 require('./functions');
 require('./overview/components/admin-video-overview');
+require('./livestream/components/livestream');
 
 require('../scss/isset-video-publisher.scss');
 

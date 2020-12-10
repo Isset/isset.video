@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import {secondsToHours} from '../helpers/duration';
+import {secondsToHours} from '../helpers/time';
 import PropTypes from 'prop-types';
 import {__} from '@wordpress/i18n';
 
@@ -63,7 +63,7 @@ class VideoItem extends React.Component {
                 {this.renderFilename(filename, uuid)}
             </td>
             <td>
-                {moment(created).format('MM-DD-YYYY HH:mm')}
+                {moment(created).format('YYYY-MM-DD HH:mm')}
             </td>
         </tr>;
     }

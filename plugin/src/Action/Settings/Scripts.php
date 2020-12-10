@@ -40,7 +40,7 @@ class Scripts extends BaseAction {
 		wp_localize_script( 'isset-video-main', 'issetVideoTranslations', $this->getTranslationLabels() );
 		wp_set_script_translations( 'isset-video-main', 'isset-video', 'isset-video/languages' );
 
-		if ( ( isset( $_GET['page'] ) && $_GET['page'] === Plugin::MENU_MAIN_SLUG ) || ( isset( $arguments[0] ) && $this->editingOrNewPost( $arguments[0] ) ) ) {
+		if ( ( isset( $_GET['page'] ) && ( $_GET['page'] === Plugin::MENU_MAIN_SLUG || $_GET['page'] === Plugin::MENU_LIVESTREAM_SLUG ) ) || ( isset( $arguments[0] ) && $this->editingOrNewPost( $arguments[0] ) ) ) {
 			$videoArchiveService = $this->plugin->getVideoArchiveService();
 
 			wp_localize_script(

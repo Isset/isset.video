@@ -10,13 +10,15 @@ use IssetBV\VideoPublisher\Wordpress\Action\Upload;
 use IssetBV\VideoPublisher\Wordpress\Rest\BaseEndpoint;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoArchiveService;
 use IssetBV\VideoPublisher\Wordpress\Service\VideoPublisherService;
+use IssetBV\VideoPublisher\Wordpress\Shortcode\Livestream;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\Publish;
 use IssetBV\VideoPublisher\Wordpress\Shortcode\ShortcodeBase;
 use IssetBV\VideoPublisher\Wordpress\Widgets\BaseWidget;
 use IssetBV\VideoPublisher\Wordpress\Widgets\Dashboard;
 
 class Plugin {
-	const MENU_MAIN_SLUG = 'isset-video-overview';
+	const MENU_MAIN_SLUG       = 'isset-video-overview';
+	const MENU_LIVESTREAM_SLUG = 'isset-video-livestream';
 
 	static $instance;
 
@@ -35,6 +37,7 @@ class Plugin {
 	 */
 	private $shortcodes = array(
 		Publish::class,
+		Livestream::class,
 	);
 
 	/**
@@ -224,6 +227,7 @@ class Plugin {
 
 	private function initBlocks() {
 		$this->registerBlock( 'video-block' );
+		$this->registerBlock( 'livestream-block' );
 	}
 
 	private function registerBlock( $name ) {
@@ -294,6 +298,7 @@ class Plugin {
 
 	public function addMenuItems() {
 		$this->addOverviewItem();
+		$this->addLivestreamItem();
 	}
 
 	public function getOverviewPageUrl() {
@@ -328,6 +333,35 @@ class Plugin {
 		$position   = 11;
 
 		add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
+	}
+
+	public function renderLivestreamPage() {
+		$vps                  = $this->getVideoPublisherService();
+		$context              = array();
+		$context['logged_in'] = $vps->isLoggedIn();
+
+		if ( $context['logged_in'] ) {
+			echo Renderer::render( 'admin/livestreams.php', $context );
+		} else {
+			$context['login_url'] = $vps->getLoginURL();
+
+			echo Renderer::render( 'admin/page.php', $context );
+		}
+	}
+
+	private function addLivestreamItem() {
+		$this->enqueueStyle( 'css/main.css' );
+		// $this->enqueueScript( 'js/admin-video-livestream.js' );
+
+		$page_title  = __( 'Livestream', 'isset-video' );
+		$menu_title  = __( 'Livestream', 'isset-video' );
+		$capability  = 'manage_options';
+		$parent_slug = self::MENU_MAIN_SLUG;
+		$function    = function() {
+			$this->renderLivestreamPage();
+		};
+
+		add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, self::MENU_LIVESTREAM_SLUG, $function );
 	}
 
 	private function renderChart() {

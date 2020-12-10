@@ -85,3 +85,9 @@ function toQueryParameters(data) {
 
     return `${parameters.toString()}${arraysString}`;
 }
+
+export function getPublisherUrl() {
+    const {publisherUrl} = window.IssetVideoArchiveAjax;
+
+    return publisherUrl;
+}

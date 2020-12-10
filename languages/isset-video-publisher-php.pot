@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-12-07T13:01:40+00:00\n"
+"POT-Creation-Date: 2020-12-10T15:37:41+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: isset-video\n"
@@ -31,8 +31,13 @@ msgstr ""
 msgid "http://isset.nl/"
 msgstr ""
 
-#: src/Plugin.php:321
+#: src/Plugin.php:326
 msgid "Videos"
+msgstr ""
+
+#: src/Plugin.php:356
+#: src/Plugin.php:357
+msgid "Livestream"
 msgstr ""
 
 #: views/admin/dashboard/api-dashboard.php:7
@@ -104,6 +109,10 @@ msgstr ""
 
 #: views/admin/page.php:12
 msgid "Please connect your my.isset.video account by clicking the button below. We will redirect you to my.isset.video to ask for your permission."
+msgstr ""
+
+#: views/shortcode/livestream-invalid.php:3
+msgid "Livestream is not available"
 msgstr ""
 
 #: views/shortcode/publish-invalid.php:3

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {archiveAjax, publisherAjax} from '../../ajax';
-import {secondsToHours} from '../helpers/duration';
+import {secondsToHours} from '../helpers/time';
 import moment from 'moment';
 import filesize from '../helpers/filesize';
 import AdminCopyText from './admin-copy-text';
@@ -142,7 +142,7 @@ class AdminVideoDetails extends React.Component {
                             </tr>
                             <tr>
                                 <td>{__('Created', 'isset-video')}:</td>
-                                <td>{moment(date_created).format('MM-DD-YYYY HH:mm')}</td>
+                                <td>{moment(date_created).format('YYYY-MM-DD HH:mm')}</td>
                             </tr>
                             <tr>
                                 <td>{__('Filesize', 'isset-video')}:</td>

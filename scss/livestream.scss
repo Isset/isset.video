@@ -1,0 +1,29 @@
+.isset-video-livestream-table {
+    border-collapse: collapse;
+
+    tr {
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+
+            &:nth-child(1) {
+                background-color: #333;
+            }
+            &:nth-child(2) {
+                background-color: #444;
+            }
+        }
+    }
+}
+
+.isset-video-container {
+    h2 {
+        color: orange;
+    }
+
+}
+
+.isset-video-livestream-info {
+    background-color: #111;
+    min-height: 200px;
+}

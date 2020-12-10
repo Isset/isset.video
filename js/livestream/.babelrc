@@ -4,7 +4,7 @@
         "@babel/plugin-proposal-class-properties",
         ["transform-react-jsx", {"pragma": "React.createElement"}],
         ["@wordpress/babel-plugin-makepot", {
-            "output": "languages/isset-video-publisher-js-overview.pot"
+            "output": "languages/isset-video-publisher-js-livestream.pot"
         }]
     ]
 }

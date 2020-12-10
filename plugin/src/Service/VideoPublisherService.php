@@ -281,4 +281,8 @@ class VideoPublisherService extends BaseHttpService {
 	private function getConfig( $key ) {
 		return isset( $this->config[ $key ] ) ? $this->config[ $key ] : null;
 	}
+
+	public function getLivestreamDetails( $uuid ) {
+		return $this->publisherGet( "/api/livestreams/{$uuid}" );
+	}
 }

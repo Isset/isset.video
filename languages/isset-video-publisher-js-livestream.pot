@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: js/livestream/components/livestream.js:56
+msgid "Livestream"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:101
+msgid "Livestream is waiting for input at: %s"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:108
+msgid "Livestream has ended"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:117
+msgid "Stream Url"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:121
+msgid "Stream Key"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:125
+msgid "Created"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:129
+msgid "Started"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:133
+msgid "Ended"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:137
+msgid "Share Url"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:147
+msgid "Name"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:149
+msgid "Description"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:155
+msgid "Start streaming"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:157
+msgid "Streaming info"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:92
+msgid "No livestream created yet"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:94
+msgid "Create Livestream"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:99
+msgid "Livestream has not yet started"
+msgstr ""
