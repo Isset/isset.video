@@ -1,4 +1,5 @@
 import {publisherAjax} from '../../ajax';
+import {wpAjax} from '../../ajax';
 
 export async function fetchActiveLivestreams() {
     const response = await publisherAjax('api/livestreams');
@@ -7,7 +8,7 @@ export async function fetchActiveLivestreams() {
 }
 
 export async function fetchLiveStreamDetails(uuid) {
-    return await publisherAjax(`api/livestreams/${uuid}`);
+    return await wpAjax('isset-video-fetch-livestream-details', {uuid});
 }
 
 export async function createLiveStream() {

@@ -54,6 +54,7 @@ class Plugin {
 		Upload\GetUploaderUrl::class,
 		Upload\CreateArchiveFile::class,
 		Upload\GetUploadAllowed::class,
+		Action\Livestream\StreamDetails::class,
 	);
 
 	private $endpoints = array();

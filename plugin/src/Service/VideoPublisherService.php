@@ -283,6 +283,6 @@ class VideoPublisherService extends BaseHttpService {
 	}
 
 	public function getLivestreamDetails( $uuid ) {
-		return $this->publisherGet( "/api/livestreams/{$uuid}" );
+		return $this->publisherGet( '/api/livestreams/' . urlencode( $uuid ) . "?clientIp={$this->getClientIp()}" );
 	}
 }
