@@ -30,7 +30,7 @@ class LivestreamPlayer extends React.Component {
         let options = {
             controls: true,
             autoplay: true,
-            muted: false,
+            muted: true,
             techOrder: ['chromecast', 'html5'],
             plugins: {
                 httpSourceSelector: {
@@ -48,7 +48,7 @@ class LivestreamPlayer extends React.Component {
 
         let player = videojs(this.videoNode, options, function () {
             this.on('loadedmetadata', function () {
-                //loadVolumeCookie();
+                player.muted(false);
             });
             this.on('volumechange', function (e) {
                 //Cookies.set('volume', player.volume());
@@ -89,7 +89,7 @@ class LivestreamPlayer extends React.Component {
 
     showPlayer = () => {
         const {url} = this.props;
-
+        
         this.player.src(url);
         this.player.play();
 
@@ -102,7 +102,7 @@ class LivestreamPlayer extends React.Component {
     };
 
     renderEndedOverlay = () => {
-        return <div className="video-js vjs-theme-isset vjs-16-9 vjs-overlay-abs">
+        return <div className="video-js vjs-theme-isset vjs-16-9 vjs-overlay-abs isset-video-livestream-ended">
             <div className="vjs-tech">
                 <div className="text-container">
                     <h1>
@@ -135,7 +135,7 @@ class LivestreamPlayer extends React.Component {
         const {play, ended, started} = this.state;
         const {uuid, url, socket} = this.props;
 
-        return <div className="isset-video-livestream-video vjs-big-play-centered">
+        return <div className="isset-video-livestream-video vjs-big-play-centered vjs-16-9">
             <video
                 id={`isset-video-livestream-${uuid}`}
                 className="video-js vjs-theme-isset vjs-16-9"
@@ -145,6 +145,7 @@ class LivestreamPlayer extends React.Component {
                 controls
                 data-setup={"{}"}
                 ref={node => this.videoNode = node}
+                muted={true}
             >
                 <p className="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a web browser that
@@ -166,6 +167,6 @@ window.addEventListener('load', () => {
         let player = players[i];
         const {uuid, socket, url, started, ended} = player.dataset;
 
-        ReactDOM.render(<LivestreamPlayer uuid={uuid} socket={socket} url={url} started={started} ended={ended} />, player);
+        ReactDOM.render(<LivestreamPlayer key={uuid} uuid={uuid} socket={socket} url={url} started={started} ended={ended} />, player);
     }
 });

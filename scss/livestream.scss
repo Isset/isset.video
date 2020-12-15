@@ -41,6 +41,10 @@
         background-color: #111;
         z-index: 10;
 
+        &.isset-video-livestream-ended {
+            position: relative;
+        }
+
         .vjs-tech {
             display: flex;
             justify-content: center;

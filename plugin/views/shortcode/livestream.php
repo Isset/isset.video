@@ -1,5 +1,5 @@
 <div
-    class="isset-video-livestream-player"
+    class="isset-video-livestream-player vjs-16-9"
     data-uuid="<?php echo $uuid; ?>"
     data-socket="<?php echo $socket; ?>"
     data-url="<?php echo $url; ?>"
