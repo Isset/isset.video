@@ -3,7 +3,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: js/publisher-livestream-block.js:118
+#: js/publisher-livestream-block.js:85
 msgid "No livestream found"
 msgstr ""
 

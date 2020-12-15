@@ -53,6 +53,10 @@ class VideoPublisherService extends BaseHttpService {
 		return $this->getConfig( 'uploader_url' );
 	}
 
+	public function getMercureURL() {
+		return $this->getConfig( 'mercure_url' );
+	}
+
 	public function getLoginURL() {
 		$url = $this->getMyIssetVideoURL();
 

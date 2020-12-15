@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
-"POT-Creation-Date: 2020-12-10T15:37:41+00:00\n"
-"PO-Revision-Date: 2020-12-10 16:40+0100\n"
+"POT-Creation-Date: 2020-12-15T14:23:25+00:00\n"
+"PO-Revision-Date: 2020-12-15 15:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -12,8 +12,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.1\n"
 
-#: js/livestream/components/livestream.js:56 src/Plugin.php:356
-#: src/Plugin.php:357
+#: js/livestream/components/livestream.js:88 src/Plugin.php:357
+#: src/Plugin.php:358
 msgid "Livestream"
 msgstr "Livestream"
 
@@ -74,13 +74,30 @@ msgid "No livestream created yet"
 msgstr "Nog geen livestream aangemaakt"
 
 #: js/livestream/components/livestreamDetails.js:94
-#: js/publisher-livestream-block.js:99
+#: js/publisher-livestream-block.js:88
 msgid "Create Livestream"
 msgstr "Livestream Aanmaken"
 
 #: js/livestream/components/livestreamDetails.js:99
 msgid "Livestream has not yet started"
 msgstr "Livestream is nog niet gestart"
+
+#: js/livestream/components/livestreamPlayer.js:109
+msgid "Livestream ended"
+msgstr "Livestream is beëindigd"
+
+#: js/livestream/components/livestreamPlayer.js:112
+msgid "The VOD will be ready on this page at a later time."
+msgstr "De VOD zal later beschikbaar worden gemaakt."
+
+#: js/livestream/components/livestreamPlayer.js:124
+msgid "Livestream waiting to start"
+msgstr "Wachten op Starten van Livestream "
+
+#: js/livestream/components/livestreamPlayer.js:127
+msgid "This player will update automatically when the livestream goes live."
+msgstr ""
+"Deze speler zal automatisch geüpdate worden wanneer de livestream begint."
 
 #: js/overview/components/admin-copy-text.js:42
 msgid "Copied shortcode"
@@ -210,13 +227,13 @@ msgstr "Nieuwe video"
 msgid "Upload More"
 msgstr "Meer Uploaden"
 
-#: js/publisher-livestream-block.js:106
-msgid "Getting livestream data"
-msgstr "Livestream data ophalen"
-
-#: js/publisher-livestream-block.js:129
+#: js/publisher-livestream-block.js:85
 msgid "No livestream found"
 msgstr "Geen livestream gevonden"
+
+#: js/publisher-livestream-block.js:95
+msgid "Getting livestream data"
+msgstr "Livestream data ophalen"
 
 #: js/publisher-video-block.js:158
 msgid "Error"
@@ -275,7 +292,7 @@ msgstr "Wordpress isset.video implementatie"
 msgid "http://isset.nl/"
 msgstr "http://isset.nl/"
 
-#: src/Plugin.php:326
+#: src/Plugin.php:327
 msgid "Videos"
 msgstr "Video's"
 

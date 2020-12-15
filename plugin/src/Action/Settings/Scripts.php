@@ -28,12 +28,13 @@ class Scripts extends BaseAction {
 			'isset-video-main',
 			'IssetVideoPublisherAjax',
 			array(
-				'nonce'     => wp_create_nonce( 'isset-video' ),
-				'restNonce' => wp_create_nonce( 'wp_rest' ),
-				'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
-				'postId'    => get_the_ID(),
-				'adminUrl'  => admin_url(),
-				'loggedIn'  => $videoPublishService->isLoggedIn(),
+				'nonce'      => wp_create_nonce( 'isset-video' ),
+				'restNonce'  => wp_create_nonce( 'wp_rest' ),
+				'ajaxUrl'    => admin_url( 'admin-ajax.php' ),
+				'postId'     => get_the_ID(),
+				'adminUrl'   => admin_url(),
+				'loggedIn'   => $videoPublishService->isLoggedIn(),
+				'mercureUrl' => $videoPublishService->getMercureURL(),
 			)
 		);
 

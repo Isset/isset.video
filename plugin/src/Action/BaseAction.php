@@ -24,6 +24,10 @@ abstract class BaseAction {
 		return false;
 	}
 
+	function isSiteOnly() {
+		return false;
+	}
+
 	function getPriority() {
 		return 10;
 	}

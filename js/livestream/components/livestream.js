@@ -18,6 +18,18 @@ class IssetVideoLivestream extends React.Component {
         this.findActiveLivestream();
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const {livestream} = this.state;
+
+        if (!prevState.livestream.uuid && livestream && livestream.uuid) {
+            this.initDetailsListener();
+        }
+    }
+
+    componentWillUnmount() {
+        this.eventSource.close();
+    }
+
     findActiveLivestream = async () => {
         const filtered = await fetchActiveLivestreams();
         if (filtered.length > 0) {
@@ -31,6 +43,26 @@ class IssetVideoLivestream extends React.Component {
         if (livestream && livestream.uuid) {
             this.setState({livestream});
         }
+    }
+
+    initDetailsListener = () => {
+        const {livestream} = this.state;
+
+        this.eventSource = new EventSource('https://test.sock.isset.video/.well-known/mercure' + '?topic=' + encodeURIComponent(`https://isset.video/livestreams/${livestream.uuid}`));
+        this.eventSource.onmessage = (e) => {
+            const eventData = JSON.parse(e.data);
+            //timeout 20 seconds
+            if (eventData.event === 'start') {
+                // wait 20 seconds
+                // fetch new data and update status
+                setTimeout(() => this.findActiveLivestreamDetails(livestream.uuid), 20000);
+            }
+            if (eventData.event === 'end') {
+                // wait 20 seconds
+                // fetch new data and update status
+                setTimeout(() => this.findActiveLivestreamDetails(livestream.uuid), 20000);
+            }
+        };
     }
 
     createLivestream = async () => {

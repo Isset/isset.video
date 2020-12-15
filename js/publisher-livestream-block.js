@@ -103,6 +103,11 @@ blocks.registerBlockType('isset-video-publisher/livestream-block', {
             attribute: 'data-uuid',
             selector: '.isset-video-stream-container',
         },
+        uuidParsed: {
+            type: 'array',
+            source: 'children',
+            selector: '.isset-video-stream-container',
+        },
         embedUrl: {
             type: 'string',
             source: 'attribute',
@@ -111,11 +116,10 @@ blocks.registerBlockType('isset-video-publisher/livestream-block', {
         },
     },
     save: props => {
-        const {attributes: {embedUrl, uuid}} = props;
+        const {attributes: {uuid, uuidParsed}} = props;
 
         return <div className="isset-video-stream-container" data-uuid={uuid}>
-            {embedUrl && <iframe src={embedUrl} frameBorder="0" width="560" height="315" allowFullScreen />}
-            {!embedUrl && <h2>{__('No livestream found', 'isset-video')}</h2>}
+            {uuidParsed}
         </div>;
     },
 });

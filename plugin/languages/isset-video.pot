@@ -1,4 +1,4 @@
-# #-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.7.3)  #-#-#-#-#
+# #-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.7.4)  #-#-#-#-#
 # Copyright (C) 2020 isset.video
 # This file is distributed under the same license as the isset.video plugin.
 #, fuzzy
@@ -13,21 +13,21 @@ msgstr ""
 "#-#-#-#-#  isset-video-publisher-js.pot  #-#-#-#-#\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
-"#-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.7.3)  #-#-#-#-#\n"
-"Project-Id-Version: isset.video 0.7.3\n"
+"#-#-#-#-#  isset-video-publisher-php.pot (isset.video 0.7.4)  #-#-#-#-#\n"
+"Project-Id-Version: isset.video 0.7.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-12-10T15:37:41+00:00\n"
+"POT-Creation-Date: 2020-12-15T14:23:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: isset-video\n"
 
-#: js/livestream/components/livestream.js:56 src/Plugin.php:356
-#: src/Plugin.php:357
+#: js/livestream/components/livestream.js:88 src/Plugin.php:357
+#: src/Plugin.php:358
 msgid "Livestream"
 msgstr ""
 
@@ -86,12 +86,28 @@ msgid "No livestream created yet"
 msgstr ""
 
 #: js/livestream/components/livestreamDetails.js:94
-#: js/publisher-livestream-block.js:99
+#: js/publisher-livestream-block.js:88
 msgid "Create Livestream"
 msgstr ""
 
 #: js/livestream/components/livestreamDetails.js:99
 msgid "Livestream has not yet started"
+msgstr ""
+
+#: js/livestream/components/livestreamPlayer.js:109
+msgid "Livestream ended"
+msgstr ""
+
+#: js/livestream/components/livestreamPlayer.js:112
+msgid "The VOD will be ready on this page at a later time."
+msgstr ""
+
+#: js/livestream/components/livestreamPlayer.js:124
+msgid "Livestream waiting to start"
+msgstr ""
+
+#: js/livestream/components/livestreamPlayer.js:127
+msgid "This player will update automatically when the livestream goes live."
 msgstr ""
 
 #: js/overview/components/admin-copy-text.js:42
@@ -215,12 +231,12 @@ msgstr ""
 msgid "Upload More"
 msgstr ""
 
-#: js/publisher-livestream-block.js:106
-msgid "Getting livestream data"
+#: js/publisher-livestream-block.js:85
+msgid "No livestream found"
 msgstr ""
 
-#: js/publisher-livestream-block.js:129
-msgid "No livestream found"
+#: js/publisher-livestream-block.js:95
+msgid "Getting livestream data"
 msgstr ""
 
 #: js/publisher-video-block.js:158
@@ -280,7 +296,7 @@ msgstr ""
 msgid "http://isset.nl/"
 msgstr ""
 
-#: src/Plugin.php:326
+#: src/Plugin.php:327
 msgid "Videos"
 msgstr ""
 

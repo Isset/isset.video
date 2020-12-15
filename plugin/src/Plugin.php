@@ -110,7 +110,7 @@ class Plugin {
 	public function enqueueScript( $script ) {
 		wp_enqueue_script(
 			'isset-video-publisher-' . $script,
-			ISSET_VIDEO_PUBLISHER_URL . '/' . $script,
+			ISSET_VIDEO_PUBLISHER_URL . $script,
 			array(),
 			ISSET_VIDEO_PUBLISHER_VERSION . '-' . filemtime( ISSET_VIDEO_PUBLISHER_PATH . '/' . $script ),
 			true

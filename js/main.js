@@ -13,6 +13,8 @@ require('./livestream/components/livestream');
 
 require('../scss/isset-video-publisher.scss');
 
+require('./livestream/components/livestreamPlayer');
+
 
 window.addEventListener('load', () => {
     for (const video of Array.from(document.querySelectorAll('.video-publisher-video video'))) {

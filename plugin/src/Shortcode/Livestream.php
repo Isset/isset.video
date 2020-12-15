@@ -26,10 +26,20 @@ class Livestream extends ShortcodeBase {
 			return Renderer::render( 'shortcode/livestream-invalid.php' );
 		}
 
-		$context              = $attr;
-		$context['uuid']      = $uuid;
-		$context['embed_url'] = $details['embed_url'];
+		$context            = $attr;
+		$context['uuid']    = $uuid;
+		$context['url']     = $details['playout_url'];
+		$context['socket']  = $this->getSocketUrl( $uuid );
+		$context['started'] = $details['date_started'] !== null;
+		$context['ended']   = $details['date_ended'] !== null;
 
 		return Renderer::render( 'shortcode/livestream.php', $context );
+	}
+
+	function getSocketUrl( $uuid ) {
+		$publishService = $this->plugin->getVideoPublisherService();
+		$mercureUrl     = $publishService->getMercureURL();
+
+		return "{$mercureUrl}?topic=" . urlencode( "https://isset.video/livestreams/{$uuid}" );
 	}
 }
