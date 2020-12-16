@@ -89,7 +89,7 @@ class LivestreamPlayer extends React.Component {
 
     showPlayer = () => {
         const {url} = this.props;
-        
+
         this.player.src(url);
         this.player.play();
 

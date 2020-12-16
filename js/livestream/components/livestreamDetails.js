@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {__} from '@wordpress/i18n';
+import {__} from '../../labels';
 import {dateTimeToHumanlyReadable} from '../../overview/helpers/time';
 import AdminCopyText from '../../overview/components/admin-copy-text';
 

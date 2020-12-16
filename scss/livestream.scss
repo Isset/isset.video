@@ -30,8 +30,6 @@
 
 .isset-video-livestream-video {
     position: relative;
-    //width: 560px;
-    //height: 315px;
 
     .vjs-overlay-abs {
         position: absolute;
@@ -42,7 +40,7 @@
         z-index: 10;
 
         &.isset-video-livestream-ended {
-            position: relative;
+            /* position: relative; */
         }
 
         .vjs-tech {

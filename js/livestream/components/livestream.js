@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import {publisherAjax} from '../../ajax';
 import LivestreamDetails from './livestreamDetails';
-import {__} from '@wordpress/i18n';
+import {__} from '../../labels';
 import {createLiveStream, fetchActiveLivestreams, fetchLiveStreamDetails} from '../api/api';
 
 class IssetVideoLivestream extends React.Component {
@@ -16,14 +16,6 @@ class IssetVideoLivestream extends React.Component {
 
     componentDidMount() {
         this.findActiveLivestream();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        const {livestream} = this.state;
-
-        if (!prevState.livestream.uuid && livestream && livestream.uuid) {
-            this.initDetailsListener();
-        }
     }
 
     componentWillUnmount() {
@@ -43,26 +35,6 @@ class IssetVideoLivestream extends React.Component {
         if (livestream && livestream.uuid) {
             this.setState({livestream});
         }
-    }
-
-    initDetailsListener = () => {
-        const {livestream} = this.state;
-
-        this.eventSource = new EventSource('https://test.sock.isset.video/.well-known/mercure' + '?topic=' + encodeURIComponent(`https://isset.video/livestreams/${livestream.uuid}`));
-        this.eventSource.onmessage = (e) => {
-            const eventData = JSON.parse(e.data);
-            //timeout 20 seconds
-            if (eventData.event === 'start') {
-                // wait 20 seconds
-                // fetch new data and update status
-                setTimeout(() => this.findActiveLivestreamDetails(livestream.uuid), 20000);
-            }
-            if (eventData.event === 'end') {
-                // wait 20 seconds
-                // fetch new data and update status
-                setTimeout(() => this.findActiveLivestreamDetails(livestream.uuid), 20000);
-            }
-        };
     }
 
     createLivestream = async () => {
@@ -86,7 +58,6 @@ class IssetVideoLivestream extends React.Component {
 
         return <div>
             <h1>{livestream.name ? livestream.name : __('Livestream', 'isset-video')}</h1>
-
             <LivestreamDetails livestream={livestream} updateLivestream={this.updateLivestream} createLivestream={this.createLivestream} />
         </div>;
     }
