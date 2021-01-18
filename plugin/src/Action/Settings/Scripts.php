@@ -21,7 +21,7 @@ class Scripts extends BaseAction {
 		}
 
 		$videoPublishService = $this->plugin->getVideoPublisherService();
-		
+
 		wp_enqueue_script( 'isset-video-main', ISSET_VIDEO_PUBLISHER_URL . 'js/main.js', array( 'jquery' ), true );
 		wp_enqueue_script( 'isset-video-publisher-charts', ISSET_VIDEO_PUBLISHER_URL . 'js/admin-charts.js', array( 'jquery' ), true );
 		wp_localize_script(

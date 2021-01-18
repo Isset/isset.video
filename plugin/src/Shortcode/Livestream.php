@@ -26,12 +26,12 @@ class Livestream extends ShortcodeBase {
 			return Renderer::render( 'shortcode/livestream-invalid.php' );
 		}
 
-		$context            = $attr;
-		$context['uuid']    = $uuid;
-		$context['url']     = $details['playout_url'];
-		$context['socket']  = $this->getSocketUrl( $uuid );
-		$context['started'] = $details['date_started'] !== null;
-		$context['ended']   = $details['date_ended'] !== null;
+		$context                 = $attr;
+		$context['uuid']         = $uuid;
+		$context['url']          = $details['playout_url'];
+		$context['socket']       = $this->getSocketUrl( $uuid );
+		$context['started']      = $details['date_started'] !== null;
+		$context['ended']        = $details['date_ended'] !== null;
 		$context['publisherUrl'] = $this->plugin->getVideoPublisherService()->getPublisherURL();
 
 		return Renderer::render( 'shortcode/livestream.php', $context );

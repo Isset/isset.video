@@ -111,7 +111,7 @@ class Plugin {
 		wp_enqueue_script(
 			'isset-video-publisher-' . $script,
 			ISSET_VIDEO_PUBLISHER_URL . $script,
-			array('wp-i18n'),
+			array( 'wp-i18n' ),
 			ISSET_VIDEO_PUBLISHER_VERSION . '-' . filemtime( ISSET_VIDEO_PUBLISHER_PATH . '/' . $script ),
 			true
 		);
@@ -351,7 +351,7 @@ class Plugin {
 	}
 
 	private function addLivestreamItem() {
-		//$this->enqueueStyle( 'css/main.css' );
+		// $this->enqueueStyle( 'css/main.css' );
 		// $this->enqueueScript( 'js/admin-video-livestream.js' );
 
 		$page_title  = __( 'Livestream', 'isset-video' );

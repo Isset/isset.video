@@ -270,11 +270,11 @@ class VideoPublisherService extends BaseHttpService {
 	}
 
 	protected function getClientIp() {
-        if ($this->getConfig('client_ip')) {
-            return $this->getConfig('client_ip');
-        }
+		if ( $this->getConfig( 'client_ip' ) ) {
+			return $this->getConfig( 'client_ip' );
+		}
 
-        if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+		if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
 			$ip = $_SERVER['HTTP_CLIENT_IP'];
 		} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
 			// to check ip is pass from proxy
