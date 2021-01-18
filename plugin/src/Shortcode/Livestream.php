@@ -32,6 +32,7 @@ class Livestream extends ShortcodeBase {
 		$context['socket']  = $this->getSocketUrl( $uuid );
 		$context['started'] = $details['date_started'] !== null;
 		$context['ended']   = $details['date_ended'] !== null;
+		$context['publisherUrl'] = $this->plugin->getVideoPublisherService()->getPublisherURL();
 
 		return Renderer::render( 'shortcode/livestream.php', $context );
 	}

@@ -164,7 +164,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                 const {processed, filename, stills} = suggestion;
 
                 if (!processed) {
-                    return <div className="video-block-suggestions-wrapper">
+                    return <div className="video-block-suggestions-wrapper" key={`video-processing-${suggestion.uuid}`}>
                         <div className="isset-video-placeholder-container">
                             <div className="isset-video-thumb-placeholder">
                                 {this.renderProcessingPlaceholder()}
@@ -174,7 +174,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                     </div>;
                 }
 
-                return <div className="video-block-suggestions-wrapper" onClick={() => this.setValue(suggestion)}>
+                return <div className="video-block-suggestions-wrapper" onClick={() => this.setValue(suggestion)} key={`video-suggestion-${suggestion.uuid}`}>
                     <div>
                         {this.renderStill(stills)}
                     </div>
