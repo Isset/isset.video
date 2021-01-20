@@ -16,7 +16,7 @@ class Scripts extends BaseAction {
 	}
 
 	function execute( $arguments ) {
-		if ( isset( $_GET['post_type'] ) && $_GET['post_type'] !== '' ) {
+		if ( isset( $_GET['post_type'] ) && $_GET['post_type'] !== '' && $_GET['post_type'] !== 'page' ) {
 			return;
 		}
 
@@ -41,7 +41,7 @@ class Scripts extends BaseAction {
 		wp_localize_script( 'isset-video-main', 'issetVideoTranslations', $this->getTranslationLabels() );
 		wp_set_script_translations( 'isset-video-main', 'isset-video', 'isset-video/languages' );
 
-		if ( ( isset( $_GET['page'] ) && ( $_GET['page'] === Plugin::MENU_MAIN_SLUG || $_GET['page'] === Plugin::MENU_LIVESTREAM_SLUG ) ) || ( isset( $arguments[0] ) && $this->editingOrNewPost( $arguments[0] ) ) ) {
+		if ( $this->editingOrNewPost( $arguments ) ) {
 			$videoArchiveService = $this->plugin->getVideoArchiveService();
 
 			wp_localize_script(
@@ -59,8 +59,20 @@ class Scripts extends BaseAction {
 		}
 	}
 
-	private function editingOrNewPost( $page ) {
-		return $page === 'post.php' || $page === 'new.php';
+	private function editingOrNewPost( $arguments ) {
+		if ( isset( $_GET['page'] ) ) {
+			if ( $_GET['page'] === Plugin::MENU_MAIN_SLUG || $_GET['page'] === Plugin::MENU_LIVESTREAM_SLUG ) {
+				return true;
+			}
+		}
+
+		if ( isset( $arguments[0] ) ) {
+			$page = $arguments[0];
+
+			return $page === 'post.php' || $page === 'new.php' || $page === 'post-new.php';
+		}
+
+		return false;
 	}
 
 	private function getTranslationLabels() {
