@@ -293,4 +293,32 @@ class VideoPublisherService extends BaseHttpService {
 	public function getLivestreamDetails( $uuid ) {
 		return $this->publisherGet( '/api/livestreams/' . urlencode( $uuid ) . "?clientIp={$this->getClientIp()}" );
 	}
+
+	protected function getPlayoutUrlWithSubtitlesAndChapters( $plaoutUrl, $subtitles, $chapters ) {
+		if ( count( $subtitles ) === 0 ) {
+			return $plaoutUrl;
+		}
+
+		return $plaoutUrl . '?' . $this->getSubtitleQueryString( $subtitles ) . '&' . $this->getChapterQueryString( $chapters );
+	}
+
+	protected function getSubtitleQueryString( $subtitles ) {
+		$languages = array();
+
+		foreach ( $subtitles as $subtitle ) {
+			$languages[ $subtitle['label'] ] = $subtitle['url'];
+		}
+
+		return http_build_query( $languages );
+	}
+
+	protected function getChapterQueryString( $chapters ) {
+		$languages = array();
+
+		foreach ( $chapters as $chapter ) {
+			$languages[ $chapter['label'] ] = $chapter['url'];
+		}
+
+		return http_build_query( $languages );
+	}
 }

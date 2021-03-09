@@ -6,6 +6,14 @@
             <p class="vjs-no-js">
                 <?php _e( 'Your browser does not support the video tag.', 'isset-video' ); ?>
             </p>
+
+            <?php foreach($subtitles as $index => $subtitle): ?>
+                <track kind="captions" src="<?php echo $subtitle['url']; ?>" srclang="<?php echo $subtitle['language']; ?>" label="<?php echo $subtitle['label']; ?>" <?php echo $index === 0 ? 'default' : ''; ?>>
+            <?php endforeach; ?>
+
+            <?php foreach($chapters as $chapter): ?>
+                <track kind="chapters" src="<?php echo $chapter['url']; ?>" srclang="<?php echo $chapter['language']; ?>">
+            <?php endforeach; ?>
         </video>
     </div>
 <?php else: ?>
