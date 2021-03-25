@@ -220,7 +220,7 @@ class VideoPublisherService extends BaseHttpService {
 	}
 
 	public function fetchStats() {
-		return $this->publisherGet( '/api/statistics/user/streaming' );
+		return $this->publisherGet( '/api/statistics/user/stats' );
 	}
 
 	public function fetchUsage() {
@@ -236,10 +236,6 @@ class VideoPublisherService extends BaseHttpService {
 		$current = $this->fetchUsage();
 
 		return $limit['storage_limit'] > $current['storage'];
-	}
-
-	public function fetchStatsV2( DateTime $dateFrom ) {
-		return $this->publisherGet( "/api/statistics/user/streaming?dateFrom={$dateFrom->format('Y-m-d')}" );
 	}
 
 	public function exchangeToken( $platform ) {
