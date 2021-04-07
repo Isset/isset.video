@@ -220,7 +220,25 @@ class VideoPublisherService extends BaseHttpService {
 	}
 
 	public function fetchStats() {
-		return $this->publisherGet( '/api/statistics/user/stats' );
+		$division = $this->fetchCurrentDivision();
+
+		if ( ! $division ) {
+			return array(
+				'views' => array(),
+				'data'  => array(),
+			);
+		}
+
+		$from = new DateTime( '-1 month' );
+		$to   = new DateTime();
+
+		$views = $this->publisherGet( "/api/timescale-statistics/division/{$division['uuid']}/views/publishes-daily?dateFrom={$from->format('Y-m-d')}&dateTo={$to->format('Y-m-d')}" );
+		$data  = $this->publisherGet( "/api/timescale-statistics/division/{$division['uuid']}/data/publishes-daily?dateFrom={$from->format('Y-m-d')}&dateTo={$to->format('Y-m-d')}" );
+
+		return array(
+			'views' => $views['results'],
+			'data'  => $data['results'],
+		);
 	}
 
 	public function fetchUsage() {
@@ -229,6 +247,16 @@ class VideoPublisherService extends BaseHttpService {
 
 	public function fetchSubscriptionLimit() {
 		return $this->issetVideoGet( '/api/token/subscription-limit' );
+	}
+
+	public function fetchCurrentDivision() {
+		$info = $this->getUserInfo();
+
+		if ( $info && isset( $info['division_current'] ) ) {
+			return $info['division_current'];
+		}
+
+		return false;
 	}
 
 	public function uploadingAllowed() {

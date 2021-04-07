@@ -239,7 +239,7 @@ blocks.registerBlockType('isset-video-publisher/video-block', {
                     <div className="video-block-suggestions-container">
                         {suggestions.length === 0 ? <span className="video-block-text">{__('No publishes found', 'isset-video')}</span> : this.renderSuggestions(suggestions)}
                     </div>
-                    <div>d
+                    <div>
                         <button onClick={() => this.getSuggestions(searchTerm, lazyStep)}
                                 className="video-block-button">{__('More results', 'isset-video')}
                         </button>

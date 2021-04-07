@@ -18,7 +18,7 @@ class Scripts extends BaseAction {
 	function execute( $arguments ) {
 		if ( isset( $_GET['post_type'] ) && $_GET['post_type'] !== '' && $_GET['post_type'] !== 'page' ) {
 			// @TODO: Test this. This fixes the javascript not being loaded, but I can't imagine this is here for no reason?
-		    // return;
+			// return;
 		}
 
 		$videoPublishService = $this->plugin->getVideoPublisherService();
