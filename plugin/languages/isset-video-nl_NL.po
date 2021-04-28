@@ -2,17 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
-"POT-Creation-Date: 2020-12-15T14:23:25+00:00\n"
-"PO-Revision-Date: 2020-12-15 15:28+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2021-04-28 16:35+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: js/livestream/components/livestream.js:88 src/Plugin.php:357
+#: js/livestream/components/livestream.js:60 src/Plugin.php:357
 #: src/Plugin.php:358
 msgid "Livestream"
 msgstr "Livestream"
@@ -34,6 +34,32 @@ msgid "Stream Key"
 msgstr "Stream Sleutel"
 
 #: js/livestream/components/livestreamDetails.js:125
+#: js/overview/components/admin-video-details.js:228
+#: js/overview/components/admin-video-details.js:227
+#: js/overview/components/admin-video-details.js:225
+#: js/overview/components/admin-video-details.js:223
+#: js/overview/components/admin-video-details.js:221
+#: js/overview/components/admin-video-details.js:219
+#: js/overview/components/admin-video-details.js:217
+#: js/overview/components/admin-video-details.js:216
+#: js/overview/components/admin-video-details.js:212
+#: js/overview/components/admin-video-details.js:208
+#: js/overview/components/admin-video-details.js:207
+#: js/overview/components/admin-video-details.js:201
+#: js/overview/components/admin-video-details.js:190
+#: js/overview/components/admin-video-details.js:188
+#: js/overview/components/admin-video-details.js:187
+#: js/overview/components/admin-video-details.js:171
+#: js/overview/components/admin-video-details.js:170
+#: js/overview/components/admin-video-details.js:161
+#: js/overview/components/admin-video-details.js:162
+#: js/overview/components/admin-video-details.js:166
+#: js/overview/components/admin-video-details.js:165
+#: js/overview/components/admin-video-details.js:160
+#: js/overview/components/admin-video-details.js:157
+#: js/overview/components/admin-video-details.js:153
+#: js/overview/components/admin-video-details.js:152
+#: js/overview/components/admin-video-details.js:149
 #: js/overview/components/admin-video-details.js:144
 #: js/overview/components/admin-video-overview.js:178
 msgid "Created"
@@ -103,28 +129,81 @@ msgstr ""
 msgid "Copied shortcode"
 msgstr "Shortcode gekopieerd"
 
-#: js/overview/components/admin-video-details.js:127
+#: js/overview/components/admin-video-details.js:153
+msgid "Drop an image file here or browse your computer."
+msgstr "Sleep hier een plaatje op of verken je computer."
+
+#: js/overview/components/admin-video-details.js:171
+#: js/overview/components/admin-video-details.js:169
+#: js/overview/components/admin-video-details.js:167
+#: js/overview/components/admin-video-details.js:165
+#: js/overview/components/admin-video-details.js:163
+#: js/overview/components/admin-video-details.js:162
+#: js/overview/components/admin-video-details.js:158
+#: js/overview/components/admin-video-details.js:154
+#: js/overview/components/admin-video-details.js:155
+#: js/overview/components/admin-video-details.js:148
+#: js/overview/components/admin-video-details.js:137
+#: js/overview/components/admin-video-details.js:135
+#: js/overview/components/admin-video-details.js:134
+#: js/overview/components/admin-video-details.js:118
+#: js/overview/components/admin-video-details.js:117
+#: js/overview/components/video-upload.js:153
+msgid "Upload"
+msgstr "Upload"
+
+#: js/overview/components/admin-video-details.js:172
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: js/overview/components/admin-video-details.js:205
 msgid "Use the following code to embed this video"
 msgstr "Gebruik de volgende code om de video toe te voegen"
 
+#: js/overview/components/admin-video-details.js:224
+#: js/overview/components/admin-video-details.js:223
+#: js/overview/components/admin-video-details.js:221
+#: js/overview/components/admin-video-details.js:219
+#: js/overview/components/admin-video-details.js:217
+#: js/overview/components/admin-video-details.js:215
+#: js/overview/components/admin-video-details.js:213
+#: js/overview/components/admin-video-details.js:212
+#: js/overview/components/admin-video-details.js:208
+#: js/overview/components/admin-video-details.js:204
+#: js/overview/components/admin-video-details.js:203
+#: js/overview/components/admin-video-details.js:197
+#: js/overview/components/admin-video-details.js:186
+#: js/overview/components/admin-video-details.js:184
+#: js/overview/components/admin-video-details.js:183
+#: js/overview/components/admin-video-details.js:167
+#: js/overview/components/admin-video-details.js:166
+#: js/overview/components/admin-video-details.js:157
+#: js/overview/components/admin-video-details.js:158
+#: js/overview/components/admin-video-details.js:162
+#: js/overview/components/admin-video-details.js:161
+#: js/overview/components/admin-video-details.js:156
+#: js/overview/components/admin-video-details.js:153
+#: js/overview/components/admin-video-details.js:149
+#: js/overview/components/admin-video-details.js:148
+#: js/overview/components/admin-video-details.js:145
 #: js/overview/components/admin-video-details.js:140
 #: js/overview/components/admin-video-overview.js:177
 msgid "Filename"
 msgstr "Bestandsnaam"
 
-#: js/overview/components/admin-video-details.js:148
+#: js/overview/components/admin-video-details.js:232
 msgid "Filesize"
 msgstr "Grootte"
 
-#: js/overview/components/admin-video-details.js:152
+#: js/overview/components/admin-video-details.js:236
 msgid "Length"
 msgstr "Speelduur"
 
-#: js/overview/components/admin-video-details.js:156
+#: js/overview/components/admin-video-details.js:240
 msgid "Resolution"
 msgstr "Resolutie"
 
-#: js/overview/components/admin-video-details.js:160
+#: js/overview/components/admin-video-details.js:244
 msgid "Presets"
 msgstr "Preset"
 
@@ -170,6 +249,13 @@ msgstr "Geen videos gevonden"
 msgid "Processing"
 msgstr "Bezig"
 
+#: js/overview/components/admin-video-details.js:130
+#: js/overview/components/video-upload.js:130
+msgid "Drop one or more files here (4.3GB max) or browse your computer."
+msgstr ""
+"Sleep hier een of meerdere videobestanden op (4,3GB max) of blader op uw "
+"computer. "
+
 #: js/overview/components/video-upload.js:112
 msgid "Successfully added %s to archive"
 msgstr "%s succesvol toegevoegd aan archief"
@@ -186,12 +272,6 @@ msgstr "Uploaden"
 msgid "Selected files"
 msgstr "Geselecteerd bestand"
 
-#: js/overview/components/video-upload.js:130
-msgid "Drop one or more files here (4.3GB max) or browse your computer."
-msgstr ""
-"Sleep hier een of meerdere videobestanden op (4,3GB max) of blader op uw "
-"computer. "
-
 #: js/overview/components/video-upload.js:140
 msgid ""
 "Storage limit is already reached, please remove videos to upload again or "
@@ -199,10 +279,6 @@ msgid ""
 msgstr ""
 "Opslaglimiet is reeds bereikt, verwijder video's om nieuwe video's te kunnen "
 "uploaden, of upgrade uw abonnement."
-
-#: js/overview/components/video-upload.js:153
-msgid "Upload"
-msgstr "Upload"
 
 #: js/overview/components/video-upload.js:159
 msgid "Cancel upload"
@@ -384,7 +460,7 @@ msgstr "Deze video kan niet geladen worden"
 msgid "Your browser does not support the video tag."
 msgstr "Jouw browser ondersteunt geen video's"
 
-#: views/shortcode/publish.php:12
+#: views/shortcode/publish.php:20
 msgid "Video cannot be loaded"
 msgstr "Deze video kan niet geladen worden"
 

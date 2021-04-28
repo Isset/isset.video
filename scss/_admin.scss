@@ -454,7 +454,8 @@
   display: flex;
 
   .isset-video-details,
-  .isset-video-upload-container {
+  .isset-video-upload-container,
+  .isset-video-custom-still-dialog {
     width: 1010px;
     background-color: #23282C;
     position: fixed;
@@ -488,6 +489,34 @@
       width: 610px;
       overflow-x: scroll;
       white-space: nowrap;
+
+      .isset-video-add-default-still {
+        box-sizing: border-box;
+        border: 2px solid orange;
+        display: inline-block;
+        width: 150px;
+        height: 80px;
+        margin-right: 5px;
+        position: relative;
+        cursor: pointer;
+
+        .dashicons {
+          position: absolute;
+          left: 50%;
+          top: 50px;
+          margin: -20px 0 0 -10px;
+          color: orange;
+        }
+      }
+
+      .still-replace {
+        position: absolute;
+        right: 30px;
+        top: 5px;
+        font-size: 40px;
+        color: orange;
+        cursor: pointer;
+      }
 
       img {
         margin-right: 5px;
@@ -526,5 +555,9 @@
         }
       }
     }
+  }
+
+  .isset-video-custom-still-dialog {
+    width: 800px;
   }
 }

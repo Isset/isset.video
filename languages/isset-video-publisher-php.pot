@@ -1,15 +1,15 @@
-# Copyright (C) 2020 isset.video
+# Copyright (C) 2021 isset.video
 # This file is distributed under the same license as the isset.video plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: isset.video 0.7.4\n"
+"Project-Id-Version: isset.video 0.9.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-12-15T14:23:25+00:00\n"
+"POT-Creation-Date: 2021-04-28T14:23:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: isset-video\n"
@@ -123,6 +123,6 @@ msgstr ""
 msgid "Your browser does not support the video tag."
 msgstr ""
 
-#: views/shortcode/publish.php:12
+#: views/shortcode/publish.php:20
 msgid "Video cannot be loaded"
 msgstr ""
