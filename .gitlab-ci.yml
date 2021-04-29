@@ -4,7 +4,7 @@ before_script:
 
 build:
   stage: build
-  image: node:15.14.0-alpine
+  image: node:15.14.0
   cache:
     paths:
       - node_modules
