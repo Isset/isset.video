@@ -4,7 +4,7 @@ before_script:
 
 build:
   stage: build
-  image: node
+  image: node:15.14.0
   cache:
     paths:
       - node_modules
@@ -28,6 +28,7 @@ publish_nightly:
     - echo '  StrictHostKeyChecking no' >> ~/.ssh/config
     - scp out/isset-video.zip wptest@isset122.isset.net:web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip
     - ssh wptest@isset122.isset.net sh -c "cd ~/web/WordPress/wp-content/plugins/isset-video && rm -rf ~/web/WordPress/wp-content/plugins/isset-video/* && unzip ~/web/WordPress/issetvideoplugin/nightly/${CI_COMMIT_SHA}.zip -d ~/web/WordPress/wp-content/plugins/isset-video"
+    - ssh wptest@isset122.isset.net 'chmod -R 755 /home/wptest/web/WordPress/wp-content/plugins/isset-video'
 publish_release:
   only:
     - master

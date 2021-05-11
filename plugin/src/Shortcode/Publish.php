@@ -42,6 +42,8 @@ class Publish extends ShortcodeBase {
 		$context              = $attr;
 		$context['poster']    = isset( $publish['assets'] ) ? $this->findDefaultImage( $publish['assets'] ) : null;
 		$context['uuid']      = $uuid;
+		$context['subtitles'] = isset( $publish['subtitles'] ) ? $publish['subtitles'] : array();
+		$context['chapters']  = isset( $publish['chapters'] ) ? $publish['chapters'] : array();
 		$context['video_url'] = $video_url;
 
 		return Renderer::render( 'shortcode/publish.php', $context );

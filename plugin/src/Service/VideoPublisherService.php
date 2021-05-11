@@ -220,7 +220,25 @@ class VideoPublisherService extends BaseHttpService {
 	}
 
 	public function fetchStats() {
-		return $this->publisherGet( '/api/statistics/user/streaming' );
+		$division = $this->fetchCurrentDivision();
+
+		if ( ! $division ) {
+			return array(
+				'views' => array(),
+				'data'  => array(),
+			);
+		}
+
+		$from = new DateTime( '-1 month' );
+		$to   = new DateTime();
+
+		$views = $this->publisherGet( "/api/timescale-statistics/division/{$division['uuid']}/views/publishes-daily?dateFrom={$from->format('Y-m-d')}&dateTo={$to->format('Y-m-d')}" );
+		$data  = $this->publisherGet( "/api/timescale-statistics/division/{$division['uuid']}/data/publishes-daily?dateFrom={$from->format('Y-m-d')}&dateTo={$to->format('Y-m-d')}" );
+
+		return array(
+			'views' => $views['results'],
+			'data'  => $data['results'],
+		);
 	}
 
 	public function fetchUsage() {
@@ -231,15 +249,21 @@ class VideoPublisherService extends BaseHttpService {
 		return $this->issetVideoGet( '/api/token/subscription-limit' );
 	}
 
+	public function fetchCurrentDivision() {
+		$info = $this->getUserInfo();
+
+		if ( $info && isset( $info['division_current'] ) ) {
+			return $info['division_current'];
+		}
+
+		return false;
+	}
+
 	public function uploadingAllowed() {
 		$limit   = $this->fetchSubscriptionLimit();
 		$current = $this->fetchUsage();
 
 		return $limit['storage_limit'] > $current['storage'];
-	}
-
-	public function fetchStatsV2( DateTime $dateFrom ) {
-		return $this->publisherGet( "/api/statistics/user/streaming?dateFrom={$dateFrom->format('Y-m-d')}" );
 	}
 
 	public function exchangeToken( $platform ) {
@@ -292,5 +316,33 @@ class VideoPublisherService extends BaseHttpService {
 
 	public function getLivestreamDetails( $uuid ) {
 		return $this->publisherGet( '/api/livestreams/' . urlencode( $uuid ) . "?clientIp={$this->getClientIp()}" );
+	}
+
+	protected function getPlayoutUrlWithSubtitlesAndChapters( $plaoutUrl, $subtitles, $chapters ) {
+		if ( count( $subtitles ) === 0 ) {
+			return $plaoutUrl;
+		}
+
+		return $plaoutUrl . '?' . $this->getSubtitleQueryString( $subtitles ) . '&' . $this->getChapterQueryString( $chapters );
+	}
+
+	protected function getSubtitleQueryString( $subtitles ) {
+		$languages = array();
+
+		foreach ( $subtitles as $subtitle ) {
+			$languages[ $subtitle['label'] ] = $subtitle['url'];
+		}
+
+		return http_build_query( $languages );
+	}
+
+	protected function getChapterQueryString( $chapters ) {
+		$languages = array();
+
+		foreach ( $chapters as $chapter ) {
+			$languages[ $chapter['label'] ] = $chapter['url'];
+		}
+
+		return http_build_query( $languages );
 	}
 }

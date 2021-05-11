@@ -54,15 +54,15 @@
 					</div>
 				</div>
 				<div id="videoPublisherStreamingViews">
-                    <?php if ( isset( $stats['views'] ) && isset( $stats['views']['totalByDay'] ) ): ?>
-                        <?php foreach ( $stats['views']['totalByDay'] as $view_row ) : ?>
+                    <?php if ( isset( $stats['views'] ) ): ?>
+                        <?php foreach ( $stats['views'] as $view_row ) : ?>
                             <span data-key="<?php echo $view_row['date']; ?>" data-value="<?php echo $view_row['views']; ?>"></span>
                         <?php endforeach; ?>
                     <?php endif; ?>
 				</div>
 				<div id="videoPublisherStreamingData">
-                    <?php if ( isset( $stats['data'] ) && isset( $stats['data']['totalByDay'] ) ): ?>
-                        <?php foreach ( $stats['data']['totalByDay'] as $view_row ) : ?>
+                    <?php if ( isset( $stats['data'] ) ): ?>
+                        <?php foreach ( $stats['data'] as $view_row ) : ?>
                             <span data-key="<?php echo $view_row['date']; ?>" data-value="<?php echo $view_row['bytes']; ?>"></span>
                         <?php endforeach; ?>
                     <?php endif; ?>

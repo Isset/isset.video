@@ -59,6 +59,50 @@
   height: 100% !important;
 }
 
-.vjs-subs-caps-button {
-  display: none;
+.vjs-chapter-bar {
+  position: absolute;
+  width: 100%;
+  margin: 0 10px;
+  top: 12px;
+  height: 5px;
+
+  .vjs-chapter-marker {
+    position: absolute;
+    height: 5px;
+    background-color: orange;
+    border-right: 2px solid white;
+    opacity: 0.5;
+    z-index: 1000;
+
+    .vjs-chapter-marker-text {
+      display: none;
+      position: absolute;
+      font-size: 14px;
+      bottom: 9px;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+
+    &:hover {
+      top: -2px;
+      height: 9px;
+      opacity: 1;
+
+      .vjs-chapter-marker-text {
+        display: block;
+
+        span {
+          display: inline-block;
+          position: relative;
+          white-space: nowrap;
+          background-color: black;
+          padding: 6px;
+
+        }
+      }
+    }
+  }
 }

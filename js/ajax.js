@@ -33,25 +33,44 @@ export async function archiveAjax(uri, queryParams = {}, method = 'GET', post = 
     return ajax(`${archiveUrl}${uri}?${toQueryParameters(queryParams)}`, archiveToken, method, post);
 }
 
-export async function publisherAjax(uri, queryParams = {}, method = 'GET', post = {}) {
+export async function publisherAjax(uri, queryParams = {}, method = 'GET', post = {}, file = null) {
     // noinspection JSUnresolvedVariable
     const {publisherUrl, publisherToken} = window.IssetVideoArchiveAjax;
 
-    return ajax(`${publisherUrl}${uri}?${toQueryParameters(queryParams)}`, publisherToken, method, post);
+    return ajax(`${publisherUrl}${uri}?${toQueryParameters(queryParams)}`, publisherToken, method, post, file);
 }
 
-async function ajax(url, token, method = 'GET', post = {}) {
-    const options = {
-        method,
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'x-token-auth': token,
-        },
-    };
+async function ajax(url, token, method = 'GET', post = {}, file = null) {
+    let options = {};
 
-    if (Object.keys(post).length > 0) {
-        options.body = JSON.stringify(post);
+    if (file instanceof File) {
+        console.log('uploading still');
+        const body = new FormData();
+        body.append('file', file);
+
+        Object.keys(post).forEach(key => body.append(key, data[key]));
+
+        options = {
+            method,
+            headers: {
+                'Accept': 'application/json',
+                'x-token-auth': token,
+            },
+            body: body,
+        };
+    } else {
+        options = {
+            method,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-token-auth': token,
+            },
+        };
+
+        if (Object.keys(post).length > 0) {
+            options.body = JSON.stringify(post);
+        }
     }
 
     let ajaxPromise = await fetch(url, options);

@@ -6,3 +6,7 @@ release: csfix
 	bin/create-release
 translation:
 	bin/create-translations
+watch:
+	yarn watch
+up:
+	docker-compose up -d
