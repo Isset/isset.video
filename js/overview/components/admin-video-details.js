@@ -210,7 +210,7 @@ class AdminVideoDetails extends React.Component {
                         {!this.hasCustomImage(assets) && <div className="isset-video-add-default-still" onClick={this.uploadCustomImage}>
                             <span className="dashicons dashicons-plus" />
                         </div>}
-                        {assets.map(asset => <div className="video-block-relative video-publisher-inline-block">
+                        {assets.map(asset => <div key={`still-image-${asset.id}`} className="video-block-relative video-publisher-inline-block">
                             {asset.id === 0 && <span className="dashicons dashicons-update-alt still-replace" onClick={this.uploadCustomImage} />}
                             <img className={defaultImage === asset.id ? 'isset-video-default-image' : undefined} src={`${asset.url}?width=150&height=80`} key={`asset-${asset.id}`} onClick={() => this.setDefaultImage(asset.id)} />
                         </div>)}
