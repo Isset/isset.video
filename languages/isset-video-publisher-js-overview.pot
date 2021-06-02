@@ -12,20 +12,6 @@ msgid "Drop an image file here or browse your computer."
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:171
-#: js/overview/components/admin-video-details.js:169
-#: js/overview/components/admin-video-details.js:167
-#: js/overview/components/admin-video-details.js:165
-#: js/overview/components/admin-video-details.js:163
-#: js/overview/components/admin-video-details.js:162
-#: js/overview/components/admin-video-details.js:158
-#: js/overview/components/admin-video-details.js:154
-#: js/overview/components/admin-video-details.js:155
-#: js/overview/components/admin-video-details.js:148
-#: js/overview/components/admin-video-details.js:137
-#: js/overview/components/admin-video-details.js:135
-#: js/overview/components/admin-video-details.js:134
-#: js/overview/components/admin-video-details.js:118
-#: js/overview/components/admin-video-details.js:117
 #: js/overview/components/video-upload.js:153
 msgid "Upload"
 msgstr ""
@@ -39,63 +25,11 @@ msgid "Use the following code to embed this video"
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:224
-#: js/overview/components/admin-video-details.js:223
-#: js/overview/components/admin-video-details.js:221
-#: js/overview/components/admin-video-details.js:219
-#: js/overview/components/admin-video-details.js:217
-#: js/overview/components/admin-video-details.js:215
-#: js/overview/components/admin-video-details.js:213
-#: js/overview/components/admin-video-details.js:212
-#: js/overview/components/admin-video-details.js:208
-#: js/overview/components/admin-video-details.js:204
-#: js/overview/components/admin-video-details.js:203
-#: js/overview/components/admin-video-details.js:197
-#: js/overview/components/admin-video-details.js:186
-#: js/overview/components/admin-video-details.js:184
-#: js/overview/components/admin-video-details.js:183
-#: js/overview/components/admin-video-details.js:167
-#: js/overview/components/admin-video-details.js:166
-#: js/overview/components/admin-video-details.js:157
-#: js/overview/components/admin-video-details.js:158
-#: js/overview/components/admin-video-details.js:162
-#: js/overview/components/admin-video-details.js:161
-#: js/overview/components/admin-video-details.js:156
-#: js/overview/components/admin-video-details.js:153
-#: js/overview/components/admin-video-details.js:149
-#: js/overview/components/admin-video-details.js:148
-#: js/overview/components/admin-video-details.js:145
-#: js/overview/components/admin-video-details.js:140
 #: js/overview/components/admin-video-overview.js:177
 msgid "Filename"
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:228
-#: js/overview/components/admin-video-details.js:227
-#: js/overview/components/admin-video-details.js:225
-#: js/overview/components/admin-video-details.js:223
-#: js/overview/components/admin-video-details.js:221
-#: js/overview/components/admin-video-details.js:219
-#: js/overview/components/admin-video-details.js:217
-#: js/overview/components/admin-video-details.js:216
-#: js/overview/components/admin-video-details.js:212
-#: js/overview/components/admin-video-details.js:208
-#: js/overview/components/admin-video-details.js:207
-#: js/overview/components/admin-video-details.js:201
-#: js/overview/components/admin-video-details.js:190
-#: js/overview/components/admin-video-details.js:188
-#: js/overview/components/admin-video-details.js:187
-#: js/overview/components/admin-video-details.js:171
-#: js/overview/components/admin-video-details.js:170
-#: js/overview/components/admin-video-details.js:161
-#: js/overview/components/admin-video-details.js:162
-#: js/overview/components/admin-video-details.js:166
-#: js/overview/components/admin-video-details.js:165
-#: js/overview/components/admin-video-details.js:160
-#: js/overview/components/admin-video-details.js:157
-#: js/overview/components/admin-video-details.js:153
-#: js/overview/components/admin-video-details.js:152
-#: js/overview/components/admin-video-details.js:149
-#: js/overview/components/admin-video-details.js:144
 #: js/overview/components/admin-video-overview.js:178
 msgid "Created"
 msgstr ""
@@ -156,11 +90,6 @@ msgstr ""
 msgid "Processing"
 msgstr ""
 
-#: js/overview/components/admin-video-details.js:130
-#: js/overview/components/video-upload.js:130
-msgid "Drop one or more files here (4.3GB max) or browse your computer."
-msgstr ""
-
 #: js/overview/components/video-upload.js:112
 msgid "Successfully added %s to archive"
 msgstr ""
@@ -175,6 +104,10 @@ msgstr ""
 
 #: js/overview/components/video-upload.js:122
 msgid "Selected files"
+msgstr ""
+
+#: js/overview/components/video-upload.js:130
+msgid "Drop one or more files here (4.3GB max) or browse your computer."
 msgstr ""
 
 #: js/overview/components/video-upload.js:140

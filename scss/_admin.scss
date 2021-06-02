@@ -265,6 +265,10 @@
     width: 100%;
   }
 
+  .iv-w-400 {
+    width: 400px;
+  }
+
   .iv-v-align-top {
     vertical-align: top;
   }
@@ -291,6 +295,14 @@
 
   .iv-bg-black {
     background-color: #333;
+  }
+
+  .iv-t-orange {
+    color: orange;
+  }
+
+  .iv-p-20 {
+    padding: 20px;
   }
 
   .isset-video-livestream-container {
@@ -559,5 +571,30 @@
 
   .isset-video-custom-still-dialog {
     width: 800px;
+  }
+}
+
+.isset-video-toast {
+  width: 200px;
+  position: absolute;
+  background-color: #666;
+  padding: 20px;
+  top: 40px;
+  right: 20px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px;
+  z-index: 10000;
+  color: #000;
+
+  &.success {
+    background-color: #9ad06e;
+  }
+
+  &.warning {
+    background-color: orange;
+  }
+
+  &.error {
+    background-color: #e57878;
   }
 }

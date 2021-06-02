@@ -17,8 +17,9 @@ use IssetBV\VideoPublisher\Wordpress\Widgets\BaseWidget;
 use IssetBV\VideoPublisher\Wordpress\Widgets\Dashboard;
 
 class Plugin {
-	const MENU_MAIN_SLUG       = 'isset-video-overview';
-	const MENU_LIVESTREAM_SLUG = 'isset-video-livestream';
+	const MENU_MAIN_SLUG            = 'isset-video-overview';
+	const MENU_LIVESTREAM_SLUG      = 'isset-video-livestream';
+	const MENU_ADVERTISEMENT_SLUG   = 'isset-video-advertisement';
 
 	static $instance;
 
@@ -300,6 +301,7 @@ class Plugin {
 	public function addMenuItems() {
 		$this->addOverviewItem();
 		$this->addLivestreamItem();
+        $this->addAdvertisementItem();
 	}
 
 	public function getOverviewPageUrl() {
@@ -351,9 +353,6 @@ class Plugin {
 	}
 
 	private function addLivestreamItem() {
-		// $this->enqueueStyle( 'css/main.css' );
-		// $this->enqueueScript( 'js/admin-video-livestream.js' );
-
 		$page_title  = __( 'Livestream', 'isset-video' );
 		$menu_title  = __( 'Livestream', 'isset-video' );
 		$capability  = 'manage_options';
@@ -364,6 +363,32 @@ class Plugin {
 
 		add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, self::MENU_LIVESTREAM_SLUG, $function );
 	}
+
+    public function renderAdvertisementPage() {
+        $vps                  = $this->getVideoPublisherService();
+        $context              = array();
+        $context['logged_in'] = $vps->isLoggedIn();
+
+        if ( $context['logged_in'] ) {
+            echo Renderer::render( 'admin/advertisement.php', $context );
+        } else {
+            $context['login_url'] = $vps->getLoginURL();
+
+            echo Renderer::render( 'admin/page.php', $context );
+        }
+    }
+
+    private function addAdvertisementItem() {
+        $page_title  = __( 'Advertisement Settings', 'isset-video' );
+        $menu_title  = __( 'Advertisement', 'isset-video' );
+        $capability  = 'manage_options';
+        $parent_slug = self::MENU_MAIN_SLUG;
+        $function    = function() {
+            $this->renderAdvertisementPage();
+        };
+
+        add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, self::MENU_ADVERTISEMENT_SLUG, $function );
+    }
 
 	private function renderChart() {
 		$service = $this->getVideoPublisherService();

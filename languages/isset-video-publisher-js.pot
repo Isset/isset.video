@@ -3,6 +3,76 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
+#: js/advertisement/components/advertisementSettings.js:104
+msgid "Enable Video Ads"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:106
+msgid "Enable or disable ads for your videos"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:120
+msgid "Ad Source"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:122
+msgid "Choose your Ad Server"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:146
+msgid "Ad Uri"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:152
+msgid "Ads are Skippable"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:154
+msgid "By enabling this, the shown ads will be skippable by the user"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:167
+msgid "Ad Location"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:169
+msgid ""
+"Choose if your ads should be played before, after, or/and during video "
+"playback"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:176
+msgid "Before"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:188
+msgid "After"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:200
+msgid "Middle"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:215
+msgid "Save"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:86
+msgid "Settings saved"
+msgstr ""
+
+#: js/advertisement/helpers/advertisement.js:10
+msgid "The key for your VAST endpoint supplied by Adsterra, ie."
+msgstr ""
+
+#: js/advertisement/helpers/advertisement.js:12
+msgid "The endpoint supplied by your ad provider, ie."
+msgstr ""
+
+#: js/advertisement/helpers/advertisement.js:8
+msgid "The uri supplied by AdSense, ie."
+msgstr ""
+
 #: js/publisher-livestream-block.js:85
 msgid "No livestream found"
 msgstr ""
@@ -13,6 +83,16 @@ msgstr ""
 
 #: js/publisher-livestream-block.js:95
 msgid "Getting livestream data"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:195
+#: js/publisher-video-block.js:236
+msgid "Search"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:202
+#: js/publisher-video-block.js:234
+msgid "Search videos"
 msgstr ""
 
 #: js/publisher-video-block.js:151
@@ -49,14 +129,6 @@ msgstr ""
 
 #: js/publisher-video-block.js:231
 msgid "Videos on isset.video"
-msgstr ""
-
-#: js/publisher-video-block.js:234
-msgid "Search videos"
-msgstr ""
-
-#: js/publisher-video-block.js:236
-msgid "Search"
 msgstr ""
 
 #: js/publisher-video-block.js:240
