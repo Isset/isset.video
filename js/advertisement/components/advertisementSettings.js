@@ -27,9 +27,13 @@ class AdvertisementSettings extends React.Component {
         });
 
         publisherAjax('api/settings/advertisement').then(result => {
-            const {provider, uri, positions, enabled} = result;
+            if (!Array.isArray(result)) {
+                const {provider, uri, positions, enabled} = result;
 
-            this.setState({enabled, provider: provider.id, uri, positions, loaded: true});
+                this.setState({enabled, provider: provider.id, uri, positions, loaded: true});
+            } else {
+                this.setState({loaded: true});
+            }
         });
     }
 
