@@ -62,7 +62,7 @@ class Scripts extends BaseAction {
 
 	private function editingOrNewPost( $arguments ) {
 		if ( isset( $_GET['page'] ) ) {
-			if ( $_GET['page'] === Plugin::MENU_MAIN_SLUG || $_GET['page'] === Plugin::MENU_LIVESTREAM_SLUG || $_GET['page'] === Plugin::MENU_ADVERTISEMENT_SLUG) {
+			if ( $_GET['page'] === Plugin::MENU_MAIN_SLUG || $_GET['page'] === Plugin::MENU_LIVESTREAM_SLUG || $_GET['page'] === Plugin::MENU_ADVERTISEMENT_SLUG ) {
 				return true;
 			}
 		}

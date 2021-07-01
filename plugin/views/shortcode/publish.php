@@ -1,7 +1,13 @@
 <?php if ( $video_url ): ?>
     <div class="video-publisher-video video-player">
         <video <?php echo $controls; ?> <?php echo $autoplay; ?> <?php echo $loop; ?> <?php echo $muted; ?>
-               poster="<?php echo $poster; ?>" preload="auto" class="video-js vjs-big-play-centered vjs-default-skin" controls x-webkit-airplay="allow">
+               poster="<?php echo $poster; ?>"
+               preload="auto"
+               class="video-js vjs-big-play-centered vjs-default-skin"
+               controls
+               x-webkit-airplay="allow"
+               data-ad-url="<?php echo empty($ad_url) ? '' : $ad_url; ?>"
+        >
             <source src="<?php echo esc_attr($video_url); ?>" type="application/x-mpegURL">
             <p class="vjs-no-js">
                 <?php _e( 'Your browser does not support the video tag.', 'isset-video' ); ?>

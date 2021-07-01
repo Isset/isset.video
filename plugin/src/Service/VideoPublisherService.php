@@ -345,4 +345,8 @@ class VideoPublisherService extends BaseHttpService {
 
 		return http_build_query( $languages );
 	}
+
+	public function getAdvertisementUrl( $publishUuid ) {
+		return $this->publisherGet( '/api/publishes/' . urlencode( $publishUuid ) . '/advertisement-url' );
+	}
 }

@@ -6,14 +6,14 @@ require('videojs-contrib-quality-levels');
 require('videojs-http-source-selector');
 require('@silvermine/videojs-chromecast')(videojs, {preloadWebComponents: true});
 require('@silvermine/videojs-airplay')(videojs);
+require('videojs-contrib-ads');
+require('videojs-ima');
 
 require('./functions');
 require('./overview/components/admin-video-overview');
 require('./livestream/components/livestream');
 require('./advertisement/components/advertisementSettings');
-
 require('../scss/isset-video-publisher.scss');
-
 require('./livestream/components/livestreamPlayer');
 
 
@@ -43,6 +43,14 @@ window.addEventListener('load', () => {
 
         player.chromecast();
         player.airPlay();
+
+        const {adUrl} = video.dataset;
+
+        let imaOptions = {
+            adTagUrl: adUrl,
+        };
+
+        player.ima(imaOptions);
     }
 
     setLocaleData(window.issetVideoTranslations, 'isset-video');
