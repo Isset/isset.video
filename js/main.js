@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import {setLocaleData} from '@wordpress/i18n';
+import 'videojs-ima/dist/videojs.ima.css';
 
 require('jquery');
 require('videojs-contrib-quality-levels');

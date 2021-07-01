@@ -14,11 +14,11 @@ class Publish extends ShortcodeBase {
 			'chrome_cast',
 			'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'
 		);
-        // Also attach google ima sdk
-        wp_enqueue_script(
-            'google-ima-sdk',
-            '//imasdk.googleapis.com/js/sdkloader/ima3.js'
-        );
+		// Also attach google ima sdk
+		wp_enqueue_script(
+			'google-ima-sdk',
+			'//imasdk.googleapis.com/js/sdkloader/ima3.js'
+		);
 
 		$attr = shortcode_atts(
 			array(
