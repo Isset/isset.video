@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the isset.video plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: isset.video 0.9.1\n"
+"Project-Id-Version: isset.video 0.9.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-06-02T11:52:54+00:00\n"
+"POT-Creation-Date: 2021-07-05T12:02:29+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: isset-video\n"
@@ -48,27 +48,27 @@ msgstr ""
 msgid "Advertisement"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:7
+#: views/admin/dashboard/api-dashboard.php:10
 #: views/admin/dashboard/dashboard.php:6
 msgid "Storage used"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:14
+#: views/admin/dashboard/api-dashboard.php:17
 #: views/admin/dashboard/dashboard.php:10
 msgid "Data streamed"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:23
+#: views/admin/dashboard/api-dashboard.php:26
 msgid "Logged in as"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:25
+#: views/admin/dashboard/api-dashboard.php:28
 #: views/admin/dashboard/dashboard.php:14
 #: views/admin/page.php:6
 msgid "Logout"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:31
+#: views/admin/dashboard/api-dashboard.php:34
 msgid "Subscription type"
 msgstr ""
 
@@ -127,10 +127,10 @@ msgstr ""
 msgid "Video is not available"
 msgstr ""
 
-#: views/shortcode/publish.php:7
+#: views/shortcode/publish.php:13
 msgid "Your browser does not support the video tag."
 msgstr ""
 
-#: views/shortcode/publish.php:20
+#: views/shortcode/publish.php:26
 msgid "Video cannot be loaded"
 msgstr ""

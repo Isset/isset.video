@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
-"POT-Creation-Date: 2021-06-02T11:52:54+00:00\n"
-"PO-Revision-Date: 2021-06-02 14:00+0200\n"
+"POT-Creation-Date: 2021-07-05T12:02:29+00:00\n"
+"PO-Revision-Date: 2021-07-05 14:11+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -34,8 +34,14 @@ msgid "Stream Key"
 msgstr "Stream Key"
 
 #: js/livestream/components/livestreamDetails.js:125
-#: js/overview/components/admin-video-details.js:228
-#: js/overview/components/admin-video-overview.js:178
+#: js/overview/components/admin-video-details.js:266
+#: js/overview/components/admin-video-details.js:262
+#: js/overview/components/admin-video-details.js:253
+#: js/overview/components/admin-video-details.js:249
+#: js/overview/components/admin-video-details.js:245
+#: js/overview/components/admin-video-details.js:244
+#: js/overview/components/admin-video-details.js:243
+#: js/overview/components/admin-video-overview.js:177
 msgid "Created"
 msgstr "Created"
 
@@ -102,79 +108,99 @@ msgstr "This player will update automatically when the livestream goes live."
 msgid "Copied shortcode"
 msgstr "Copied shortcode"
 
-#: js/overview/components/admin-video-details.js:153
+#: js/overview/components/admin-video-details.js:165
 msgid "Drop an image file here or browse your computer."
 msgstr "Drop an image file here or browse your computer."
 
-#: js/overview/components/admin-video-details.js:171
+#: js/overview/components/admin-video-details.js:188
+#: js/overview/components/admin-video-details.js:187
+#: js/overview/components/admin-video-details.js:186
 #: js/overview/components/video-upload.js:153
 msgid "Upload"
 msgstr "Upload"
 
-#: js/overview/components/admin-video-details.js:172
+#: js/overview/components/admin-video-details.js:189
+#: js/advertisement/components/publishAdvertisementSettings.js:137
 msgid "Cancel"
 msgstr "Cancel"
 
 #: js/overview/components/admin-video-details.js:205
+msgid ""
+"This file is currently being processed. This may take a few minutes, "
+"depending on the video length"
+msgstr ""
+"This file is currently being processed. This may take a few minutes, "
+"depending on the video length"
+
+#: js/overview/components/admin-video-details.js:243
 msgid "Use the following code to embed this video"
 msgstr "Use the following code to embed this video"
 
-#: js/overview/components/admin-video-details.js:224
-#: js/overview/components/admin-video-overview.js:177
+#: js/overview/components/admin-video-details.js:262
+#: js/overview/components/admin-video-details.js:258
+#: js/overview/components/admin-video-details.js:249
+#: js/overview/components/admin-video-details.js:245
+#: js/overview/components/admin-video-details.js:241
+#: js/overview/components/admin-video-details.js:240
+#: js/overview/components/admin-video-details.js:239
+#: js/overview/components/admin-video-overview.js:176
 msgid "Filename"
 msgstr "Filename"
 
-#: js/overview/components/admin-video-details.js:232
+#: js/overview/components/admin-video-details.js:270
 msgid "Filesize"
 msgstr "Filesize"
 
-#: js/overview/components/admin-video-details.js:236
+#: js/overview/components/admin-video-details.js:274
 msgid "Length"
 msgstr "Length"
 
-#: js/overview/components/admin-video-details.js:240
+#: js/overview/components/admin-video-details.js:278
 msgid "Resolution"
 msgstr "Resolution"
 
-#: js/overview/components/admin-video-details.js:244
+#: js/overview/components/admin-video-details.js:282
 msgid "Presets"
 msgstr "Presets"
+
+#: js/overview/components/admin-video-details.js:288 src/Plugin.php:382
+msgid "Advertisement Settings"
+msgstr "Advertisement Settings"
 
 #: js/overview/components/admin-video-overview.js:109
 msgid "Are you sure you want to delete the selected videos?"
 msgstr "Are you sure you want to delete the selected videos?"
 
-#: js/overview/components/admin-video-overview.js:152
+#: js/overview/components/admin-video-overview.js:151
 msgid "Upload New"
 msgstr "Upload New"
 
-#: js/overview/components/admin-video-overview.js:155
+#: js/overview/components/admin-video-overview.js:154
 msgid "Delete Selected"
 msgstr "Delete Selected"
 
-#: js/overview/components/admin-video-overview.js:158
-#: js/advertisement/components/advertisementSettings.js:195
+#: js/overview/components/admin-video-overview.js:157
 #: js/publisher-video-block.js:236
 msgid "Search"
 msgstr "Search"
 
-#: js/overview/components/admin-video-overview.js:164
+#: js/overview/components/admin-video-overview.js:163
 msgid "Total results"
 msgstr "Total results"
 
-#: js/overview/components/admin-video-overview.js:174
+#: js/overview/components/admin-video-overview.js:173
 msgid "Thumbnail"
 msgstr "Thumbnail"
 
-#: js/overview/components/admin-video-overview.js:175
+#: js/overview/components/admin-video-overview.js:174
 msgid "Duration"
 msgstr "Duration"
 
-#: js/overview/components/admin-video-overview.js:176
+#: js/overview/components/admin-video-overview.js:175
 msgid "Size"
 msgstr "Size"
 
-#: js/overview/components/admin-video-overview.js:201
+#: js/overview/components/admin-video-overview.js:200
 #: js/publisher-video-block.js:240
 msgid "No publishes found"
 msgstr "No videos found"
@@ -200,8 +226,8 @@ msgid "Selected files"
 msgstr "Selected files"
 
 #: js/overview/components/video-upload.js:130
-msgid "Drop one or more files here (4.3GB max) or browse your computer."
-msgstr "Drop one or more files here (4.3GB max) or browse your computer."
+msgid "Drop one or more files here or browse your computer."
+msgstr "Drop one or more files here or browse your computer."
 
 #: js/overview/components/video-upload.js:140
 msgid ""
@@ -234,39 +260,58 @@ msgstr "Upload new video"
 msgid "Upload More"
 msgstr "Upload More"
 
-#: js/advertisement/components/advertisementSettings.js:104
+#: js/advertisement/components/advertisementSettings.js:62
+#: js/advertisement/components/publishAdvertisementSettings.js:82
+msgid "Settings saved"
+msgstr "Settings saved"
+
+#: js/advertisement/components/advertisementSettings.js:79
+#: js/advertisement/components/publishAdvertisementSettings.js:120
 msgid "Enable Video Ads"
 msgstr "Enable Video Ads"
 
-#: js/advertisement/components/advertisementSettings.js:106
+#: js/advertisement/components/advertisementSettings.js:81
 msgid "Enable or disable ads for your videos"
 msgstr "Enable or disable ads for your videos"
 
-#: js/advertisement/components/advertisementSettings.js:120
-msgid "Ad Source"
-msgstr "Ad Source"
+#: js/advertisement/components/advertisementSettings.js:93
+#: js/advertisement/components/publishAdvertisementSettings.js:136
+msgid "Save"
+msgstr "Save"
 
-#: js/advertisement/components/advertisementSettings.js:122
-msgid "Choose your Ad Server"
-msgstr "Choose your Ad Server"
+#: js/advertisement/components/publishAdvertisementSettings.js:103
+msgid "Set Video Advertisement Settings"
+msgstr "Set Video Advertisement Settings"
 
-#: js/advertisement/components/advertisementSettings.js:146
+#: js/advertisement/components/publishAdvertisementSettings.js:105
+msgid ""
+"Set custom advertisement settings for this video. By using this, you can "
+"enable/disable ads specifically for this video."
+msgstr ""
+"Set custom advertisement settings for this video. By using this, you can "
+"enable/disable ads specifically for this video."
+
+#: js/advertisement/components/publishAdvertisementSettings.js:122
+msgid "Enable or disable ads for this video"
+msgstr "Enable or disable ads for this video"
+
+#: js/advertisement/components/settingsForm.js:115
 msgid "Ad Uri"
 msgstr "Ad Uri"
 
-#: js/advertisement/components/advertisementSettings.js:152
+#: js/advertisement/components/settingsForm.js:121
 msgid "Ads are Skippable"
 msgstr "Ads are Skippable"
 
-#: js/advertisement/components/advertisementSettings.js:154
+#: js/advertisement/components/settingsForm.js:123
 msgid "By enabling this, the shown ads will be skippable by the user"
 msgstr "By enabling this, the shown ads will be skippable by the user"
 
-#: js/advertisement/components/advertisementSettings.js:167
+#: js/advertisement/components/settingsForm.js:136
 msgid "Ad Location"
 msgstr "Ad Location"
 
-#: js/advertisement/components/advertisementSettings.js:169
+#: js/advertisement/components/settingsForm.js:138
 msgid ""
 "Choose if your ads should be played before, after, or/and during video "
 "playback"
@@ -274,25 +319,25 @@ msgstr ""
 "Choose if your ads should be played before, after, or/and during video "
 "playback"
 
-#: js/advertisement/components/advertisementSettings.js:176
+#: js/advertisement/components/settingsForm.js:145
 msgid "Before"
 msgstr "Before"
 
-#: js/advertisement/components/advertisementSettings.js:188
+#: js/advertisement/components/settingsForm.js:157
 msgid "After"
 msgstr "After"
 
-#: js/advertisement/components/advertisementSettings.js:200
+#: js/advertisement/components/settingsForm.js:169
 msgid "Middle"
 msgstr "Middle"
 
-#: js/advertisement/components/advertisementSettings.js:215
-msgid "Save"
-msgstr "Save"
+#: js/advertisement/components/settingsForm.js:89
+msgid "Ad Source"
+msgstr "Ad Source"
 
-#: js/advertisement/components/advertisementSettings.js:86
-msgid "Settings saved"
-msgstr "Settings saved"
+#: js/advertisement/components/settingsForm.js:91
+msgid "Choose your Ad Server"
+msgstr "Choose your Ad Server"
 
 #: js/advertisement/helpers/advertisement.js:10
 msgid "The key for your VAST endpoint supplied by Adsterra, ie."
@@ -313,11 +358,6 @@ msgstr "No livestream found"
 #: js/publisher-livestream-block.js:95
 msgid "Getting livestream data"
 msgstr "Getting livestream data"
-
-#: js/advertisement/components/advertisementSettings.js:202
-#: js/publisher-video-block.js:234
-msgid "Search videos"
-msgstr "Search videos"
 
 #: js/publisher-video-block.js:158
 msgid "Error"
@@ -351,6 +391,10 @@ msgstr "Autoplay"
 msgid "Videos on isset.video"
 msgstr "Videos on isset.video"
 
+#: js/publisher-video-block.js:234
+msgid "Search videos"
+msgstr "Search videos"
+
 #: js/publisher-video-block.js:244
 msgid "More results"
 msgstr "More results"
@@ -376,34 +420,30 @@ msgstr "http://isset.nl/"
 msgid "Videos"
 msgstr "Videos"
 
-#: src/Plugin.php:382
-msgid "Advertisement Settings"
-msgstr "Advertisement Settings"
-
 #: src/Plugin.php:383
 msgid "Advertisement"
 msgstr "Advertisement"
 
-#: views/admin/dashboard/api-dashboard.php:7
+#: views/admin/dashboard/api-dashboard.php:10
 #: views/admin/dashboard/dashboard.php:6
 msgid "Storage used"
 msgstr "Storage used"
 
-#: views/admin/dashboard/api-dashboard.php:14
+#: views/admin/dashboard/api-dashboard.php:17
 #: views/admin/dashboard/dashboard.php:10
 msgid "Data streamed"
 msgstr "Data streamed"
 
-#: views/admin/dashboard/api-dashboard.php:23
+#: views/admin/dashboard/api-dashboard.php:26
 msgid "Logged in as"
 msgstr "Logged in as"
 
-#: views/admin/dashboard/api-dashboard.php:25
+#: views/admin/dashboard/api-dashboard.php:28
 #: views/admin/dashboard/dashboard.php:14 views/admin/page.php:6
 msgid "Logout"
 msgstr "Logout"
 
-#: views/admin/dashboard/api-dashboard.php:31
+#: views/admin/dashboard/api-dashboard.php:34
 msgid "Subscription type"
 msgstr "Subscription type"
 
@@ -468,11 +508,11 @@ msgstr "Livestream is not available"
 msgid "Video is not available"
 msgstr "Video is not available"
 
-#: views/shortcode/publish.php:7
+#: views/shortcode/publish.php:13
 msgid "Your browser does not support the video tag."
 msgstr "Your browser does not support the video tag."
 
-#: views/shortcode/publish.php:20
+#: views/shortcode/publish.php:26
 msgid "Video cannot be loaded"
 msgstr "Video cannot be loaded"
 

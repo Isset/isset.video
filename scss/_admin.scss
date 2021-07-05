@@ -2,22 +2,19 @@
   background-color: #464d52;
   padding: 10px;
   color: #eee;
-
-
 }
 
 .isset-video-chart-container {
   padding: 10px;
   color: #eee;
   background-color: #32373c;
-  padding-bottom: 20px;
 
   h2 {
     color: orange;
   }
 
   .isset-video-stats-container {
-    margin-top: 31px;
+    margin-top: 20px;
     flex-direction: column;
 
     a {
@@ -32,6 +29,14 @@
 
 .video-publisher-admin {
   padding-right: 20px;
+
+  img {
+    &.isset-video-logo {
+      width: 180px;
+      margin-top: -20px;
+      margin-bottom: 10px;
+    }
+  }
 }
 
 .isset-video-overview-container {
@@ -295,10 +300,6 @@
 
   .iv-bg-black {
     background-color: #333;
-  }
-
-  .iv-t-orange {
-    color: orange;
   }
 
   .iv-p-20 {
@@ -597,4 +598,8 @@
   &.error {
     background-color: #e57878;
   }
+}
+
+.iv-t-orange {
+  color: orange;
 }

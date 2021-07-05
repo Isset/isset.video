@@ -1,6 +1,9 @@
 <?php if ( $isLoggedIn ) : ?>
 	<div class="video-publisher-flex" style="flex-direction: row; justify-content: space-between">
 		<div class="video-publisher-flex-1 video-publisher-flex isset-video-stats-container" style="">
+            <a target="_blank" href="<?php echo $isset_video_url; ?>" class="mb-20">
+                <img src="<?php echo ISSET_VIDEO_PUBLISHER_URL . '/assets/isset.video.png'; ?>" class="isset-video-logo" />
+            </a>
 			<?php if ( $stats ) : ?>
 				<div class="video-publisher-flex-1">
 					<div class="video-publisher-mt-2">
@@ -37,9 +40,6 @@
 					</div>
 				</div>
 			<?php endif; ?>
-			<div class="mt-20">
-				<a target="_blank" href="<?php echo $isset_video_url; ?>"><?php _e( 'isset.video' ); ?></a>
-			</div>
 		</div>
 		<?php if ( $stats ) : ?>
 			<div class="video-publisher-flex-3">

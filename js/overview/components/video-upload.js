@@ -127,7 +127,7 @@ class VideoUpload extends React.Component {
                 <span className="dashicons dashicons-download download-icon" />
             </div>
             <div className="text-wrapper">
-                <p>{__('Drop one or more files here (4.3GB max) or browse your computer.', 'isset-video')}</p>
+                <p>{__('Drop one or more files here or browse your computer.', 'isset-video')}</p>
             </div>
         </>;
     };

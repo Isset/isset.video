@@ -3,62 +3,83 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: js/advertisement/components/advertisementSettings.js:104
+#: js/advertisement/components/advertisementSettings.js:62
+#: js/advertisement/components/publishAdvertisementSettings.js:82
+msgid "Settings saved"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:79
+#: js/advertisement/components/publishAdvertisementSettings.js:120
 msgid "Enable Video Ads"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:106
+#: js/advertisement/components/advertisementSettings.js:81
 msgid "Enable or disable ads for your videos"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:120
-msgid "Ad Source"
+#: js/advertisement/components/advertisementSettings.js:93
+#: js/advertisement/components/publishAdvertisementSettings.js:136
+msgid "Save"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:122
-msgid "Choose your Ad Server"
+#: js/advertisement/components/publishAdvertisementSettings.js:103
+msgid "Set Video Advertisement Settings"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:146
+#: js/advertisement/components/publishAdvertisementSettings.js:105
+msgid ""
+"Set custom advertisement settings for this video. By using this, you can "
+"enable/disable ads specifically for this video."
+msgstr ""
+
+#: js/advertisement/components/publishAdvertisementSettings.js:122
+msgid "Enable or disable ads for this video"
+msgstr ""
+
+#: js/advertisement/components/publishAdvertisementSettings.js:137
+msgid "Cancel"
+msgstr ""
+
+#: js/advertisement/components/settingsForm.js:115
 msgid "Ad Uri"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:152
+#: js/advertisement/components/settingsForm.js:121
 msgid "Ads are Skippable"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:154
+#: js/advertisement/components/settingsForm.js:123
 msgid "By enabling this, the shown ads will be skippable by the user"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:167
+#: js/advertisement/components/settingsForm.js:136
 msgid "Ad Location"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:169
+#: js/advertisement/components/settingsForm.js:138
 msgid ""
 "Choose if your ads should be played before, after, or/and during video "
 "playback"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:176
+#: js/advertisement/components/settingsForm.js:145
 msgid "Before"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:188
+#: js/advertisement/components/settingsForm.js:157
 msgid "After"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:200
+#: js/advertisement/components/settingsForm.js:169
 msgid "Middle"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:215
-msgid "Save"
+#: js/advertisement/components/settingsForm.js:89
+msgid "Ad Source"
 msgstr ""
 
-#: js/advertisement/components/advertisementSettings.js:86
-msgid "Settings saved"
+#: js/advertisement/components/settingsForm.js:91
+msgid "Choose your Ad Server"
 msgstr ""
 
 #: js/advertisement/helpers/advertisement.js:10
@@ -83,16 +104,6 @@ msgstr ""
 
 #: js/publisher-livestream-block.js:95
 msgid "Getting livestream data"
-msgstr ""
-
-#: js/advertisement/components/advertisementSettings.js:195
-#: js/publisher-video-block.js:236
-msgid "Search"
-msgstr ""
-
-#: js/advertisement/components/advertisementSettings.js:202
-#: js/publisher-video-block.js:234
-msgid "Search videos"
 msgstr ""
 
 #: js/publisher-video-block.js:151
@@ -129,6 +140,14 @@ msgstr ""
 
 #: js/publisher-video-block.js:231
 msgid "Videos on isset.video"
+msgstr ""
+
+#: js/publisher-video-block.js:234
+msgid "Search videos"
+msgstr ""
+
+#: js/publisher-video-block.js:236
+msgid "Search"
 msgstr ""
 
 #: js/publisher-video-block.js:240

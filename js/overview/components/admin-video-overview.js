@@ -142,7 +142,6 @@ class IssetVideoOverview extends React.Component {
 
     render() {
         const {offset, results, total, limit, uuid, checkAll, orderDirection, showUpload} = this.state;
-        const {adminUrl} = window.IssetVideoPublisherAjax;
 
         return <div>
             {uuid && <AdminVideoDetails uuid={uuid} onClose={this.onCloseDetails} />}

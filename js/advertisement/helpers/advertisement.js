@@ -14,3 +14,11 @@ export function getExample(key) {
             return '';
     }
 }
+
+export const DEFAULT_ADVERTISEMENT = {
+    enabled: false,
+    uri: '',
+    skippable: true,
+    provider: DEFAULT_PROVIDER,
+    positions: ['before'],
+}

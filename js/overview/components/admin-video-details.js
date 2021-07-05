@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import {__} from '@wordpress/i18n';
 import {UPLOAD_ADDED} from '../upload/uploadStatuses';
 import {uploadCustomStill} from '../upload/api';
+import PublishAdvertisementSettings from '../../advertisement/components/publishAdvertisementSettings';
 
 class AdminVideoDetails extends React.Component {
     static propTypes = {
@@ -33,7 +34,9 @@ class AdminVideoDetails extends React.Component {
             defaultImage: null,
             playerUrl: '',
             settingCustomImage: false,
+            openedAdvertisementSettings: false,
             files: [],
+            loaded: false,
         }
     }
 
@@ -86,6 +89,7 @@ class AdminVideoDetails extends React.Component {
                 defaultImage: this.findDefaultImage(assets),
                 settingCustomImage: false,
                 files: [],
+                loaded: true,
             });
         }).catch(err => console.log(err));
     };
@@ -114,7 +118,7 @@ class AdminVideoDetails extends React.Component {
     setDefaultImage = id => {
         const {uuid} = this.state;
 
-        publisherAjax(`api/publishes/${uuid}/stills/${id}/set-default`, {}, 'POST').then(json => {
+        publisherAjax(`api/publishes/${uuid}/stills/set-default-still`, {}, 'POST', {id}).then(json => {
             this.setState({defaultImage: id}, this.loadPublish)
         }).catch(err => console.log(err));
     };
@@ -132,6 +136,14 @@ class AdminVideoDetails extends React.Component {
 
             result.then(() => this.loadPublish());
         }
+    };
+
+    openAdvertisementSettings = () => {
+        this.setState({openedAdvertisementSettings: true});
+    };
+
+    closeAdvertisementSettings = () => {
+        this.setState({openedAdvertisementSettings: false});
     };
 
     closeCustomStillDialog = () => {
@@ -155,6 +167,11 @@ class AdminVideoDetails extends React.Component {
         </>;
     };
 
+    renderAdvertisementSettings = () => {
+        const {publish: {publish_uuid}} = this.state;
+        return <PublishAdvertisementSettings uuid={publish_uuid} onClose={this.closeAdvertisementSettings} />
+    };
+
     renderUploadCustomStill = () => {
         const {files} = this.state;
 
@@ -175,8 +192,25 @@ class AdminVideoDetails extends React.Component {
         </div>;
     };
 
+    renderTranscodeBusy = () => {
+        const {videoName, uuidParsed, assets, playerUrl, defaultImage, publish: {presets}, loaded} = this.state;
+
+        return <div className="isset-video-overlay">
+            <div className="isset-video-details video-publisher-flex video-publisher-flex-between ">
+                <div className="iv-w-50">
+                    <span className="isset-video-close dashicons dashicons-no" onClick={this.props.onClose} />
+                    <h1>{videoName}</h1>
+
+                    <div className="text-wrapper">
+                        <p>{__('This file is currently being processed. This may take a few minutes, depending on the video length', 'isset-video')}</p>
+                    </div>
+                </div>
+            </div>
+        </div>;
+    };
+
     renderDetails = () => {
-        const {videoName, uuidParsed, assets, playerUrl, defaultImage, publish: {presets}} = this.state;
+        const {videoName, uuidParsed, assets, playerUrl, defaultImage, publish: {presets}, loaded} = this.state;
         const {file: {
             date_created,
             duration,
@@ -186,7 +220,11 @@ class AdminVideoDetails extends React.Component {
             settingCustomImage,
         }} = this.state;
 
-        if (!playerUrl) {
+        if (!playerUrl && loaded) {
+            return this.renderTranscodeBusy();
+        }
+
+        if (!playerUrl || !loaded) {
             return null;
         }
 
@@ -244,6 +282,13 @@ class AdminVideoDetails extends React.Component {
                                 <td>{__('Presets', 'isset-video')}:</td>
                                 <td className="isset-video-preset-container">{presets.map(preset => <span className="isset-video-preset" key={`preset-${preset}`}>{preset}</span>)}</td>
                             </tr>
+                            <tr>
+                                <td colSpan={2}>
+                                    <a href="#" onClick={this.openAdvertisementSettings} className="iv-t-orange">
+                                        {__('Advertisement Settings', 'isset-video')}
+                                    </a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -252,11 +297,15 @@ class AdminVideoDetails extends React.Component {
     };
 
     render() {
-        const {settingCustomImage} = this.state;
+        const {settingCustomImage, openedAdvertisementSettings} = this.state;
         const detailsContainer = document.getElementById('issetVideoOverlay');
 
         if (settingCustomImage) {
             return ReactDOM.createPortal(this.renderUploadCustomStill(), detailsContainer);
+        }
+
+        if (openedAdvertisementSettings) {
+            return ReactDOM.createPortal(this.renderAdvertisementSettings(), detailsContainer);
         }
 
         return ReactDOM.createPortal(this.renderDetails(), detailsContainer);
