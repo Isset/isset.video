@@ -12,9 +12,7 @@ msgid "Drop an image file here or browse your computer."
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:188
-#: js/overview/components/admin-video-details.js:187
-#: js/overview/components/admin-video-details.js:186
-#: js/overview/components/video-upload.js:153
+#: js/overview/components/video-upload.js:189
 msgid "Upload"
 msgstr ""
 
@@ -33,23 +31,11 @@ msgid "Use the following code to embed this video"
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:262
-#: js/overview/components/admin-video-details.js:258
-#: js/overview/components/admin-video-details.js:249
-#: js/overview/components/admin-video-details.js:245
-#: js/overview/components/admin-video-details.js:241
-#: js/overview/components/admin-video-details.js:240
-#: js/overview/components/admin-video-details.js:239
 #: js/overview/components/admin-video-overview.js:176
 msgid "Filename"
 msgstr ""
 
 #: js/overview/components/admin-video-details.js:266
-#: js/overview/components/admin-video-details.js:262
-#: js/overview/components/admin-video-details.js:253
-#: js/overview/components/admin-video-details.js:249
-#: js/overview/components/admin-video-details.js:245
-#: js/overview/components/admin-video-details.js:244
-#: js/overview/components/admin-video-details.js:243
 #: js/overview/components/admin-video-overview.js:177
 msgid "Created"
 msgstr ""
@@ -114,48 +100,52 @@ msgstr ""
 msgid "Processing"
 msgstr ""
 
-#: js/overview/components/video-upload.js:112
+#: js/overview/components/video-upload.js:138
 msgid "Successfully added %s to archive"
 msgstr ""
 
-#: js/overview/components/video-upload.js:114
+#: js/overview/components/video-upload.js:140
 msgid "Failed adding %s to archive"
 msgstr ""
 
-#: js/overview/components/video-upload.js:116
+#: js/overview/components/video-upload.js:142
 msgid "Uploading"
 msgstr ""
 
-#: js/overview/components/video-upload.js:122
-msgid "Selected files"
-msgstr ""
-
-#: js/overview/components/video-upload.js:130
+#: js/overview/components/video-upload.js:152
 msgid "Drop one or more files here or browse your computer."
 msgstr ""
 
-#: js/overview/components/video-upload.js:140
+#: js/overview/components/video-upload.js:152
+msgid "(Max %s)"
+msgstr ""
+
+#: js/overview/components/video-upload.js:158
+msgid "Selected files"
+msgstr ""
+
+#: js/overview/components/video-upload.js:176
 msgid ""
 "Storage limit is already reached, please remove videos to upload again or "
 "upgrade your subscription"
 msgstr ""
 
-#: js/overview/components/video-upload.js:159
+#: js/overview/components/video-upload.js:195
 msgid "Cancel upload"
 msgstr ""
 
-#: js/overview/components/video-upload.js:163
+#: js/overview/components/video-upload.js:199
 msgid "Your files will be queued for transcoding"
 msgstr ""
 
-#: js/overview/components/video-upload.js:167
+#: js/overview/components/video-upload.js:203
 msgid "Uploads Cancelled"
 msgstr ""
 
-#: js/overview/components/video-upload.js:196
+#: js/overview/components/video-upload.js:232
 msgid "Upload new video"
 msgstr ""
 
-#: js/overview/components/video-upload.js:206
+#: js/overview/components/video-upload.js:242
 msgid "Upload More"
 msgstr ""

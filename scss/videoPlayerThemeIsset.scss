@@ -1,0 +1,212 @@
+.vjs-theme-isset {
+  --vjs-theme-isset--primary: #f48024;
+  --vjs-theme-isset--secondary: #fff
+}
+
+.vjs-theme-isset.vjs-big-play-button:focus, .vjs-theme-isset:hover .vjs-big-play-button {
+  background-color: transparent;
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' fill='%23f48024'%3E%3Cpath fill-rule='evenodd' d='M44 88C19.738 88 0 68.262 0 44S19.738 0 44 0s44 19.738 44 44-19.738 44-44 44zm0-85C21.393 3 3 21.393 3 44c0 22.608 18.393 41 41 41s41-18.392 41-41C85 21.393 66.607 3 44 3zm16.063 43.898L39.629 60.741a3.496 3.496 0 01-3.604.194 3.492 3.492 0 01-1.859-3.092V30.158c0-1.299.712-2.483 1.859-3.092a3.487 3.487 0 013.604.194l20.433 13.843a3.497 3.497 0 01.001 5.795zm-1.683-3.311L37.946 29.744a.49.49 0 00-.276-.09.51.51 0 00-.239.062.483.483 0 00-.265.442v27.685c0 .262.166.389.265.442.1.053.299.118.515-.028L58.38 44.414A.489.489 0 0058.6 44a.49.49 0 00-.22-.413z'/%3E%3C/svg%3E")
+}
+
+.vjs-theme-isset .vjs-big-play-button {
+  width: 88px;
+  height: 88px;
+  background: none;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' fill='%23fff'%3E%3Cpath fill-rule='evenodd' d='M44 88C19.738 88 0 68.262 0 44S19.738 0 44 0s44 19.738 44 44-19.738 44-44 44zm0-85C21.393 3 3 21.393 3 44c0 22.608 18.393 41 41 41s41-18.392 41-41C85 21.393 66.607 3 44 3zm16.063 43.898L39.629 60.741a3.496 3.496 0 01-3.604.194 3.492 3.492 0 01-1.859-3.092V30.158c0-1.299.712-2.483 1.859-3.092a3.487 3.487 0 013.604.194l20.433 13.843a3.497 3.497 0 01.001 5.795zm-1.683-3.311L37.946 29.744a.49.49 0 00-.276-.09.51.51 0 00-.239.062.483.483 0 00-.265.442v27.685c0 .262.166.389.265.442.1.053.299.118.515-.028L58.38 44.414A.489.489 0 0058.6 44a.49.49 0 00-.22-.413z'/%3E%3C/svg%3E");
+  border: none;
+  top: 50%;
+  left: 50%;
+  margin-top: -44px;
+  margin-left: -44px;
+  color: purple
+}
+
+.vjs-theme-isset .vjs-big-play-button .vjs-icon-placeholder {
+  display: none
+}
+
+.vjs-theme-isset .vjs-button > .vjs-icon-placeholder:before {
+  line-height: 1.55
+}
+
+.vjs-theme-isset .vjs-control:not(.vjs-disabled):not(.vjs-time-control):hover {
+  color: var(--vjs-theme-isset--primary);
+}
+
+.vjs-theme-isset .vjs-control-bar {
+  background: none;
+  padding-left: 1em;
+  padding-right: 1em;
+  background-color: rgba(30, 30, 30, 0.6);
+  padding-bottom: 1em;
+  padding-top: 7px;
+  height: 42px;
+}
+
+.vjs-theme-isset .vjs-control-bar:before {
+  content: '';
+  filter: drop-shadow(0 -25px 16px #333);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px -25px 78px 5px rgba(0, 0, 0, 0.7);
+  left: 0;
+  top: 0;
+}
+
+.vjs-theme-isset .vjs-play-control {
+  font-size: .8em
+}
+
+.vjs-theme-isset .vjs-play-control .vjs-icon-placeholder:before {
+  background-color: var(--vjs-theme-isset--secondary);
+  height: 1.5em;
+  width: 1.5em;
+  margin-top: .2em;
+  border-radius: 1em;
+  color: var(--vjs-theme-isset--primary)
+}
+
+.vjs-theme-isset .vjs-play-control:hover .vjs-icon-placeholder:before {
+  background-color: var(--vjs-theme-isset--primary);
+  color: var(--vjs-theme-isset--secondary)
+}
+
+.vjs-theme-isset .vjs-menu-button .vjs-icon-cog:before {
+  position: absolute;
+  top: 3px;
+  left: 16px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.vjs-theme-isset .vjs-menu-button-popup .vjs-menu {
+  margin-bottom: 0.5em;
+}
+
+.vjs-theme-isset .vjs-mute-control {
+  display: none
+}
+
+.vjs-theme-isset .vjs-volume-panel {
+  margin-left: .5em;
+  margin-right: .5em;
+  padding-top: .3em
+}
+
+.vjs-theme-isset .vjs-volume-bar.vjs-slider-horizontal, .vjs-theme-isset .vjs-volume-panel, .vjs-theme-isset .vjs-volume-panel.vjs-volume-panel-horizontal:hover, .vjs-theme-isset .vjs-volume-panel:active .vjs-volume-control.vjs-volume-horizontal, .vjs-theme-isset .vjs-volume-panel:hover, .vjs-theme-isset .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-horizontal {
+  width: 3em
+}
+
+.vjs-theme-isset .vjs-volume-level:before {
+  font-size: 1em
+}
+
+.vjs-theme-isset .vjs-volume-panel .vjs-volume-control {
+  opacity: 1;
+  width: 100%;
+  height: 100%
+}
+
+.vjs-theme-isset .vjs-volume-bar {
+  background-color: transparent;
+  margin: 0
+}
+
+.vjs-theme-isset .vjs-slider-horizontal .vjs-volume-level {
+  height: 100%
+}
+
+.vjs-theme-isset .vjs-progress-control {
+  margin-top: 2px;
+}
+
+.vjs-theme-isset .vjs-volume-bar.vjs-slider-horizontal {
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 100%
+}
+
+.vjs-theme-isset .vjs-volume-bar:before {
+  content: "";
+  z-index: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 3em solid transparent;
+  border-bottom: 2em solid var(--vjs-theme-isset--primary);
+  border-right: 0 solid transparent;
+  border-top: 0 solid transparent
+}
+
+.vjs-theme-isset .vjs-volume-level {
+  overflow: hidden;
+  background-color: transparent
+}
+
+.vjs-theme-isset .vjs-volume-level:before {
+  content: "";
+  z-index: 1;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 3em solid transparent;
+  border-bottom: 2em solid var(--vjs-theme-isset--secondary);
+  border-right: 0 solid transparent;
+  border-top: 0 solid transparent
+}
+
+.vjs-theme-isset .vjs-progress-control:hover .vjs-progress-holder {
+  font-size: 1em
+}
+
+.vjs-theme-isset .vjs-play-progress:before {
+  display: none
+}
+
+.vjs-theme-isset .vjs-progress-holder {
+  border-radius: .2em;
+  height: .5em;
+  margin: 0
+}
+
+.vjs-theme-isset .vjs-load-progress, .vjs-theme-isset .vjs-load-progress div, .vjs-theme-isset .vjs-play-progress {
+  border-radius: .2em
+}
+
+.vjs-theme-isset {
+  &.vjs-portrait {
+    width: 100%;
+    height: 100%;
+  }
+
+  .vjs-http-source-selector {
+    font-size: 16px;
+    width: 40px;
+    margin-top: -2px;
+
+    .vjs-menu {
+      width: 8em;
+
+      .vjs-menu-content {
+        bottom: 7px;
+        color: white;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .vjs-chromecast-button {
+    font-size: 14px;
+  }
+}
+
+.vjs-chapters-button {
+  display: none;
+}

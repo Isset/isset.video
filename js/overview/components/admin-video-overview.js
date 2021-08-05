@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {archiveAjax, wpAjax} from '../../ajax';
+import {archiveAjax} from '../../ajax';
 import VideoItem from './video-item';
 import Pagination from './pagination';
 import AdminVideoDetails from './admin-video-details';

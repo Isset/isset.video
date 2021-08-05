@@ -3,7 +3,7 @@
         <video <?php echo $controls; ?> <?php echo $autoplay; ?> <?php echo $loop; ?> <?php echo $muted; ?>
                poster="<?php echo $poster; ?>"
                preload="auto"
-               class="video-js vjs-big-play-centered vjs-default-skin"
+               class="video-js vjs-big-play-centered vjs-theme-isset"
                controls
                x-webkit-airplay="allow"
                data-ad-url="<?php echo empty($ad_url) ? '' : $ad_url; ?>"
@@ -25,3 +25,17 @@
 <?php else: ?>
     <?php _e( 'Video cannot be loaded', 'isset-video' ); ?>
 <?php endif; ?>
+
+<script type="application/javascript">
+    const linkElementId = 'isset-video-custom-player-css';
+    const existingLink = document.getElementById(linkElementId);
+
+    if (!existingLink) {
+        const linkElement = document.createElement('link');
+        linkElement.id = linkElementId;
+        linkElement.rel = 'stylesheet';
+        linkElement.href = '<?php echo $css_url; ?>';
+
+        document.head.appendChild(linkElement);
+    }
+</script>

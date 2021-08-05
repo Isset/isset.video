@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
-"POT-Creation-Date: 2021-07-05T12:02:29+00:00\n"
-"PO-Revision-Date: 2021-07-05 14:11+0200\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2021-08-05 10:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -12,8 +12,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.3\n"
 
-#: js/livestream/components/livestream.js:60 src/Plugin.php:356
-#: src/Plugin.php:357
+#: js/livestream/components/livestream.js:60 src/Plugin.php:359
+#: src/Plugin.php:360
 msgid "Livestream"
 msgstr "Livestream"
 
@@ -35,12 +35,6 @@ msgstr "Stream Key"
 
 #: js/livestream/components/livestreamDetails.js:125
 #: js/overview/components/admin-video-details.js:266
-#: js/overview/components/admin-video-details.js:262
-#: js/overview/components/admin-video-details.js:253
-#: js/overview/components/admin-video-details.js:249
-#: js/overview/components/admin-video-details.js:245
-#: js/overview/components/admin-video-details.js:244
-#: js/overview/components/admin-video-details.js:243
 #: js/overview/components/admin-video-overview.js:177
 msgid "Created"
 msgstr "Created"
@@ -113,9 +107,7 @@ msgid "Drop an image file here or browse your computer."
 msgstr "Drop an image file here or browse your computer."
 
 #: js/overview/components/admin-video-details.js:188
-#: js/overview/components/admin-video-details.js:187
-#: js/overview/components/admin-video-details.js:186
-#: js/overview/components/video-upload.js:153
+#: js/overview/components/video-upload.js:189
 msgid "Upload"
 msgstr "Upload"
 
@@ -137,12 +129,6 @@ msgid "Use the following code to embed this video"
 msgstr "Use the following code to embed this video"
 
 #: js/overview/components/admin-video-details.js:262
-#: js/overview/components/admin-video-details.js:258
-#: js/overview/components/admin-video-details.js:249
-#: js/overview/components/admin-video-details.js:245
-#: js/overview/components/admin-video-details.js:241
-#: js/overview/components/admin-video-details.js:240
-#: js/overview/components/admin-video-details.js:239
 #: js/overview/components/admin-video-overview.js:176
 msgid "Filename"
 msgstr "Filename"
@@ -163,7 +149,8 @@ msgstr "Resolution"
 msgid "Presets"
 msgstr "Presets"
 
-#: js/overview/components/admin-video-details.js:288 src/Plugin.php:382
+#: js/overview/components/admin-video-details.js:288 src/Plugin.php:385
+#: views/admin/advertisement.php:4
 msgid "Advertisement Settings"
 msgstr "Advertisement Settings"
 
@@ -209,27 +196,31 @@ msgstr "No videos found"
 msgid "Processing"
 msgstr "Processing"
 
-#: js/overview/components/video-upload.js:112
+#: js/overview/components/video-upload.js:138
 msgid "Successfully added %s to archive"
 msgstr "Successfully added %s to archive"
 
-#: js/overview/components/video-upload.js:114
+#: js/overview/components/video-upload.js:140
 msgid "Failed adding %s to archive"
 msgstr "Failed adding %s to archive"
 
-#: js/overview/components/video-upload.js:116
+#: js/overview/components/video-upload.js:142
 msgid "Uploading"
 msgstr "Uploading"
 
-#: js/overview/components/video-upload.js:122
-msgid "Selected files"
-msgstr "Selected files"
-
-#: js/overview/components/video-upload.js:130
+#: js/overview/components/video-upload.js:152
 msgid "Drop one or more files here or browse your computer."
 msgstr "Drop one or more files here or browse your computer."
 
-#: js/overview/components/video-upload.js:140
+#: js/overview/components/video-upload.js:152
+msgid "(Max %s)"
+msgstr "(Maximaal %s)"
+
+#: js/overview/components/video-upload.js:158
+msgid "Selected files"
+msgstr "Selected files"
+
+#: js/overview/components/video-upload.js:176
 msgid ""
 "Storage limit is already reached, please remove videos to upload again or "
 "upgrade your subscription"
@@ -237,26 +228,26 @@ msgstr ""
 "Storage limit has already been reached, please remove videos to upload again "
 "or upgrade your subscription"
 
-#: js/overview/components/video-upload.js:159
+#: js/overview/components/video-upload.js:195
 msgid "Cancel upload"
 msgstr "Cancel upload"
 
-#: js/overview/components/video-upload.js:163
+#: js/overview/components/video-upload.js:199
 msgid "Your files will be queued for transcoding"
 msgstr ""
 "Your files will be archived and converted to make them suitable for video "
 "streaming. This will take some time, depending on the size and duration of "
 "the uploaded file"
 
-#: js/overview/components/video-upload.js:167
+#: js/overview/components/video-upload.js:203
 msgid "Uploads Cancelled"
 msgstr "Uploads Cancelled"
 
-#: js/overview/components/video-upload.js:196
+#: js/overview/components/video-upload.js:232
 msgid "Upload new video"
 msgstr "Upload new video"
 
-#: js/overview/components/video-upload.js:206
+#: js/overview/components/video-upload.js:242
 msgid "Upload More"
 msgstr "Upload More"
 
@@ -276,6 +267,7 @@ msgstr "Enable or disable ads for your videos"
 
 #: js/advertisement/components/advertisementSettings.js:93
 #: js/advertisement/components/publishAdvertisementSettings.js:136
+#: js/playerSettings/components/editor.js:221
 msgid "Save"
 msgstr "Save"
 
@@ -351,6 +343,74 @@ msgstr "The endpoint supplied by your ad provider, ie."
 msgid "The uri supplied by AdSense, ie."
 msgstr "The uri supplied by AdSense, ie."
 
+#: js/playerSettings/components/editor.js:126
+msgid "Play Button"
+msgstr "Play Button"
+
+#: js/playerSettings/components/editor.js:134
+msgid "Color on Mouseover"
+msgstr "Color on Mouseover"
+
+#: js/playerSettings/components/editor.js:142
+msgid "Borders"
+msgstr "Borders"
+
+#: js/playerSettings/components/editor.js:146
+msgid "Color"
+msgstr "Color"
+
+#: js/playerSettings/components/editor.js:150
+msgid "Width"
+msgstr "Width"
+
+#: js/playerSettings/components/editor.js:154
+msgid "Rounded Corners"
+msgstr "Rounded Corners"
+
+#: js/playerSettings/components/editor.js:162
+msgid "Progress Bar"
+msgstr "Progress Bar"
+
+#: js/playerSettings/components/editor.js:170
+msgid "Loaded Color"
+msgstr "Loaded Color"
+
+#: js/playerSettings/components/editor.js:174
+msgid "Played"
+msgstr "Played"
+
+#: js/playerSettings/components/editor.js:178
+msgid "Height"
+msgstr "Height"
+
+#: js/playerSettings/components/editor.js:186
+msgid "Controls"
+msgstr "Controls"
+
+#: js/playerSettings/components/editor.js:190
+msgid "Background Color"
+msgstr "Background Color"
+
+#: js/playerSettings/components/editor.js:194
+msgid "Buttons Color"
+msgstr "Buttons Color"
+
+#: js/playerSettings/components/editor.js:198
+msgid "Buttons Accent Color"
+msgstr "Buttons Accent Color"
+
+#: js/playerSettings/components/editor.js:212
+msgid "Enable Styles"
+msgstr "Enable Styles"
+
+#: js/playerSettings/components/editor.js:224
+msgid "Reset"
+msgstr "Reset"
+
+#: js/playerSettings/components/playerPreview.js:29
+msgid "Preview"
+msgstr "Preview"
+
 #: js/publisher-livestream-block.js:85
 msgid "No livestream found"
 msgstr "No livestream found"
@@ -416,21 +476,25 @@ msgstr "Wordpress isset.video implementation"
 msgid "http://isset.nl/"
 msgstr "http://isset.nl/"
 
-#: src/Plugin.php:329
+#: src/Plugin.php:332
 msgid "Videos"
 msgstr "Videos"
 
-#: src/Plugin.php:383
+#: src/Plugin.php:386
 msgid "Advertisement"
 msgstr "Advertisement"
 
+#: src/Plugin.php:397 src/Plugin.php:398 views/admin/player-settings.php:4
+msgid "Player Settings"
+msgstr "Player Settings"
+
 #: views/admin/dashboard/api-dashboard.php:10
-#: views/admin/dashboard/dashboard.php:6
+#: views/admin/dashboard/dashboard.php:7
 msgid "Storage used"
 msgstr "Storage used"
 
 #: views/admin/dashboard/api-dashboard.php:17
-#: views/admin/dashboard/dashboard.php:10
+#: views/admin/dashboard/dashboard.php:11
 msgid "Data streamed"
 msgstr "Data streamed"
 
@@ -439,7 +503,7 @@ msgid "Logged in as"
 msgstr "Logged in as"
 
 #: views/admin/dashboard/api-dashboard.php:28
-#: views/admin/dashboard/dashboard.php:14 views/admin/page.php:6
+#: views/admin/dashboard/dashboard.php:15 views/admin/page.php:7
 msgid "Logout"
 msgstr "Logout"
 
@@ -456,15 +520,16 @@ msgid "Data"
 msgstr "Data"
 
 #: views/admin/dashboard/api-dashboard.php:74
-#: views/admin/dashboard/dashboard.php:18
+#: views/admin/dashboard/dashboard.php:19
 msgid "Login to isset.video"
 msgstr "Login to isset.video"
 
-#: views/admin/dashboard/dashboard.php:3
+#. translators: %s is the user's username
+#: views/admin/dashboard/dashboard.php:4
 msgid "Logged in as %s"
 msgstr "Logged in as %s"
 
-#: views/admin/dashboard/dashboard.php:15 views/admin/page.php:7
+#: views/admin/dashboard/dashboard.php:16 views/admin/page.php:8
 msgid "Go to videos"
 msgstr "Go to videos"
 
@@ -476,11 +541,12 @@ msgstr "Unsupported type"
 msgid "Your Videos"
 msgstr "Your Videos"
 
-#: views/admin/page.php:4
+#. translators: %s is the user's username
+#: views/admin/page.php:5
 msgid "Hi, %s"
 msgstr "Hi, %s"
 
-#: views/admin/page.php:5
+#: views/admin/page.php:6
 msgid ""
 "You are now connected to my.isset.video. Click the button below to unlink "
 "your account and logout."
@@ -488,11 +554,11 @@ msgstr ""
 "You are now connected to my.isset.video. Click the button below to unlink "
 "your account and logout."
 
-#: views/admin/page.php:11 views/admin/page.php:13
+#: views/admin/page.php:12 views/admin/page.php:14
 msgid "Connect to my.isset.video"
 msgstr "Connect to my.isset.video"
 
-#: views/admin/page.php:12
+#: views/admin/page.php:13
 msgid ""
 "Please connect your my.isset.video account by clicking the button below. We "
 "will redirect you to my.isset.video to ask for your permission."

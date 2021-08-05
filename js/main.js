@@ -14,6 +14,7 @@ require('./functions');
 require('./overview/components/admin-video-overview');
 require('./livestream/components/livestream');
 require('./advertisement/components/advertisementSettings');
+require('./playerSettings/components/playerSettings');
 require('../scss/isset-video-publisher.scss');
 require('./livestream/components/livestreamPlayer');
 

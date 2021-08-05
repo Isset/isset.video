@@ -26,7 +26,7 @@ class Message extends React.Component {
         const {message, level} = this.props;
 
         return (
-            <div className={`isset-video-toast ${level}`}>
+            <div className={`isset-video-toast toast-${level}`}>
                 {message}
             </div>
         );

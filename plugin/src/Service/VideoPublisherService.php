@@ -263,7 +263,7 @@ class VideoPublisherService extends BaseHttpService {
 		$limit   = $this->fetchSubscriptionLimit();
 		$current = $this->fetchUsage();
 
-		return $limit['storage_limit'] > $current['storage'];
+		return $limit['storage_limit'] === null || $limit['storage_limit'] > $current['storage'];
 	}
 
 	public function exchangeToken( $platform ) {

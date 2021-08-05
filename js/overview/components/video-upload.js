@@ -7,12 +7,15 @@ import PropTypes from 'prop-types';
 import {updateFaviconProgress} from '../../progress-favicon';
 import {wpAjax} from '../../ajax';
 import "../../../scss/upload.scss"
+import {showMessage} from '../../toast/helper/toast';
+import filesize from '../helpers/filesize';
 
 const initialUploadState = {
     files: [],
     uploadStatus: '',
     totalProgress: 0,
     uploadsAllowed: false,
+    filesizeLimit: 0,
 };
 
 class VideoUpload extends React.Component {
@@ -25,22 +28,36 @@ class VideoUpload extends React.Component {
     constructor(props) {
         super(props);
 
-        const uploadsAllowed = this.getUploadsAllowed();
-        this.state = {...initialUploadState, uploadsAllowed};
+        this.state = {...initialUploadState};
+
+        this.getUploadsAllowed();
+        this.getFilesizeLimit();
     }
 
     resetUploads = () => {
         this.queue = null;
-        const uploadsAllowed = this.getUploadsAllowed();
-        this.setState({...initialUploadState, uploadsAllowed});
+
+        this.setState({...initialUploadState});
+        this.getUploadsAllowed();
+        this.getFilesizeLimit();
     };
 
     filesAdded = (event) => {
         const {target: {files}} = event;
         const selectedFiles = [];
+        const {filesizeLimit} = this.state;
 
-        for (let i = 0; i < files.length; i++) {
-            let file = files[i];
+        const filtered = Array.from(files).filter(file => {
+            if (file.size > filesizeLimit) {
+                showMessage(`File ${file.name} is too large.`, 'error');
+                return false;
+            }
+
+            return true;
+        });
+
+        for (let i = 0; i < filtered.length; i++) {
+            let file = filtered[i];
 
             file.progress = 0;
             file.status = UPLOAD_ADDED;
@@ -64,8 +81,17 @@ class VideoUpload extends React.Component {
         window.onbeforeunload = () => "";
     }
 
-    getUploadsAllowed = async () => {
-        return await wpAjax('isset-video-fetch-uploading-allowed').then(response => response.allowed ? response.allowed : false);
+    getUploadsAllowed = () => {
+        wpAjax('isset-video-fetch-uploading-allowed').then(response => {
+            this.setState({uploadsAllowed: response.allowed ? response.allowed : false});
+        });
+    };
+
+    getFilesizeLimit = () => {
+        wpAjax('isset-video-fetch-subscription-limits').then(response => {
+            this.setState({filesizeLimit: 10})
+            this.setState({filesizeLimit: typeof response[0].storage_limit !== undefined ? response[0].storage_limit : 1000000000});
+        });
     };
 
     cancelUploads = () => {
@@ -117,6 +143,16 @@ class VideoUpload extends React.Component {
         }
     }
 
+    renderUploadContainerText = () => {
+        const {filesizeLimit} = this.state;
+
+        if (filesizeLimit > 5000000000 || filesizeLimit === null) {
+            return __('Drop one or more files here or browse your computer.', 'isset-video')
+        } else {
+            return __('Drop one or more files here or browse your computer.', 'isset-video') + ' ' + sprintf(__('(Max %s)', 'isset-video'), `${filesize(filesizeLimit)}`);
+        }
+    };
+
     renderFileList = files => {
         if (files.length > 0) {
             return __('Selected files', 'isset-video') + ': ' + files.map(file => file.name).join(', ');
@@ -127,7 +163,7 @@ class VideoUpload extends React.Component {
                 <span className="dashicons dashicons-download download-icon" />
             </div>
             <div className="text-wrapper">
-                <p>{__('Drop one or more files here or browse your computer.', 'isset-video')}</p>
+                <p>{this.renderUploadContainerText()}</p>
             </div>
         </>;
     };

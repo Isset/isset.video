@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-07-05T12:02:29+00:00\n"
+"POT-Creation-Date: 2021-08-05T08:28:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: isset-video\n"
@@ -31,30 +31,37 @@ msgstr ""
 msgid "http://isset.nl/"
 msgstr ""
 
-#: src/Plugin.php:329
+#: src/Plugin.php:332
 msgid "Videos"
 msgstr ""
 
-#: src/Plugin.php:356
-#: src/Plugin.php:357
+#: src/Plugin.php:359
+#: src/Plugin.php:360
 msgid "Livestream"
 msgstr ""
 
-#: src/Plugin.php:382
+#: src/Plugin.php:385
+#: views/admin/advertisement.php:4
 msgid "Advertisement Settings"
 msgstr ""
 
-#: src/Plugin.php:383
+#: src/Plugin.php:386
 msgid "Advertisement"
 msgstr ""
 
+#: src/Plugin.php:397
+#: src/Plugin.php:398
+#: views/admin/player-settings.php:4
+msgid "Player Settings"
+msgstr ""
+
 #: views/admin/dashboard/api-dashboard.php:10
-#: views/admin/dashboard/dashboard.php:6
+#: views/admin/dashboard/dashboard.php:7
 msgid "Storage used"
 msgstr ""
 
 #: views/admin/dashboard/api-dashboard.php:17
-#: views/admin/dashboard/dashboard.php:10
+#: views/admin/dashboard/dashboard.php:11
 msgid "Data streamed"
 msgstr ""
 
@@ -63,8 +70,8 @@ msgid "Logged in as"
 msgstr ""
 
 #: views/admin/dashboard/api-dashboard.php:28
-#: views/admin/dashboard/dashboard.php:14
-#: views/admin/page.php:6
+#: views/admin/dashboard/dashboard.php:15
+#: views/admin/page.php:7
 msgid "Logout"
 msgstr ""
 
@@ -81,16 +88,17 @@ msgid "Data"
 msgstr ""
 
 #: views/admin/dashboard/api-dashboard.php:74
-#: views/admin/dashboard/dashboard.php:18
+#: views/admin/dashboard/dashboard.php:19
 msgid "Login to isset.video"
 msgstr ""
 
-#: views/admin/dashboard/dashboard.php:3
+#. translators: %s is the user's username
+#: views/admin/dashboard/dashboard.php:4
 msgid "Logged in as %s"
 msgstr ""
 
-#: views/admin/dashboard/dashboard.php:15
-#: views/admin/page.php:7
+#: views/admin/dashboard/dashboard.php:16
+#: views/admin/page.php:8
 msgid "Go to videos"
 msgstr ""
 
@@ -102,20 +110,21 @@ msgstr ""
 msgid "Your Videos"
 msgstr ""
 
-#: views/admin/page.php:4
+#. translators: %s is the user's username
+#: views/admin/page.php:5
 msgid "Hi, %s"
 msgstr ""
 
-#: views/admin/page.php:5
+#: views/admin/page.php:6
 msgid "You are now connected to my.isset.video. Click the button below to unlink your account and logout."
 msgstr ""
 
-#: views/admin/page.php:11
-#: views/admin/page.php:13
+#: views/admin/page.php:12
+#: views/admin/page.php:14
 msgid "Connect to my.isset.video"
 msgstr ""
 
-#: views/admin/page.php:12
+#: views/admin/page.php:13
 msgid "Please connect your my.isset.video account by clicking the button below. We will redirect you to my.isset.video to ask for your permission."
 msgstr ""
 

@@ -9,7 +9,7 @@ msgid "Settings saved"
 msgstr ""
 
 #: js/advertisement/components/advertisementSettings.js:79
-#: js/advertisement/components/publishAdvertisementSettings.js:120
+#: js/advertisement/components/publishAdvertisementSettings.js:119
 msgid "Enable Video Ads"
 msgstr ""
 
@@ -18,25 +18,27 @@ msgid "Enable or disable ads for your videos"
 msgstr ""
 
 #: js/advertisement/components/advertisementSettings.js:93
+#: js/advertisement/components/publishAdvertisementSettings.js:135
 #: js/advertisement/components/publishAdvertisementSettings.js:136
+#: js/playerSettings/components/editor.js:221
 msgid "Save"
 msgstr ""
 
-#: js/advertisement/components/publishAdvertisementSettings.js:103
+#: js/advertisement/components/publishAdvertisementSettings.js:102
 msgid "Set Video Advertisement Settings"
 msgstr ""
 
-#: js/advertisement/components/publishAdvertisementSettings.js:105
+#: js/advertisement/components/publishAdvertisementSettings.js:104
 msgid ""
 "Set custom advertisement settings for this video. By using this, you can "
 "enable/disable ads specifically for this video."
 msgstr ""
 
-#: js/advertisement/components/publishAdvertisementSettings.js:122
+#: js/advertisement/components/publishAdvertisementSettings.js:121
 msgid "Enable or disable ads for this video"
 msgstr ""
 
-#: js/advertisement/components/publishAdvertisementSettings.js:137
+#: js/advertisement/components/publishAdvertisementSettings.js:136
 msgid "Cancel"
 msgstr ""
 
@@ -92,6 +94,74 @@ msgstr ""
 
 #: js/advertisement/helpers/advertisement.js:8
 msgid "The uri supplied by AdSense, ie."
+msgstr ""
+
+#: js/playerSettings/components/editor.js:126
+msgid "Play Button"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:134
+msgid "Color on Mouseover"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:142
+msgid "Borders"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:146
+msgid "Color"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:150
+msgid "Width"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:154
+msgid "Rounded Corners"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:162
+msgid "Progress Bar"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:170
+msgid "Loaded Color"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:174
+msgid "Played"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:178
+msgid "Height"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:186
+msgid "Controls"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:190
+msgid "Background Color"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:194
+msgid "Buttons Color"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:198
+msgid "Buttons Accent Color"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:212
+msgid "Enable Styles"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:224
+msgid "Reset"
+msgstr ""
+
+#: js/playerSettings/components/playerPreview.js:29
+msgid "Preview"
 msgstr ""
 
 #: js/publisher-livestream-block.js:85

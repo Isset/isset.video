@@ -86,7 +86,6 @@ class PublishAdvertisementSettings extends React.Component {
 
     render() {
         const {advertisement, customize, loaded} = this.state;
-        console.log(advertisement);
         const isEnabled = advertisement && advertisement.enabled;
 
         if (!loaded) {

@@ -4,7 +4,7 @@ import {wpAjax} from '../../ajax';
 export async function fetchActiveLivestreams() {
     const response = await publisherAjax('api/livestreams');
 
-    return response.filter(stream => stream.date_ended === null);
+    return response.results.filter(stream => stream.date_ended === null);
 }
 
 export async function fetchLiveStreamDetails(uuid) {

@@ -1,6 +1,7 @@
 <div class="wrap video-publisher-admin">
     <?php if ( $logged_in ): ?>
         <div class="card">
+            <?php /*translators: %s is the user's username */ ?>
             <h2><?php echo sprintf ( __( 'Hi, %s', 'isset-video' ), $user['username'] ); ?></h2>
             <div><?php _e( 'You are now connected to my.isset.video. Click the button below to unlink your account and logout.', 'isset-video' ); ?></div>
             <a class="isset-video-btn btn-danger mt-20" href="<?php echo $logout_url; ?>"><?php _e('Logout', 'isset-video' ); ?></a>
