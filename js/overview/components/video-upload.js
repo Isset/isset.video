@@ -48,7 +48,7 @@ class VideoUpload extends React.Component {
         const {filesizeLimit} = this.state;
 
         const filtered = Array.from(files).filter(file => {
-            if (file.size > filesizeLimit) {
+            if (filesizeLimit !== null && file.size > filesizeLimit) {
                 showMessage(`File ${file.name} is too large.`, 'error');
                 return false;
             }
