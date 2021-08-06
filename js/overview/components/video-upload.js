@@ -89,7 +89,6 @@ class VideoUpload extends React.Component {
 
     getFilesizeLimit = () => {
         wpAjax('isset-video-fetch-subscription-limits').then(response => {
-            this.setState({filesizeLimit: 10})
             this.setState({filesizeLimit: typeof response[0].storage_limit !== undefined ? response[0].storage_limit : 1000000000});
         });
     };
