@@ -14,3 +14,7 @@ export async function fetchLiveStreamDetails(uuid) {
 export async function createLiveStream() {
     return await publisherAjax('api/livestreams/create', {},'post');
 }
+
+export async function cancelLiveStream(streamKey) {
+    return await publisherAjax(`api/livestreams/${streamKey}/cancel`, {},'get');
+}

@@ -5,6 +5,7 @@ import {__} from '@wordpress/i18n';
 class AdminCopyText extends React.Component {
     static propTypes = {
         text: PropTypes.string.isRequired,
+        onCopied: PropTypes.func,
     };
 
     constructor(props) {
@@ -24,7 +25,11 @@ class AdminCopyText extends React.Component {
         document.execCommand('copy');
         document.querySelector('body').removeChild(tempInput);
 
-        this.setState({copied: true}, () => setTimeout(this.reset, 5000));
+        if (this.props.onCopied) {
+            this.props.onCopied();
+        } else {
+            this.setState({copied: true}, () => setTimeout(this.reset, 5000));
+        }
     }
 
     reset = () => this.setState({copied: false});

@@ -67,6 +67,10 @@
   &:hover, &:focus {
     color: #fff;
   }
+
+  span {
+    display: inline-block;
+  }
 }
 
 .isset-video-btn-success {
@@ -647,4 +651,8 @@
 
 .iv-t-orange {
   color: orange;
+}
+
+.iv-t-white {
+  color: white;
 }
