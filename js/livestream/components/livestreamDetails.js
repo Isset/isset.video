@@ -192,6 +192,18 @@ class LivestreamDetails extends React.Component {
                         <p>
                             {__('Streaming info', 'isset-video')}
                         </p>
+                        <h4 className="iv-t-orange">
+                            {__('Rtmp info header', 'isset-video')}
+                        </h4>
+                        <p>
+                            {__('Rtmp info text', 'isset-video')}
+                        </p>
+                        <h4 className="iv-t-orange">
+                            {__('Streamkey info header', 'isset-video')}
+                        </h4>
+                        <p>
+                            {__('Streamkey info text', 'isset-video')}
+                        </p>
                     </div>}
                 </div>
             </div>

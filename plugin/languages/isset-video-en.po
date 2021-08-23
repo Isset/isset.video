@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-08-18 16:22+0200\n"
+"POT-Creation-Date: 2021-08-23T11:58:53+00:00\n"
+"PO-Revision-Date: 2021-08-23 14:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -102,7 +102,29 @@ msgstr ""
 "Using isset.video, you can easily start streaming. All you need is a piece "
 "of software, able to stream to rtmp urls. We suggest using OBS."
 
+#: js/livestream/components/livestreamDetails.js:196
+msgid "Rtmp info header"
+msgstr "Stream Url"
+
+#: js/livestream/components/livestreamDetails.js:199
+msgid "Rtmp info text"
+msgstr ""
+"We supply an RTMP url, which you can enter when your software asks for a "
+"streaming endpoint or server. Sometimes you need to fill out the RTMP url "
+"and the stream key separately. In OBS you can find the server setting under "
+"Settings -> Stream."
+
 #: js/livestream/components/livestreamDetails.js:202
+msgid "Streamkey info header"
+msgstr "Stream Key"
+
+#: js/livestream/components/livestreamDetails.js:205
+msgid "Streamkey info text"
+msgstr ""
+"When you need to fill out the stream key separately, use the provided stream "
+"key."
+
+#: js/livestream/components/livestreamDetails.js:214
 msgid "Cancel Livestream"
 msgstr "Cancel Livestream"
 
