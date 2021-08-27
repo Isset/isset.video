@@ -201,7 +201,7 @@ class Editor extends React.Component {
                     </div>
                 </div>
             </div>
-            <div className="iv-col-12 iv-col-md-7">
+            <div className="iv-col-12 iv-col-md-7 iv-player-preview-column">
                 <PlayerPreview style={style}  />
 
                 <div className="card">

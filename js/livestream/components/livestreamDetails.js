@@ -134,7 +134,9 @@ class LivestreamDetails extends React.Component {
                             </p>
                         </div>}
 
-                        {status === 'active' && <iframe allowFullScreen={true} className="embed-responsive-item bg-black" src={embed_url}/>}
+                        {status === 'active' && <div className="isset-video-livestream-player-container">
+                            <iframe allowFullScreen={true} className="embed-responsive-item bg-black" src={embed_url}/>
+                        </div>}
 
                         {status === 'ended' && <div>
                             <h2>{__('Livestream has ended', 'isset-video')}</h2>
@@ -142,52 +144,52 @@ class LivestreamDetails extends React.Component {
                     </div>
                 </div>
                 <div className="iv-w-50 video-publisher-p-2">
-                    {uuid && <>
-                        <table className="iv-w-100 isset-video-details-table isset-video-livestream-table">
-                            <tbody>
-                            <tr>
-                                <td>{__('Stream Url', 'isset-video')}:</td>
-                                <td>
-                                    <AdminCopyText text={rtmp_url} onCopied={() => showMessage(__('Copied stream url', 'isset-video'))} />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>{__('Stream Key', 'isset-video')}:</td>
-                                <td>
-                                    <AdminCopyText text={stream_key} onCopied={() => showMessage(__('Copied stream key', 'isset-video'))} />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>{__('Created', 'isset-video')}:</td>
-                                <td>{dateTimeToHumanlyReadable(date_created)}</td>
-                            </tr>
-                            {date_started && <tr>
-                                <td>{__('Started', 'isset-video')}:</td>
-                                <td>{dateTimeToHumanlyReadable(date_started)}</td>
-                            </tr>}
-                            {date_ended && <tr>
-                                <td>{__('Ended', 'isset-video')}:</td>
-                                <td>{dateTimeToHumanlyReadable(date_ended)}</td>
-                            </tr>}
-                            <tr>
-                                <td>{__('Share Url', 'isset-video')}:</td>
-                                <td>
-                                    <a href={share_url} target="_blank">
-                                        {share_url}
-                                    </a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    {/*{uuid && <>*/}
+                    {/*    <table className="iv-w-100 isset-video-details-table isset-video-livestream-table">*/}
+                    {/*        <tbody>*/}
+                    {/*        <tr>*/}
+                    {/*            <td>{__('Stream Url', 'isset-video')}:</td>*/}
+                    {/*            <td>*/}
+                    {/*                <AdminCopyText text={rtmp_url} onCopied={() => showMessage(__('Copied stream url', 'isset-video'))} />*/}
+                    {/*            </td>*/}
+                    {/*        </tr>*/}
+                    {/*        <tr>*/}
+                    {/*            <td>{__('Stream Key', 'isset-video')}:</td>*/}
+                    {/*            <td>*/}
+                    {/*                <AdminCopyText text={stream_key} onCopied={() => showMessage(__('Copied stream key', 'isset-video'))} />*/}
+                    {/*            </td>*/}
+                    {/*        </tr>*/}
+                    {/*        <tr>*/}
+                    {/*            <td>{__('Created', 'isset-video')}:</td>*/}
+                    {/*            <td>{dateTimeToHumanlyReadable(date_created)}</td>*/}
+                    {/*        </tr>*/}
+                    {/*        {date_started && <tr>*/}
+                    {/*            <td>{__('Started', 'isset-video')}:</td>*/}
+                    {/*            <td>{dateTimeToHumanlyReadable(date_started)}</td>*/}
+                    {/*        </tr>}*/}
+                    {/*        {date_ended && <tr>*/}
+                    {/*            <td>{__('Ended', 'isset-video')}:</td>*/}
+                    {/*            <td>{dateTimeToHumanlyReadable(date_ended)}</td>*/}
+                    {/*        </tr>}*/}
+                    {/*        <tr>*/}
+                    {/*            <td>{__('Share Url', 'isset-video')}:</td>*/}
+                    {/*            <td>*/}
+                    {/*                <a href={share_url} target="_blank">*/}
+                    {/*                    {share_url}*/}
+                    {/*                </a>*/}
+                    {/*            </td>*/}
+                    {/*        </tr>*/}
+                    {/*        </tbody>*/}
+                    {/*    </table>*/}
 
-                        <input className="iv-w-100 video-publisher-mt-2" type="text" placeholder={__('Name', 'isset-video')} value={name} onChange={this.nameChange} onBlur={this.updateName} />
+                    {/*    <input className="iv-w-100 video-publisher-mt-2" type="text" placeholder={__('Name', 'isset-video')} value={name} onChange={this.nameChange} onBlur={this.updateName} />*/}
 
-                        <textarea className="iv-w-100 video-publisher-mt-2" rows={5} placeholder={__('Description', 'isset-video')} value={description} onChange={this.descriptionChange} onBlur={this.updateDescription} />
+                    {/*    <textarea className="iv-w-100 video-publisher-mt-2" rows={5} placeholder={__('Description', 'isset-video')} value={description} onChange={this.descriptionChange} onBlur={this.updateDescription} />*/}
 
-                        <AdminCopyText text={`[isset-livestream uuid=${uuid}]`} />
-                    </>}
+                    {/*    <AdminCopyText text={`[isset-livestream uuid=${uuid}]`} />*/}
+                    {/*</>}*/}
 
-                    {!uuid && <div className="isset-video-livestream-info video-publisher-p-2 video-publisher-pl-4">
+                    {uuid && <div className="isset-video-livestream-info video-publisher-p-2 video-publisher-pl-4">
                         <h2><span className="dashicons dashicons-video-alt" /> {__('Start streaming', 'isset-video')}</h2>
                         <p>
                             {__('Streaming info', 'isset-video')}

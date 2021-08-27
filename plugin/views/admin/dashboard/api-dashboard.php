@@ -8,10 +8,14 @@
 				<div class="video-publisher-flex-1">
 					<div class="video-publisher-mt-2">
 						<span class="video-publisher-bold"><?php _e( 'Storage used', 'isset-video' ); ?>: </span>
-						<span><?php echo round( $usage['storage'] / 1e+9, 3 ); ?> GB / <?php echo round( $subscription_limit['storage_limit'] / 1e+9, 3 ); ?> GB</span>
-						<div class="isset-video-progressbar">
-							<div class="isset-video-progressbar-progress" style="width: <?php echo calc_percentage( $usage['storage'], $subscription_limit['storage_limit'] ); ?>%;"></div>
-						</div>
+                        <?php if ($subscription_limit['storage_limit']): ?>
+						    <span><?php echo round( $usage['storage'] / 1e+9, 3 ); ?> GB / <?php echo round( $subscription_limit['storage_limit'] / 1e+9, 3 ); ?> GB</span>
+                            <div class="isset-video-progressbar">
+                                <div class="isset-video-progressbar-progress" style="width: <?php echo calc_percentage( $usage['storage'], $subscription_limit['storage_limit'] ); ?>%;"></div>
+                            </div>
+                        <?php else: ?>
+                            <span><?php echo round( $usage['storage'] / 1e+9, 3 ); ?> GB</span>
+                        <?php endif; ?>
 					</div>
 					<div>
 						<span class="video-publisher-bold"><?php _e( 'Data streamed', 'isset-video' ); ?>: </span>

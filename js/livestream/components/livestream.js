@@ -49,7 +49,11 @@ class IssetVideoLivestream extends React.Component {
         const {livestream: {uuid}} = this.state;
 
         publisherAjax(`api/livestreams/${uuid}`, {}, 'PATCH', update).then(result => {
-            this.setState({livestream: result});
+            const {uuid} = result;
+
+            if (uuid) {
+                this.getLivestreamDetails(uuid);
+            }
         });
     }
 

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
 "POT-Creation-Date: 2021-08-23T11:58:53+00:00\n"
-"PO-Revision-Date: 2021-08-23 14:27+0200\n"
+"PO-Revision-Date: 2021-08-27 15:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -134,7 +134,7 @@ msgid ""
 "created"
 msgstr ""
 "Weet u zeker dat u de huidige livestream wilt beëindigen? Er wordt dan geen "
-"VOD aangemaakt"
+"geen video van de livestream aangemaakt"
 
 #: js/livestream/components/livestreamPlayer.js:109
 msgid "Livestream ended"
@@ -142,7 +142,9 @@ msgstr "Livestream is beëindigd"
 
 #: js/livestream/components/livestreamPlayer.js:112
 msgid "The VOD will be ready on this page at a later time."
-msgstr "De VOD zal later beschikbaar worden gemaakt."
+msgstr ""
+"Even geduld aub. We verwerken de livestream en maken er een video van, zodat "
+"deze later terug te kijken is."
 
 #: js/livestream/components/livestreamPlayer.js:124
 msgid "Livestream waiting to start"

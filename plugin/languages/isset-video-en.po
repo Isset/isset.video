@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
 "POT-Creation-Date: 2021-08-23T11:58:53+00:00\n"
-"PO-Revision-Date: 2021-08-23 14:19+0200\n"
+"PO-Revision-Date: 2021-08-27 15:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -133,8 +133,8 @@ msgid ""
 "Are you sure you want to cancel the current livestream? No VOD will be "
 "created"
 msgstr ""
-"Are you sure you want to cancel the current livestream? No VOD will be "
-"created"
+"Are you sure you want to cancel the current livestream? No video of this "
+"livestream will be created"
 
 #: js/livestream/components/livestreamPlayer.js:109
 msgid "Livestream ended"
@@ -142,7 +142,9 @@ msgstr "Livestream ended"
 
 #: js/livestream/components/livestreamPlayer.js:112
 msgid "The VOD will be ready on this page at a later time."
-msgstr "The VOD will be ready on this page at a later time."
+msgstr ""
+"Please wait while we process your livestream and make a video file so you "
+"can rewatch it when it's finished."
 
 #: js/livestream/components/livestreamPlayer.js:124
 msgid "Livestream waiting to start"
