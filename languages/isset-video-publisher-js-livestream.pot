@@ -1,0 +1,130 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: js/livestream/components/livestream.js:70
+msgid "Livestream"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:113
+msgid "Livestream cancelled"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:115
+msgid "This livestream has been cancelled by the user"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:119
+msgid "Create New Livestream"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:125
+msgid "No livestream created yet"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:127
+msgid "Create Livestream"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:132
+msgid "Livestream has not yet started"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:134
+msgid "Livestream is waiting for input at: %s"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:143
+msgid "Livestream has ended"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:149
+msgid "Cancel Livestream"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:163
+msgid "Stream Url"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:165
+msgid "Copied stream url"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:169
+msgid "Stream Key"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:171
+msgid "Copied stream key"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:175
+msgid "Created"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:179
+msgid "Started"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:183
+msgid "Ended"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:187
+msgid "Share Url"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:197
+msgid "Name"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:199
+msgid "Description"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:205
+msgid "Start streaming"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:207
+msgid "Streaming info"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:210
+msgid "Rtmp info header"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:213
+msgid "Rtmp info text"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:216
+msgid "Streamkey info header"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:219
+msgid "Streamkey info text"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:97
+msgid ""
+"Are you sure you want to cancel the current livestream? No VOD will be "
+"created"
+msgstr ""
+
+#: js/livestream/components/livestreamPlayer.js:109
+msgid "Livestream ended"
+msgstr ""
+
+#: js/livestream/components/livestreamPlayer.js:112
+msgid "The VOD will be ready on this page at a later time."
+msgstr ""
+
+#: js/livestream/components/livestreamPlayer.js:124
+msgid "Livestream waiting to start"
+msgstr ""
+
+#: js/livestream/components/livestreamPlayer.js:127
+msgid "This player will update automatically when the livestream goes live."
+msgstr ""

@@ -1,0 +1,151 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: js/overview/components/admin-copy-text.js:47
+msgid "Copied shortcode"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:165
+msgid "Drop an image file here or browse your computer."
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:188
+#: js/overview/components/video-upload.js:188
+msgid "Upload"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:189
+msgid "Cancel"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:205
+msgid ""
+"This file is currently being processed. This may take a few minutes, "
+"depending on the video length"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:243
+msgid "Use the following code to embed this video"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:262
+#: js/overview/components/admin-video-overview.js:176
+msgid "Filename"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:266
+#: js/overview/components/admin-video-overview.js:177
+msgid "Created"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:270
+msgid "Filesize"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:274
+msgid "Length"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:278
+msgid "Resolution"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:282
+msgid "Presets"
+msgstr ""
+
+#: js/overview/components/admin-video-details.js:288
+msgid "Advertisement Settings"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:109
+msgid "Are you sure you want to delete the selected videos?"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:151
+msgid "Upload New"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:154
+msgid "Delete Selected"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:157
+msgid "Search"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:163
+msgid "Total results"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:173
+msgid "Thumbnail"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:174
+msgid "Duration"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:175
+msgid "Size"
+msgstr ""
+
+#: js/overview/components/admin-video-overview.js:200
+msgid "No publishes found"
+msgstr ""
+
+#: js/overview/components/video-item.js:41
+msgid "Processing"
+msgstr ""
+
+#: js/overview/components/video-upload.js:137
+msgid "Successfully added %s to archive"
+msgstr ""
+
+#: js/overview/components/video-upload.js:139
+msgid "Failed adding %s to archive"
+msgstr ""
+
+#: js/overview/components/video-upload.js:141
+msgid "Uploading"
+msgstr ""
+
+#: js/overview/components/video-upload.js:151
+msgid "Drop one or more files here or browse your computer."
+msgstr ""
+
+#: js/overview/components/video-upload.js:151
+msgid "(Max %s)"
+msgstr ""
+
+#: js/overview/components/video-upload.js:157
+msgid "Selected files"
+msgstr ""
+
+#: js/overview/components/video-upload.js:175
+msgid ""
+"Storage limit is already reached, please remove videos to upload again or "
+"upgrade your subscription"
+msgstr ""
+
+#: js/overview/components/video-upload.js:194
+msgid "Cancel upload"
+msgstr ""
+
+#: js/overview/components/video-upload.js:198
+msgid "Your files will be queued for transcoding"
+msgstr ""
+
+#: js/overview/components/video-upload.js:202
+msgid "Uploads Cancelled"
+msgstr ""
+
+#: js/overview/components/video-upload.js:231
+msgid "Upload new video"
+msgstr ""
+
+#: js/overview/components/video-upload.js:241
+msgid "Upload More"
+msgstr ""

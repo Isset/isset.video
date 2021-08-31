@@ -1,0 +1,145 @@
+# Copyright (C) 2021 isset.video
+# This file is distributed under the same license as the isset.video plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: isset.video 0.9.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-08-31T13:46:06+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: isset-video\n"
+
+#. Plugin Name of the plugin
+#. Author of the plugin
+msgid "isset.video"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://isset.video/wp-plugin/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Wordpress isset.video implementation"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://isset.nl/"
+msgstr ""
+
+#: src/Plugin.php:335
+msgid "Videos"
+msgstr ""
+
+#: src/Plugin.php:362
+#: src/Plugin.php:363
+msgid "Livestream"
+msgstr ""
+
+#: src/Plugin.php:388
+#: views/admin/advertisement.php:4
+msgid "Advertisement Settings"
+msgstr ""
+
+#: src/Plugin.php:389
+msgid "Advertisement"
+msgstr ""
+
+#: src/Plugin.php:400
+#: src/Plugin.php:401
+#: views/admin/player-settings.php:4
+msgid "Player Settings"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:10
+#: views/admin/dashboard/dashboard.php:7
+msgid "Storage used"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:21
+#: views/admin/dashboard/dashboard.php:11
+msgid "Data streamed"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:30
+msgid "Logged in as"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:32
+#: views/admin/dashboard/dashboard.php:15
+#: views/admin/page.php:7
+msgid "Logout"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:38
+msgid "Subscription type"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:52
+msgid "Views"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:53
+msgid "Data"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:78
+#: views/admin/dashboard/dashboard.php:19
+msgid "Login to isset.video"
+msgstr ""
+
+#. translators: %s is the user's username
+#: views/admin/dashboard/dashboard.php:4
+msgid "Logged in as %s"
+msgstr ""
+
+#: views/admin/dashboard/dashboard.php:16
+#: views/admin/page.php:8
+msgid "Go to videos"
+msgstr ""
+
+#: views/admin/input.php:6
+msgid "Unsupported type"
+msgstr ""
+
+#: views/admin/overview.php:7
+msgid "Your Videos"
+msgstr ""
+
+#. translators: %s is the user's username
+#: views/admin/page.php:5
+msgid "Hi, %s"
+msgstr ""
+
+#: views/admin/page.php:6
+msgid "You are now connected to my.isset.video. Click the button below to unlink your account and logout."
+msgstr ""
+
+#: views/admin/page.php:12
+#: views/admin/page.php:14
+msgid "Connect to my.isset.video"
+msgstr ""
+
+#: views/admin/page.php:13
+msgid "Please connect your my.isset.video account by clicking the button below. We will redirect you to my.isset.video to ask for your permission."
+msgstr ""
+
+#: views/shortcode/livestream-invalid.php:3
+msgid "Livestream is not available"
+msgstr ""
+
+#: views/shortcode/publish-invalid.php:3
+msgid "Video is not available"
+msgstr ""
+
+#: views/shortcode/publish.php:14
+msgid "Your browser does not support the video tag."
+msgstr ""
+
+#: views/shortcode/publish.php:19
+msgid "Video cannot be loaded"
+msgstr ""

@@ -1,0 +1,228 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: js/advertisement/components/advertisementSettings.js:62
+#: js/advertisement/components/publishAdvertisementSettings.js:82
+msgid "Settings saved"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:79
+#: js/advertisement/components/publishAdvertisementSettings.js:119
+msgid "Enable Video Ads"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:81
+msgid "Enable or disable ads for your videos"
+msgstr ""
+
+#: js/advertisement/components/advertisementSettings.js:93
+#: js/advertisement/components/publishAdvertisementSettings.js:135
+#: js/playerSettings/components/editor.js:221
+msgid "Save"
+msgstr ""
+
+#: js/advertisement/components/publishAdvertisementSettings.js:102
+msgid "Set Video Advertisement Settings"
+msgstr ""
+
+#: js/advertisement/components/publishAdvertisementSettings.js:104
+msgid ""
+"Set custom advertisement settings for this video. By using this, you can "
+"enable/disable ads specifically for this video."
+msgstr ""
+
+#: js/advertisement/components/publishAdvertisementSettings.js:121
+msgid "Enable or disable ads for this video"
+msgstr ""
+
+#: js/advertisement/components/publishAdvertisementSettings.js:136
+msgid "Cancel"
+msgstr ""
+
+#: js/advertisement/components/settingsForm.js:115
+msgid "Ad Uri"
+msgstr ""
+
+#: js/advertisement/components/settingsForm.js:121
+msgid "Ads are Skippable"
+msgstr ""
+
+#: js/advertisement/components/settingsForm.js:123
+msgid "By enabling this, the shown ads will be skippable by the user"
+msgstr ""
+
+#: js/advertisement/components/settingsForm.js:136
+msgid "Ad Location"
+msgstr ""
+
+#: js/advertisement/components/settingsForm.js:138
+msgid ""
+"Choose if your ads should be played before, after, or/and during video "
+"playback"
+msgstr ""
+
+#: js/advertisement/components/settingsForm.js:145
+msgid "Before"
+msgstr ""
+
+#: js/advertisement/components/settingsForm.js:157
+msgid "After"
+msgstr ""
+
+#: js/advertisement/components/settingsForm.js:169
+msgid "Middle"
+msgstr ""
+
+#: js/advertisement/components/settingsForm.js:89
+msgid "Ad Source"
+msgstr ""
+
+#: js/advertisement/components/settingsForm.js:91
+msgid "Choose your Ad Server"
+msgstr ""
+
+#: js/advertisement/helpers/advertisement.js:10
+msgid "The key for your VAST endpoint supplied by Adsterra, ie."
+msgstr ""
+
+#: js/advertisement/helpers/advertisement.js:12
+msgid "The endpoint supplied by your ad provider, ie."
+msgstr ""
+
+#: js/advertisement/helpers/advertisement.js:8
+msgid "The uri supplied by AdSense, ie."
+msgstr ""
+
+#: js/playerSettings/components/editor.js:126
+msgid "Play Button"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:134
+msgid "Color on Mouseover"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:142
+msgid "Borders"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:146
+msgid "Color"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:150
+msgid "Width"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:154
+msgid "Rounded Corners"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:162
+msgid "Progress Bar"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:170
+msgid "Loaded Color"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:174
+msgid "Played"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:178
+msgid "Height"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:186
+msgid "Controls"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:190
+msgid "Background Color"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:194
+msgid "Buttons Color"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:198
+msgid "Buttons Accent Color"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:212
+msgid "Enable Styles"
+msgstr ""
+
+#: js/playerSettings/components/editor.js:224
+msgid "Reset"
+msgstr ""
+
+#: js/playerSettings/components/playerPreview.js:29
+msgid "Preview"
+msgstr ""
+
+#: js/publisher-livestream-block.js:85
+msgid "No livestream found"
+msgstr ""
+
+#: js/publisher-livestream-block.js:88
+msgid "Create Livestream"
+msgstr ""
+
+#: js/publisher-livestream-block.js:95
+msgid "Getting livestream data"
+msgstr ""
+
+#: js/publisher-video-block.js:151
+msgid "Processing"
+msgstr ""
+
+#: js/publisher-video-block.js:158
+msgid "Error"
+msgstr ""
+
+#: js/publisher-video-block.js:173
+msgid "File nof found"
+msgstr ""
+
+#: js/publisher-video-block.js:196
+msgid "Video info"
+msgstr ""
+
+#: js/publisher-video-block.js:198
+msgid "Video name"
+msgstr ""
+
+#: js/publisher-video-block.js:201
+msgid "Video size"
+msgstr ""
+
+#: js/publisher-video-block.js:207
+msgid "Options"
+msgstr ""
+
+#: js/publisher-video-block.js:209
+msgid "Autoplay"
+msgstr ""
+
+#: js/publisher-video-block.js:231
+msgid "Videos on isset.video"
+msgstr ""
+
+#: js/publisher-video-block.js:234
+msgid "Search videos"
+msgstr ""
+
+#: js/publisher-video-block.js:236
+msgid "Search"
+msgstr ""
+
+#: js/publisher-video-block.js:240
+msgid "No publishes found"
+msgstr ""
+
+#: js/publisher-video-block.js:244
+msgid "More results"
+msgstr ""
