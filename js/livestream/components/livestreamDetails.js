@@ -5,6 +5,7 @@ import {dateTimeToHumanlyReadable} from '../../overview/helpers/time';
 import AdminCopyText from '../../overview/components/admin-copy-text';
 import {cancelLiveStream} from '../api/api';
 import {showMessage} from '../../toast/helper/toast';
+import {getPublisherUrl} from '../../ajax';
 
 class LivestreamDetails extends React.Component {
     static propTypes = {
@@ -142,54 +143,65 @@ class LivestreamDetails extends React.Component {
                             <h2>{__('Livestream has ended', 'isset-video')}</h2>
                         </div>}
                     </div>
+                    {status === 'waiting' && <div className="video-publisher-p-2 video-publisher-pl-0">
+                        <button className="isset-video-btn isset-video-btn-orange" onClick={() => this.cancelLivestream(stream_key)}>
+                            <span className="dashicons dashicons-remove video-publisher-mr-2" />
+                            <span>{__('Cancel Livestream', 'isset-video')}</span>
+                        </button>
+                    </div>}
                 </div>
                 <div className="iv-w-50 video-publisher-p-2">
-                    {/*{uuid && <>*/}
-                    {/*    <table className="iv-w-100 isset-video-details-table isset-video-livestream-table">*/}
-                    {/*        <tbody>*/}
-                    {/*        <tr>*/}
-                    {/*            <td>{__('Stream Url', 'isset-video')}:</td>*/}
-                    {/*            <td>*/}
-                    {/*                <AdminCopyText text={rtmp_url} onCopied={() => showMessage(__('Copied stream url', 'isset-video'))} />*/}
-                    {/*            </td>*/}
-                    {/*        </tr>*/}
-                    {/*        <tr>*/}
-                    {/*            <td>{__('Stream Key', 'isset-video')}:</td>*/}
-                    {/*            <td>*/}
-                    {/*                <AdminCopyText text={stream_key} onCopied={() => showMessage(__('Copied stream key', 'isset-video'))} />*/}
-                    {/*            </td>*/}
-                    {/*        </tr>*/}
-                    {/*        <tr>*/}
-                    {/*            <td>{__('Created', 'isset-video')}:</td>*/}
-                    {/*            <td>{dateTimeToHumanlyReadable(date_created)}</td>*/}
-                    {/*        </tr>*/}
-                    {/*        {date_started && <tr>*/}
-                    {/*            <td>{__('Started', 'isset-video')}:</td>*/}
-                    {/*            <td>{dateTimeToHumanlyReadable(date_started)}</td>*/}
-                    {/*        </tr>}*/}
-                    {/*        {date_ended && <tr>*/}
-                    {/*            <td>{__('Ended', 'isset-video')}:</td>*/}
-                    {/*            <td>{dateTimeToHumanlyReadable(date_ended)}</td>*/}
-                    {/*        </tr>}*/}
-                    {/*        <tr>*/}
-                    {/*            <td>{__('Share Url', 'isset-video')}:</td>*/}
-                    {/*            <td>*/}
-                    {/*                <a href={share_url} target="_blank">*/}
-                    {/*                    {share_url}*/}
-                    {/*                </a>*/}
-                    {/*            </td>*/}
-                    {/*        </tr>*/}
-                    {/*        </tbody>*/}
-                    {/*    </table>*/}
+                    <div className="livestream-logo-container">
+                        <a target="_blank" href="<?php echo $isset_video_url; ?>" className="mb-20">
+                            <img src={`/wp-content/plugins/isset-video/assets/isset.video.png`} className="isset-video-logo"/>
+                        </a>
+                    </div>
+                    {uuid && <div className="iv-bg-black video-publisher-p-2">
+                        <table className="iv-w-100 isset-video-details-table isset-video-livestream-table">
+                            <tbody>
+                            <tr>
+                                <td>{__('Stream Url', 'isset-video')}:</td>
+                                <td>
+                                    <AdminCopyText text={rtmp_url} onCopied={() => showMessage(__('Copied stream url', 'isset-video'))} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{__('Stream Key', 'isset-video')}:</td>
+                                <td>
+                                    <AdminCopyText text={stream_key} onCopied={() => showMessage(__('Copied stream key', 'isset-video'))} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{__('Created', 'isset-video')}:</td>
+                                <td>{dateTimeToHumanlyReadable(date_created)}</td>
+                            </tr>
+                            {date_started && <tr>
+                                <td>{__('Started', 'isset-video')}:</td>
+                                <td>{dateTimeToHumanlyReadable(date_started)}</td>
+                            </tr>}
+                            {date_ended && <tr>
+                                <td>{__('Ended', 'isset-video')}:</td>
+                                <td>{dateTimeToHumanlyReadable(date_ended)}</td>
+                            </tr>}
+                            <tr>
+                                <td>{__('Share Url', 'isset-video')}:</td>
+                                <td>
+                                    <a href={share_url} target="_blank">
+                                        {share_url}
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                    {/*    <input className="iv-w-100 video-publisher-mt-2" type="text" placeholder={__('Name', 'isset-video')} value={name} onChange={this.nameChange} onBlur={this.updateName} />*/}
+                        <input className="iv-w-100 video-publisher-mt-2" type="text" placeholder={__('Name', 'isset-video')} value={name} onChange={this.nameChange} onBlur={this.updateName} />
 
-                    {/*    <textarea className="iv-w-100 video-publisher-mt-2" rows={5} placeholder={__('Description', 'isset-video')} value={description} onChange={this.descriptionChange} onBlur={this.updateDescription} />*/}
+                        <textarea className="iv-w-100 video-publisher-mt-2" rows={5} placeholder={__('Description', 'isset-video')} value={description} onChange={this.descriptionChange} onBlur={this.updateDescription} />
 
-                    {/*    <AdminCopyText text={`[isset-livestream uuid=${uuid}]`} />*/}
-                    {/*</>}*/}
+                        <AdminCopyText text={`[isset-livestream uuid=${uuid}]`} />
+                    </div>}
 
-                    {uuid && <div className="isset-video-livestream-info video-publisher-p-2 video-publisher-pl-4">
+                    {!uuid && <div className="isset-video-livestream-info video-publisher-p-2 video-publisher-pl-4">
                         <h2><span className="dashicons dashicons-video-alt" /> {__('Start streaming', 'isset-video')}</h2>
                         <p>
                             {__('Streaming info', 'isset-video')}
@@ -208,13 +220,6 @@ class LivestreamDetails extends React.Component {
                         </p>
                     </div>}
                 </div>
-            </div>
-
-            <div className="iv-w-50 video-publisher-p-2">
-                {status === 'waiting' && <button className="isset-video-btn isset-video-btn-orange" onClick={() => this.cancelLivestream(stream_key)}>
-                    <span className="dashicons dashicons-remove video-publisher-mr-2" />
-                    <span>{__('Cancel Livestream', 'isset-video')}</span>
-                </button>}
             </div>
         </div>;
     }

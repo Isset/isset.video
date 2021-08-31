@@ -26,6 +26,15 @@
         color: orange;
     }
 
+    .livestream-logo-container {
+        background-color: #111;
+        width: 100%;
+
+        img {
+            width: 180px;
+            margin: 10px 20px;
+        }
+    }
 }
 
 .isset-video-livestream-info {

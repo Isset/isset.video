@@ -5,115 +5,115 @@
 msgid ""
 msgstr ""
 
-#: js/livestream/components/livestream.js:66 src/Plugin.php:359
-#: src/Plugin.php:360
+#: js/livestream/components/livestream.js:70 src/Plugin.php:362
+#: src/Plugin.php:363
 msgid "Livestream"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:112
+#: js/livestream/components/livestreamDetails.js:113
 msgid "Livestream cancelled"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:114
+#: js/livestream/components/livestreamDetails.js:115
 msgid "This livestream has been cancelled by the user"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:118
+#: js/livestream/components/livestreamDetails.js:119
 msgid "Create New Livestream"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:124
+#: js/livestream/components/livestreamDetails.js:125
 msgid "No livestream created yet"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:126
+#: js/livestream/components/livestreamDetails.js:127
 #: js/publisher-livestream-block.js:88
 msgid "Create Livestream"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:131
+#: js/livestream/components/livestreamDetails.js:132
 msgid "Livestream has not yet started"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:133
+#: js/livestream/components/livestreamDetails.js:134
 msgid "Livestream is waiting for input at: %s"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:140
+#: js/livestream/components/livestreamDetails.js:143
 msgid "Livestream has ended"
 msgstr ""
 
 #: js/livestream/components/livestreamDetails.js:149
+msgid "Cancel Livestream"
+msgstr ""
+
+#: js/livestream/components/livestreamDetails.js:163
 msgid "Stream Url"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:151
+#: js/livestream/components/livestreamDetails.js:165
 msgid "Copied stream url"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:155
+#: js/livestream/components/livestreamDetails.js:169
 msgid "Stream Key"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:157
+#: js/livestream/components/livestreamDetails.js:171
 msgid "Copied stream key"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:161
+#: js/livestream/components/livestreamDetails.js:175
 #: js/overview/components/admin-video-details.js:266
 #: js/overview/components/admin-video-overview.js:177
 msgid "Created"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:165
+#: js/livestream/components/livestreamDetails.js:179
 msgid "Started"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:169
+#: js/livestream/components/livestreamDetails.js:183
 msgid "Ended"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:173
+#: js/livestream/components/livestreamDetails.js:187
 msgid "Share Url"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:183
+#: js/livestream/components/livestreamDetails.js:197
 msgid "Name"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:185
+#: js/livestream/components/livestreamDetails.js:199
 msgid "Description"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:191
+#: js/livestream/components/livestreamDetails.js:205
 msgid "Start streaming"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:193
+#: js/livestream/components/livestreamDetails.js:207
 msgid "Streaming info"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:196
+#: js/livestream/components/livestreamDetails.js:210
 msgid "Rtmp info header"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:199
+#: js/livestream/components/livestreamDetails.js:213
 msgid "Rtmp info text"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:202
+#: js/livestream/components/livestreamDetails.js:216
 msgid "Streamkey info header"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:205
+#: js/livestream/components/livestreamDetails.js:219
 msgid "Streamkey info text"
 msgstr ""
 
-#: js/livestream/components/livestreamDetails.js:214
-msgid "Cancel Livestream"
-msgstr ""
-
-#: js/livestream/components/livestreamDetails.js:96
+#: js/livestream/components/livestreamDetails.js:97
 msgid ""
 "Are you sure you want to cancel the current livestream? No VOD will be "
 "created"
@@ -184,7 +184,7 @@ msgstr ""
 msgid "Presets"
 msgstr ""
 
-#: js/overview/components/admin-video-details.js:288 src/Plugin.php:385
+#: js/overview/components/admin-video-details.js:288 src/Plugin.php:388
 #: views/admin/advertisement.php:4
 msgid "Advertisement Settings"
 msgstr ""
@@ -502,15 +502,15 @@ msgstr ""
 msgid "http://isset.nl/"
 msgstr ""
 
-#: src/Plugin.php:332
+#: src/Plugin.php:335
 msgid "Videos"
 msgstr ""
 
-#: src/Plugin.php:386
+#: src/Plugin.php:389
 msgid "Advertisement"
 msgstr ""
 
-#: src/Plugin.php:397 src/Plugin.php:398 views/admin/player-settings.php:4
+#: src/Plugin.php:400 src/Plugin.php:401 views/admin/player-settings.php:4
 msgid "Player Settings"
 msgstr ""
 
@@ -519,33 +519,33 @@ msgstr ""
 msgid "Storage used"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:17
+#: views/admin/dashboard/api-dashboard.php:21
 #: views/admin/dashboard/dashboard.php:11
 msgid "Data streamed"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:26
+#: views/admin/dashboard/api-dashboard.php:30
 msgid "Logged in as"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:28
+#: views/admin/dashboard/api-dashboard.php:32
 #: views/admin/dashboard/dashboard.php:15 views/admin/page.php:7
 msgid "Logout"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:34
+#: views/admin/dashboard/api-dashboard.php:38
 msgid "Subscription type"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:48
+#: views/admin/dashboard/api-dashboard.php:52
 msgid "Views"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:49
+#: views/admin/dashboard/api-dashboard.php:53
 msgid "Data"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:74
+#: views/admin/dashboard/api-dashboard.php:78
 #: views/admin/dashboard/dashboard.php:19
 msgid "Login to isset.video"
 msgstr ""
