@@ -39,9 +39,6 @@ class Scripts extends BaseAction {
 			)
 		);
 
-		wp_localize_script( 'isset-video-main', 'issetVideoTranslations', $this->getTranslationLabels() );
-		wp_set_script_translations( 'isset-video-main', 'isset-video', 'isset-video/languages' );
-
 		if ( $this->editingOrNewPost( $arguments ) ) {
 			$videoArchiveService = $this->plugin->getVideoArchiveService();
 
@@ -58,6 +55,9 @@ class Scripts extends BaseAction {
 				)
 			);
 		}
+
+		wp_localize_script( 'isset-video-main', 'issetVideoTranslations', $this->getTranslationLabels() );
+		wp_set_script_translations( 'isset-video-main', 'isset-video', 'isset-video/languages' );
 	}
 
 	private function editingOrNewPost( $arguments ) {
@@ -80,7 +80,7 @@ class Scripts extends BaseAction {
 		global $l10n;
 		$translations = array();
 
-		if ( $l10n ) {
+		if ( $l10n && isset( $l10n['isset-video'] ) ) {
 			foreach ( $l10n['isset-video']->entries as $key => $entry ) {
 				$translations[ $key ] = $entry->translations;
 			}

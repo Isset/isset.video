@@ -16,6 +16,7 @@ use IssetBV\VideoPublisher\Wordpress\Shortcode\ShortcodeBase;
 use IssetBV\VideoPublisher\Wordpress\Widgets\BaseWidget;
 use IssetBV\VideoPublisher\Wordpress\Widgets\Dashboard;
 
+
 class Plugin {
 	const MENU_MAIN_SLUG            = 'isset-video-overview';
 	const MENU_LIVESTREAM_SLUG      = 'isset-video-livestream';
@@ -76,6 +77,7 @@ class Plugin {
 
 	private $helpers = array(
 		'Statistics',
+		'Translations',
 	);
 
 	public static function instance() {
@@ -91,8 +93,8 @@ class Plugin {
 		$this->initConfig();
 		$this->addShortcodes();
 		$this->initScripts();
-		$this->loadTranslations();
 		$this->loadHelpers();
+		$this->loadTranslations();
 		$this->initActions();
 		$this->initRest();
 		$this->initBlocks();
@@ -151,7 +153,8 @@ class Plugin {
 	}
 
 	private function loadTranslations() {
-		load_plugin_textdomain( 'isset-video', false, 'isset-video/languages' );
+		add_filter( 'load_textdomain_mofile', 'isset_video_load_default_textdomain', 10, 2 );
+		load_plugin_textdomain( 'isset-video', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	private function initActions() {
