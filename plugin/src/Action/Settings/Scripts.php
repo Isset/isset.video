@@ -36,7 +36,7 @@ class Scripts extends BaseAction {
 				'adminUrl'   => admin_url(),
 				'loggedIn'   => $videoPublishService->isLoggedIn(),
 				'mercureUrl' => $videoPublishService->getMercureURL(),
-                'division'   => $videoPublishService->fetchCurrentDivision(),
+				'division'   => $videoPublishService->fetchCurrentDivision(),
 			)
 		);
 
