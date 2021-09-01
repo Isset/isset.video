@@ -5,7 +5,6 @@ import {dateTimeToHumanlyReadable} from '../../overview/helpers/time';
 import AdminCopyText from '../../overview/components/admin-copy-text';
 import {cancelLiveStream} from '../api/api';
 import {showMessage} from '../../toast/helper/toast';
-import {getPublisherUrl} from '../../ajax';
 
 class LivestreamDetails extends React.Component {
     static propTypes = {
@@ -24,10 +23,13 @@ class LivestreamDetails extends React.Component {
             status: '',
             creatingLivestream: false,
         }
+
+        this.eventSource = null;
     }
 
     componentDidMount() {
         this.updateLivestreamState();
+        this.initEventSourceListener();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -35,6 +37,41 @@ class LivestreamDetails extends React.Component {
 
         if (livestream !== prevProps.livestream) {
             this.updateLivestreamState();
+            this.initEventSourceListener();
+        }
+    }
+
+    componentWillUnmount() {
+        this.stopEventSourceListener();
+    }
+
+    initEventSourceListener = () => {
+        const {livestream: {uuid}} = this.props;
+        const {mercureUrl} = window.IssetVideoPublisherAjax;
+
+        if (uuid) {
+            this.stopEventSourceListener();
+            this.eventSource = new EventSource(mercureUrl + '?topic=' + encodeURIComponent(`https://isset.video/livestreams/${uuid}`));
+            this.eventSource.onmessage = (e) => {
+                const eventData = JSON.parse(e.data);
+                //timeout 20 seconds
+                if (eventData.event === 'start') {
+                    // wait 20 seconds
+                    // fetch new data and update status
+                    setTimeout(() => this.props.getLivestreamDetails(uuid), 20000);
+                }
+                if (eventData.event === 'end') {
+                    // wait 20 seconds
+                    // fetch new data and update status
+                    setTimeout(() => this.props.getLivestreamDetails(uuid), 20000);
+                }
+            };
+        }
+    }
+
+    stopEventSourceListener = () => {
+        if (this.eventSource) {
+            this.eventSource.close();
         }
     }
 

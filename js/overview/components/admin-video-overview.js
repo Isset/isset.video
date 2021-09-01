@@ -28,6 +28,7 @@ class IssetVideoOverview extends React.Component {
 
         this.search = '';
         this.searchTimeout = null;
+        this.eventSource = null;
     }
 
     componentDidMount() {
@@ -42,8 +43,13 @@ class IssetVideoOverview extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        this.stopEventSourceListener();
+    }
+
     init = () => {
         this.loadVideos(0)
+        this.initEventSourceListener();
     };
 
     loadVideos = (offset) => {
@@ -63,6 +69,28 @@ class IssetVideoOverview extends React.Component {
         this.loadVideos(offset);
     };
 
+    initEventSourceListener = () => {
+        const {mercureUrl, division: {uuid}} = window.IssetVideoPublisherAjax;
+
+        if (uuid) {
+            this.stopEventSourceListener();
+            this.eventSource = new EventSource(mercureUrl + '?topic=' + encodeURIComponent(`https://isset.video/archive/divisions/${uuid}/files`));
+            this.eventSource.onmessage = (e) => {
+                const file = JSON.parse(e.data);
+
+                if (file) {
+                    this.refresh();
+                }
+            };
+        }
+    };
+
+    stopEventSourceListener = () => {
+        if (this.eventSource) {
+            this.eventSource.close();
+        }
+    };
+
     onSelect = (uuid) => {
         this.setState({uuid});
     };
@@ -78,7 +106,7 @@ class IssetVideoOverview extends React.Component {
         const list = checked ? results.map(result => result.uuid) : [];
 
         this.setState({checkAll: checked, checked: list});
-    }
+    };
 
     isVideoChecked = uuid => this.state.checked.includes(uuid);
 
