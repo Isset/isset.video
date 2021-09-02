@@ -189,7 +189,7 @@ class LivestreamDetails extends React.Component {
                 </div>
                 <div className="iv-w-50 video-publisher-p-2">
                     <div className="livestream-logo-container">
-                        <a target="_blank" href="<?php echo $isset_video_url; ?>" className="mb-20">
+                        <a target="_blank" href="https://my.isset.video" className="mb-20">
                             <img src={`/wp-content/plugins/isset-video/assets/isset.video.png`} className="isset-video-logo"/>
                         </a>
                     </div>

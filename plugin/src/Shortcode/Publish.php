@@ -52,7 +52,7 @@ class Publish extends ShortcodeBase {
 		$context['chapters']  = isset( $publish['chapters'] ) ? $publish['chapters'] : array();
 		$context['video_url'] = $video_url;
 		$context['ad_url']    = $advertisementUrl;
-		$context['css_url']   = $publishService->getPublisherURL() . "/css/publish/{$uuid}/player.css?time=" . time();
+		$context['css_url']   = $publishService->getPublisherURL() . "css/publish/{$uuid}/player.css?time=" . time();
 
 		return Renderer::render( 'shortcode/publish.php', $context );
 	}
