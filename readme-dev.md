@@ -127,3 +127,18 @@ Automatically Fix:
 make csfix
 ```
 
+## Release ##
+
+To release a new version of the plugin, change the version number in both the plugin header and the ISSET_VIDEO_PUBLISHER_VERSION constant in
+
+```
+src/isset-video-publisher.php
+```
+
+and run
+
+```
+make release
+```
+
+This will create an isset-video.zip in the *'out'* folder.
