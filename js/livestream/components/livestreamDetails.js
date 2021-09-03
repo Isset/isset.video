@@ -141,6 +141,7 @@ class LivestreamDetails extends React.Component {
     render() {
         const {uuid, stream_key, rtmp_url, date_created, date_started, date_ended, embed_url, share_url} = this.props.livestream;
         const {name, description, status, creatingLivestream} = this.state;
+        const {pluginUrl} = window.IssetVideoPublisherAjax;
 
         return <div className="isset-video-container">
             <div className="video-publisher-flex video-publisher-flex-between">
@@ -190,7 +191,7 @@ class LivestreamDetails extends React.Component {
                 <div className="iv-w-50 video-publisher-p-2">
                     <div className="livestream-logo-container">
                         <a target="_blank" href="https://my.isset.video" className="mb-20">
-                            <img src={`/wp-content/plugins/isset-video/assets/isset.video.png`} className="isset-video-logo"/>
+                            <img src={`${pluginUrl}assets/isset.video.png`} className="isset-video-logo"/>
                         </a>
                     </div>
                     {uuid && <div className="iv-bg-black video-publisher-p-2">
