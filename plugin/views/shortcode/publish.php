@@ -20,12 +20,9 @@
 <?php endif; ?>
 
 <script type="application/javascript">
-    const linkElementId = 'isset-video-custom-player-css';
-    const existingLink = document.getElementById(linkElementId);
-
-    if (!existingLink) {
+    if (!document.getElementById('isset-video-custom-player-css')) {
         const linkElement = document.createElement('link');
-        linkElement.id = linkElementId;
+        linkElement.id = 'isset-video-custom-player-css';
         linkElement.rel = 'stylesheet';
         linkElement.href = '<?php echo $css_url; ?>';
 
