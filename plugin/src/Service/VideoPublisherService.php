@@ -263,7 +263,7 @@ class VideoPublisherService extends BaseHttpService {
 		$limit   = $this->fetchSubscriptionLimit();
 		$current = $this->fetchUsage();
 
-		return $limit['storage_limit'] > $current['storage'];
+		return $limit['storage_limit'] === null || $limit['storage_limit'] > $current['storage'];
 	}
 
 	public function exchangeToken( $platform ) {
@@ -344,5 +344,9 @@ class VideoPublisherService extends BaseHttpService {
 		}
 
 		return http_build_query( $languages );
+	}
+
+	public function getAdvertisementUrl( $publishUuid ) {
+		return $this->publisherGet( '/api/publishes/' . urlencode( $publishUuid ) . '/advertisement-url' );
 	}
 }

@@ -1,14 +1,21 @@
 <?php if ( $isLoggedIn ) : ?>
 	<div class="video-publisher-flex" style="flex-direction: row; justify-content: space-between">
 		<div class="video-publisher-flex-1 video-publisher-flex isset-video-stats-container" style="">
+            <a target="_blank" href="<?php echo $isset_video_url; ?>" class="mb-20">
+                <img src="<?php echo ISSET_VIDEO_PUBLISHER_URL . '/assets/isset.video.png'; ?>" class="isset-video-logo" />
+            </a>
 			<?php if ( $stats ) : ?>
 				<div class="video-publisher-flex-1">
 					<div class="video-publisher-mt-2">
 						<span class="video-publisher-bold"><?php _e( 'Storage used', 'isset-video' ); ?>: </span>
-						<span><?php echo round( $usage['storage'] / 1e+9, 3 ); ?> GB / <?php echo round( $subscription_limit['storage_limit'] / 1e+9, 3 ); ?> GB</span>
-						<div class="isset-video-progressbar">
-							<div class="isset-video-progressbar-progress" style="width: <?php echo calc_percentage( $usage['storage'], $subscription_limit['storage_limit'] ); ?>%;"></div>
-						</div>
+                        <?php if ($subscription_limit['storage_limit']): ?>
+						    <span><?php echo round( $usage['storage'] / 1e+9, 3 ); ?> GB / <?php echo round( $subscription_limit['storage_limit'] / 1e+9, 3 ); ?> GB</span>
+                            <div class="isset-video-progressbar">
+                                <div class="isset-video-progressbar-progress" style="width: <?php echo calc_percentage( $usage['storage'], $subscription_limit['storage_limit'] ); ?>%;"></div>
+                            </div>
+                        <?php else: ?>
+                            <span><?php echo round( $usage['storage'] / 1e+9, 3 ); ?> GB</span>
+                        <?php endif; ?>
 					</div>
 					<div>
 						<span class="video-publisher-bold"><?php _e( 'Data streamed', 'isset-video' ); ?>: </span>
@@ -37,9 +44,6 @@
 					</div>
 				</div>
 			<?php endif; ?>
-			<div class="mt-20">
-				<a target="_blank" href="<?php echo $isset_video_url; ?>"><?php _e( 'isset.video' ); ?></a>
-			</div>
 		</div>
 		<?php if ( $stats ) : ?>
 			<div class="video-publisher-flex-3">

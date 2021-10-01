@@ -49,6 +49,16 @@ class IssetVideoLivestream extends React.Component {
         const {livestream: {uuid}} = this.state;
 
         publisherAjax(`api/livestreams/${uuid}`, {}, 'PATCH', update).then(result => {
+            const {uuid} = result;
+
+            if (uuid) {
+                this.getLivestreamDetails(uuid);
+            }
+        });
+    }
+
+    getLivestreamDetails = uuid => {
+        publisherAjax(`api/livestreams/${uuid}`, {}, 'GET').then(result => {
             this.setState({livestream: result});
         });
     }
@@ -58,7 +68,7 @@ class IssetVideoLivestream extends React.Component {
 
         return <div>
             <h1>{livestream.name ? livestream.name : __('Livestream', 'isset-video')}</h1>
-            <LivestreamDetails livestream={livestream} updateLivestream={this.updateLivestream} createLivestream={this.createLivestream} />
+            <LivestreamDetails livestream={livestream} updateLivestream={this.updateLivestream} createLivestream={this.createLivestream} getLivestreamDetails={this.getLivestreamDetails} />
         </div>;
     }
 

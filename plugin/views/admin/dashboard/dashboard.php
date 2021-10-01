@@ -1,5 +1,6 @@
 <div class="video-publisher-admin">
     <?php if ( $isLoggedIn ): ?>
+        <?php /*translators: %s is the user's username */ ?>
         <h2><?php echo sprintf( __( 'Logged in as %s', 'isset-video' ), $user['username'] ); ?></h2>
         <?php if ( $stats ): ?>
             <div class="video-publisher-mt-2">

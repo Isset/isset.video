@@ -1,18 +1,21 @@
 import videojs from 'video.js';
 import {setLocaleData} from '@wordpress/i18n';
+import 'videojs-ima/dist/videojs.ima.css';
 
 require('jquery');
 require('videojs-contrib-quality-levels');
 require('videojs-http-source-selector');
 require('@silvermine/videojs-chromecast')(videojs, {preloadWebComponents: true});
 require('@silvermine/videojs-airplay')(videojs);
+require('videojs-contrib-ads');
+require('videojs-ima');
 
 require('./functions');
 require('./overview/components/admin-video-overview');
 require('./livestream/components/livestream');
-
+require('./advertisement/components/advertisementSettings');
+require('./playerSettings/components/playerSettings');
 require('../scss/isset-video-publisher.scss');
-
 require('./livestream/components/livestreamPlayer');
 
 
@@ -35,33 +38,70 @@ window.addEventListener('load', () => {
                 }
             },
         }, function() {
+            if (video.dataset.chapters) {
+                const chapters = JSON.parse(video.dataset.chapters);
+
+                Array.from(chapters).forEach(chapter => {
+                    const {url, language} = chapter;
+                    const track = this.addRemoteTextTrack({kind: 'chapters', src: url, language}, true);
+
+                    track.addEventListener('load', () => {
+                        const activeSubtitle = findSubtitleTrackWithStatus(this.textTracks().tracks_, 'showing');
+                        if (activeSubtitle) {
+                            loadChapters(this, activeSubtitle.language);
+                        }
+                    });
+                });
+            }
+
             this.on('loadedmetadata', function() {
                 loadChapters(this);
+
+                const activeSubtitle = findSubtitleTrackWithStatus(this.textTracks().tracks_, 'showing');
+                if (activeSubtitle) {
+                    loadChapters(this, activeSubtitle.language);
+                } else {
+                    loadChapters(this, null);
+                }
             });
         });
 
         player.chromecast();
         player.airPlay();
+
+        const {adUrl} = video.dataset;
+
+        let imaOptions = {
+            adTagUrl: adUrl,
+        };
+
+        player.ima(imaOptions);
     }
 
     setLocaleData(window.issetVideoTranslations, 'isset-video');
 });
 
-export function loadChapters(player) {
-
+export function loadChapters(player, language) {
     let duration = player.duration();
     if (duration === 0) {
         return;
     }
-    let track = findChapterTrack(player);
-    if(track === null){
+
+    // Disable all chapter text tracks. If we don't do this, the hidden tracks will still fire events
+    // which results in errors in the console, because no player is attached.
+    disableChapterTracks(player);
+    let track = findChapterTrack(player, language);
+
+    if(track === null || track.cues === null){
         return;
     }
+
     let cues = track.cues;
     let controlBar = player.controlBar.contentEl();
     let element = document.createElement('div');
 
     element.className = 'vjs-chapter-bar';
+    element.id = 'vjs-chapter-bar';
 
     for (let i = 0; i < cues.length; i++) {
         let cue = cues[i];
@@ -104,3 +144,19 @@ function findChapterTrack(player) {
 
     return null;
 }
+
+/**
+ * Disable all chapter textTracks
+ */
+function disableChapterTracks(player) {
+    player.textTracks().tracks_.map(track => {
+        if (track.kind === 'chapters') {
+            track.mode = 'disabled';
+        }
+    });
+}
+
+function findSubtitleTrackWithStatus(tracks, status = 'showing') {
+    return tracks.filter(track => track.kind === 'subtitles' && track.mode === status).pop();
+}
+

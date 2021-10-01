@@ -16,9 +16,12 @@ use IssetBV\VideoPublisher\Wordpress\Shortcode\ShortcodeBase;
 use IssetBV\VideoPublisher\Wordpress\Widgets\BaseWidget;
 use IssetBV\VideoPublisher\Wordpress\Widgets\Dashboard;
 
+
 class Plugin {
-	const MENU_MAIN_SLUG       = 'isset-video-overview';
-	const MENU_LIVESTREAM_SLUG = 'isset-video-livestream';
+	const MENU_MAIN_SLUG            = 'isset-video-overview';
+	const MENU_LIVESTREAM_SLUG      = 'isset-video-livestream';
+	const MENU_ADVERTISEMENT_SLUG   = 'isset-video-advertisement';
+	const MENU_PLAYER_SETTINGS_SLUG = 'isset-video-player-settings';
 
 	static $instance;
 
@@ -54,6 +57,7 @@ class Plugin {
 		Upload\GetUploaderUrl::class,
 		Upload\CreateArchiveFile::class,
 		Upload\GetUploadAllowed::class,
+		Upload\GetSubscriptionLimit::class,
 		Action\Livestream\StreamDetails::class,
 	);
 
@@ -73,6 +77,7 @@ class Plugin {
 
 	private $helpers = array(
 		'Statistics',
+		'Translations',
 	);
 
 	public static function instance() {
@@ -88,8 +93,8 @@ class Plugin {
 		$this->initConfig();
 		$this->addShortcodes();
 		$this->initScripts();
-		$this->loadTranslations();
 		$this->loadHelpers();
+		$this->loadTranslations();
 		$this->initActions();
 		$this->initRest();
 		$this->initBlocks();
@@ -148,7 +153,8 @@ class Plugin {
 	}
 
 	private function loadTranslations() {
-		load_plugin_textdomain( 'isset-video', false, 'isset-video/languages' );
+		add_filter( 'load_textdomain_mofile', 'isset_video_load_default_textdomain', 10, 2 );
+		load_plugin_textdomain( 'isset-video', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	private function initActions() {
@@ -300,6 +306,8 @@ class Plugin {
 	public function addMenuItems() {
 		$this->addOverviewItem();
 		$this->addLivestreamItem();
+		$this->addAdvertisementItem();
+		$this->addPlayerSettingsItem();
 	}
 
 	public function getOverviewPageUrl() {
@@ -351,9 +359,6 @@ class Plugin {
 	}
 
 	private function addLivestreamItem() {
-		// $this->enqueueStyle( 'css/main.css' );
-		// $this->enqueueScript( 'js/admin-video-livestream.js' );
-
 		$page_title  = __( 'Livestream', 'isset-video' );
 		$menu_title  = __( 'Livestream', 'isset-video' );
 		$capability  = 'manage_options';
@@ -363,6 +368,58 @@ class Plugin {
 		};
 
 		add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, self::MENU_LIVESTREAM_SLUG, $function );
+	}
+
+	public function renderAdvertisementPage() {
+		$vps                  = $this->getVideoPublisherService();
+		$context              = array();
+		$context['logged_in'] = $vps->isLoggedIn();
+
+		if ( $context['logged_in'] ) {
+			echo Renderer::render( 'admin/advertisement.php', $context );
+		} else {
+			$context['login_url'] = $vps->getLoginURL();
+
+			echo Renderer::render( 'admin/page.php', $context );
+		}
+	}
+
+	private function addAdvertisementItem() {
+		$page_title  = __( 'Advertisement Settings', 'isset-video' );
+		$menu_title  = __( 'Advertisement', 'isset-video' );
+		$capability  = 'manage_options';
+		$parent_slug = self::MENU_MAIN_SLUG;
+		$function    = function() {
+			$this->renderAdvertisementPage();
+		};
+
+		add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, self::MENU_ADVERTISEMENT_SLUG, $function );
+	}
+
+	private function addPlayerSettingsItem() {
+		$page_title  = __( 'Player Settings', 'isset-video' );
+		$menu_title  = __( 'Player Settings', 'isset-video' );
+		$capability  = 'manage_options';
+		$parent_slug = self::MENU_MAIN_SLUG;
+		$function    = function() {
+			$this->renderPlayerSettingsPage();
+		};
+
+		add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, self::MENU_PLAYER_SETTINGS_SLUG, $function );
+	}
+
+	private function renderPlayerSettingsPage() {
+		$vps                  = $this->getVideoPublisherService();
+		$context              = array();
+		$context['logged_in'] = $vps->isLoggedIn();
+
+		if ( $context['logged_in'] ) {
+			echo Renderer::render( 'admin/player-settings.php', $context );
+		} else {
+			$context['login_url'] = $vps->getLoginURL();
+
+			echo Renderer::render( 'admin/page.php', $context );
+		}
 	}
 
 	private function renderChart() {

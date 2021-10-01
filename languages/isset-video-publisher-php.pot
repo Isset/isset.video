@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the isset.video plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: isset.video 0.9.0\n"
+"Project-Id-Version: isset.video 0.9.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-04-28T14:23:58+00:00\n"
+"POT-Creation-Date: 2021-08-31T13:46:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: isset-video\n"
@@ -31,58 +31,74 @@ msgstr ""
 msgid "http://isset.nl/"
 msgstr ""
 
-#: src/Plugin.php:327
+#: src/Plugin.php:335
 msgid "Videos"
 msgstr ""
 
-#: src/Plugin.php:357
-#: src/Plugin.php:358
+#: src/Plugin.php:362
+#: src/Plugin.php:363
 msgid "Livestream"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:7
-#: views/admin/dashboard/dashboard.php:6
+#: src/Plugin.php:388
+#: views/admin/advertisement.php:4
+msgid "Advertisement Settings"
+msgstr ""
+
+#: src/Plugin.php:389
+msgid "Advertisement"
+msgstr ""
+
+#: src/Plugin.php:400
+#: src/Plugin.php:401
+#: views/admin/player-settings.php:4
+msgid "Player Settings"
+msgstr ""
+
+#: views/admin/dashboard/api-dashboard.php:10
+#: views/admin/dashboard/dashboard.php:7
 msgid "Storage used"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:14
-#: views/admin/dashboard/dashboard.php:10
+#: views/admin/dashboard/api-dashboard.php:21
+#: views/admin/dashboard/dashboard.php:11
 msgid "Data streamed"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:23
+#: views/admin/dashboard/api-dashboard.php:30
 msgid "Logged in as"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:25
-#: views/admin/dashboard/dashboard.php:14
-#: views/admin/page.php:6
+#: views/admin/dashboard/api-dashboard.php:32
+#: views/admin/dashboard/dashboard.php:15
+#: views/admin/page.php:7
 msgid "Logout"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:31
+#: views/admin/dashboard/api-dashboard.php:38
 msgid "Subscription type"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:48
+#: views/admin/dashboard/api-dashboard.php:52
 msgid "Views"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:49
+#: views/admin/dashboard/api-dashboard.php:53
 msgid "Data"
 msgstr ""
 
-#: views/admin/dashboard/api-dashboard.php:74
-#: views/admin/dashboard/dashboard.php:18
+#: views/admin/dashboard/api-dashboard.php:78
+#: views/admin/dashboard/dashboard.php:19
 msgid "Login to isset.video"
 msgstr ""
 
-#: views/admin/dashboard/dashboard.php:3
+#. translators: %s is the user's username
+#: views/admin/dashboard/dashboard.php:4
 msgid "Logged in as %s"
 msgstr ""
 
-#: views/admin/dashboard/dashboard.php:15
-#: views/admin/page.php:7
+#: views/admin/dashboard/dashboard.php:16
+#: views/admin/page.php:8
 msgid "Go to videos"
 msgstr ""
 
@@ -94,20 +110,21 @@ msgstr ""
 msgid "Your Videos"
 msgstr ""
 
-#: views/admin/page.php:4
+#. translators: %s is the user's username
+#: views/admin/page.php:5
 msgid "Hi, %s"
 msgstr ""
 
-#: views/admin/page.php:5
+#: views/admin/page.php:6
 msgid "You are now connected to my.isset.video. Click the button below to unlink your account and logout."
 msgstr ""
 
-#: views/admin/page.php:11
-#: views/admin/page.php:13
+#: views/admin/page.php:12
+#: views/admin/page.php:14
 msgid "Connect to my.isset.video"
 msgstr ""
 
-#: views/admin/page.php:12
+#: views/admin/page.php:13
 msgid "Please connect your my.isset.video account by clicking the button below. We will redirect you to my.isset.video to ask for your permission."
 msgstr ""
 
@@ -119,10 +136,10 @@ msgstr ""
 msgid "Video is not available"
 msgstr ""
 
-#: views/shortcode/publish.php:7
+#: views/shortcode/publish.php:14
 msgid "Your browser does not support the video tag."
 msgstr ""
 
-#: views/shortcode/publish.php:20
+#: views/shortcode/publish.php:19
 msgid "Video cannot be loaded"
 msgstr ""

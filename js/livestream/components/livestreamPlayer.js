@@ -93,7 +93,7 @@ class LivestreamPlayer extends React.Component {
         this.player.src(url);
         this.player.play();
 
-        this.setState({play: true});
+        this.setState({play: true, started: true});
     };
 
     showEnded = () => {

@@ -44,7 +44,6 @@ async function ajax(url, token, method = 'GET', post = {}, file = null) {
     let options = {};
 
     if (file instanceof File) {
-        console.log('uploading still');
         const body = new FormData();
         body.append('file', file);
 

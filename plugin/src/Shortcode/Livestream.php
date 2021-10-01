@@ -26,6 +26,12 @@ class Livestream extends ShortcodeBase {
 			return Renderer::render( 'shortcode/livestream-invalid.php' );
 		}
 
+		// If the livestream has a publish, show the publish player instead
+		if ( ! empty( $details['publish'] ) ) {
+			$publishShortcode = new Publish( $this->plugin );
+			return $publishShortcode->generate( array( 'uuid' => $details['publish'] ) );
+		}
+
 		$context                 = $attr;
 		$context['uuid']         = $uuid;
 		$context['url']          = $details['playout_url'];

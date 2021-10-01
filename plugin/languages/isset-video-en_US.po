@@ -1,0 +1,651 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plugin\n"
+"POT-Creation-Date: 2021-08-23T11:58:53+00:00\n"
+"PO-Revision-Date: 2021-08-27 15:39+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+
+#: js/livestream/components/livestream.js:66 src/Plugin.php:359
+#: src/Plugin.php:360
+msgid "Livestream"
+msgstr "Livestream"
+
+#: js/livestream/components/livestreamDetails.js:112
+msgid "Livestream cancelled"
+msgstr "Livestream cancelled"
+
+#: js/livestream/components/livestreamDetails.js:114
+msgid "This livestream has been cancelled by the user"
+msgstr "This livestream has been cancelled by the user"
+
+#: js/livestream/components/livestreamDetails.js:118
+msgid "Create New Livestream"
+msgstr "Create New Livestream"
+
+#: js/livestream/components/livestreamDetails.js:124
+msgid "No livestream created yet"
+msgstr "No livestream created yet"
+
+#: js/livestream/components/livestreamDetails.js:126
+#: js/publisher-livestream-block.js:88
+msgid "Create Livestream"
+msgstr "Create Livestream"
+
+#: js/livestream/components/livestreamDetails.js:131
+msgid "Livestream has not yet started"
+msgstr "Livestream has not yet started"
+
+#: js/livestream/components/livestreamDetails.js:133
+msgid "Livestream is waiting for input at: %s"
+msgstr "Livestream is waiting for input at: %s"
+
+#: js/livestream/components/livestreamDetails.js:140
+msgid "Livestream has ended"
+msgstr "Livestream has ended"
+
+#: js/livestream/components/livestreamDetails.js:149
+msgid "Stream Url"
+msgstr "Stream Url"
+
+#: js/livestream/components/livestreamDetails.js:151
+msgid "Copied stream url"
+msgstr "Copied stream url"
+
+#: js/livestream/components/livestreamDetails.js:155
+msgid "Stream Key"
+msgstr "Stream Key"
+
+#: js/livestream/components/livestreamDetails.js:157
+msgid "Copied stream key"
+msgstr "Copied stream key"
+
+#: js/livestream/components/livestreamDetails.js:161
+#: js/overview/components/admin-video-details.js:266
+#: js/overview/components/admin-video-overview.js:177
+msgid "Created"
+msgstr "Created"
+
+#: js/livestream/components/livestreamDetails.js:165
+msgid "Started"
+msgstr "Started"
+
+#: js/livestream/components/livestreamDetails.js:169
+msgid "Ended"
+msgstr "Ended"
+
+#: js/livestream/components/livestreamDetails.js:173
+msgid "Share Url"
+msgstr "Share Url"
+
+#: js/livestream/components/livestreamDetails.js:183
+msgid "Name"
+msgstr "Name"
+
+#: js/livestream/components/livestreamDetails.js:185
+msgid "Description"
+msgstr "Description"
+
+#: js/livestream/components/livestreamDetails.js:191
+msgid "Start streaming"
+msgstr "Start streaming"
+
+#: js/livestream/components/livestreamDetails.js:193
+msgid "Streaming info"
+msgstr ""
+"Using isset.video, you can easily start streaming. All you need is a piece "
+"of software, able to stream to rtmp urls. We suggest using OBS."
+
+#: js/livestream/components/livestreamDetails.js:196
+msgid "Rtmp info header"
+msgstr "Stream Url"
+
+#: js/livestream/components/livestreamDetails.js:199
+msgid "Rtmp info text"
+msgstr ""
+"We supply an RTMP url, which you can enter when your software asks for a "
+"streaming endpoint or server. Sometimes you need to fill out the RTMP url "
+"and the stream key separately. In OBS you can find the server setting under "
+"Settings -> Stream."
+
+#: js/livestream/components/livestreamDetails.js:202
+msgid "Streamkey info header"
+msgstr "Stream Key"
+
+#: js/livestream/components/livestreamDetails.js:205
+msgid "Streamkey info text"
+msgstr ""
+"When you need to fill out the stream key separately, use the provided stream "
+"key."
+
+#: js/livestream/components/livestreamDetails.js:214
+msgid "Cancel Livestream"
+msgstr "Cancel Livestream"
+
+#: js/livestream/components/livestreamDetails.js:96
+msgid ""
+"Are you sure you want to cancel the current livestream? No VOD will be "
+"created"
+msgstr ""
+"Are you sure you want to cancel the current livestream? No video of this "
+"livestream will be created"
+
+#: js/livestream/components/livestreamPlayer.js:109
+msgid "Livestream ended"
+msgstr "Livestream ended"
+
+#: js/livestream/components/livestreamPlayer.js:112
+msgid "The VOD will be ready on this page at a later time."
+msgstr ""
+"Please wait while we process your livestream and make a video file so you "
+"can rewatch it when it's finished."
+
+#: js/livestream/components/livestreamPlayer.js:124
+msgid "Livestream waiting to start"
+msgstr "Livestream waiting to start"
+
+#: js/livestream/components/livestreamPlayer.js:127
+msgid "This player will update automatically when the livestream goes live."
+msgstr "This player will update automatically when the livestream goes live."
+
+#: js/overview/components/admin-copy-text.js:47
+msgid "Copied shortcode"
+msgstr "Copied shortcode"
+
+#: js/overview/components/admin-video-details.js:165
+msgid "Drop an image file here or browse your computer."
+msgstr "Drop an image file here or browse your computer."
+
+#: js/overview/components/admin-video-details.js:188
+#: js/overview/components/video-upload.js:188
+msgid "Upload"
+msgstr "Upload"
+
+#: js/overview/components/admin-video-details.js:189
+#: js/advertisement/components/publishAdvertisementSettings.js:136
+msgid "Cancel"
+msgstr "Cancel"
+
+#: js/overview/components/admin-video-details.js:205
+msgid ""
+"This file is currently being processed. This may take a few minutes, "
+"depending on the video length"
+msgstr ""
+"This file is currently being processed. This may take a few minutes, "
+"depending on the video length"
+
+#: js/overview/components/admin-video-details.js:243
+msgid "Use the following code to embed this video"
+msgstr "Use the following code to embed this video"
+
+#: js/overview/components/admin-video-details.js:262
+#: js/overview/components/admin-video-overview.js:176
+msgid "Filename"
+msgstr "Filename"
+
+#: js/overview/components/admin-video-details.js:270
+msgid "Filesize"
+msgstr "Filesize"
+
+#: js/overview/components/admin-video-details.js:274
+msgid "Length"
+msgstr "Length"
+
+#: js/overview/components/admin-video-details.js:278
+msgid "Resolution"
+msgstr "Resolution"
+
+#: js/overview/components/admin-video-details.js:282
+msgid "Presets"
+msgstr "Presets"
+
+#: js/overview/components/admin-video-details.js:288 src/Plugin.php:385
+#: views/admin/advertisement.php:4
+msgid "Advertisement Settings"
+msgstr "Advertisement Settings"
+
+#: js/overview/components/admin-video-overview.js:109
+msgid "Are you sure you want to delete the selected videos?"
+msgstr "Are you sure you want to delete the selected videos?"
+
+#: js/overview/components/admin-video-overview.js:151
+msgid "Upload New"
+msgstr "Upload New"
+
+#: js/overview/components/admin-video-overview.js:154
+msgid "Delete Selected"
+msgstr "Delete Selected"
+
+#: js/overview/components/admin-video-overview.js:157
+#: js/publisher-video-block.js:236
+msgid "Search"
+msgstr "Search"
+
+#: js/overview/components/admin-video-overview.js:163
+msgid "Total results"
+msgstr "Total results"
+
+#: js/overview/components/admin-video-overview.js:173
+msgid "Thumbnail"
+msgstr "Thumbnail"
+
+#: js/overview/components/admin-video-overview.js:174
+msgid "Duration"
+msgstr "Duration"
+
+#: js/overview/components/admin-video-overview.js:175
+msgid "Size"
+msgstr "Size"
+
+#: js/overview/components/admin-video-overview.js:200
+#: js/publisher-video-block.js:240
+msgid "No publishes found"
+msgstr "No videos found"
+
+#: js/overview/components/video-item.js:41 js/publisher-video-block.js:151
+msgid "Processing"
+msgstr "Processing"
+
+#: js/overview/components/video-upload.js:137
+msgid "Successfully added %s to archive"
+msgstr "Successfully added %s to archive"
+
+#: js/overview/components/video-upload.js:139
+msgid "Failed adding %s to archive"
+msgstr "Failed adding %s to archive"
+
+#: js/overview/components/video-upload.js:141
+msgid "Uploading"
+msgstr "Uploading"
+
+#: js/overview/components/video-upload.js:151
+msgid "Drop one or more files here or browse your computer."
+msgstr "Drop one or more files here or browse your computer."
+
+#: js/overview/components/video-upload.js:151
+msgid "(Max %s)"
+msgstr "(Maximaal %s)"
+
+#: js/overview/components/video-upload.js:157
+msgid "Selected files"
+msgstr "Selected files"
+
+#: js/overview/components/video-upload.js:175
+msgid ""
+"Storage limit is already reached, please remove videos to upload again or "
+"upgrade your subscription"
+msgstr ""
+"Storage limit has already been reached, please remove videos to upload again "
+"or upgrade your subscription"
+
+#: js/overview/components/video-upload.js:194
+msgid "Cancel upload"
+msgstr "Cancel upload"
+
+#: js/overview/components/video-upload.js:198
+msgid "Your files will be queued for transcoding"
+msgstr ""
+"Your files will be archived and converted to make them suitable for video "
+"streaming. This will take some time, depending on the size and duration of "
+"the uploaded file"
+
+#: js/overview/components/video-upload.js:202
+msgid "Uploads Cancelled"
+msgstr "Uploads Cancelled"
+
+#: js/overview/components/video-upload.js:231
+msgid "Upload new video"
+msgstr "Upload new video"
+
+#: js/overview/components/video-upload.js:241
+msgid "Upload More"
+msgstr "Upload More"
+
+#: js/advertisement/components/advertisementSettings.js:62
+#: js/advertisement/components/publishAdvertisementSettings.js:82
+msgid "Settings saved"
+msgstr "Settings saved"
+
+#: js/advertisement/components/advertisementSettings.js:79
+#: js/advertisement/components/publishAdvertisementSettings.js:119
+msgid "Enable Video Ads"
+msgstr "Enable Video Ads"
+
+#: js/advertisement/components/advertisementSettings.js:81
+msgid "Enable or disable ads for your videos"
+msgstr "Enable or disable ads for your videos"
+
+#: js/advertisement/components/advertisementSettings.js:93
+#: js/advertisement/components/publishAdvertisementSettings.js:135
+#: js/playerSettings/components/editor.js:221
+msgid "Save"
+msgstr "Save"
+
+#: js/advertisement/components/publishAdvertisementSettings.js:102
+msgid "Set Video Advertisement Settings"
+msgstr "Set Video Advertisement Settings"
+
+#: js/advertisement/components/publishAdvertisementSettings.js:104
+msgid ""
+"Set custom advertisement settings for this video. By using this, you can "
+"enable/disable ads specifically for this video."
+msgstr ""
+"Set custom advertisement settings for this video. By using this, you can "
+"enable/disable ads specifically for this video."
+
+#: js/advertisement/components/publishAdvertisementSettings.js:121
+msgid "Enable or disable ads for this video"
+msgstr "Enable or disable ads for this video"
+
+#: js/advertisement/components/settingsForm.js:115
+msgid "Ad Uri"
+msgstr "Ad Uri"
+
+#: js/advertisement/components/settingsForm.js:121
+msgid "Ads are Skippable"
+msgstr "Ads are Skippable"
+
+#: js/advertisement/components/settingsForm.js:123
+msgid "By enabling this, the shown ads will be skippable by the user"
+msgstr "By enabling this, the shown ads will be skippable by the user"
+
+#: js/advertisement/components/settingsForm.js:136
+msgid "Ad Location"
+msgstr "Ad Location"
+
+#: js/advertisement/components/settingsForm.js:138
+msgid ""
+"Choose if your ads should be played before, after, or/and during video "
+"playback"
+msgstr ""
+"Choose if your ads should be played before, after, or/and during video "
+"playback"
+
+#: js/advertisement/components/settingsForm.js:145
+msgid "Before"
+msgstr "Before"
+
+#: js/advertisement/components/settingsForm.js:157
+msgid "After"
+msgstr "After"
+
+#: js/advertisement/components/settingsForm.js:169
+msgid "Middle"
+msgstr "Middle"
+
+#: js/advertisement/components/settingsForm.js:89
+msgid "Ad Source"
+msgstr "Ad Source"
+
+#: js/advertisement/components/settingsForm.js:91
+msgid "Choose your Ad Server"
+msgstr "Choose your Ad Server"
+
+#: js/advertisement/helpers/advertisement.js:10
+msgid "The key for your VAST endpoint supplied by Adsterra, ie."
+msgstr "The key for your VAST endpoint supplied by Adsterra, ie."
+
+#: js/advertisement/helpers/advertisement.js:12
+msgid "The endpoint supplied by your ad provider, ie."
+msgstr "The endpoint supplied by your ad provider, ie."
+
+#: js/advertisement/helpers/advertisement.js:8
+msgid "The uri supplied by AdSense, ie."
+msgstr "The uri supplied by AdSense, ie."
+
+#: js/playerSettings/components/editor.js:126
+msgid "Play Button"
+msgstr "Play Button"
+
+#: js/playerSettings/components/editor.js:134
+msgid "Color on Mouseover"
+msgstr "Color on Mouseover"
+
+#: js/playerSettings/components/editor.js:142
+msgid "Borders"
+msgstr "Borders"
+
+#: js/playerSettings/components/editor.js:146
+msgid "Color"
+msgstr "Color"
+
+#: js/playerSettings/components/editor.js:150
+msgid "Width"
+msgstr "Width"
+
+#: js/playerSettings/components/editor.js:154
+msgid "Rounded Corners"
+msgstr "Rounded Corners"
+
+#: js/playerSettings/components/editor.js:162
+msgid "Progress Bar"
+msgstr "Progress Bar"
+
+#: js/playerSettings/components/editor.js:170
+msgid "Loaded Color"
+msgstr "Loaded Color"
+
+#: js/playerSettings/components/editor.js:174
+msgid "Played"
+msgstr "Played"
+
+#: js/playerSettings/components/editor.js:178
+msgid "Height"
+msgstr "Height"
+
+#: js/playerSettings/components/editor.js:186
+msgid "Controls"
+msgstr "Controls"
+
+#: js/playerSettings/components/editor.js:190
+msgid "Background Color"
+msgstr "Background Color"
+
+#: js/playerSettings/components/editor.js:194
+msgid "Buttons Color"
+msgstr "Buttons Color"
+
+#: js/playerSettings/components/editor.js:198
+msgid "Buttons Accent Color"
+msgstr "Buttons Accent Color"
+
+#: js/playerSettings/components/editor.js:212
+msgid "Enable Styles"
+msgstr "Enable Styles"
+
+#: js/playerSettings/components/editor.js:224
+msgid "Reset"
+msgstr "Reset"
+
+#: js/playerSettings/components/playerPreview.js:29
+msgid "Preview"
+msgstr "Preview"
+
+#: js/publisher-livestream-block.js:85
+msgid "No livestream found"
+msgstr "No livestream found"
+
+#: js/publisher-livestream-block.js:95
+msgid "Getting livestream data"
+msgstr "Getting livestream data"
+
+#: js/publisher-video-block.js:158
+msgid "Error"
+msgstr "Error"
+
+#: js/publisher-video-block.js:173
+msgid "File nof found"
+msgstr "File nof found"
+
+#: js/publisher-video-block.js:196
+msgid "Video info"
+msgstr "Video info"
+
+#: js/publisher-video-block.js:198
+msgid "Video name"
+msgstr "Video name"
+
+#: js/publisher-video-block.js:201
+msgid "Video size"
+msgstr "Video size"
+
+#: js/publisher-video-block.js:207
+msgid "Options"
+msgstr "Options"
+
+#: js/publisher-video-block.js:209
+msgid "Autoplay"
+msgstr "Autoplay"
+
+#: js/publisher-video-block.js:231
+msgid "Videos on isset.video"
+msgstr "Videos on isset.video"
+
+#: js/publisher-video-block.js:234
+msgid "Search videos"
+msgstr "Search videos"
+
+#: js/publisher-video-block.js:244
+msgid "More results"
+msgstr "More results"
+
+#. Plugin Name of the plugin
+#. Author of the plugin
+msgid "isset.video"
+msgstr "isset.video"
+
+#. Plugin URI of the plugin
+msgid "https://isset.video/wp-plugin/"
+msgstr "https://isset.video/wp-plugin/"
+
+#. Description of the plugin
+msgid "Wordpress isset.video implementation"
+msgstr "Wordpress isset.video implementation"
+
+#. Author URI of the plugin
+msgid "http://isset.nl/"
+msgstr "http://isset.nl/"
+
+#: src/Plugin.php:332
+msgid "Videos"
+msgstr "Videos"
+
+#: src/Plugin.php:386
+msgid "Advertisement"
+msgstr "Advertisement"
+
+#: src/Plugin.php:397 src/Plugin.php:398 views/admin/player-settings.php:4
+msgid "Player Settings"
+msgstr "Player Settings"
+
+#: views/admin/dashboard/api-dashboard.php:10
+#: views/admin/dashboard/dashboard.php:7
+msgid "Storage used"
+msgstr "Storage used"
+
+#: views/admin/dashboard/api-dashboard.php:17
+#: views/admin/dashboard/dashboard.php:11
+msgid "Data streamed"
+msgstr "Data streamed"
+
+#: views/admin/dashboard/api-dashboard.php:26
+msgid "Logged in as"
+msgstr "Logged in as"
+
+#: views/admin/dashboard/api-dashboard.php:28
+#: views/admin/dashboard/dashboard.php:15 views/admin/page.php:7
+msgid "Logout"
+msgstr "Logout"
+
+#: views/admin/dashboard/api-dashboard.php:34
+msgid "Subscription type"
+msgstr "Subscription type"
+
+#: views/admin/dashboard/api-dashboard.php:48
+msgid "Views"
+msgstr "Views"
+
+#: views/admin/dashboard/api-dashboard.php:49
+msgid "Data"
+msgstr "Data"
+
+#: views/admin/dashboard/api-dashboard.php:74
+#: views/admin/dashboard/dashboard.php:19
+msgid "Login to isset.video"
+msgstr "Login to isset.video"
+
+#. translators: %s is the user's username
+#: views/admin/dashboard/dashboard.php:4
+msgid "Logged in as %s"
+msgstr "Logged in as %s"
+
+#: views/admin/dashboard/dashboard.php:16 views/admin/page.php:8
+msgid "Go to videos"
+msgstr "Go to videos"
+
+#: views/admin/input.php:6
+msgid "Unsupported type"
+msgstr "Unsupported type"
+
+#: views/admin/overview.php:7
+msgid "Your Videos"
+msgstr "Your Videos"
+
+#. translators: %s is the user's username
+#: views/admin/page.php:5
+msgid "Hi, %s"
+msgstr "Hi, %s"
+
+#: views/admin/page.php:6
+msgid ""
+"You are now connected to my.isset.video. Click the button below to unlink "
+"your account and logout."
+msgstr ""
+"You are now connected to my.isset.video. Click the button below to unlink "
+"your account and logout."
+
+#: views/admin/page.php:12 views/admin/page.php:14
+msgid "Connect to my.isset.video"
+msgstr "Connect to my.isset.video"
+
+#: views/admin/page.php:13
+msgid ""
+"Please connect your my.isset.video account by clicking the button below. We "
+"will redirect you to my.isset.video to ask for your permission."
+msgstr ""
+"Please connect your my.isset.video account by clicking the button below. We "
+"will redirect you to my.isset.video to ask for your permission."
+
+#: views/shortcode/livestream-invalid.php:3
+msgid "Livestream is not available"
+msgstr "Livestream is not available"
+
+#: views/shortcode/publish-invalid.php:3
+msgid "Video is not available"
+msgstr "Video is not available"
+
+#: views/shortcode/publish.php:14
+msgid "Your browser does not support the video tag."
+msgstr "Your browser does not support the video tag."
+
+#: views/shortcode/publish.php:19
+msgid "Video cannot be loaded"
+msgstr "Video cannot be loaded"
+
+#~ msgid "Are you sure you want to leave?"
+#~ msgstr "Are you sure you want to leave?"
+
+#~ msgid "isset.video settings"
+#~ msgstr "isset.video settings"
+
+#~ msgid "Enter your settings below:"
+#~ msgstr "Enter your settings below:"
+
+#~ msgid "Show advanced options"
+#~ msgstr "Show advanced options"

@@ -23,8 +23,8 @@ class Scripts extends BaseAction {
 
 		$videoPublishService = $this->plugin->getVideoPublisherService();
 
-		wp_enqueue_script( 'isset-video-main', ISSET_VIDEO_PUBLISHER_URL . 'js/main.js', array( 'jquery' ), true );
-		wp_enqueue_script( 'isset-video-publisher-charts', ISSET_VIDEO_PUBLISHER_URL . 'js/admin-charts.js', array( 'jquery' ), true );
+		wp_enqueue_script( 'isset-video-main', ISSET_VIDEO_PUBLISHER_URL . 'js/main.js', array( 'jquery' ), ISSET_VIDEO_PUBLISHER_VERSION );
+		wp_enqueue_script( 'isset-video-publisher-charts', ISSET_VIDEO_PUBLISHER_URL . 'js/admin-charts.js', array( 'jquery' ), ISSET_VIDEO_PUBLISHER_VERSION );
 		wp_localize_script(
 			'isset-video-main',
 			'IssetVideoPublisherAjax',
@@ -36,11 +36,10 @@ class Scripts extends BaseAction {
 				'adminUrl'   => admin_url(),
 				'loggedIn'   => $videoPublishService->isLoggedIn(),
 				'mercureUrl' => $videoPublishService->getMercureURL(),
+				'division'   => $videoPublishService->fetchCurrentDivision(),
+				'pluginUrl'  => ISSET_VIDEO_PUBLISHER_URL,
 			)
 		);
-
-		wp_localize_script( 'isset-video-main', 'issetVideoTranslations', $this->getTranslationLabels() );
-		wp_set_script_translations( 'isset-video-main', 'isset-video', 'isset-video/languages' );
 
 		if ( $this->editingOrNewPost( $arguments ) ) {
 			$videoArchiveService = $this->plugin->getVideoArchiveService();
@@ -58,11 +57,14 @@ class Scripts extends BaseAction {
 				)
 			);
 		}
+
+		wp_localize_script( 'isset-video-main', 'issetVideoTranslations', $this->getTranslationLabels() );
+		wp_set_script_translations( 'isset-video-main', 'isset-video', 'isset-video/languages' );
 	}
 
 	private function editingOrNewPost( $arguments ) {
 		if ( isset( $_GET['page'] ) ) {
-			if ( $_GET['page'] === Plugin::MENU_MAIN_SLUG || $_GET['page'] === Plugin::MENU_LIVESTREAM_SLUG ) {
+			if ( $_GET['page'] === Plugin::MENU_MAIN_SLUG || $_GET['page'] === Plugin::MENU_LIVESTREAM_SLUG || $_GET['page'] === Plugin::MENU_ADVERTISEMENT_SLUG || $_GET['page'] === Plugin::MENU_PLAYER_SETTINGS_SLUG ) {
 				return true;
 			}
 		}
@@ -80,7 +82,7 @@ class Scripts extends BaseAction {
 		global $l10n;
 		$translations = array();
 
-		if ( $l10n ) {
+		if ( $l10n && isset( $l10n['isset-video'] ) ) {
 			foreach ( $l10n['isset-video']->entries as $key => $entry ) {
 				$translations[ $key ] = $entry->translations;
 			}

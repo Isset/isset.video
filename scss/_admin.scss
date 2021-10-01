@@ -2,22 +2,19 @@
   background-color: #464d52;
   padding: 10px;
   color: #eee;
-
-
 }
 
 .isset-video-chart-container {
   padding: 10px;
   color: #eee;
   background-color: #32373c;
-  padding-bottom: 20px;
 
   h2 {
     color: orange;
   }
 
   .isset-video-stats-container {
-    margin-top: 31px;
+    margin-top: 20px;
     flex-direction: column;
 
     a {
@@ -32,6 +29,14 @@
 
 .video-publisher-admin {
   padding-right: 20px;
+
+  img {
+    &.isset-video-logo {
+      width: 180px;
+      margin-top: -20px;
+      margin-bottom: 10px;
+    }
+  }
 }
 
 .isset-video-overview-container {
@@ -61,6 +66,10 @@
 
   &:hover, &:focus {
     color: #fff;
+  }
+
+  span {
+    display: inline-block;
   }
 }
 
@@ -265,6 +274,10 @@
     width: 100%;
   }
 
+  .iv-w-400 {
+    width: 400px;
+  }
+
   .iv-v-align-top {
     vertical-align: top;
   }
@@ -290,12 +303,61 @@
   }
 
   .iv-bg-black {
-    background-color: #333;
+    background-color: #111;
+  }
+
+  .iv-p-20 {
+    padding: 20px;
+  }
+
+  .iv-pt-10 {
+    padding-top: 10px;
   }
 
   .isset-video-livestream-container {
     background-color: #333;
-    min-height: 400px;
+    min-height: 340px;
+  }
+
+  .iv-col-5 {
+    flex: 0 0 41.66667%;
+    max-width: 41.66667%;
+  }
+
+  .iv-col-7 {
+    flex: 0 0 58.33333%;
+    max-width: 58.33333%;
+  }
+
+  .iv-col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .iv-col-5, .iv-col-7, .iv-col-12 {
+    position: relative;
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .iv-col-md-7 {
+      flex: 0 0 58.33333%;
+      max-width: 58.33333%;
+    }
+
+    .iv-col-md-5 {
+      flex: 0 0 41.66667%;
+      max-width: 41.66667%;
+    }
+  }
+
+  .iv-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .iv-wrap-reverse {
+    flex-wrap: wrap-reverse;
   }
 }
 
@@ -361,6 +423,10 @@
 
 .video-publisher-p-2 {
   padding: 0.75rem !important;
+}
+
+.video-publisher-pl-0 {
+  padding-left: 0 !important;
 }
 
 .video-publisher-pl-2 {
@@ -560,4 +626,37 @@
   .isset-video-custom-still-dialog {
     width: 800px;
   }
+}
+
+.isset-video-toast {
+  width: 200px;
+  position: absolute;
+  background-color: #666;
+  padding: 20px;
+  top: 40px;
+  right: 20px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px;
+  z-index: 10000;
+  color: #000;
+
+  &.toast-success {
+    background-color: #9ad06e;
+  }
+
+  &.toast-warning {
+    background-color: orange;
+  }
+
+  &.toast-error {
+    background-color: #e57878;
+  }
+}
+
+.iv-t-orange {
+  color: orange;
+}
+
+.iv-t-white {
+  color: white;
 }

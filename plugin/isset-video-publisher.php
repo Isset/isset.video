@@ -4,7 +4,7 @@
 Plugin Name: isset.video
 Plugin URI: https://isset.video/wp-plugin/
 Description: Wordpress isset.video implementation
-Version: 0.9.1
+Version: 0.9.6
 Requires at least: 5.0
 Required PHP: 7.1
 Author: isset.video
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'ISSET_VIDEO_PUBLISHER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ISSET_VIDEO_PUBLISHER_URL', plugin_dir_url( __FILE__ ) );
-define( 'ISSET_VIDEO_PUBLISHER_VERSION', '0.9.1' );
+define( 'ISSET_VIDEO_PUBLISHER_VERSION', '0.9.6' );
 
 
 include_once __DIR__ . '/src/Autoloader.php';

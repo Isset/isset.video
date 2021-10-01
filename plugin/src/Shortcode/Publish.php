@@ -14,6 +14,11 @@ class Publish extends ShortcodeBase {
 			'chrome_cast',
 			'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'
 		);
+		// Also attach google ima sdk
+		wp_enqueue_script(
+			'google-ima-sdk',
+			'//imasdk.googleapis.com/js/sdkloader/ima3.js'
+		);
 
 		$attr = shortcode_atts(
 			array(
@@ -30,8 +35,9 @@ class Publish extends ShortcodeBase {
 
 		$uuid = $attr['uuid'];
 
-		$publishService = $this->plugin->getVideoPublisherService();
-		$publish        = $publishService->fetchPublishInfo( $uuid );
+		$publishService   = $this->plugin->getVideoPublisherService();
+		$publish          = $publishService->fetchPublishInfo( $uuid );
+		$advertisementUrl = $publishService->getAdvertisementUrl( $uuid );
 
 		if ( ! $publish ) {
 			return Renderer::render( 'shortcode/publish-invalid.php' );
@@ -45,6 +51,8 @@ class Publish extends ShortcodeBase {
 		$context['subtitles'] = isset( $publish['subtitles'] ) ? $publish['subtitles'] : array();
 		$context['chapters']  = isset( $publish['chapters'] ) ? $publish['chapters'] : array();
 		$context['video_url'] = $video_url;
+		$context['ad_url']    = $advertisementUrl;
+		$context['css_url']   = $publishService->getPublisherURL() . "css/publish/{$uuid}/player.css?time=" . time();
 
 		return Renderer::render( 'shortcode/publish.php', $context );
 	}

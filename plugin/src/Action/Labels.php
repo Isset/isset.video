@@ -7,7 +7,7 @@ class Labels extends BaseAction {
 
 
 	function execute( $arguments ) {
-		load_plugin_textdomain( 'rad-plugin', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'isset-video', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 
